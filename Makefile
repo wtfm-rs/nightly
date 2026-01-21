@@ -13,6 +13,7 @@ build:
 	rm -rf doc
 	$(RUSTDOC) src/introduction.rs
 	$(RUSTDOC) src/rustup.rs
+	$(RUSTDOC) src/workflow.rs
 	cp -r doc docs
 	cp README.md docs
 	rm -rf doc

@@ -80,28 +80,30 @@
 <a href=#80 id=80 data-nosnippet>80</a>//!	rm -rf doc
 <a href=#81 id=81 data-nosnippet>81</a>//!	$(RUSTDOC) src/introduction.rs
 <a href=#82 id=82 data-nosnippet>82</a>//!	$(RUSTDOC) src/rustup.rs
-<a href=#83 id=83 data-nosnippet>83</a>//!	cp -r doc docs
-<a href=#84 id=84 data-nosnippet>84</a>//!	rm -rf doc
-<a href=#85 id=85 data-nosnippet>85</a>//! ```
-<a href=#86 id=86 data-nosnippet>86</a>//! ```sh
-<a href=#87 id=87 data-nosnippet>87</a>//! % make build
-<a href=#88 id=88 data-nosnippet>88</a>//! rm -rf doc
-<a href=#89 id=89 data-nosnippet>89</a>//! rustup run nightly rustdoc src/introduction.rs
-<a href=#90 id=90 data-nosnippet>90</a>//! rustup run nightly rustdoc src/rustup.rs
-<a href=#91 id=91 data-nosnippet>91</a>//! cp -r doc docs
-<a href=#92 id=92 data-nosnippet>92</a>//! rm -rf doc
-<a href=#93 id=93 data-nosnippet>93</a>//! ```
-<a href=#94 id=94 data-nosnippet>94</a>
-<a href=#95 id=95 data-nosnippet>95</a>//!
-<a href=#96 id=96 data-nosnippet>96</a>//! `make test`
-<a href=#97 id=97 data-nosnippet>97</a>//! ```make
-<a href=#98 id=98 data-nosnippet>98</a>//!	$(CARGO) fmt
-<a href=#99 id=99 data-nosnippet>99</a>//!	$(CARGO) test
-<a href=#100 id=100 data-nosnippet>100</a>//! ```
-<a href=#101 id=101 data-nosnippet>101</a>//!
-<a href=#102 id=102 data-nosnippet>102</a>//! `make clean`
-<a href=#103 id=103 data-nosnippet>103</a>//! ```make
-<a href=#104 id=104 data-nosnippet>104</a>//!	$(CARGO) clean 
-<a href=#105 id=105 data-nosnippet>105</a>//! ```
-<a href=#106 id=106 data-nosnippet>106</a>
+<a href=#83 id=83 data-nosnippet>83</a>//!	$(RUSTDOC) src/workflow.rs
+<a href=#84 id=84 data-nosnippet>84</a>//!	cp -r doc docs
+<a href=#85 id=85 data-nosnippet>85</a>//!	rm -rf doc
+<a href=#86 id=86 data-nosnippet>86</a>//! ```
+<a href=#87 id=87 data-nosnippet>87</a>//! ```sh
+<a href=#88 id=88 data-nosnippet>88</a>//! % make build
+<a href=#89 id=89 data-nosnippet>89</a>//! rm -rf doc
+<a href=#90 id=90 data-nosnippet>90</a>//! rustup run nightly rustdoc src/introduction.rs
+<a href=#91 id=91 data-nosnippet>91</a>//! rustup run nightly rustdoc src/rustup.rs
+<a href=#92 id=92 data-nosnippet>92</a>//! rustup run nightly rustdoc src/workflow.rs
+<a href=#93 id=93 data-nosnippet>93</a>//! cp -r doc docs
+<a href=#94 id=94 data-nosnippet>94</a>//! rm -rf doc
+<a href=#95 id=95 data-nosnippet>95</a>//! ```
+<a href=#96 id=96 data-nosnippet>96</a>
+<a href=#97 id=97 data-nosnippet>97</a>//!
+<a href=#98 id=98 data-nosnippet>98</a>//! `make test`
+<a href=#99 id=99 data-nosnippet>99</a>//! ```make
+<a href=#100 id=100 data-nosnippet>100</a>//!	$(CARGO) fmt
+<a href=#101 id=101 data-nosnippet>101</a>//!	$(CARGO) test
+<a href=#102 id=102 data-nosnippet>102</a>//! ```
+<a href=#103 id=103 data-nosnippet>103</a>//!
+<a href=#104 id=104 data-nosnippet>104</a>//! `make clean`
+<a href=#105 id=105 data-nosnippet>105</a>//! ```make
+<a href=#106 id=106 data-nosnippet>106</a>//!	$(CARGO) clean 
+<a href=#107 id=107 data-nosnippet>107</a>//! ```
+<a href=#108 id=108 data-nosnippet>108</a>
 </span></code></pre></div></section></main></body></html>

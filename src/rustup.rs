@@ -80,6 +80,7 @@
 //!	rm -rf doc
 //!	$(RUSTDOC) src/introduction.rs
 //!	$(RUSTDOC) src/rustup.rs
+//!	$(RUSTDOC) src/workflow.rs
 //!	cp -r doc docs
 //!	rm -rf doc
 //! ```
@@ -88,6 +89,7 @@
 //! rm -rf doc
 //! rustup run nightly rustdoc src/introduction.rs
 //! rustup run nightly rustdoc src/rustup.rs
+//! rustup run nightly rustdoc src/workflow.rs
 //! cp -r doc docs
 //! rm -rf doc
 //! ```
