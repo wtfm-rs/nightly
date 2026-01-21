@@ -1,4 +1,5 @@
 RUSTC = rustup run nightly rustc
+RUSTDOC = rustup run nightly rustdoc
 CARGO = rustup run nightly cargo
 
 all:	install versions build
@@ -9,23 +10,21 @@ install:
 	$(CARGO) update
 
 build:
-	$(CARGO) doc --release --target-dir docs
-	rm -rf docs/debug
-	rm -rf docs/release
-	rm -f docs/.rustc_info.json
-	rm -f docs/.rustdoc_fingerprint.json
-	rm -f docs/CACHEDIR.TAG
+	rm -rf doc
+	$(RUSTDOC) introduction/src/lib.rs
+	cp -r doc docs
 	cp README.md docs
+	rm -rf doc
 
 test:
 	$(CARGO) fmt
-	$(CARGO) test --target-dir docs
-	
+	$(CARGO) test
 
 versions:
 	$(RUSTC) --version
+	$(RUSTDOC) --version
 	$(CARGO) --version
 
 clean:
-	$(CARGO) clean --target-dir docs
+	$(CARGO) clean 
 	
