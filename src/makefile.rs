@@ -53,10 +53,7 @@
 //! 
 //! ```make
 //! RUSTC = rustup run nightly rustc
-//! RUSTDOC = rustup run nightly rustdoc \
-//!          --out-dir docs \
-//!          -Z unstable-options \
-//!          --playground-url "https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024"
+//! RUSTDOC = rustup run nightly rustdoc --out-dir docs
 //! CARGO = rustup run nightly cargo
 //! ```
 //! Here is how to use it.
@@ -83,15 +80,17 @@
 //! ```make
 //!	rm -rf docs
 //!	$(RUSTDOC) src/introduction.rs
-//!	$(RUSTDOC) src/rustup.rs
+//!	$(RUSTDOC) src/assert_matches.rs
+//!	$(RUSTDOC) src/makefile.rs
 //!	$(RUSTDOC) src/workflow.rs
 //! ```
 //! ```sh
 //! % make build
 //! rm -rf docs
-//! rustup run nightly rustdoc --out-dir docs -Z unstable-options --playground-url "https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024" src/introduction.rs
-//! rustup run nightly rustdoc --out-dir docs -Z unstable-options --playground-url "https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024" src/rustup.rs
-//! rustup run nightly rustdoc --out-dir docs -Z unstable-options --playground-url "https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024" src/workflow.rs
+//! rustup run nightly rustdoc --out-dir docs  src/introduction.rs
+//! rustup run nightly rustdoc --out-dir docs  src/assert_matches.rs
+//! rustup run nightly rustdoc --out-dir docs  src/makefile.rs
+//! rustup run nightly rustdoc --out-dir docs  src/workflow.rs
 //! ```
 
 //!
