@@ -64,6 +64,16 @@
 //!	$(RUSTDOC) --version
 //!	$(CARGO) --version
 //! ```
+//! 
+//! ```sh
+//! rustup run nightly rustc --version
+//! rustc 1.95.0-nightly (5c49c4f7c 2026-01-20)
+//! rustup run nightly rustdoc --version
+//! rustdoc 1.95.0-nightly (5c49c4f7c 2026-01-20)
+//! rustup run nightly cargo --version
+//! cargo 1.95.0-nightly (85eff7c80 2026-01-15)
+//! ```
+//!
 //!
 //! `make build`
 //! ```make
