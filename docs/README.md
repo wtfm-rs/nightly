@@ -1,5 +1,5 @@
 # nightly
 
 - [introduction](introduction)
-- [rustup](rustup)
-- [workflow](workflow)
+- Local copies of full [Rust Documentation](rust/html/index.html)
+

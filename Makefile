@@ -11,10 +11,10 @@ all:	install versions build
 install:
 	rustup toolchain list
 	rustup toolchain install nightly
+	rustup override set nightly
 	$(CARGO) update
 
 build:
-	rm -rf docs
 	$(RUSTDOC) src/introduction.rs
 	$(RUSTDOC) src/rustup.rs
 	$(RUSTDOC) src/workflow.rs
@@ -34,3 +34,6 @@ versions:
 clean:
 	$(CARGO) clean 
 	
+doc:
+	rustup doc
+	cp -r ~/.rustup/toolchains/nightly-aarch64-apple-darwin/share/doc/* docs
