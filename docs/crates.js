@@ -1,2 +1,2 @@
-window.ALL_CRATES = ["introduction","rustup","workflow"];
-//{"start":21,"fragment_lengths":[14,9,11]}
+window.ALL_CRATES = ["introduction","makefile","workflow"];
+//{"start":21,"fragment_lengths":[14,11,11]}

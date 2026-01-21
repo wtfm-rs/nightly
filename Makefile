@@ -16,7 +16,7 @@ install:
 
 build:
 	$(RUSTDOC) src/introduction.rs
-	$(RUSTDOC) src/rustup.rs
+	$(RUSTDOC) src/makefile.rs
 	$(RUSTDOC) src/workflow.rs
 
 clippy:

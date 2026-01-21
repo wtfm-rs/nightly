@@ -1,5 +1,5 @@
 //! This crate has no code, only [rustdoc](https://doc.rust-lang.org/stable/rustdoc/).
-//! [RTFM](https://rust-lang.github.io/rustup/index.html)
+//! [RTFM](https://rust-lang.github.io/rustup/index.html).
 //!
 //! # rustup run
 //!
