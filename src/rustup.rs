@@ -78,23 +78,25 @@
 //! `make build`
 //! ```make
 //!	rm -rf doc
-//!	$(RUSTDOC) introduction/src/lib.rs
-//!	$(RUSTDOC) introduction/src/rustup.rs
+//!	$(RUSTDOC) src/introduction.rs
+//!	$(RUSTDOC) src/rustup.rs
 //!	cp -r doc docs
 //!	rm -rf doc
 //! ```
+//! ```sh
+//! % make build
+//! rm -rf doc
+//! rustup run nightly rustdoc src/introduction.rs
+//! rustup run nightly rustdoc src/rustup.rs
+//! cp -r doc docs
+//! rm -rf doc
+//! ```
+
 //!
 //! `make test`
 //! ```make
 //!	$(CARGO) fmt
 //!	$(CARGO) test
-//! ```
-//!
-//! `make versions`
-//! ```make
-//!	$(RUSTC) --version
-//!	$(RUSTDOC) --version
-//!	$(CARGO) --version
 //! ```
 //!
 //! `make clean`

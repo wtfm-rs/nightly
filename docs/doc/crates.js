@@ -1,2 +1,2 @@
-window.ALL_CRATES = ["lib","rustup"];
-//{"start":21,"fragment_lengths":[5,9]}
+window.ALL_CRATES = ["introduction","rustup"];
+//{"start":21,"fragment_lengths":[14,9]}

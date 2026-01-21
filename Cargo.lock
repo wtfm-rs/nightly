@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "introduction"
+name = "wtfm_nightly"
 version = "0.1.0"

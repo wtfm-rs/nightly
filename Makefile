@@ -11,8 +11,8 @@ install:
 
 build:
 	rm -rf doc
-	$(RUSTDOC) introduction/src/lib.rs
-	$(RUSTDOC) introduction/src/rustup.rs
+	$(RUSTDOC) src/introduction.rs
+	$(RUSTDOC) src/rustup.rs
 	cp -r doc docs
 	cp README.md docs
 	rm -rf doc
