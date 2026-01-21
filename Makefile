@@ -1,8 +1,5 @@
 RUSTC = rustup run nightly rustc
-RUSTDOC = rustup run nightly rustdoc \
-	--out-dir docs \
-	-Z unstable-options \
-	--playground-url "https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024"
+RUSTDOC = rustup run nightly rustdoc --out-dir docs 
 CARGO = rustup run nightly cargo
 
 all:	install versions build

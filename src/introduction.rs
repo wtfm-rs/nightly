@@ -1,3 +1,4 @@
+#![doc(html_playground_url = "https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024")]
 //! # Introduction
 //! 
 //! ## nightly 
