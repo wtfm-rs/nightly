@@ -1,2 +1,2 @@
-createSrcSidebar('[["introduction",["",[],["introduction.rs"]]],["makefile",["",[],["makefile.rs"]]],["workflow",["",[],["workflow.rs"]]]]');
-//{"start":19,"fragment_lengths":[44,37,37]}
+createSrcSidebar('[["assert_matches",["",[],["assert_matches.rs"]]],["introduction",["",[],["introduction.rs"]]],["makefile",["",[],["makefile.rs"]]],["workflow",["",[],["workflow.rs"]]]]');
+//{"start":19,"fragment_lengths":[48,45,37,37]}

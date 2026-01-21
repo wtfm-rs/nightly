@@ -16,6 +16,7 @@ install:
 
 build:
 	$(RUSTDOC) src/introduction.rs
+	$(RUSTDOC) src/assert_matches.rs
 	$(RUSTDOC) src/makefile.rs
 	$(RUSTDOC) src/workflow.rs
 
