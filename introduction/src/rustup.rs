@@ -1,5 +1,7 @@
+//! This crate has no code, only [rustdoc](https://doc.rust-lang.org/stable/rustdoc/).
+//! [RTFM](https://rust-lang.github.io/rustup/index.html)
+//!
 //! # rustup run
-//! <https://rust-lang.github.io/rustup/index.html>
 //!
 //! ```sh
 //! rustup run --help 
@@ -43,7 +45,7 @@
 //! So we will use `rustuprun nightly ...` version. It might be a good idea
 //! to wrap them with Makefile macros.
 //!
-//! ## Makefile macros
+//! # Makefile macros
 //!
 //! Since we use make as the top level CLI/CI, it would be convenient to 
 //! wrap Rust nigthly toolchain commands with 
