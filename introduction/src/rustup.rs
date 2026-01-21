@@ -1,0 +1,92 @@
+//! # rustup run
+//! <https://rust-lang.github.io/rustup/index.html>
+//!
+//! ```sh
+//! rustup run --help 
+//! Run a command with an environment configured for a given toolchain
+//!
+//! Usage: rustup[EXE] run [OPTIONS] <TOOLCHAIN> <COMMAND>...
+//!
+//! Arguments:
+//!  <TOOLCHAIN>   Toolchain name, such as 'stable', 'nightly', '1.8.0', or a custom toolchain name, or an
+//!                absolute path. For more information see `rustup help toolchain`
+//!  <COMMAND>...  
+//!
+//! Options:
+//!      --install  Install the requested toolchain if needed
+//!  -h, --help     Print help
+//!
+//! Discussion:
+//!    Configures an environment to use the given toolchain and then runs
+//!    the specified program. The command may be any program, not just
+//!    rustc or cargo. This can be used for testing arbitrary toolchains
+//!    without setting an override.
+//!
+//!    Commands explicitly proxied by `rustup` (such as `rustc` and
+//!    `cargo`) also have a shorthand for this available. The toolchain
+//!    can be set by using `+toolchain` as the first argument. These are
+//!    equivalent:
+//!
+//!        $ cargo +nightly build
+//!
+//!        $ rustup run nightly cargo build
+//! ```
+//! It seems the online help above was out-dated.
+//! ```sh
+//! % cargo --version
+//! cargo 1.92.0 (Homebrew)
+//! % cargo +nightly build
+//! error: no such command: `+nightly`
+//!
+//! help: invoke `cargo` through `rustup` to handle `+toolchain` directives
+//! ```
+//! So we will use `rustuprun nightly ...` version. It might be a good idea
+//! to wrap them with Makefile macros.
+//!
+//! ## Makefile macros
+//!
+//! Since we use make as the top level CLI/CI, it would be convenient to 
+//! wrap Rust nigthly toolchain commands with 
+//! [Makefile macros](https://www.gnu.org/software/make/manual/html_node/Using-Variables.html).
+//! 
+//! ```make
+//! RUSTC = rustup run nightly rustc
+//! RUSTDOC = rustup run nightly rustdoc
+//! CARGO = rustup run nightly cargo
+//! ```
+//! Here is how to use it.
+//!
+//! `make versions`
+//! ```make
+//!	$(RUSTC) --version
+//!	$(RUSTDOC) --version
+//!	$(CARGO) --version
+//! ```
+//!
+//! `make build`
+//! ```make
+//!	rm -rf doc
+//!	$(RUSTDOC) introduction/src/lib.rs
+//!	$(RUSTDOC) introduction/src/rustup.rs
+//!	cp -r doc docs
+//!	rm -rf doc
+//! ```
+//!
+//! `make test`
+//! ```make
+//!	$(CARGO) fmt
+//!	$(CARGO) test
+//! ```
+//!
+//! `make versions`
+//! ```make
+//!	$(RUSTC) --version
+//!	$(RUSTDOC) --version
+//!	$(CARGO) --version
+//! ```
+//!
+//! `make clean`
+//! ```make
+//!	$(CARGO) clean 
+//! ```
+
