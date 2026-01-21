@@ -1,4 +1,5 @@
 # nightly
 
-- [Introduction](https://wtfm-rs.github.io/nightly/doc/introduction/index.html)
-
+- [introduction](introduction)
+- [rustup](rustup)
+- [workflow](workflow)

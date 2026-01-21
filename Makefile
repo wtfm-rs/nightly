@@ -1,8 +1,12 @@
 RUSTC = rustup run nightly rustc
-RUSTDOC = rustup run nightly rustdoc --playground-url "https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024" -Z unstable-options
+RUSTDOC = rustup run nightly rustdoc \
+	--out-dir docs \
+	-Z unstable-options \
+	--playground-url "https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024"
 CARGO = rustup run nightly cargo
 
 all:	install versions build
+	cp README.md docs
 
 install:
 	rustup toolchain list
@@ -10,13 +14,10 @@ install:
 	$(CARGO) update
 
 build:
-	rm -rf doc
+	rm -rf docs
 	$(RUSTDOC) src/introduction.rs
 	$(RUSTDOC) src/rustup.rs
 	$(RUSTDOC) src/workflow.rs
-	cp -r doc docs
-	cp README.md docs
-	rm -rf doc
 
 clippy:
 	$(CARGO) clippy
