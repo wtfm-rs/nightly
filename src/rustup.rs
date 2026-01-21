@@ -69,6 +69,7 @@
 //! ```
 //! 
 //! ```sh
+//! % make versions
 //! rustup run nightly rustc --version
 //! rustc 1.95.0-nightly (5c49c4f7c 2026-01-20)
 //! rustup run nightly rustdoc --version
