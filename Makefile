@@ -1,5 +1,6 @@
 RUSTC = rustup run nightly rustc
 RUSTDOC = rustup run nightly rustdoc --out-dir docs 
+CARGO = rustup run nightly cargo
 
 all:	install versions build test pass
 	cp README.md docs
@@ -28,8 +29,9 @@ pass:
 	rustup run nightly cargo clean
 
 versions:
-	$(RUSTC) --version
-	$(RUSTDOC) --version
+	$(RUSTC) --version --verbose
+	$(RUSTDOC) --version --verbose
+	$(CARGO) --version --verbose
 
 doc:
 	rustup doc
