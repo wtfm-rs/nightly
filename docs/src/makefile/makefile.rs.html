@@ -54,55 +54,55 @@
 <a href=#54 id=54 data-nosnippet>54</a>//! ```make
 <a href=#55 id=55 data-nosnippet>55</a>//! RUSTC = rustup run nightly rustc
 <a href=#56 id=56 data-nosnippet>56</a>//! RUSTDOC = rustup run nightly rustdoc --out-dir docs
-<a href=#57 id=57 data-nosnippet>57</a>//! CARGO = rustup run nightly cargo
-<a href=#58 id=58 data-nosnippet>58</a>//! ```
-<a href=#59 id=59 data-nosnippet>59</a>//! Here is how to use it.
-<a href=#60 id=60 data-nosnippet>60</a>//!
-<a href=#61 id=61 data-nosnippet>61</a>//! `make versions`
-<a href=#62 id=62 data-nosnippet>62</a>//! ```make
-<a href=#63 id=63 data-nosnippet>63</a>//!	$(RUSTC) --version
-<a href=#64 id=64 data-nosnippet>64</a>//!	$(RUSTDOC) --version
-<a href=#65 id=65 data-nosnippet>65</a>//!	$(CARGO) --version
-<a href=#66 id=66 data-nosnippet>66</a>//! ```
-<a href=#67 id=67 data-nosnippet>67</a>//! 
-<a href=#68 id=68 data-nosnippet>68</a>//! ```sh
-<a href=#69 id=69 data-nosnippet>69</a>//! % make versions
-<a href=#70 id=70 data-nosnippet>70</a>//! rustup run nightly rustc --version
-<a href=#71 id=71 data-nosnippet>71</a>//! rustc 1.95.0-nightly (5c49c4f7c 2026-01-20)
-<a href=#72 id=72 data-nosnippet>72</a>//! rustup run nightly rustdoc --version
-<a href=#73 id=73 data-nosnippet>73</a>//! rustdoc 1.95.0-nightly (5c49c4f7c 2026-01-20)
-<a href=#74 id=74 data-nosnippet>74</a>//! rustup run nightly cargo --version
-<a href=#75 id=75 data-nosnippet>75</a>//! cargo 1.95.0-nightly (85eff7c80 2026-01-15)
-<a href=#76 id=76 data-nosnippet>76</a>//! ```
-<a href=#77 id=77 data-nosnippet>77</a>//!
-<a href=#78 id=78 data-nosnippet>78</a>//!
-<a href=#79 id=79 data-nosnippet>79</a>//! `make build`
-<a href=#80 id=80 data-nosnippet>80</a>//! ```make
-<a href=#81 id=81 data-nosnippet>81</a>//!	rm -rf docs
-<a href=#82 id=82 data-nosnippet>82</a>//!	$(RUSTDOC) src/introduction.rs
-<a href=#83 id=83 data-nosnippet>83</a>//!	$(RUSTDOC) src/assert_matches.rs
-<a href=#84 id=84 data-nosnippet>84</a>//!	$(RUSTDOC) src/makefile.rs
-<a href=#85 id=85 data-nosnippet>85</a>//!	$(RUSTDOC) src/workflow.rs
-<a href=#86 id=86 data-nosnippet>86</a>//! ```
-<a href=#87 id=87 data-nosnippet>87</a>//! ```sh
-<a href=#88 id=88 data-nosnippet>88</a>//! % make build
-<a href=#89 id=89 data-nosnippet>89</a>//! rm -rf docs
-<a href=#90 id=90 data-nosnippet>90</a>//! rustup run nightly rustdoc --out-dir docs  src/introduction.rs
-<a href=#91 id=91 data-nosnippet>91</a>//! rustup run nightly rustdoc --out-dir docs  src/assert_matches.rs
-<a href=#92 id=92 data-nosnippet>92</a>//! rustup run nightly rustdoc --out-dir docs  src/makefile.rs
-<a href=#93 id=93 data-nosnippet>93</a>//! rustup run nightly rustdoc --out-dir docs  src/workflow.rs
-<a href=#94 id=94 data-nosnippet>94</a>//! ```
-<a href=#95 id=95 data-nosnippet>95</a>
-<a href=#96 id=96 data-nosnippet>96</a>//!
-<a href=#97 id=97 data-nosnippet>97</a>//! `make test`
-<a href=#98 id=98 data-nosnippet>98</a>//! ```make
-<a href=#99 id=99 data-nosnippet>99</a>//!	$(CARGO) fmt
-<a href=#100 id=100 data-nosnippet>100</a>//!	$(CARGO) test
-<a href=#101 id=101 data-nosnippet>101</a>//! ```
+<a href=#57 id=57 data-nosnippet>57</a>//! ```
+<a href=#58 id=58 data-nosnippet>58</a>//! Here is how to use it.
+<a href=#59 id=59 data-nosnippet>59</a>//!
+<a href=#60 id=60 data-nosnippet>60</a>//! `make versions`
+<a href=#61 id=61 data-nosnippet>61</a>//! ```make
+<a href=#62 id=62 data-nosnippet>62</a>//!	$(RUSTC) --version
+<a href=#63 id=63 data-nosnippet>63</a>//!	$(RUSTDOC) --version
+<a href=#64 id=64 data-nosnippet>64</a>//! ```
+<a href=#65 id=65 data-nosnippet>65</a>//! 
+<a href=#66 id=66 data-nosnippet>66</a>//! ```sh
+<a href=#67 id=67 data-nosnippet>67</a>//! % make versions
+<a href=#68 id=68 data-nosnippet>68</a>//! rustup run nightly rustc --version
+<a href=#69 id=69 data-nosnippet>69</a>//! rustc 1.95.0-nightly (5c49c4f7c 2026-01-20)
+<a href=#70 id=70 data-nosnippet>70</a>//! rustup run nightly rustdoc --version
+<a href=#71 id=71 data-nosnippet>71</a>//! rustdoc 1.95.0-nightly (5c49c4f7c 2026-01-20)
+<a href=#72 id=72 data-nosnippet>72</a>//! ```
+<a href=#73 id=73 data-nosnippet>73</a>//!
+<a href=#74 id=74 data-nosnippet>74</a>//!
+<a href=#75 id=75 data-nosnippet>75</a>//! `make build`
+<a href=#76 id=76 data-nosnippet>76</a>//! ```make
+<a href=#77 id=77 data-nosnippet>77</a>//!	rm -rf docs
+<a href=#78 id=78 data-nosnippet>78</a>//!	$(RUSTDOC) src/introduction.rs
+<a href=#79 id=79 data-nosnippet>79</a>//!	$(RUSTDOC) src/assert_matches.rs
+<a href=#80 id=80 data-nosnippet>80</a>//!	$(RUSTDOC) src/makefile.rs
+<a href=#81 id=81 data-nosnippet>81</a>//!	$(RUSTDOC) src/workflow.rs
+<a href=#82 id=82 data-nosnippet>82</a>//! ```
+<a href=#83 id=83 data-nosnippet>83</a>//! ```sh
+<a href=#84 id=84 data-nosnippet>84</a>//! % make build
+<a href=#85 id=85 data-nosnippet>85</a>//! rm -rf docs
+<a href=#86 id=86 data-nosnippet>86</a>//! rustup run nightly rustdoc --out-dir docs  src/introduction.rs
+<a href=#87 id=87 data-nosnippet>87</a>//! rustup run nightly rustdoc --out-dir docs  src/assert_matches.rs
+<a href=#88 id=88 data-nosnippet>88</a>//! rustup run nightly rustdoc --out-dir docs  src/makefile.rs
+<a href=#89 id=89 data-nosnippet>89</a>//! rustup run nightly rustdoc --out-dir docs  src/workflow.rs
+<a href=#90 id=90 data-nosnippet>90</a>//! ```
+<a href=#91 id=91 data-nosnippet>91</a>
+<a href=#92 id=92 data-nosnippet>92</a>//!
+<a href=#93 id=93 data-nosnippet>93</a>//! `make test`
+<a href=#94 id=94 data-nosnippet>94</a>//! ```make
+<a href=#95 id=95 data-nosnippet>95</a>//!     $(RUSTC) --test src/assert_matches.rs &amp;&amp; ./assert_matches &amp;&amp; rm ./assert_matches
+<a href=#96 id=96 data-nosnippet>96</a>//! ```
+<a href=#97 id=97 data-nosnippet>97</a>//!
+<a href=#98 id=98 data-nosnippet>98</a>//! ```sh
+<a href=#99 id=99 data-nosnippet>99</a>//!
+<a href=#100 id=100 data-nosnippet>100</a>//! % make test
+<a href=#101 id=101 data-nosnippet>101</a>//! rustup run nightly rustc --test src/assert_matches.rs &amp;&amp; ./assert_matches &amp;&amp; rm ./assert_matches
 <a href=#102 id=102 data-nosnippet>102</a>//!
-<a href=#103 id=103 data-nosnippet>103</a>//! `make clean`
-<a href=#104 id=104 data-nosnippet>104</a>//! ```make
-<a href=#105 id=105 data-nosnippet>105</a>//!	$(CARGO) clean 
-<a href=#106 id=106 data-nosnippet>106</a>//! ```
-<a href=#107 id=107 data-nosnippet>107</a>
+<a href=#103 id=103 data-nosnippet>103</a>//! running 1 test
+<a href=#104 id=104 data-nosnippet>104</a>//! test tests::test_assert_matches - should panic ... ok
+<a href=#105 id=105 data-nosnippet>105</a>//!
+<a href=#106 id=106 data-nosnippet>106</a>//! test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+<a href=#107 id=107 data-nosnippet>107</a>//! ``` 		 			
 </span></code></pre></div></section></main></body></html>

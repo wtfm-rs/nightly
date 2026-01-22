@@ -54,7 +54,6 @@
 //! ```make
 //! RUSTC = rustup run nightly rustc
 //! RUSTDOC = rustup run nightly rustdoc --out-dir docs
-//! CARGO = rustup run nightly cargo
 //! ```
 //! Here is how to use it.
 //!
@@ -62,7 +61,6 @@
 //! ```make
 //!	$(RUSTC) --version
 //!	$(RUSTDOC) --version
-//!	$(CARGO) --version
 //! ```
 //! 
 //! ```sh
@@ -71,8 +69,6 @@
 //! rustc 1.95.0-nightly (5c49c4f7c 2026-01-20)
 //! rustup run nightly rustdoc --version
 //! rustdoc 1.95.0-nightly (5c49c4f7c 2026-01-20)
-//! rustup run nightly cargo --version
-//! cargo 1.95.0-nightly (85eff7c80 2026-01-15)
 //! ```
 //!
 //!
@@ -96,12 +92,16 @@
 //!
 //! `make test`
 //! ```make
-//!	$(CARGO) fmt
-//!	$(CARGO) test
+//!     $(RUSTC) --test src/assert_matches.rs && ./assert_matches && rm ./assert_matches
 //! ```
 //!
-//! `make clean`
-//! ```make
-//!	$(CARGO) clean 
-//! ```
-
+//! ```sh
+//!
+//! % make test
+//! rustup run nightly rustc --test src/assert_matches.rs && ./assert_matches && rm ./assert_matches
+//!
+//! running 1 test
+//! test tests::test_assert_matches - should panic ... ok
+//!
+//! test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+//! ``` 		 			
