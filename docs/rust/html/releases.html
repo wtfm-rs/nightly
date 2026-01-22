@@ -23,14 +23,14 @@
     <div id="versioninfo">
   <img src="https://www.rust-lang.org/logos/rust-logo-32x32-blk.png" width="32" height="32" alt="Rust logo"><br>
   <span class="white-sticker"><a href="https://www.rust-lang.org">Rust</a> 1.95.0-nightly</span><br>
-  <a href="https://github.com/rust-lang/rust/commit/5c49c4f7c8393c861b849441d27f5d40e0f1e33b"
-    class="hash white-sticker">5c49c4f7c</a>
+  <a href="https://github.com/rust-lang/rust/commit/eda76d9d1d133effbf7facb28168fd78d75fd434"
+    class="hash white-sticker">eda76d9d1</a>
 </div>
 
 
     <h1 class="title">Rust Release Notes</h1>
-    <h1 id="version-193-2026-01-22"><a class="doc-anchor" href="#version-193-2026-01-22">§</a>Version 1.93 (2026-01-22)</h1>
-<p><a id="1.93-Language"></a></p>
+    <h1 id="version-1930-2026-01-22"><a class="doc-anchor" href="#version-1930-2026-01-22">§</a>Version 1.93.0 (2026-01-22)</h1>
+<p><a id="1.93.0-Language"></a></p>
 <h2 id="language"><a class="doc-anchor" href="#language">§</a>Language</h2>
 <ul>
 <li><a href="https://github.com/rust-lang/rust/pull/145656">Stabilize several s390x <code>vector</code>-related target features and the <code>is_s390x_feature_detected!</code> macro</a></li>
@@ -43,19 +43,19 @@
 <li><a href="https://github.com/rust-lang/rust/pull/148407">Add warn-by-default <code>const_item_interior_mutations</code> lint to warn against calls which mutate interior mutable <code>const</code> items</a></li>
 <li><a href="https://github.com/rust-lang/rust/pull/141470">Add warn-by-default <code>function_casts_as_integer</code> lint</a></li>
 </ul>
-<p><a id="1.93-Compiler"></a></p>
+<p><a id="1.93.0-Compiler"></a></p>
 <h2 id="compiler"><a class="doc-anchor" href="#compiler">§</a>Compiler</h2>
 <ul>
 <li><a href="https://github.com/rust-lang/rust/pull/145974">Stabilize <code>-Cjump-tables=bool</code></a>. The flag was previously called <code>-Zno-jump-tables</code>.</li>
 </ul>
-<p><a id="1.93-Platform-Support"></a></p>
+<p><a id="1.93.0-Platform-Support"></a></p>
 <h2 id="platform-support"><a class="doc-anchor" href="#platform-support">§</a>Platform Support</h2>
 <ul>
 <li><a href="https://github.com/rust-lang/rust/pull/148435">Promote <code>riscv64a23-unknown-linux-gnu</code> to Tier 2 (without host tools)</a></li>
 </ul>
 <p>Refer to Rust’s <a href="https://doc.rust-lang.org/rustc/platform-support.html">platform support page</a>
 for more information on Rust’s tiered platform support.</p>
-<p><a id="1.93-Libraries"></a></p>
+<p><a id="1.93.0-Libraries"></a></p>
 <h2 id="libraries"><a class="doc-anchor" href="#libraries">§</a>Libraries</h2>
 <ul>
 <li><a href="https://github.com/rust-lang/rust/pull/135634">Stop internally using <code>specialization</code> on the <code>Copy</code> trait as it is unsound in the presence of lifetime dependent <code>Copy</code> implementations. This may result in some performance regressions as some standard library APIs may now call <code>Clone::clone</code> instead of performing bitwise copies</a></li>
@@ -63,7 +63,7 @@ for more information on Rust’s tiered platform support.</p>
 <li><a href="https://github.com/rust-lang/rust/pull/145628">Make <code>BTree::append</code> not update existing keys when appending an entry which already exists</a></li>
 <li><a href="https://github.com/rust-lang/rust/pull/145665">Don’t require <code>T: RefUnwindSafe</code> for <code>vec::IntoIter&lt;T&gt;: UnwindSafe</code></a></li>
 </ul>
-<p><a id="1.93-Stabilized-APIs"></a></p>
+<p><a id="1.93.0-Stabilized-APIs"></a></p>
 <h2 id="stabilized-apis"><a class="doc-anchor" href="#stabilized-apis">§</a>Stabilized APIs</h2>
 <ul>
 <li><a href="https://doc.rust-lang.org/stable/core/primitive.slice.html#method.assume_init_drop"><code>&lt;[MaybeUninit&lt;T&gt;]&gt;::assume_init_drop</code></a></li>
@@ -90,14 +90,14 @@ for more information on Rust’s tiered platform support.</p>
 <li><a href="https://doc.rust-lang.org/stable/std/fmt/fn.from_fn.html"><code>std::fmt::from_fn</code></a></li>
 <li><a href="https://doc.rust-lang.org/stable/std/fmt/struct.FromFn.html"><code>std::fmt::FromFn</code></a></li>
 </ul>
-<p><a id="1.93-Cargo"></a></p>
+<p><a id="1.93.0-Cargo"></a></p>
 <h2 id="cargo"><a class="doc-anchor" href="#cargo">§</a>Cargo</h2>
 <ul>
 <li><a href="https://github.com/rust-lang/cargo/pull/16160/">Enable CARGO_CFG_DEBUG_ASSERTIONS in build scripts based on profile</a></li>
 <li><a href="https://github.com/rust-lang/cargo/pull/16204/">In <code>cargo tree</code>, support long forms for <code>--format</code> variables</a></li>
 <li><a href="https://github.com/rust-lang/cargo/pull/16263/">Add <code>--workspace</code> to <code>cargo clean</code></a></li>
 </ul>
-<p><a id="1.93-Rustdoc"></a></p>
+<p><a id="1.93.0-Rustdoc"></a></p>
 <h2 id="rustdoc"><a class="doc-anchor" href="#rustdoc">§</a>Rustdoc</h2>
 <ul>
 <li><a href="https://github.com/rust-lang/rust/pull/146495">Remove <code>#![doc(document_private_items)]</code></a></li>
@@ -105,7 +105,7 @@ for more information on Rust’s tiered platform support.</p>
 <li><a href="https://github.com/rust-lang/rust/pull/148301">Include extern crates in search filters for <code>import</code></a></li>
 <li><a href="https://github.com/rust-lang/rust/pull/149197">Validate usage of crate-level doc attributes</a>.  This means if any of <code>html_favicon_url</code>, <code>html_logo_url</code>, <code>html_playground_url</code>, <code>issue_tracker_base_url</code>, or <code>html_no_source</code> either has a missing value, an unexpected value, or a value of the wrong type, rustdoc will emit the deny-by-default lint <code>rustdoc::invalid_doc_attributes</code>.</li>
 </ul>
-<p><a id="1.93-Compatibility-Notes"></a></p>
+<p><a id="1.93.0-Compatibility-Notes"></a></p>
 <h2 id="compatibility-notes"><a class="doc-anchor" href="#compatibility-notes">§</a>Compatibility Notes</h2>
 <ul>
 <li><a href="https://github.com/rust-lang/rust/pull/139751">Introduce <code>pin_v2</code> into the builtin attributes namespace</a></li>

@@ -66,11 +66,10 @@
 //! ```sh
 //! % make versions
 //! rustup run nightly rustc --version
-//! rustc 1.95.0-nightly (5c49c4f7c 2026-01-20)
-//! rustup run nightly rustdoc --version
-//! rustdoc 1.95.0-nightly (5c49c4f7c 2026-01-20)
+//! rustc 1.95.0-nightly (eda76d9d1 2026-01-21)
+//! rustup run nightly rustdoc --out-dir docs  --version
+//! rustdoc 1.95.0-nightly (eda76d9d1 2026-01-21)
 //! ```
-//!
 //!
 //! `make build`
 //! ```make
