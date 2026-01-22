@@ -2,7 +2,7 @@ RUSTC = rustup run nightly rustc
 RUSTDOC = rustup run nightly rustdoc --out-dir docs 
 CARGO = rustup run nightly cargo
 
-all:	install versions build
+all:	install versions build test
 	cp README.md docs
 
 install:
@@ -21,8 +21,7 @@ clippy:
 	$(CARGO) clippy
 
 test:
-	$(CARGO) fmt
-	$(CARGO) test
+	$(RUSTC) --test src/assert_matches.rs && ./assert_matches
 
 versions:
 	$(RUSTC) --version
