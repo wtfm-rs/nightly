@@ -73,25 +73,26 @@
 //!
 //! `make build`
 //! ```make
-//!	rm -rf docs
 //!	$(RUSTDOC) src/introduction.rs
 //!	$(RUSTDOC) src/assert_matches.rs
+//!	$(RUSTDOC) src/bin/coroutine.rs
 //!	$(RUSTDOC) src/makefile.rs
 //!	$(RUSTDOC) src/workflow.rs
 //! ```
+//!
 //! ```sh
 //! % make build
-//! rm -rf docs
 //! rustup run nightly rustdoc --out-dir docs  src/introduction.rs
 //! rustup run nightly rustdoc --out-dir docs  src/assert_matches.rs
+//! rustup run nightly rustdoc --out-dir docs  src/bin/coroutine.rs
 //! rustup run nightly rustdoc --out-dir docs  src/makefile.rs
 //! rustup run nightly rustdoc --out-dir docs  src/workflow.rs
 //! ```
-
 //!
 //! `make test`
 //! ```make
 //!     $(RUSTC) --test src/assert_matches.rs && ./assert_matches && rm ./assert_matches
+//!     $(RUSTC) src/bin/coroutine.rs && ./coroutine && rm ./coroutine
 //! ```
 //!
 //! ```sh
@@ -103,4 +104,7 @@
 //! test tests::test_assert_matches - should panic ... ok
 //!
 //! test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+//!
+//! rustup run nightly rustc src/bin/coroutine.rs && ./coroutine && rm ./coroutine
+//! It works!
 //! ``` 		 			
