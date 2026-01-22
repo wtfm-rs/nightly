@@ -1,6 +1,6 @@
 //! <https://wtfm-rs.github.io/nightly/rust/html/unstable-book/index.html>
 //!
-//! This only works in nightly
+//! This failed locally but passed in CI. 
 //! ```sh
 //! % rustup run nightly rustc src/bin/coroutine.rs && ./coroutine && rm ./coroutine
 //! It works!

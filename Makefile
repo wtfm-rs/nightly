@@ -21,7 +21,9 @@ test:
 	$(RUSTC) src/bin/coroutine.rs && ./coroutine && rm ./coroutine
 
 fail:
+	rustup run nightly cargo --version
 	-rustup run nightly cargo  run --bin coroutine
+	cargo --version
 	-cargo  run --bin coroutine
 	rustup run nightly cargo clean
 
