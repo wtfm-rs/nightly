@@ -22,6 +22,7 @@ test:
 
 fail:
 	-rustup run nightly cargo  run --bin coroutine
+	-cargo  run --bin coroutine
 	rustup run nightly cargo clean
 
 versions:
