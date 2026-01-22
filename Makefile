@@ -1,7 +1,7 @@
 RUSTC = rustup run nightly rustc
 RUSTDOC = rustup run nightly rustdoc --out-dir docs 
 
-all:	install versions build test fail
+all:	install versions build test pass
 	cp README.md docs
 
 install:
@@ -20,7 +20,7 @@ test:
 	$(RUSTC) --test src/assert_matches.rs && ./assert_matches && rm ./assert_matches
 	$(RUSTC) src/bin/coroutine.rs && ./coroutine && rm ./coroutine
 
-fail:
+pass:
 	rustup run nightly cargo --version
 	-rustup run nightly cargo  run --bin coroutine
 	cargo --version
