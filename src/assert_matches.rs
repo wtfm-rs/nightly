@@ -15,7 +15,7 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_assert_matches() {
-        use std::assert_matches::assert_matches;
+        use std::assert_matches;
         let a = Some(345);
         let b = Some(56);
         assert_matches!(a, Some(_));
