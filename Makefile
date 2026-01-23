@@ -8,6 +8,7 @@ all:	install versions build test pass
 install:
 	rustup toolchain list
 	rustup toolchain install nightly
+	rustup update nightly
 	rustup override set nightly
 
 build:
