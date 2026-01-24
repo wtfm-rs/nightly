@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-6586fa25.js";
+            window.path_to_searchindex_js = "searchindex-fe73a51c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-a6dae761.js"></script>
+        <script src="toc-f39945cd.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1195,6 +1195,24 @@ In order to actually trace the functions,
 you will need to link a separate runtime library of your choice,
 such as Clang’s <a href="https://www.llvm.org/docs/XRay.html#xray-runtime-library">XRay Runtime Library</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="large-data-threshold"><a class="header" href="#large-data-threshold"><code>large-data-threshold</code></a></h1>
+<hr>
+<p>This flag controls the threshold for static data to be placed in large data
+sections when using the <code>medium</code> code model on x86-64.</p>
+<p>When using <code>-Ccode-model=medium</code>, static data smaller than this threshold will
+use RIP-relative addressing (32-bit offsets), while larger data will use
+absolute 64-bit addressing. This allows the compiler to generate more efficient
+code for smaller data while still supporting data larger than 2GB.</p>
+<p>The default threshold is 65536 bytes (64KB) if not specified.</p>
+<h2 id="example-2"><a class="header" href="#example-2">Example</a></h2>
+<pre><code class="language-sh">rustc -Ccode-model=medium -Zlarge-data-threshold=1024 main.rs
+</code></pre>
+<p>This sets the threshold to 1KB, meaning only data smaller than 1024 bytes will
+use RIP-relative addressing.</p>
+<h2 id="platform-support"><a class="header" href="#platform-support">Platform Support</a></h2>
+<p>This flag is only effective on x86-64 targets when using <code>-Ccode-model=medium</code>.
+On other architectures or with other code models, this flag has no effect.</p>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="link-native-libraries"><a class="header" href="#link-native-libraries"><code>link-native-libraries</code></a></h1>
 <p>This option allows ignoring libraries specified in <code>#[link]</code> attributes instead of passing them to the linker.
 This can be useful in build systems that manage native libraries themselves and pass them manually,
@@ -1353,7 +1371,7 @@ Set the <code>-Zoffload=Enable</code> compiler flag to experiment with it.</p>
 <h2 id="-zon-broken-pipekill"><a class="header" href="#-zon-broken-pipekill"><code>-Zon-broken-pipe=kill</code></a></h2>
 <p>Set the <code>SIGPIPE</code> handler to <code>SIG_DFL</code> before invoking <code>fn main()</code>. This will result in your program getting killed if it tries to write to a closed pipe. This is normally what you want if your program produces textual output.</p>
 <p>When spawning child processes, <code>SIGPIPE</code> will not be touched. This normally means child processes inherit <code>SIG_DFL</code> for <code>SIGPIPE</code>.</p>
-<h3 id="example-2"><a class="header" href="#example-2">Example</a></h3>
+<h3 id="example-3"><a class="header" href="#example-3">Example</a></h3>
 <pre class="playground"><code class="language-rust no_run">fn main() {
     loop {
         println!("hello world");
@@ -1528,7 +1546,7 @@ path.</p>
 directory from build output, while allowing the command line to be universally
 reproducible, such that the same execution will work on all machines, regardless
 of build environment.</p>
-<h2 id="example-3"><a class="header" href="#example-3">Example</a></h2>
+<h2 id="example-4"><a class="header" href="#example-4">Example</a></h2>
 <pre><code class="language-sh"># This would produce an absolute path to main.rs in build outputs of
 # "./main.rs".
 rustc -Z remap-cwd-prefix=. main.rs
@@ -2087,7 +2105,7 @@ less memory.</p>
 <p>HWAddressSanitizer requires <code>tagged-globals</code> target feature to instrument
 globals. To enable this target feature compile with <code>-C target-feature=+tagged-globals</code></p>
 <p>See the <a href="https://clang.llvm.org/docs/HardwareAssistedAddressSanitizerDesign.html">Clang HWAddressSanitizer documentation</a> for more details.</p>
-<h2 id="example-4"><a class="header" href="#example-4">Example</a></h2>
+<h2 id="example-5"><a class="header" href="#example-5">Example</a></h2>
 <p>Heap buffer overflow:</p>
 <pre class="playground"><code class="language-rust">fn main() {
     let xs = vec![0, 1, 2, 3];
@@ -4194,7 +4212,7 @@ instrumentation in an annotated function. This might be useful to:</p>
 <li>Avoid generating coverage for a function that is not meant to be executed,
 but still target 100% coverage for the rest of the program.</li>
 </ul>
-<h2 id="example-5"><a class="header" href="#example-5">Example</a></h2>
+<h2 id="example-6"><a class="header" href="#example-6">Example</a></h2>
 <pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span>#![feature(coverage_attribute)]
 
@@ -5239,7 +5257,7 @@ feature, which applied to all empty traits (without needing an opt-in).</p>
 use of qualified paths in patterns.</p>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/86935">#86935</a>.</p>
 <hr>
-<h2 id="example-6"><a class="header" href="#example-6">Example</a></h2>
+<h2 id="example-7"><a class="header" href="#example-7">Example</a></h2>
 <pre class="playground"><code class="language-rust">#![feature(more_qualified_paths)]
 
 fn main() {
@@ -5799,7 +5817,7 @@ impl MyTrait for () {
 <hr>
 <p>The <code>strict_provenance_lints</code> feature allows to enable the <code>fuzzy_provenance_casts</code> and <code>lossy_provenance_casts</code> lints.
 These lint on casts between integers and pointers, that are recommended against or invalid in the strict provenance model.</p>
-<h2 id="example-7"><a class="header" href="#example-7">Example</a></h2>
+<h2 id="example-8"><a class="header" href="#example-8">Example</a></h2>
 <pre class="playground"><code class="language-rust">#![feature(strict_provenance_lints)]
 #![warn(fuzzy_provenance_casts)]
 
