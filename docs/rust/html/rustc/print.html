@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a631a4e8.js";
+            window.path_to_searchindex_js = "searchindex-29630132.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-46ab57f5.js"></script>
+        <script src="toc-d63a11d1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -7990,7 +7990,7 @@ async fn foo() {}</code></pre>
   |
   = note: see issue #110011 &lt;https://github.com/rust-lang/rust/issues/110011&gt; for more information
   = help: add `#![feature(async_fn_track_caller)]` to the crate attributes to enable
-  = note: this compiler was built on 2026-01-23; consider upgrading it if it is out of date
+  = note: this compiler was built on 2026-01-25; consider upgrading it if it is out of date
   = note: `#[warn(ungated_async_fn_track_caller)]` on by default
 
 </code></pre>
@@ -8259,7 +8259,7 @@ macro foo() {}</code></pre>
   |
   = note: see issue #39412 &lt;https://github.com/rust-lang/rust/issues/39412&gt; for more information
   = help: add `#![feature(decl_macro)]` to the crate attributes to enable
-  = note: this compiler was built on 2026-01-23; consider upgrading it if it is out of date
+  = note: this compiler was built on 2026-01-25; consider upgrading it if it is out of date
   = warning: unstable syntax can change at any point in the future, causing a hard error!
   = note: for more information, see issue #65860 &lt;https://github.com/rust-lang/rust/issues/65860&gt;
 
@@ -10253,7 +10253,7 @@ future. See <a href="https://github.com/rust-lang/rust/issues/64266">issue #6426
   |
   = note: the `test_unstable_lint` lint is unstable
   = help: add `#![feature(test_unstable_lint)]` to the crate attributes to enable
-  = note: this compiler was built on 2026-01-23; consider upgrading it if it is out of date
+  = note: this compiler was built on 2026-01-25; consider upgrading it if it is out of date
   = note: `#[warn(unknown_lints)]` on by default
 
 </code></pre>
@@ -13607,6 +13607,7 @@ so Rustup may install the documentation for a similar tier 1 target instead.</p>
 <tr><td><a href="#-windows-gnu"><code>i686-pc-windows-gnu</code></a></td><td>32-bit MinGW (Windows 10+, Windows Server 2016+, Pentium 4) <sup class="footnote-reference" id="fr-x86_32-floats-return-ABI-3"><a href="#footnote-x86_32-floats-return-ABI">1</a></sup> <sup class="footnote-reference" id="fr-win32-msvc-alignment-2"><a href="#footnote-win32-msvc-alignment">2</a></sup></td></tr>
 <tr><td><code>powerpc-unknown-linux-gnu</code></td><td>PowerPC Linux (kernel 3.2+, glibc 2.17)</td></tr>
 <tr><td><code>powerpc64-unknown-linux-gnu</code></td><td>PPC64 Linux (kernel 3.2+, glibc 2.17)</td></tr>
+<tr><td><a href="#powerpc64-unknown-linux-musl"><code>powerpc64-unknown-linux-musl</code></a></td><td>PPC64 Linux (kernel 4.19+, musl 1.2.5)</td></tr>
 <tr><td><a href="#powerpc64le-unknown-linux-gnu"><code>powerpc64le-unknown-linux-gnu</code></a></td><td>PPC64LE Linux (kernel 3.10+, glibc 2.17)</td></tr>
 <tr><td><a href="#powerpc64le-unknown-linux-musl"><code>powerpc64le-unknown-linux-musl</code></a></td><td>PPC64LE Linux (kernel 4.19+, musl 1.2.5)</td></tr>
 <tr><td><a href="#riscv64gc-unknown-linux-gnu"><code>riscv64gc-unknown-linux-gnu</code></a></td><td>RISC-V Linux (kernel 4.20+, glibc 2.29)</td></tr>
@@ -13669,11 +13670,11 @@ so Rustup may install the documentation for a similar tier 1 target instead.</p>
 <tr><td><a href="#armv7-unknown-linux-gnueabi-and-armv7-unknown-linux-gnueabihf"><code>armv7-unknown-linux-gnueabi</code></a></td><td style="text-align: center">✓</td><td>Armv7-A Linux (kernel 4.15+, glibc 2.27)</td></tr>
 <tr><td><code>armv7-unknown-linux-musleabi</code></td><td style="text-align: center">✓</td><td>Armv7-A Linux with musl 1.2.5</td></tr>
 <tr><td><code>armv7-unknown-linux-musleabihf</code></td><td style="text-align: center">✓</td><td>Armv7-A Linux with musl 1.2.5, hardfloat</td></tr>
-<tr><td><a href="#armv7a-none-eabi-and-armv7a-none-eabihf"><code>armv7a-none-eabi</code></a></td><td style="text-align: center">*</td><td>Bare Armv7-A</td></tr>
-<tr><td><a href="#armv7a-none-eabi-and-armv7a-none-eabihf"><code>armv7a-none-eabihf</code></a></td><td style="text-align: center">*</td><td>Bare Armv7-A, hardfloat</td></tr>
-<tr><td><a href="#armv7r-none-eabi-and-armv7r-none-eabihf"><code>armv7r-none-eabi</code></a></td><td style="text-align: center">*</td><td>Bare Armv7-R</td></tr>
-<tr><td><a href="#armv7r-none-eabi-and-armv7r-none-eabihf"><code>armv7r-none-eabihf</code></a></td><td style="text-align: center">*</td><td>Bare Armv7-R, hardfloat</td></tr>
-<tr><td><a href="#armv8r-none-eabihf"><code>armv8r-none-eabihf</code></a></td><td style="text-align: center">*</td><td>Bare Armv8-R, hardfloat</td></tr>
+<tr><td><a href="#armv7a-none-eabi-and-thumbv7a-none-eabi"><code>armv7a-none-eabi</code></a></td><td style="text-align: center">*</td><td>Bare Armv7-A</td></tr>
+<tr><td><a href="#armv7a-none-eabi-and-thumbv7a-none-eabi"><code>armv7a-none-eabihf</code></a></td><td style="text-align: center">*</td><td>Bare Armv7-A, hardfloat</td></tr>
+<tr><td><a href="#armv7r-none-eabi-and-thumbv7r-none-eabi"><code>armv7r-none-eabi</code></a></td><td style="text-align: center">*</td><td>Bare Armv7-R</td></tr>
+<tr><td><a href="#armv7r-none-eabi-and-thumbv7r-none-eabi"><code>armv7r-none-eabihf</code></a></td><td style="text-align: center">*</td><td>Bare Armv7-R, hardfloat</td></tr>
+<tr><td><a href="#armv8r-none-eabihf-and-thumbv8r-none-eabihf"><code>armv8r-none-eabihf</code></a></td><td style="text-align: center">*</td><td>Bare Armv8-R, hardfloat</td></tr>
 <tr><td><code>i586-unknown-linux-gnu</code></td><td style="text-align: center">✓</td><td>32-bit Linux (kernel 3.2+, glibc 2.17, original Pentium) <sup class="footnote-reference" id="fr-x86_32-floats-x87-1"><a href="#footnote-x86_32-floats-x87">3</a></sup></td></tr>
 <tr><td><code>i586-unknown-linux-musl</code></td><td style="text-align: center">✓</td><td>32-bit Linux (musl 1.2.5, original Pentium) <sup class="footnote-reference" id="fr-x86_32-floats-x87-2"><a href="#footnote-x86_32-floats-x87">3</a></sup></td></tr>
 <tr><td><a href="#-linux-android-and--linux-androideabi"><code>i686-linux-android</code></a></td><td style="text-align: center">✓</td><td>32-bit x86 Android (<a href="https://developer.android.com/ndk/guides/abis.html#x86">Pentium 4 plus various extensions</a>) <sup class="footnote-reference" id="fr-x86_32-floats-return-ABI-4"><a href="#footnote-x86_32-floats-return-ABI">1</a></sup></td></tr>
@@ -13791,6 +13792,8 @@ host tools.</p>
 <tr><td><code>armv4t-unknown-linux-gnueabi</code></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>Armv4T Linux</td></tr>
 <tr><td><a href="#armv5te-none-eabi"><code>armv5te-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Bare Armv5TE</td></tr>
 <tr><td><code>armv5te-unknown-linux-uclibceabi</code></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>Armv5TE Linux with uClibc</td></tr>
+<tr><td><a href="#armv6-none-eabi-and-thumbv6-none-eabi"><code>armv6-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Bare Armv6</td></tr>
+<tr><td><a href="#armv6-none-eabi-and-thumbv6-none-eabi"><code>armv6-none-eabihf</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Bare Armv6, hardfloat</td></tr>
 <tr><td><a href="#-unknown-freebsd"><code>armv6-unknown-freebsd</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>Armv6 FreeBSD</td></tr>
 <tr><td><a href="#-unknown-netbsd"><code>armv6-unknown-netbsd-eabihf</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>Armv6 NetBSD w/hard-float</td></tr>
 <tr><td><a href="#armv6k-nintendo-3ds"><code>armv6k-nintendo-3ds</code></a></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>Armv6k Nintendo 3DS, Horizon (Requires devkitARM toolchain)</td></tr>
@@ -13870,7 +13873,6 @@ host tools.</p>
 <tr><td><a href="#-wrs-vxworks"><code>powerpc-wrs-vxworks-spe</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td></td></tr>
 <tr><td><a href="#powerpc64-ibm-aix"><code>powerpc64-ibm-aix</code></a></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>64-bit AIX (7.2 and newer)</td></tr>
 <tr><td><a href="#-unknown-freebsd"><code>powerpc64-unknown-freebsd</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>PPC64 FreeBSD (ELFv2)</td></tr>
-<tr><td><a href="#powerpc64-unknown-linux-musl"><code>powerpc64-unknown-linux-musl</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>PPC64 Linux (kernel 4.19, musl 1.2.5)</td></tr>
 <tr><td><a href="#-unknown-openbsd"><code>powerpc64-unknown-openbsd</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>OpenBSD/powerpc64</td></tr>
 <tr><td><a href="#-wrs-vxworks"><code>powerpc64-wrs-vxworks</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td></td></tr>
 <tr><td><a href="#-unknown-freebsd"><code>powerpc64le-unknown-freebsd</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>PPC64LE FreeBSD</td></tr>
@@ -13909,18 +13911,24 @@ host tools.</p>
 <tr><td><a href="#-unknown-openbsd"><code>sparc64-unknown-openbsd</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>OpenBSD/sparc64</td></tr>
 <tr><td><a href="#armv4t-none-eabi--thumbv4t-none-eabi"><code>thumbv4t-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv4T</td></tr>
 <tr><td><a href="#armv5te-none-eabi"><code>thumbv5te-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv5TE</td></tr>
+<tr><td><a href="#armv6-none-eabi-and-thumbv6-none-eabi"><code>thumbv6-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv6</td></tr>
 <tr><td><a href="#-nuttx-elf"><code>thumbv6m-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv6M with NuttX</td></tr>
-<tr><td><code>thumbv7a-pc-windows-msvc</code></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
-<tr><td><a href="#x86_64-uwp-windows-msvc-i686-uwp-windows-msvc-thumbv7a-uwp-windows-msvc-and-aarch64-uwp-windows-msvc"><code>thumbv7a-uwp-windows-msvc</code></a></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><a href="#armv7a-none-eabi-and-thumbv7a-none-eabi"><code>thumbv7a-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv7-A</td></tr>
+<tr><td><a href="#armv7a-none-eabi-and-thumbv7a-none-eabi"><code>thumbv7a-none-eabihf</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv7-A, hardfloat</td></tr>
 <tr><td><a href="#-nuttx-elf"><code>thumbv7a-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv7-A with NuttX</td></tr>
 <tr><td><a href="#-nuttx-elf"><code>thumbv7a-nuttx-eabihf</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv7-A with NuttX, hardfloat</td></tr>
+<tr><td><code>thumbv7a-pc-windows-msvc</code></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><a href="#x86_64-uwp-windows-msvc-i686-uwp-windows-msvc-thumbv7a-uwp-windows-msvc-and-aarch64-uwp-windows-msvc"><code>thumbv7a-uwp-windows-msvc</code></a></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
 <tr><td><a href="#-nuttx-elf"><code>thumbv7em-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv7EM with NuttX</td></tr>
 <tr><td><a href="#-nuttx-elf"><code>thumbv7em-nuttx-eabihf</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv7EM with NuttX, hardfloat</td></tr>
 <tr><td><a href="#-nuttx-elf"><code>thumbv7m-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv7M with NuttX</td></tr>
 <tr><td><code>thumbv7neon-unknown-linux-musleabihf</code></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>Thumb2-mode Armv7-A Linux with NEON, musl 1.2.5</td></tr>
+<tr><td><a href="#armv7r-none-eabi-and-thumbv7r-none-eabi"><code>thumbv7r-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv7-R</td></tr>
+<tr><td><a href="#armv7r-none-eabi-and-thumbv7r-none-eabi"><code>thumbv7r-none-eabihf</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv7-R, hardfloat</td></tr>
 <tr><td><a href="#-nuttx-elf"><code>thumbv8m.base-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv8M Baseline with NuttX</td></tr>
 <tr><td><a href="#-nuttx-elf"><code>thumbv8m.main-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv8M Mainline with NuttX</td></tr>
 <tr><td><a href="#-nuttx-elf"><code>thumbv8m.main-nuttx-eabihf</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv8M Mainline with NuttX, hardfloat</td></tr>
+<tr><td><a href="#armv8r-none-eabihf-and-thumbv8r-none-eabihf"><code>thumbv8r-none-eabihf</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv8-R, hardfloat</td></tr>
 <tr><td><a href="#wasm64-unknown-unknown"><code>wasm64-unknown-unknown</code></a></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>WebAssembly</td></tr>
 <tr><td><a href="#wasm32-wali-linux-"><code>wasm32-wali-linux-musl</code></a></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>WebAssembly with <a href="https://github.com/arjunr2/WALI">WALI</a></td></tr>
 <tr><td><a href="#wasm32-wasip3"><code>wasm32-wasip3</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>WebAssembly with WASIp3</td></tr>
@@ -15340,7 +15348,7 @@ ARMv8-A host or via QEMU emulation.</p>
 </ul>
 <p>Bare-metal targets for CPUs in the Armv8-A architecture family, running in AArch64 mode.</p>
 <p>For the AArch32 mode carried over from Armv7-A, see
-<a href="#armv7a-none-eabi-and-armv7a-none-eabihf"><code>armv7a-none-eabi</code></a> instead.</p>
+<a href="#armv7a-none-eabi-and-thumbv7a-none-eabi"><code>armv7a-none-eabi</code></a> instead.</p>
 <p>Processors in this family include the <a href="https://en.wikipedia.org/wiki/Comparison_of_ARM_processors#ARMv8-A">Arm Cortex-A35, 53, 76, etc</a>.</p>
 <h2 id="target-maintainers-16"><a class="header" href="#target-maintainers-16">Target maintainers</a></h2>
 <ul>
@@ -15561,14 +15569,14 @@ their own document.</p>
 <ul>
 <li>Arm A-Profile Architectures
 <ul>
-<li><a href="#armv7a-none-eabi-and-armv7a-none-eabihf"><code>armv7a-none-eabi</code></a></li>
+<li><a href="#armv7a-none-eabi-and-thumbv7a-none-eabi"><code>armv7a-none-eabi</code></a></li>
 </ul>
 </li>
 <li>Arm R-Profile Architectures
 <ul>
-<li><a href="#armv7r-none-eabi-and-armv7r-none-eabihf"><code>armv7r-none-eabi</code> and <code>armv7r-none-eabihf</code></a></li>
+<li><a href="#armv7r-none-eabi-and-thumbv7r-none-eabi"><code>armv7r-none-eabi</code> and <code>armv7r-none-eabihf</code></a></li>
 <li><a href="#armebv7r-none-eabi-and-armebv7r-none-eabihf"><code>armebv7r-none-eabi</code> and <code>armebv7r-none-eabihf</code></a></li>
-<li><a href="#armv8r-none-eabihf"><code>armv8r-none-eabihf</code></a></li>
+<li><a href="#armv8r-none-eabihf-and-thumbv8r-none-eabihf"><code>armv8r-none-eabihf</code></a></li>
 </ul>
 </li>
 <li>Arm M-Profile Architectures
@@ -15590,7 +15598,7 @@ their own document.</p>
 <ul>
 <li>Arm A-Profile Architectures
 <ul>
-<li><a href="#armv7a-none-eabi-and-armv7a-none-eabihf"><code>armv7a-none-eabihf</code></a></li>
+<li><a href="#armv7a-none-eabi-and-thumbv7a-none-eabi"><code>armv7a-none-eabihf</code></a></li>
 </ul>
 </li>
 <li>Arm R-Profile Architectures
@@ -15607,6 +15615,7 @@ their own document.</p>
 <ul>
 <li><a href="#armv4t-none-eabi--thumbv4t-none-eabi"><code>armv4t-none-eabi</code> and <code>thumbv4t-none-eabi</code></a></li>
 <li><a href="#armv5te-none-eabi"><code>armv5te-none-eabi</code> and <code>thumbv5te-none-eabi</code></a></li>
+<li><a href="#armv6-none-eabi-and-thumbv6-none-eabi"><code>armv6-none-eabi</code>, <code>armv6-none-eabihf</code>, <code>thumbv6-none-eabi</code></a></li>
 </ul>
 </li>
 </ul>
@@ -15788,19 +15797,58 @@ need depends on the specific device you want to run your code on.</p>
 <p>For example, when programming for the DS, you can use one of the several
 available DS emulators, such as <a href="https://melonds.kuribo64.net/">melonDS</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="armv7a-none-eabi-and-armv7a-none-eabihf"><a class="header" href="#armv7a-none-eabi-and-armv7a-none-eabihf"><code>armv7a-none-eabi</code> and <code>armv7a-none-eabihf</code></a></h1>
+<h1 id="armv6-none-eabi-and-thumbv6-none-eabi"><a class="header" href="#armv6-none-eabi-and-thumbv6-none-eabi"><code>armv6-none-eabi*</code> and <code>thumbv6-none-eabi</code></a></h1>
 <ul>
-<li><strong>Tier: 2</strong></li>
+<li><strong>Tier: 3</strong></li>
 <li><strong>Library Support:</strong> core and alloc (bare-metal, <code>#![no_std]</code>)</li>
 </ul>
-<p>Bare-metal target for CPUs in the Armv7-A architecture family, supporting
-dual ARM/Thumb mode, with ARM mode as the default.</p>
+<p>Bare-metal target for any cpu in the Armv6 architecture family, supporting
+ARM/Thumb code interworking (aka <code>Arm</code>/<code>Thumb</code>), with <code>Arm</code> code as the default
+code generation. The most common processor family using the Armv6 architecture
+is the ARM11, which includes the ARM1176JZF-S used in the original Raspberry Pi
+and in the Raspberry Pi Zero.</p>
+<p>This target assumes your processor has the Armv6K extensions, as basically all
+Armv6 processors do<sup class="footnote-reference" id="fr-1-1-1"><a href="#footnote-1-1">1</a></sup>. The Armv6K extension adds the <code>LDREXB</code> and <code>STREXB</code>
+instructions required to efficiently implement CAS on the <a href="https://docs.rust-lang.org/stable/core/sync/atomic/struct.AtomicU8.html"><code>AtomicU8</code></a> and
+<a href="https://docs.rust-lang.org/stable/core/sync/atomic/struct.AtomicI8.html"><code>AtomicI8</code></a> types.</p>
+<p>The <code>thumbv6-none-eabi</code> target is the same as this one, but the instruction set
+defaults to <code>Thumb</code>. Note that this target only supports the old Thumb-1
+instruction set, not the later Thumb-2 instruction set that was added in the
+Armv6T2 extension. Note that the Thumb-1 instruction set does not support
+atomics.</p>
+<p>The <code>armv6-none-eabihf</code> target uses the EABIHF hard-float ABI, and requires an
+FPU - it assumes a VFP2D16 FPU is present. The FPU is not available from Thumb
+mode so there is no <code>thumbv6-none-eabihf</code> target.</p>
+<p>See <a href="#armthumb-none-eabihf"><code>arm-none-eabi</code></a> for information applicable to all
+<code>arm-none-eabi</code> targets.</p>
+<h2 id="target-maintainers-22"><a class="header" href="#target-maintainers-22">Target Maintainers</a></h2>
+<p><a href="https://github.com/thejpster">@thejpster</a></p>
+<hr>
+<ol class="footnote-definition">
+<li id="footnote-1-1">
+<p>The only ARMv6 processor without the Armv6k extensions is the first (r0)
+revision of the ARM1136 - in the unlikely event you have a chip with one of
+these processors, use the ARMv5TE target instead. <a href="#fr-1-1-1">↩</a></p>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="armv7a-none-eabi-and-thumbv7a-none-eabi"><a class="header" href="#armv7a-none-eabi-and-thumbv7a-none-eabi"><code>armv7a-none-eabi*</code> and <code>thumbv7a-none-eabi*</code></a></h1>
+<ul>
+<li><strong>Tier: 2</strong> (<code>armv7a-none-eabi</code> and <code>armv7a-none-eabihf</code>)</li>
+<li><strong>Tier: 3</strong> (<code>thumbv7a-none-eabi</code> and <code>thumbv7a-none-eabihf</code>)</li>
+<li><strong>Library Support:</strong> core and alloc (bare-metal, <code>#![no_std]</code>)</li>
+</ul>
+<p>Bare-metal target for CPUs in the Armv7-A architecture family, supporting dual
+ARM/Thumb mode. The <code>armv7a-none-eabi*</code> targets use Arm mode by default and the
+<code>thumbv7a-none-eabi</code> targets use Thumb mode by default. The <code>-eabi</code> targets use
+a soft-float ABI and do not require an FPU, while the <code>-eabihf</code> targets use a
+hard-float ABI and do require an FPU.</p>
 <p>Note, this is for processors running in AArch32 mode. For the AArch64 mode
 added in Armv8-A, see <a href="#aarch64-unknown-none-and-aarch64-unknown-none-softfloat"><code>aarch64-unknown-none</code></a> instead.</p>
 <p>Processors in this family include the <a href="https://en.wikipedia.org/wiki/ARM_Cortex-A">Arm Cortex-A5, 8, 32, etc</a>.</p>
 <p>See <a href="#armthumb-none-eabihf"><code>arm-none-eabi</code></a> for information applicable to all
 <code>arm-none-eabi</code> targets.</p>
-<h2 id="target-maintainers-22"><a class="header" href="#target-maintainers-22">Target maintainers</a></h2>
+<h2 id="target-maintainers-23"><a class="header" href="#target-maintainers-23">Target maintainers</a></h2>
 <ul>
 <li><a href="https://github.com/rust-embedded/wg?tab=readme-ov-file#the-arm-team">Rust Embedded Devices Working Group Arm Team</a></li>
 <li><a href="https://github.com/rust-lang/team/blob/master/teams/arm-maintainers.toml">@rust-lang/arm-maintainers</a> (<a href="mailto:rust@arm.com">rust@arm.com</a>)</li>
@@ -15839,28 +15887,32 @@ and <a href="https://docs.rs/aarch32-rt"><code>aarch32-rt</code></a> crates, whi
 using this target. Those crates include several examples which run in QEMU and
 build using these targets.</p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="armv7r-none-eabi-and-armv7r-none-eabihf"><a class="header" href="#armv7r-none-eabi-and-armv7r-none-eabihf"><code>armv7r-none-eabi</code> and <code>armv7r-none-eabihf</code></a></h1>
+<h1 id="armv7r-none-eabi-and-thumbv7r-none-eabi"><a class="header" href="#armv7r-none-eabi-and-thumbv7r-none-eabi"><code>armv7r-none-eabi*</code> and <code>thumbv7r-none-eabi*</code></a></h1>
 <ul>
-<li><strong>Tier: 2</strong></li>
+<li><strong>Tier: 2</strong> (<code>armv7r-none-eabi</code> and <code>armv7r-none-eabihf</code>)</li>
+<li><strong>Tier: 3</strong> (<code>thumbv7r-none-eabi</code> and <code>thumbv7r-none-eabihf</code>)</li>
 <li><strong>Library Support:</strong> core and alloc (bare-metal, <code>#![no_std]</code>)</li>
 </ul>
-<p>Bare-metal target for CPUs in the Armv7-R architecture family, supporting
-dual ARM/Thumb mode, with ARM mode as the default.</p>
+<p>Bare-metal target for CPUs in the Armv7-R architecture family, supporting dual
+ARM/Thumb mode. The <code>armv7r-none-eabi*</code> targets use Arm mode by default and the
+<code>thumbv7r-none-eabi*</code> targets use Thumb mode by default. The <code>-eabi</code> targets use
+a soft-float ABI and do not require an FPU, while the <code>-eabihf</code> targets use a
+hard-float ABI and do require an FPU.</p>
 <p>Processors in this family include the <a href="https://en.wikipedia.org/wiki/ARM_Cortex-R">Arm Cortex-R4, 5, 7, and 8</a>.</p>
 <p>See <a href="#armthumb-none-eabihf"><code>arm-none-eabi</code></a> for information applicable to all
 <code>arm-none-eabi</code> targets.</p>
-<h2 id="target-maintainers-23"><a class="header" href="#target-maintainers-23">Target maintainers</a></h2>
+<h2 id="target-maintainers-24"><a class="header" href="#target-maintainers-24">Target maintainers</a></h2>
 <ul>
 <li><a href="https://github.com/chrisnc">@chrisnc</a></li>
 <li><a href="https://github.com/rust-embedded/wg?tab=readme-ov-file#the-arm-team">Rust Embedded Devices Working Group Arm Team</a></li>
 <li><a href="https://github.com/rust-lang/team/blob/master/teams/arm-maintainers.toml">@rust-lang/arm-maintainers</a> (<a href="mailto:rust@arm.com">rust@arm.com</a>)</li>
 </ul>
 <h2 id="requirements-22"><a class="header" href="#requirements-22">Requirements</a></h2>
-<p>When using the hardfloat targets, the minimum floating-point features assumed
-are those of the <code>vfpv3-d16</code>, which includes single- and double-precision, with
-16 double-precision registers. This floating-point unit appears in Cortex-R4F
-and Cortex-R5F processors. See <a href="https://developer.arm.com/documentation/den0042/a/Floating-Point/Floating-point-basics-and-the-IEEE-754-standard/VFP-in-the-Cortex-R-processors">VFP in the Cortex-R processors</a>
-for more details on the possible FPU variants.</p>
+<p>When using the hardfloat (<code>-eabibf</code>) targets, the minimum floating-point
+features assumed are those of the <code>vfpv3-d16</code>, which includes single- and
+double-precision, with 16 double-precision registers. This floating-point unit
+appears in Cortex-R4F and Cortex-R5F processors. See <a href="https://developer.arm.com/documentation/den0042/a/Floating-Point/Floating-point-basics-and-the-IEEE-754-standard/VFP-in-the-Cortex-R-processors">VFP in the Cortex-R
+processors</a> for more details on the possible FPU variants.</p>
 <p>If your processor supports a different set of floating-point features than the
 default expectations of <code>vfpv3-d16</code>, then these should also be enabled or
 disabled as needed with <code>-C target-feature=(+/-)</code>.</p>
@@ -15870,49 +15922,16 @@ and <a href="https://docs.rs/aarch32-rt"><code>aarch32-rt</code></a> crates, whi
 using this target. Those crates include several examples which run in QEMU and
 build using these targets.</p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="armebv7r-none-eabi-and-armebv7r-none-eabihf"><a class="header" href="#armebv7r-none-eabi-and-armebv7r-none-eabihf"><code>armebv7r-none-eabi</code> and <code>armebv7r-none-eabihf</code></a></h1>
+<h1 id="armv8r-none-eabihf-and-thumbv8r-none-eabihf"><a class="header" href="#armv8r-none-eabihf-and-thumbv8r-none-eabihf"><code>armv8r-none-eabihf</code> and <code>thumbv8r-none-eabihf</code></a></h1>
 <ul>
-<li><strong>Tier: 3</strong></li>
+<li><strong>Tier: 2</strong>: <code>armv8r-none-eabihf</code></li>
+<li><strong>Tier: 3</strong>: <code>thumbv8r-none-eabihf</code></li>
 <li><strong>Library Support:</strong> core and alloc (bare-metal, <code>#![no_std]</code>)</li>
 </ul>
-<p>Bare-metal target for CPUs in the Armv7-R architecture family running in Big
-Endian mode. These processors support dual ARM/Thumb mode, with ARM mode as
-the default.</p>
-<p><strong>NOTE:</strong> You should almost always prefer the <a href="#armv7r-none-eabi-and-armv7r-none-eabihf">little-endian
-versions</a> of these target. Big Endian Arm systems are
-highly unusual.</p>
-<p>Processors in this family include the <a href="https://en.wikipedia.org/wiki/ARM_Cortex-R">Arm Cortex-R4, 5, 7, and 8</a>.</p>
-<p>See <a href="#armthumb-none-eabihf"><code>arm-none-eabi</code></a> for information applicable to all
-<code>arm-none-eabi</code> targets.</p>
-<h2 id="target-maintainers-24"><a class="header" href="#target-maintainers-24">Target maintainers</a></h2>
-<p><a href="https://github.com/chrisnc">@chrisnc</a></p>
-<h2 id="requirements-23"><a class="header" href="#requirements-23">Requirements</a></h2>
-<p>Note that some variants of the Cortex-R have both big-endian instructions and
-data. This configuration is known as BE-32, while data-only big-endianness is
-known as BE-8. To build programs for BE-32 processors, the GNU linker must be
-used with the <code>-mbe32</code> option. See <a href="https://developer.arm.com/documentation/den0042/a/Coding-for-Cortex-R-Processors/Endianness">ARM Cortex-R Series Programmer’s Guide:
-Endianness</a> for more details about different endian modes.</p>
-<p>When using the hardfloat targets, the minimum floating-point features assumed
-are those of the <code>vfpv3-d16</code>, which includes single- and double-precision, with
-16 double-precision registers. This floating-point unit appears in Cortex-R4F
-and Cortex-R5F processors. See <a href="https://developer.arm.com/documentation/den0042/a/Floating-Point/Floating-point-basics-and-the-IEEE-754-standard/VFP-in-the-Cortex-R-processors">VFP in the Cortex-R processors</a>
-for more details on the possible FPU variants.</p>
-<p>If your processor supports a different set of floating-point features than the
-default expectations of <code>vfpv3-d16</code>, then these should also be enabled or
-disabled as needed with <code>-C target-feature=(+/-)</code>.</p>
-<h2 id="start-up-and-low-level-code-3"><a class="header" href="#start-up-and-low-level-code-3">Start-up and Low-Level Code</a></h2>
-<p>The [Rust Embedded Devices Working Group Arm Team] maintain the <a href="https://docs.rs/aarch32-cpu"><code>aarch32-cpu</code></a>
-and <a href="https://docs.rs/aarch32-rt"><code>aarch32-rt</code></a> crates, which may be useful for writing bare-metal code
-using this target. Those crates include several examples which run in QEMU and
-build using these targets.</p>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="armv8r-none-eabihf"><a class="header" href="#armv8r-none-eabihf"><code>armv8r-none-eabihf</code></a></h1>
-<ul>
-<li><strong>Tier: 2</strong></li>
-<li><strong>Library Support:</strong> core and alloc (bare-metal, <code>#![no_std]</code>)</li>
-</ul>
-<p>Bare-metal target for CPUs in the Armv8-R architecture family, supporting
-dual ARM/Thumb mode, with ARM mode as the default.</p>
+<p>Bare-metal target for CPUs in the Armv8-R architecture family, supporting dual
+ARM/Thumb mode. The <code>armv8r-none-eabihf</code> target uses Arm mode by default and
+the <code>thumbv8r-none-eabihf</code> target uses Thumb mode by default. Both targets
+use a hard-float ABI and require an FPU.</p>
 <p>Processors in this family include the Arm <a href="https://www.arm.com/products/silicon-ip-cpu/cortex-r/cortex-r52">Cortex-R52</a>
 and <a href="https://www.arm.com/products/silicon-ip-cpu/cortex-r/cortex-r52-plus">Cortex-R52+</a>.</p>
 <p>See <a href="#armthumb-none-eabihf"><code>arm-none-eabi</code></a> for information applicable to all
@@ -15923,7 +15942,7 @@ and <a href="https://www.arm.com/products/silicon-ip-cpu/cortex-r/cortex-r52-plu
 <li><a href="https://github.com/rust-embedded/wg?tab=readme-ov-file#the-arm-team">Rust Embedded Devices Working Group Arm Team</a></li>
 <li><a href="https://github.com/rust-lang/team/blob/master/teams/arm-maintainers.toml">@rust-lang/arm-maintainers</a> (<a href="mailto:rust@arm.com">rust@arm.com</a>)</li>
 </ul>
-<h2 id="requirements-24"><a class="header" href="#requirements-24">Requirements</a></h2>
+<h2 id="requirements-23"><a class="header" href="#requirements-23">Requirements</a></h2>
 <p>The Cortex-R52 family always includes a floating-point unit, so there is no
 non-<code>hf</code> version of this target. The floating-point features assumed by this
 target are those of the single-precision-only config of the Cortex-R52, which
@@ -16348,6 +16367,42 @@ values
 </li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
+<h1 id="armebv7r-none-eabi-and-armebv7r-none-eabihf"><a class="header" href="#armebv7r-none-eabi-and-armebv7r-none-eabihf"><code>armebv7r-none-eabi</code> and <code>armebv7r-none-eabihf</code></a></h1>
+<ul>
+<li><strong>Tier: 3</strong></li>
+<li><strong>Library Support:</strong> core and alloc (bare-metal, <code>#![no_std]</code>)</li>
+</ul>
+<p>Bare-metal target for CPUs in the Armv7-R architecture family running in Big
+Endian mode. These processors support dual ARM/Thumb mode, with ARM mode as
+the default.</p>
+<p><strong>NOTE:</strong> You should almost always prefer the <a href="#armv7r-none-eabi-and-thumbv7r-none-eabi">little-endian
+versions</a> of these target. Big Endian Arm systems are
+highly unusual.</p>
+<p>Processors in this family include the <a href="https://en.wikipedia.org/wiki/ARM_Cortex-R">Arm Cortex-R4, 5, 7, and 8</a>.</p>
+<p>See <a href="#armthumb-none-eabihf"><code>arm-none-eabi</code></a> for information applicable to all
+<code>arm-none-eabi</code> targets.</p>
+<h2 id="target-maintainers-31"><a class="header" href="#target-maintainers-31">Target maintainers</a></h2>
+<p><a href="https://github.com/chrisnc">@chrisnc</a></p>
+<h2 id="requirements-24"><a class="header" href="#requirements-24">Requirements</a></h2>
+<p>Note that some variants of the Cortex-R have both big-endian instructions and
+data. This configuration is known as BE-32, while data-only big-endianness is
+known as BE-8. To build programs for BE-32 processors, the GNU linker must be
+used with the <code>-mbe32</code> option. See <a href="https://developer.arm.com/documentation/den0042/a/Coding-for-Cortex-R-Processors/Endianness">ARM Cortex-R Series Programmer’s Guide:
+Endianness</a> for more details about different endian modes.</p>
+<p>When using the hardfloat targets, the minimum floating-point features assumed
+are those of the <code>vfpv3-d16</code>, which includes single- and double-precision, with
+16 double-precision registers. This floating-point unit appears in Cortex-R4F
+and Cortex-R5F processors. See <a href="https://developer.arm.com/documentation/den0042/a/Floating-Point/Floating-point-basics-and-the-IEEE-754-standard/VFP-in-the-Cortex-R-processors">VFP in the Cortex-R processors</a>
+for more details on the possible FPU variants.</p>
+<p>If your processor supports a different set of floating-point features than the
+default expectations of <code>vfpv3-d16</code>, then these should also be enabled or
+disabled as needed with <code>-C target-feature=(+/-)</code>.</p>
+<h2 id="start-up-and-low-level-code-3"><a class="header" href="#start-up-and-low-level-code-3">Start-up and Low-Level Code</a></h2>
+<p>The [Rust Embedded Devices Working Group Arm Team] maintain the <a href="https://docs.rs/aarch32-cpu"><code>aarch32-cpu</code></a>
+and <a href="https://docs.rs/aarch32-rt"><code>aarch32-rt</code></a> crates, which may be useful for writing bare-metal code
+using this target. Those crates include several examples which run in QEMU and
+build using these targets.</p>
+<div style="break-before: page; page-break-before: always;"></div>
 <h1 id="arm-linux-support-in-rust"><a class="header" href="#arm-linux-support-in-rust">Arm Linux support in Rust</a></h1>
 <p>The Arm Architecture has been around since the mid-1980s, going through nine
 major revisions, many minor revisions, and spanning both 32-bit and 64-bit
@@ -16539,7 +16594,7 @@ targets.</p>
 <p>BE8 architecture retains the same little-endian ordered code-stream used by conventional little endian Arm systems, however the data accesses are in big-endian. BE8 is used primarily in high-performance networking applications where the ability to read packets in their native “Network Byte Order” is important (many network protocols transmit data in big-endian byte order for their wire formats).</p>
 <h2 id="history"><a class="header" href="#history">History</a></h2>
 <p>BE8 architecture is the default big-endian architecture for Arm since <a href="https://developer.arm.com/documentation/101754/0616/armlink-Reference/armlink-Command-line-Options/--be8?lang=en">Armv6</a>. It’s predecessor, used for Armv4 and Armv5 devices was <a href="https://developer.arm.com/documentation/dui0474/j/linker-command-line-options/--be32">BE32</a>. On Armv6 architecture, endianness can be configured via <a href="https://developer.arm.com/documentation/ddi0290/g/unaligned-and-mixed-endian-data-access-support/mixed-endian-access-support/interaction-between-the-bus-protocol-and-the-core-endianness">system registers</a>. However, BE32 was withdrawn for <a href="https://developer.arm.com/documentation/ddi0406/cb/Appendixes/Deprecated-and-Obsolete-Features/Obsolete-features/Support-for-BE-32-endianness-model">Armv7</a> onwards.</p>
-<h2 id="target-maintainers-31"><a class="header" href="#target-maintainers-31">Target Maintainers</a></h2>
+<h2 id="target-maintainers-32"><a class="header" href="#target-maintainers-32">Target Maintainers</a></h2>
 <p><a href="https://github.com/WorksButNotTested">@WorksButNotTested</a></p>
 <h2 id="requirements-25"><a class="header" href="#requirements-25">Requirements</a></h2>
 <p>The target is cross-compiled. This target supports <code>std</code> in the normal way (indeed only nominal changes are required from the standard Arm configuration).</p>
@@ -16597,7 +16652,7 @@ linker = "armeb-unknown-linux-gnueabi-gcc"
 floating-point units.</p>
 <p>See <a href="#arm-linux-support-in-rust"><code>arm-linux</code></a> for information applicable to all Arm Linux
 targets.</p>
-<h2 id="target-maintainers-32"><a class="header" href="#target-maintainers-32">Target maintainers</a></h2>
+<h2 id="target-maintainers-33"><a class="header" href="#target-maintainers-33">Target maintainers</a></h2>
 <p>There are currently no formally documented target maintainers.</p>
 <h2 id="requirements-26"><a class="header" href="#requirements-26">Requirements</a></h2>
 <p>The target is for cross-compilation only. Host tools are not supported.
@@ -16617,7 +16672,7 @@ linker = "arm-linux-gnueabi-gcc"
 <li><strong>Tier: 2</strong> for <code>armv7-unknown-linux-gnueabi</code></li>
 </ul>
 <p>Target for 32-bit little endian ARMv7-A Linux 3.2+ programs using glibc 2.17+.</p>
-<h2 id="target-maintainers-33"><a class="header" href="#target-maintainers-33">Target maintainers</a></h2>
+<h2 id="target-maintainers-34"><a class="header" href="#target-maintainers-34">Target maintainers</a></h2>
 <ul>
 <li><a href="https://github.com/rust-lang/team/blob/master/teams/arm-maintainers.toml">@rust-lang/arm-maintainers</a> (<a href="mailto:rust@arm.com">rust@arm.com</a>)</li>
 </ul>
@@ -16650,7 +16705,7 @@ QEMU emulation.</p>
 <p>This target supports Armv7-A softfloat CPUs and uses the uclibc-ng standard library. This is a common configuration on many consumer routers (e.g., Netgear R7000, Asus RT-AC68U).</p>
 <p>See <a href="#arm-linux-support-in-rust"><code>arm-linux</code></a> for information applicable to all Arm Linux
 targets.</p>
-<h2 id="target-maintainers-34"><a class="header" href="#target-maintainers-34">Target maintainers</a></h2>
+<h2 id="target-maintainers-35"><a class="header" href="#target-maintainers-35">Target maintainers</a></h2>
 <p><a href="https://github.com/lancethepants">@lancethepants</a></p>
 <h2 id="requirements-28"><a class="header" href="#requirements-28">Requirements</a></h2>
 <p>This target is cross compiled, and requires a cross toolchain.</p>
@@ -16758,7 +16813,7 @@ run \
 <p>This tier supports the Armv7-A processor running a Linux kernel and uClibc-ng standard library.  It provides full support for rust and the rust standard library.</p>
 <p>See <a href="#arm-linux-support-in-rust"><code>arm-linux</code></a> for information applicable to all Arm Linux
 targets.</p>
-<h2 id="target-maintainers-35"><a class="header" href="#target-maintainers-35">Target Maintainers</a></h2>
+<h2 id="target-maintainers-36"><a class="header" href="#target-maintainers-36">Target Maintainers</a></h2>
 <p><a href="https://github.com/skrap">@skrap</a></p>
 <h2 id="requirements-29"><a class="header" href="#requirements-29">Requirements</a></h2>
 <p>This target is cross compiled, and requires a cross toolchain.  You can find suitable pre-built toolchains at <a href="https://toolchains.bootlin.com/">bootlin</a> or build one yourself via <a href="https://buildroot.org">buildroot</a>.</p>
@@ -16809,7 +16864,7 @@ cargo +stage2 run --target armv7-unknown-linux-uclibceabihf
 operating system (<code>horizon</code>).</p>
 <p>Rust support for this target is not affiliated with Nintendo, and is not derived
 from nor used with any official Nintendo SDK.</p>
-<h2 id="target-maintainers-36"><a class="header" href="#target-maintainers-36">Target maintainers</a></h2>
+<h2 id="target-maintainers-37"><a class="header" href="#target-maintainers-37">Target maintainers</a></h2>
 <p>This target is maintained by members of the <a href="https://github.com/rust3ds">@rust3ds</a>
 organization:</p>
 <p><a href="https://github.com/Meziu">@Meziu</a>
@@ -16900,7 +16955,7 @@ and the remaining APIs are implemented by <code>pthread-3ds</code> and <code>lin
 <h1 id="armv7-rtems-eabihf"><a class="header" href="#armv7-rtems-eabihf"><code>armv7-rtems-eabihf</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>ARM targets for the <a href="https://www.rtems.org">RTEMS realtime operating system</a>  using the RTEMS gcc cross-compiler for linking against the libraries of a specified Board Support Package (BSP).</p>
-<h2 id="target-maintainers-37"><a class="header" href="#target-maintainers-37">Target maintainers</a></h2>
+<h2 id="target-maintainers-38"><a class="header" href="#target-maintainers-38">Target maintainers</a></h2>
 <p><a href="https://github.com/thesummer">@thesummer</a></p>
 <h2 id="requirements-31"><a class="header" href="#requirements-31">Requirements</a></h2>
 <p>The target does not support host tools. Only cross-compilation is possible.
@@ -16935,7 +16990,7 @@ For more information how to build the toolchain, RTEMS itself and RTEMS applicat
 <p>This tier supports the ARM Cortex A9 processor running on a PlayStation Vita console.</p>
 <p>Rust support for this target is not affiliated with Sony, and is not derived
 from nor used with any official Sony SDK.</p>
-<h2 id="target-maintainers-38"><a class="header" href="#target-maintainers-38">Target maintainers</a></h2>
+<h2 id="target-maintainers-39"><a class="header" href="#target-maintainers-39">Target maintainers</a></h2>
 <p><a href="https://github.com/nikarh">@nikarh</a>
 <a href="https://github.com/pheki">@pheki</a>
 <a href="https://github.com/zetanumbers">@zetanumbers</a></p>
@@ -16980,7 +17035,7 @@ title_name = "My application"
 <p><strong>Tier: 3</strong></p>
 <p>Allows compiling user programs for the <a href="https://www.vexrobotics.com/276-4810.html">VEX V5 Brain</a>, a microcontroller for educational and competitive robotics.</p>
 <p>Rust support for this target is not affiliated with VEX Robotics or IFI, and does not link to any official VEX SDK.</p>
-<h2 id="target-maintainers-39"><a class="header" href="#target-maintainers-39">Target maintainers</a></h2>
+<h2 id="target-maintainers-40"><a class="header" href="#target-maintainers-40">Target maintainers</a></h2>
 <p>This target is maintained by members of the <a href="https://github.com/vexide">vexide</a> organization:</p>
 <ul>
 <li><a href="https://github.com/lewisfm">@lewisfm</a></li>
@@ -17039,7 +17094,7 @@ compress = true
 <h1 id="-linux-android-and--linux-androideabi"><a class="header" href="#-linux-android-and--linux-androideabi">*-linux-android and *-linux-androideabi</a></h1>
 <p><strong>Tier: 2</strong></p>
 <p><a href="https://source.android.com/">Android</a> is a mobile operating system built on top of the Linux kernel.</p>
-<h2 id="target-maintainers-40"><a class="header" href="#target-maintainers-40">Target maintainers</a></h2>
+<h2 id="target-maintainers-41"><a class="header" href="#target-maintainers-41">Target maintainers</a></h2>
 <p><a href="https://github.com/chriswailes">@chriswailes</a>
 <a href="https://github.com/jfgoog">@jfgoog</a>
 <a href="https://github.com/maurer">@maurer</a>
@@ -17097,7 +17152,7 @@ instrumentation is also made available by supplying the second compiler flag <co
 </ul>
 <p>Targets for the <a href="https://gitee.com/openharmony/docs/">OpenHarmony</a> operating
 system.</p>
-<h2 id="target-maintainers-41"><a class="header" href="#target-maintainers-41">Target maintainers</a></h2>
+<h2 id="target-maintainers-42"><a class="header" href="#target-maintainers-42">Target maintainers</a></h2>
 <p><a href="https://github.com/Amanieu">@Amanieu</a>
 <a href="https://github.com/cceerczw">@cceerczw</a></p>
 <h2 id="requirements-35"><a class="header" href="#requirements-35">Requirements</a></h2>
@@ -17230,7 +17285,7 @@ the OpenHarmony emulator is set up (no networking).</p>
 <h1 id="i686-unknown-hurd-gnu-and-x86_64-unknown-hurd-gnu"><a class="header" href="#i686-unknown-hurd-gnu-and-x86_64-unknown-hurd-gnu"><code>i686-unknown-hurd-gnu</code> and <code>x86_64-unknown-hurd-gnu</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>[GNU/Hurd] is the GNU Hurd is the GNU project’s replacement for the Unix kernel.</p>
-<h2 id="target-maintainers-42"><a class="header" href="#target-maintainers-42">Target maintainers</a></h2>
+<h2 id="target-maintainers-43"><a class="header" href="#target-maintainers-43">Target maintainers</a></h2>
 <p><a href="https://github.com/sthibaul">@sthibaul</a></p>
 <h2 id="requirements-36"><a class="header" href="#requirements-36">Requirements</a></h2>
 <p>The target supports host tools.</p>
@@ -17269,7 +17324,7 @@ It’s very small that there is no network, no stdin, and no file system for app
 </table>
 </div>
 <p>TEEOS is open source in progress. <a href="https://gitee.com/opentrustee-group">MORE about</a></p>
-<h2 id="target-maintainers-43"><a class="header" href="#target-maintainers-43">Target maintainers</a></h2>
+<h2 id="target-maintainers-44"><a class="header" href="#target-maintainers-44">Target maintainers</a></h2>
 <p><a href="https://github.com/petrochenkov">@petrochenkov</a>
 <a href="https://github.com/Sword-Destiny">@Sword-Destiny</a></p>
 <h2 id="setup-1"><a class="header" href="#setup-1">Setup</a></h2>
@@ -17337,7 +17392,7 @@ linker = "/path/to/aarch64-unknown-teeos-clang.sh" # or aarch64-linux-gnu-ld
 <h1 id="avr-none"><a class="header" href="#avr-none"><code>avr-none</code></a></h1>
 <p>Series of microcontrollers from Atmel: ATmega8, ATmega328p etc.</p>
 <p><strong>Tier: 3</strong></p>
-<h2 id="target-maintainers-44"><a class="header" href="#target-maintainers-44">Target maintainers</a></h2>
+<h2 id="target-maintainers-45"><a class="header" href="#target-maintainers-45">Target maintainers</a></h2>
 <p><a href="https://github.com/Patryk27">@Patryk27</a></p>
 <h2 id="requirements-37"><a class="header" href="#requirements-37">Requirements</a></h2>
 <p>This target is only cross-compiled; x86-64 Linux, x86-64 macOS and aarch64 macOS
@@ -17390,7 +17445,7 @@ resulting firmware on your machine:</p>
 <h1 id="-espidf"><a class="header" href="#-espidf"><code>*-espidf</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Targets for the <a href="https://github.com/espressif/esp-idf">ESP-IDF</a> development framework running on RISC-V and Xtensa CPUs.</p>
-<h2 id="target-maintainers-45"><a class="header" href="#target-maintainers-45">Target maintainers</a></h2>
+<h2 id="target-maintainers-46"><a class="header" href="#target-maintainers-46">Target maintainers</a></h2>
 <p><a href="https://github.com/ivmarkov">@ivmarkov</a>
 <a href="https://github.com/MabezDev">@MabezDev</a>
 <a href="https://github.com/SergioGasquez">@SergioGasquez</a></p>
@@ -17433,7 +17488,7 @@ build-std = ["std", "panic_abort"]
 <p><strong>Tier: 2</strong></p>
 <p><a href="https://fuchsia.dev/">Fuchsia</a> is a modern open source operating system that’s simple, secure,
 updatable, and performant.</p>
-<h2 id="target-maintainers-46"><a class="header" href="#target-maintainers-46">Target maintainers</a></h2>
+<h2 id="target-maintainers-47"><a class="header" href="#target-maintainers-47">Target maintainers</a></h2>
 <p><a href="https://github.com/erickt">@erickt</a>
 <a href="https://github.com/Nashenas88">@Nashenas88</a></p>
 <p>The up-to-date list can be also found via the
@@ -18144,7 +18199,7 @@ attach and load any relevant debug symbols.</p>
 <p><strong>Tier: 3</strong></p>
 <p><a href="https://source.android.com/docs/security/features/trusty">Trusty</a> is a secure Operating System that provides a Trusted Execution
 Environment (TEE) for Android.</p>
-<h2 id="target-maintainers-47"><a class="header" href="#target-maintainers-47">Target maintainers</a></h2>
+<h2 id="target-maintainers-48"><a class="header" href="#target-maintainers-48">Target maintainers</a></h2>
 <p><a href="https://github.com/randomPoison">@randomPoison</a>
 <a href="https://github.com/ahomescu">@ahomescu</a></p>
 <h2 id="requirements-40"><a class="header" href="#requirements-40">Requirements</a></h2>
@@ -18188,7 +18243,7 @@ within Trusty.</p>
 </tbody>
 </table>
 </div>
-<h2 id="target-maintainers-48"><a class="header" href="#target-maintainers-48">Target Maintainers</a></h2>
+<h2 id="target-maintainers-49"><a class="header" href="#target-maintainers-49">Target Maintainers</a></h2>
 <p><a href="https://github.com/kawadakk">@kawadakk</a></p>
 <h2 id="requirements-41"><a class="header" href="#requirements-41">Requirements</a></h2>
 <p>This target is cross-compiled.
@@ -18241,7 +18296,7 @@ $ ls libyour_code.a
 <li>https://c-sky.github.io/</li>
 <li>https://gitlab.com/c-sky/</li>
 </ul>
-<h2 id="target-maintainers-49"><a class="header" href="#target-maintainers-49">Target maintainers</a></h2>
+<h2 id="target-maintainers-50"><a class="header" href="#target-maintainers-50">Target maintainers</a></h2>
 <p><a href="https://github.com/Dirreke">@Dirreke</a></p>
 <h2 id="requirements-42"><a class="header" href="#requirements-42">Requirements</a></h2>
 <h2 id="building-the-target-31"><a class="header" href="#building-the-target-31">Building the target</a></h2>
@@ -18305,7 +18360,7 @@ DSP architecture.</p>
 </tbody>
 </table>
 </div>
-<h2 id="target-maintainers-50"><a class="header" href="#target-maintainers-50">Target maintainers</a></h2>
+<h2 id="target-maintainers-51"><a class="header" href="#target-maintainers-51">Target maintainers</a></h2>
 <p><a href="https://github.com/androm3da">@androm3da</a></p>
 <h2 id="requirements-43"><a class="header" href="#requirements-43">Requirements</a></h2>
 <p>The target is cross-compiled. This target supports <code>std</code>.  By default, code
@@ -18387,7 +18442,7 @@ cargo run -Zbuild-std -Zbuild-std-features=llvm-libunwind
 </tbody>
 </table>
 </div>
-<h2 id="target-maintainers-51"><a class="header" href="#target-maintainers-51">Target maintainers</a></h2>
+<h2 id="target-maintainers-52"><a class="header" href="#target-maintainers-52">Target maintainers</a></h2>
 <p><a href="https://github.com/androm3da">@androm3da</a></p>
 <h2 id="requirements-44"><a class="header" href="#requirements-44">Requirements</a></h2>
 <p>This target is cross-compiled.  There is no support for <code>std</code>. There is no
@@ -18637,7 +18692,7 @@ ${hex_toolchain}/x86_64-linux-gnu/bin/qemu-system-hexagon \
 </tbody>
 </table>
 </div>
-<h2 id="target-maintainers-52"><a class="header" href="#target-maintainers-52">Target maintainers</a></h2>
+<h2 id="target-maintainers-53"><a class="header" href="#target-maintainers-53">Target maintainers</a></h2>
 <p><a href="https://github.com/androm3da">@androm3da</a></p>
 <h2 id="requirements-45"><a class="header" href="#requirements-45">Requirements</a></h2>
 <p>This target is cross-compiled. There is support for <code>std</code>. The target uses
@@ -18777,7 +18832,7 @@ deployment scenarios.</p>
 <p><strong>Tier: 2/3</strong></p>
 <p><a href="https://www.illumos.org/">illumos</a>, is a Unix operating system which provides next-generation features for downstream distributions,
 including advanced system debugging, next generation filesystem, networking, and virtualization options.</p>
-<h2 id="target-maintainers-53"><a class="header" href="#target-maintainers-53">Target maintainers</a></h2>
+<h2 id="target-maintainers-54"><a class="header" href="#target-maintainers-54">Target maintainers</a></h2>
 <p><a href="https://github.com/jclulow">@jclulow</a>
 <a href="https://github.com/pfmooney">@pfmooney</a></p>
 <h2 id="requirements-46"><a class="header" href="#requirements-46">Requirements</a></h2>
@@ -18820,7 +18875,7 @@ LoongArch is a RISC ISA developed by Loongson Technology Corporation Limited.</p
 <li><a href="https://loongson.github.io/LoongArch-Documentation/README-EN.html">LoongArch ISA manuals</a></li>
 <li><a href="https://github.com/loongson/la-abi-specs">Application Binary Interface for the LoongArch™ Architecture</a></li>
 </ul>
-<h2 id="target-maintainers-54"><a class="header" href="#target-maintainers-54">Target maintainers</a></h2>
+<h2 id="target-maintainers-55"><a class="header" href="#target-maintainers-55">Target maintainers</a></h2>
 <p><a href="https://github.com/heiher">@heiher</a>
 <a href="https://github.com/xen0n">@xen0n</a></p>
 <h2 id="requirements-47"><a class="header" href="#requirements-47">Requirements</a></h2>
@@ -18925,7 +18980,7 @@ cargo build --target loongarch64-unknown-linux-gnu
 </tbody>
 </table>
 </div>
-<h2 id="target-maintainers-55"><a class="header" href="#target-maintainers-55">Target maintainers</a></h2>
+<h2 id="target-maintainers-56"><a class="header" href="#target-maintainers-56">Target maintainers</a></h2>
 <p><a href="https://github.com/heiher">@heiher</a>
 <a href="https://github.com/xen0n">@xen0n</a></p>
 <h2 id="requirements-48"><a class="header" href="#requirements-48">Requirements</a></h2>
@@ -19006,7 +19061,7 @@ product suite.</p>
 <ul>
 <li><code>x86_64-lynx-lynxos178</code></li>
 </ul>
-<h2 id="target-maintainers-56"><a class="header" href="#target-maintainers-56">Target maintainers</a></h2>
+<h2 id="target-maintainers-57"><a class="header" href="#target-maintainers-57">Target maintainers</a></h2>
 <p><a href="https://github.com/rfatykhov-lynx">@rfatykhov-lynx</a></p>
 <h2 id="requirements-49"><a class="header" href="#requirements-49">Requirements</a></h2>
 <p>To build Rust programs for LynxOS-178, you must first have LYNX MOSA.ic
@@ -19051,7 +19106,7 @@ LynxOS-178.</p>
 <h1 id="m68k-unknown-linux-gnu"><a class="header" href="#m68k-unknown-linux-gnu">m68k-unknown-linux-gnu</a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Motorola 680x0 Linux</p>
-<h2 id="target-maintainers-57"><a class="header" href="#target-maintainers-57">Target Maintainers</a></h2>
+<h2 id="target-maintainers-58"><a class="header" href="#target-maintainers-58">Target Maintainers</a></h2>
 <p><a href="https://github.com/glaubitz">@glaubitz</a>
 <a href="https://github.com/ricky26">@ricky26</a></p>
 <h2 id="requirements-50"><a class="header" href="#requirements-50">Requirements</a></h2>
@@ -19109,7 +19164,7 @@ for testing.</p>
 <h1 id="m68k-unknown-none-elf"><a class="header" href="#m68k-unknown-none-elf">m68k-unknown-none-elf</a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Bare metal Motorola 680x0</p>
-<h2 id="target-maintainers-58"><a class="header" href="#target-maintainers-58">Target Maintainers</a></h2>
+<h2 id="target-maintainers-59"><a class="header" href="#target-maintainers-59">Target Maintainers</a></h2>
 <p><a href="https://github.com/knickish">@knickish</a></p>
 <h2 id="requirements-51"><a class="header" href="#requirements-51">Requirements</a></h2>
 <p>This target requires an m68k build environment for cross-compilation which
@@ -19156,7 +19211,7 @@ linker = "m68k-linux-gnu-ld"
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="mips64-openwrt-linux-musl"><a class="header" href="#mips64-openwrt-linux-musl"><code>mips64-openwrt-linux-musl</code></a></h1>
 <p><strong>Tier: 3</strong></p>
-<h2 id="target-maintainers-59"><a class="header" href="#target-maintainers-59">Target maintainers</a></h2>
+<h2 id="target-maintainers-60"><a class="header" href="#target-maintainers-60">Target maintainers</a></h2>
 <p><a href="https://github.com/Itus-Shield">@Itus-Shield</a></p>
 <h2 id="requirements-52"><a class="header" href="#requirements-52">Requirements</a></h2>
 <p>This target is cross-compiled. There is no support for <code>std</code>. There is no
@@ -19179,7 +19234,7 @@ time.</p>
 <h1 id="mips64-unknown-linux-muslabi64"><a class="header" href="#mips64-unknown-linux-muslabi64">mips64-unknown-linux-muslabi64</a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Target for 64-bit big endian MIPS Linux programs using musl libc and the N64 ABI.</p>
-<h2 id="target-maintainers-60"><a class="header" href="#target-maintainers-60">Target maintainers</a></h2>
+<h2 id="target-maintainers-61"><a class="header" href="#target-maintainers-61">Target maintainers</a></h2>
 <p><a href="https://github.com/Gelbpunkt">@Gelbpunkt</a></p>
 <h2 id="requirements-53"><a class="header" href="#requirements-53">Requirements</a></h2>
 <p>Building the target itself requires a 64-bit big endian MIPS compiler that is
@@ -19238,7 +19293,7 @@ target = ["mipsel-sony-psx"]
 <h1 id="mipsel-unknown-linux-gnu"><a class="header" href="#mipsel-unknown-linux-gnu"><code>mipsel-unknown-linux-gnu</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Little-endian 32 bit MIPS for Linux with `glibc.</p>
-<h2 id="target-maintainers-61"><a class="header" href="#target-maintainers-61">Target maintainers</a></h2>
+<h2 id="target-maintainers-62"><a class="header" href="#target-maintainers-62">Target maintainers</a></h2>
 <p><a href="https://github.com/LukasWoodtli">@LukasWoodtli</a></p>
 <h2 id="requirements-55"><a class="header" href="#requirements-55">Requirements</a></h2>
 <p>The target supports std on Linux. Host tools are supported but not tested.</p>
@@ -19259,7 +19314,7 @@ this target, you will need to build Rust with the target enabled (see
 <li>mips-mti-none-elf</li>
 <li>mipsel-mti-none-elf</li>
 </ul>
-<h2 id="target-maintainers-62"><a class="header" href="#target-maintainers-62">Target maintainers</a></h2>
+<h2 id="target-maintainers-63"><a class="header" href="#target-maintainers-63">Target maintainers</a></h2>
 <p><a href="https://github.com/wzssyqa">@wzssyqa</a></p>
 <h2 id="background"><a class="header" href="#background">Background</a></h2>
 <p>These 2 targets, aka mips-mti-none-elf and mipsel-mti-none-elf, are for
@@ -19291,7 +19346,7 @@ target.  On clang and ld.lld linker, it can be generated using the
 </tbody>
 </table>
 </div>
-<h2 id="target-maintainers-63"><a class="header" href="#target-maintainers-63">Target Maintainers</a></h2>
+<h2 id="target-maintainers-64"><a class="header" href="#target-maintainers-64">Target Maintainers</a></h2>
 <p><a href="https://github.com/chenx97">@chenx97</a>
 <a href="https://github.com/709924470">@709924470</a>
 <a href="https://github.com/Cyanoxygen">@Cyanoxygen</a>
@@ -19410,7 +19465,7 @@ note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 <p><strong>Tier: 2</strong></p>
 <p>This is the target meant for deploying code for Nvidia® accelerators based on their CUDA
 platform.</p>
-<h2 id="target-maintainers-64"><a class="header" href="#target-maintainers-64">Target maintainers</a></h2>
+<h2 id="target-maintainers-65"><a class="header" href="#target-maintainers-65">Target maintainers</a></h2>
 <p><a href="https://github.com/kjetilkjeka">@kjetilkjeka</a></p>
 <h2 id="requirements-58"><a class="header" href="#requirements-58">Requirements</a></h2>
 <p>This target is <code>no_std</code>, and uses the <code>llvm-bitcode-linker</code> by default. For PTX output, build with crate-type <code>cdylib</code>.
@@ -19528,7 +19583,7 @@ this platform, and <a href="https://web.archive.org/web/20120608163804/https://w
 for details on SPE ABI.</p>
 <p>Note that support for PowerPC SPE by GCC was <a href="https://gcc.gnu.org/gcc-8/changes.html">removed in GCC 9</a>,
 so recent GCC cannot be used as linker/compiler for this target.</p>
-<h2 id="target-maintainers-65"><a class="header" href="#target-maintainers-65">Target maintainers</a></h2>
+<h2 id="target-maintainers-66"><a class="header" href="#target-maintainers-66">Target maintainers</a></h2>
 <p>There are currently no formally documented target maintainers.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="powerpc-unknown-linux-muslspe"><a class="header" href="#powerpc-unknown-linux-muslspe">powerpc-unknown-linux-muslspe</a></h1>
@@ -19536,7 +19591,7 @@ so recent GCC cannot be used as linker/compiler for this target.</p>
 <p>This target is very similar to already existing ones like <code>powerpc-unknown-linux-musl</code> and <code>powerpc-unknown-linux-gnuspe</code>.
 This one has PowerPC SPE support for musl. Unfortunately, the last supported gcc version with PowerPC SPE is 8.4.0.</p>
 <p>See also <a href="#powerpc-unknown-linux-gnuspe">platform support documentation of <code>powerpc-unknown-linux-gnuspe</code></a> for information about PowerPC SPE.</p>
-<h2 id="target-maintainers-66"><a class="header" href="#target-maintainers-66">Target maintainers</a></h2>
+<h2 id="target-maintainers-67"><a class="header" href="#target-maintainers-67">Target maintainers</a></h2>
 <p><a href="https://github.com/BKPepe">@BKPepe</a></p>
 <h2 id="requirements-59"><a class="header" href="#requirements-59">Requirements</a></h2>
 <p>This target is cross-compiled. There is no support for <code>std</code>. There is no
@@ -19555,7 +19610,7 @@ this target, you will either need to build Rust with the target enabled (see
 <h1 id="powerpc64-ibm-aix"><a class="header" href="#powerpc64-ibm-aix"><code>powerpc64-ibm-aix</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Rust for AIX operating system, currently only 64-bit PowerPC is supported.</p>
-<h2 id="target-maintainers-67"><a class="header" href="#target-maintainers-67">Target maintainers</a></h2>
+<h2 id="target-maintainers-68"><a class="header" href="#target-maintainers-68">Target maintainers</a></h2>
 <p><a href="https://github.com/daltenty">@daltenty</a>
 <a href="https://github.com/gilamn5tr">@gilamn5tr</a>
 <a href="https://github.com/amy-kwan">@amy-kwan</a></p>
@@ -19569,10 +19624,12 @@ this target, you will either need to build Rust with the target enabled (see
 <p>This target supports C code. C code compiled by XL, Open XL and Clang are compatible with Rust. Typical triple of AIX on 64-bit PowerPC of these compilers are also <code>powerpc64-ibm-aix</code>.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="powerpc64-unknown-linux-musl"><a class="header" href="#powerpc64-unknown-linux-musl">powerpc64-unknown-linux-musl</a></h1>
-<p><strong>Tier: 3</strong></p>
+<p><strong>Tier: 2</strong></p>
 <p>Target for 64-bit big endian PowerPC Linux programs using musl libc.
 This target uses the ELF v2 ABI.</p>
-<h2 id="target-maintainers-68"><a class="header" href="#target-maintainers-68">Target maintainers</a></h2>
+<p>The baseline CPU required is a PowerPC 970, which means AltiVec is required and
+the oldest IBM server CPU supported is therefore POWER6.</p>
+<h2 id="target-maintainers-69"><a class="header" href="#target-maintainers-69">Target maintainers</a></h2>
 <p><a href="https://github.com/Gelbpunkt">@Gelbpunkt</a>
 <a href="https://github.com/famfo">@famfo</a>
 <a href="https://github.com/neuschaefer">@neuschaefer</a></p>
@@ -19593,9 +19650,8 @@ ar = "powerpc64-linux-musl-ar"
 linker = "powerpc64-linux-musl-gcc"
 </code></pre>
 <h2 id="building-rust-programs-47"><a class="header" href="#building-rust-programs-47">Building Rust programs</a></h2>
-<p>Rust does not yet ship pre-compiled artifacts for this target. To compile for
-this target, you will first need to build Rust with the target enabled (see
-“Building the target” above).</p>
+<p>This target is distributed through <code>rustup</code>, and otherwise requires no
+special configuration.</p>
 <h2 id="cross-compilation-14"><a class="header" href="#cross-compilation-14">Cross-compilation</a></h2>
 <p>This target can be cross-compiled from any host.</p>
 <h2 id="testing-48"><a class="header" href="#testing-48">Testing</a></h2>
@@ -19605,7 +19661,7 @@ host or via QEMU emulation.</p>
 <h1 id="powerpc64le-unknown-linux-gnu"><a class="header" href="#powerpc64le-unknown-linux-gnu"><code>powerpc64le-unknown-linux-gnu</code></a></h1>
 <p><strong>Tier: 2</strong></p>
 <p>Target for 64-bit little endian PowerPC Linux programs</p>
-<h2 id="target-maintainers-69"><a class="header" href="#target-maintainers-69">Target maintainers</a></h2>
+<h2 id="target-maintainers-70"><a class="header" href="#target-maintainers-70">Target maintainers</a></h2>
 <p><a href="https://github.com/daltenty">@daltenty</a>
 <a href="https://github.com/gilamn5tr">@gilamn5tr</a>
 <a href="https://github.com/amy-kwan">@amy-kwan</a></p>
@@ -19635,7 +19691,7 @@ PowerPC host or via QEMU emulation.</p>
 <h1 id="powerpc64le-unknown-linux-musl"><a class="header" href="#powerpc64le-unknown-linux-musl">powerpc64le-unknown-linux-musl</a></h1>
 <p><strong>Tier: 2</strong></p>
 <p>Target for 64-bit little endian PowerPC Linux programs using musl libc.</p>
-<h2 id="target-maintainers-70"><a class="header" href="#target-maintainers-70">Target maintainers</a></h2>
+<h2 id="target-maintainers-71"><a class="header" href="#target-maintainers-71">Target maintainers</a></h2>
 <p><a href="https://github.com/Gelbpunkt">@Gelbpunkt</a>
 <a href="https://github.com/famfo">@famfo</a>
 <a href="https://github.com/neuschaefer">@neuschaefer</a></p>
@@ -19665,7 +19721,7 @@ PowerPC host or via QEMU emulation.</p>
 <h1 id="riscv32eememc-unknown-none-elf"><a class="header" href="#riscv32eememc-unknown-none-elf"><code>riscv32{e,em,emc}-unknown-none-elf</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Bare-metal target for RISC-V CPUs with the RV32E, RV32EM and RV32EMC ISAs.</p>
-<h2 id="target-maintainers-71"><a class="header" href="#target-maintainers-71">Target maintainers</a></h2>
+<h2 id="target-maintainers-72"><a class="header" href="#target-maintainers-72">Target maintainers</a></h2>
 <p><a href="https://github.com/hegza">@hegza</a></p>
 <h2 id="requirements-64"><a class="header" href="#requirements-64">Requirements</a></h2>
 <p>The target is cross-compiled, and uses static linking. No external toolchain is
@@ -19686,7 +19742,7 @@ run the Rust test-suite on this target.</p>
 <p>Bare-metal target for RISC-V CPUs with the RV32I, RV32IM, RV32IMC, RV32IMAFC and RV32IMAC ISAs.</p>
 <p><strong>Tier: 3</strong></p>
 <p>Bare-metal target for RISC-V CPUs with the RV32IMA ISA.</p>
-<h2 id="target-maintainers-72"><a class="header" href="#target-maintainers-72">Target maintainers</a></h2>
+<h2 id="target-maintainers-73"><a class="header" href="#target-maintainers-73">Target maintainers</a></h2>
 <ul>
 <li>Rust Embedded Working Group, <a href="https://github.com/rust-embedded/wg#the-risc-v-team">RISC-V team</a></li>
 </ul>
@@ -19708,7 +19764,7 @@ Rust test-suite on this target.</p>
 <h1 id="riscv32im-risc0-zkvm-elf"><a class="header" href="#riscv32im-risc0-zkvm-elf"><code>riscv32im-risc0-zkvm-elf</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>RISC Zero’s Zero Knowledge Virtual Machine (zkVM) implementing the RV32IM instruction set.</p>
-<h2 id="target-maintainers-73"><a class="header" href="#target-maintainers-73">Target maintainers</a></h2>
+<h2 id="target-maintainers-74"><a class="header" href="#target-maintainers-74">Target maintainers</a></h2>
 <p><a href="https://github.com/flaub">@flaub</a>
 <a href="https://github.com/jbruestle">@jbruestle</a></p>
 <h2 id="background-1"><a class="header" href="#background-1">Background</a></h2>
@@ -19769,7 +19825,7 @@ target <code>riscv32-unknown-none</code>.</p>
 <h1 id="riscv32imac-unknown-xous-elf"><a class="header" href="#riscv32imac-unknown-xous-elf">riscv32imac-unknown-xous-elf</a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Xous microkernel, message-based operating system that powers devices such as Precursor and Betrusted. The operating system is written entirely in Rust, so no additional software is required to compile programs for Xous.</p>
-<h2 id="target-maintainers-74"><a class="header" href="#target-maintainers-74">Target maintainers</a></h2>
+<h2 id="target-maintainers-75"><a class="header" href="#target-maintainers-75">Target maintainers</a></h2>
 <p><a href="https://github.com/xobs">@xobs</a></p>
 <h2 id="requirements-67"><a class="header" href="#requirements-67">Requirements</a></h2>
 <p>Building the target itself requires a RISC-V compiler that is supported by <code>cc-rs</code>. For example, you can use the prebuilt <a href="https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/latest">xPack</a> toolchain.</p>
@@ -19800,7 +19856,7 @@ this target, you will need to do one of the following:</p>
 <h1 id="riscv64im-unknown-none-elf"><a class="header" href="#riscv64im-unknown-none-elf"><code>riscv64im-unknown-none-elf</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Bare-metal target for RISC-V CPUs with the RV64IM ISA.</p>
-<h2 id="target-maintainers-75"><a class="header" href="#target-maintainers-75">Target maintainers</a></h2>
+<h2 id="target-maintainers-76"><a class="header" href="#target-maintainers-76">Target maintainers</a></h2>
 <ul>
 <li>Rust Embedded Working Group, <a href="https://github.com/rust-embedded/wg#the-risc-v-team">RISC-V team</a></li>
 </ul>
@@ -19826,7 +19882,7 @@ target = ["riscv64im-unknown-none-elf"]
 <h1 id="riscv64gc-unknown-linux-gnu"><a class="header" href="#riscv64gc-unknown-linux-gnu"><code>riscv64gc-unknown-linux-gnu</code></a></h1>
 <p><strong>Tier: 2 (with Host Tools)</strong></p>
 <p>RISC-V targets using the <em>RV64I</em> base instruction set with the <em>G</em> collection of extensions, as well as the <em>C</em> extension.</p>
-<h2 id="target-maintainers-76"><a class="header" href="#target-maintainers-76">Target maintainers</a></h2>
+<h2 id="target-maintainers-77"><a class="header" href="#target-maintainers-77">Target maintainers</a></h2>
 <p><a href="https://github.com/kito-cheng">@kito-cheng</a>
 <a href="https://github.com/michaelmaitland">@michaelmaitland</a>
 <a href="https://github.com/robin-randhawa-sifive">@robin-randhawa-sifive</a>
@@ -19907,7 +19963,7 @@ to build or run <code>riscv64gc-unknown-linux-gnu</code> binaries.</p>
 <h1 id="riscv64gc-unknown-linux-musl"><a class="header" href="#riscv64gc-unknown-linux-musl">riscv64gc-unknown-linux-musl</a></h1>
 <p><strong>Tier: 2</strong></p>
 <p>Target for RISC-V Linux programs using musl libc.</p>
-<h2 id="target-maintainers-77"><a class="header" href="#target-maintainers-77">Target maintainers</a></h2>
+<h2 id="target-maintainers-78"><a class="header" href="#target-maintainers-78">Target maintainers</a></h2>
 <p><a href="https://github.com/Amanieu">@Amanieu</a>
 <a href="https://github.com/kraj">@kraj</a></p>
 <h2 id="requirements-70"><a class="header" href="#requirements-70">Requirements</a></h2>
@@ -19937,7 +19993,7 @@ emulation.</p>
 <p><strong>Tier: 2 (without Host Tools)</strong></p>
 <p>RISC-V target using the ratified <a href="https://github.com/riscv/riscv-profiles/blob/main/src/rva23-profile.adoc">RVA23 Profile</a>.
 This target will enable all mandary features of rva23u64 by default.</p>
-<h2 id="target-maintainers-78"><a class="header" href="#target-maintainers-78">Target maintainers</a></h2>
+<h2 id="target-maintainers-79"><a class="header" href="#target-maintainers-79">Target maintainers</a></h2>
 <p><a href="https://github.com/ZhongyaoChen">@ZhongyaoChen</a>
 <a href="https://github.com/CaiWeiran">@CaiWeiran</a></p>
 <h2 id="requirements-71"><a class="header" href="#requirements-71">Requirements</a></h2>
@@ -19962,7 +20018,7 @@ RUSTFLAGS="-C linker=riscv64-linux-gnu-gcc" cargo build --target=riscv64a23-unkn
 <h1 id="s390x-unknown-linux-gnu"><a class="header" href="#s390x-unknown-linux-gnu"><code>s390x-unknown-linux-gnu</code></a></h1>
 <p><strong>Tier: 2 (with Host Tools)</strong></p>
 <p>IBM z/Architecture (s390x) targets (including IBM Z and LinuxONE) running Linux.</p>
-<h2 id="target-maintainers-79"><a class="header" href="#target-maintainers-79">Target maintainers</a></h2>
+<h2 id="target-maintainers-80"><a class="header" href="#target-maintainers-80">Target maintainers</a></h2>
 <p><a href="https://github.com/uweigand">@uweigand</a>
 <a href="https://github.com/cuviper">@cuviper</a></p>
 <h2 id="requirements-72"><a class="header" href="#requirements-72">Requirements</a></h2>
@@ -20051,7 +20107,7 @@ runner = "qemu-s390x-static -L /usr/s390x-linux-gnu"
 <h1 id="s390x-unknown-linux-musl"><a class="header" href="#s390x-unknown-linux-musl"><code>s390x-unknown-linux-musl</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>IBM z/Architecture (s390x) targets (including IBM Z and LinuxONE) running Linux.</p>
-<h2 id="target-maintainers-80"><a class="header" href="#target-maintainers-80">Target maintainers</a></h2>
+<h2 id="target-maintainers-81"><a class="header" href="#target-maintainers-81">Target maintainers</a></h2>
 <p><a href="https://github.com/uweigand">@uweigand</a>
 <a href="https://github.com/Gelbpunkt">@Gelbpunkt</a></p>
 <h2 id="requirements-73"><a class="header" href="#requirements-73">Requirements</a></h2>
@@ -20119,7 +20175,7 @@ linker = "/TOOLCHAIN_PATH/bin/s390x-linux-musl-gcc"
 </tbody>
 </table>
 </div>
-<h2 id="target-maintainers-81"><a class="header" href="#target-maintainers-81">Target maintainers</a></h2>
+<h2 id="target-maintainers-82"><a class="header" href="#target-maintainers-82">Target maintainers</a></h2>
 <p><a href="https://github.com/jonathanpallant">@jonathanpallant</a></p>
 <h2 id="requirements-74"><a class="header" href="#requirements-74">Requirements</a></h2>
 <p>This target is cross-compiled. There is no support for <code>std</code>. There is no
@@ -20269,7 +20325,7 @@ tsim&gt;
 <h1 id="x86_64-pc-solaris"><a class="header" href="#x86_64-pc-solaris">x86_64-pc-solaris</a></h1>
 <p><strong>Tier: 2</strong></p>
 <p>Rust for Solaris operating system.</p>
-<h2 id="target-maintainers-82"><a class="header" href="#target-maintainers-82">Target maintainers</a></h2>
+<h2 id="target-maintainers-83"><a class="header" href="#target-maintainers-83">Target maintainers</a></h2>
 <p><a href="https://github.com/psumbera">@psumbera</a>
 <a href="https://github.com/kulikjak">@kulikjak</a></p>
 <h2 id="requirements-75"><a class="header" href="#requirements-75">Requirements</a></h2>
@@ -20291,7 +20347,7 @@ tsim&gt;
 from version 8 onwards.</p>
 <p>This support has been implemented jointly by <a href="https://www.elektrobit.com">Elektrobit Automotive GmbH</a>
 and <a href="https://blackberry.qnx.com">QNX</a>.</p>
-<h2 id="target-maintainers-83"><a class="header" href="#target-maintainers-83">Target maintainers</a></h2>
+<h2 id="target-maintainers-84"><a class="header" href="#target-maintainers-84">Target maintainers</a></h2>
 <p><a href="https://github.com/flba-eb">@flba-eb</a>
 <a href="https://github.com/gh-tr">@gh-tr</a>
 <a href="https://github.com/jonathanpallant">@jonathanpallant</a>
@@ -20540,7 +20596,7 @@ To ensure compatibility, do not specify any further arguments that for example c
 <ul>
 <li><code>x86_64-unikraft-linux-musl</code></li>
 </ul>
-<h2 id="target-maintainers-84"><a class="header" href="#target-maintainers-84">Target maintainers</a></h2>
+<h2 id="target-maintainers-85"><a class="header" href="#target-maintainers-85">Target maintainers</a></h2>
 <p><a href="https://github.com/mkroening">@mkroening</a></p>
 <h2 id="requirements-77"><a class="header" href="#requirements-77">Requirements</a></h2>
 <p>These targets only support cross-compilation.
@@ -20588,7 +20644,7 @@ These targets allow compiling user-space applications, that you can then copy in
 <p>On i686, some portions of native HelenOS libraries run into issues due to vector instructions accessing variables from the stack that seems
 to be misaligned. It is not clear if this is fault of HelenOS or Rust. Most programs work, but for example calling <code>ui_window_create</code> from HelenOS
 libui does not work.</p>
-<h2 id="target-maintainers-85"><a class="header" href="#target-maintainers-85">Target maintainers</a></h2>
+<h2 id="target-maintainers-86"><a class="header" href="#target-maintainers-86">Target maintainers</a></h2>
 <ul>
 <li>Matěj Volf (<a href="https://github.com/mvolfik">@mvolfik</a>)</li>
 </ul>
@@ -20632,7 +20688,7 @@ cp -P export-dev/lib/* "$HELENOS_LIB_PATH"
 <li><code>aarch64_be-unknown-hermit</code></li>
 <li><code>riscv64gc-unknown-hermit</code></li>
 </ul>
-<h2 id="target-maintainers-86"><a class="header" href="#target-maintainers-86">Target maintainers</a></h2>
+<h2 id="target-maintainers-87"><a class="header" href="#target-maintainers-87">Target maintainers</a></h2>
 <p><a href="https://github.com/stlankes">@stlankes</a>
 <a href="https://github.com/mkroening">@mkroening</a></p>
 <h2 id="requirements-79"><a class="header" href="#requirements-79">Requirements</a></h2>
@@ -20676,7 +20732,7 @@ The targets do not support running the Rust test suite.</p>
 <h1 id="-unknown-freebsd"><a class="header" href="#-unknown-freebsd">*-unknown-freebsd</a></h1>
 <p><strong>Tier: 2/3</strong></p>
 <p><a href="https://www.FreeBSD.org/">FreeBSD</a> multi-platform 4.4BSD-based UNIX-like operating system.</p>
-<h2 id="target-maintainers-87"><a class="header" href="#target-maintainers-87">Target maintainers</a></h2>
+<h2 id="target-maintainers-88"><a class="header" href="#target-maintainers-88">Target maintainers</a></h2>
 <p><a href="https://github.com/asomers">@asomers</a>
 <a href="https://github.com/MikaelUrankar">@MikaelUrankar</a></p>
 <h2 id="requirements-80"><a class="header" href="#requirements-80">Requirements</a></h2>
@@ -20717,7 +20773,7 @@ ports tree with the <code>make test</code> command from within the lang/rust dir
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="-unknown-managarm-mlibc"><a class="header" href="#-unknown-managarm-mlibc"><code>*-unknown-managarm-mlibc</code></a></h1>
 <p><strong>Tier: 3</strong></p>
-<h2 id="target-maintainers-88"><a class="header" href="#target-maintainers-88">Target Maintainers</a></h2>
+<h2 id="target-maintainers-89"><a class="header" href="#target-maintainers-89">Target Maintainers</a></h2>
 <ul>
 <li><a href="https://github.com/no92">@no92</a></li>
 <li><a href="https://github.com/64">@64</a></li>
@@ -20759,7 +20815,7 @@ linker = "/path/to/the/managarm-gcc/bin/$ARCH-managarm-gcc"
 <p><strong>Tier: 3</strong></p>
 <p><a href="https://github.com/moturus/motor-os">Motor OS</a> is a new operating system
 for virtualized environments.</p>
-<h2 id="target-maintainers-89"><a class="header" href="#target-maintainers-89">Target maintainers</a></h2>
+<h2 id="target-maintainers-90"><a class="header" href="#target-maintainers-90">Target maintainers</a></h2>
 <p><a href="https://github.com/lasiotus">@lasiotus</a></p>
 <h2 id="requirements-82"><a class="header" href="#requirements-82">Requirements</a></h2>
 <p>This target is cross-compiled. There are no special requirements for the host.</p>
@@ -20818,7 +20874,7 @@ are currently defined running NetBSD:</p>
 supplied GNU C++ compiler for the given OS version.  Many of the bootstraps
 are built for NetBSD 9.x, although some exceptions exist (some
 are built for NetBSD 8.x but also work on newer OS versions).</p>
-<h2 id="target-maintainers-90"><a class="header" href="#target-maintainers-90">Target Maintainers</a></h2>
+<h2 id="target-maintainers-91"><a class="header" href="#target-maintainers-91">Target Maintainers</a></h2>
 <p><a href="https://github.com/he32">@he32</a>
 <a href="https://github.com/0323pin">@0323pin</a></p>
 <p>Further contacts:</p>
@@ -20894,7 +20950,7 @@ Makefile fragments in the <code>lang/rust</code> package.</p>
 </table>
 </div>
 <p>Note that all OS versions are <em>major</em> even if using X.Y notation (<code>6.8</code> and <code>6.9</code> are different major versions) and could be binary incompatibles (with breaking changes).</p>
-<h2 id="target-maintainers-91"><a class="header" href="#target-maintainers-91">Target Maintainers</a></h2>
+<h2 id="target-maintainers-92"><a class="header" href="#target-maintainers-92">Target Maintainers</a></h2>
 <p><a href="https://github.com/semarie">@semarie</a></p>
 <p>Further contacts:</p>
 <ul>
@@ -20930,7 +20986,7 @@ system.</p>
 <li><code>i586-unknown-redox</code> (tier 3)</li>
 <li><code>riscv64gc-unknown-redox</code> (tier 3)</li>
 </ul>
-<h2 id="target-maintainers-92"><a class="header" href="#target-maintainers-92">Target maintainers</a></h2>
+<h2 id="target-maintainers-93"><a class="header" href="#target-maintainers-93">Target maintainers</a></h2>
 <p><a href="https://github.com/jackpot51">@jackpot51</a></p>
 <h2 id="requirements-85"><a class="header" href="#requirements-85">Requirements</a></h2>
 <p>These targets are natively compiled and can be cross-compiled. Std is fully supported.</p>
@@ -20965,7 +21021,7 @@ and core UEFI binaries.</p>
 <li><code>i686-unknown-uefi</code></li>
 <li><code>x86_64-unknown-uefi</code></li>
 </ul>
-<h2 id="target-maintainers-93"><a class="header" href="#target-maintainers-93">Target maintainers</a></h2>
+<h2 id="target-maintainers-94"><a class="header" href="#target-maintainers-94">Target maintainers</a></h2>
 <ul>
 <li><a href="https://github.com/dvdhrm">@dvdhrm</a></li>
 <li><a href="https://github.com/nicholasbishop">@nicholasbishop</a></li>
@@ -21250,7 +21306,7 @@ pub fn main() {
 <li><code>i686-pc-windows-msvc</code>: Windows on 32-bit x86.</li>
 <li><code>x86_64-pc-windows-msvc</code>: Windows on 64-bit x86.</li>
 </ul>
-<h2 id="target-maintainers-94"><a class="header" href="#target-maintainers-94">Target maintainers</a></h2>
+<h2 id="target-maintainers-95"><a class="header" href="#target-maintainers-95">Target maintainers</a></h2>
 <p><a href="https://github.com/ChrisDenton">@ChrisDenton</a>
 <a href="https://github.com/dpaoliello">@dpaoliello</a>
 <a href="https://github.com/Fulgen301">@Fulgen301</a>
@@ -21284,7 +21340,7 @@ It is <strong>highly</strong> recommended to use the latest version of VS (curre
 <h1 id="x86_64-uwp-windows-msvc-i686-uwp-windows-msvc-thumbv7a-uwp-windows-msvc-and-aarch64-uwp-windows-msvc"><a class="header" href="#x86_64-uwp-windows-msvc-i686-uwp-windows-msvc-thumbv7a-uwp-windows-msvc-and-aarch64-uwp-windows-msvc"><code>x86_64-uwp-windows-msvc</code>, <code>i686-uwp-windows-msvc</code>, <code>thumbv7a-uwp-windows-msvc</code> and <code>aarch64-uwp-windows-msvc</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Windows targets for Universal Windows Platform (UWP) applications, using MSVC toolchain.</p>
-<h2 id="target-maintainers-95"><a class="header" href="#target-maintainers-95">Target maintainers</a></h2>
+<h2 id="target-maintainers-96"><a class="header" href="#target-maintainers-96">Target maintainers</a></h2>
 <p><a href="https://github.com/bdbai">@bdbai</a></p>
 <h2 id="requirements-88"><a class="header" href="#requirements-88">Requirements</a></h2>
 <p>These targets are cross-compiled with std support. The host requirement and
@@ -21331,7 +21387,7 @@ system.</p>
 <li><code>riscv32-wrs-vxworks</code></li>
 <li><code>riscv64-wrs-vxworks</code></li>
 </ul>
-<h2 id="target-maintainers-96"><a class="header" href="#target-maintainers-96">Target maintainers</a></h2>
+<h2 id="target-maintainers-97"><a class="header" href="#target-maintainers-97">Target maintainers</a></h2>
 <p><a href="https://github.com/biabbas">@biabbas</a>
 <a href="https://github.com/hax0kartik">@hax0kartik</a></p>
 <h2 id="requirements-89"><a class="header" href="#requirements-89">Requirements</a></h2>
@@ -21389,7 +21445,7 @@ historical context found in old MCPs:</p>
 <li><a href="https://github.com/rust-lang/compiler-team/issues/695">Smooth the renaming transition of wasm32-wasi</a></li>
 </ul>
 </blockquote>
-<h2 id="target-maintainers-97"><a class="header" href="#target-maintainers-97">Target maintainers</a></h2>
+<h2 id="target-maintainers-98"><a class="header" href="#target-maintainers-98">Target maintainers</a></h2>
 <p>When this target was added to the compiler platform-specific documentation here
 was not maintained at that time. This means that the list below is not
 exhaustive and there are more interested parties in this target. That being
@@ -21471,7 +21527,7 @@ with native multi threading capabilities.</p>
 <code>wasm32-wasi-preview1-threads</code>, and even longer before that it was known as
 <code>wasm32-wasi-threads</code>.</p>
 </blockquote>
-<h2 id="target-maintainers-98"><a class="header" href="#target-maintainers-98">Target maintainers</a></h2>
+<h2 id="target-maintainers-99"><a class="header" href="#target-maintainers-99">Target maintainers</a></h2>
 <p><a href="https://github.com/g0djan">@g0djan</a>
 <a href="https://github.com/alexcrichton">@alexcrichton</a>
 <a href="https://github.com/abrown">@abrown</a>
@@ -21609,7 +21665,7 @@ originally known as <code>wasm32-wasi</code>. It is the next evolution in the de
 wasi (the <a href="https://wasi.dev">WebAssembly System Interface</a>) that uses the WebAssembly
 <a href="https://github.com/WebAssembly/component-model">component model</a> to allow for a standardized set of syscalls that are intended to empower
 WebAssembly binaries with native host capabilities.</p>
-<h2 id="target-maintainers-99"><a class="header" href="#target-maintainers-99">Target maintainers</a></h2>
+<h2 id="target-maintainers-100"><a class="header" href="#target-maintainers-100">Target maintainers</a></h2>
 <p><a href="https://github.com/alexcrichton">@alexcrichton</a>
 <a href="https://github.com/rylev">@rylev</a></p>
 <h2 id="requirements-92"><a class="header" href="#requirements-92">Requirements</a></h2>
@@ -21674,7 +21730,7 @@ crate then components produced for <code>wasm32-wasip3</code> may import WASIp2 
 This is considered a transitionary phase until fully support of libstd is
 implemented.</p>
 </blockquote>
-<h2 id="target-maintainers-100"><a class="header" href="#target-maintainers-100">Target maintainers</a></h2>
+<h2 id="target-maintainers-101"><a class="header" href="#target-maintainers-101">Target maintainers</a></h2>
 <p><a href="https://github.com/alexcrichton">@alexcrichton</a></p>
 <h2 id="requirements-93"><a class="header" href="#requirements-93">Requirements</a></h2>
 <p>This target is cross-compiled. The target supports <code>std</code> fully.</p>
@@ -21714,7 +21770,7 @@ documentation there for more information.</p>
 <p>WebAssembly targets that use the <a href="https://github.com/arjunr2/WALI">WebAssembly Linux Interface (WALI)</a> with 32-bit memory. The latest status of the WALI specification and support are documented within the repo.</p>
 <p>WALI offers seamless targetability of traditional Linux applications to Wasm by exposing Linux syscalls strategically into the sandbox. Numerous applications and build system work unmodified over WALI, including complex low-level system libraries – a list of applications are included in the research paper linked in the main repo.</p>
 <p>From the wider Wasm ecosystem perspective, implementing WALI within engines allows layering of high-level security policies (e.g. WASI) above it, arming the latter’s implementations with sandboxing and portability.</p>
-<h2 id="target-maintainers-101"><a class="header" href="#target-maintainers-101">Target maintainers</a></h2>
+<h2 id="target-maintainers-102"><a class="header" href="#target-maintainers-102">Target maintainers</a></h2>
 <p><a href="https://github.com/arjunr2">@arjunr2</a></p>
 <h2 id="requirements-94"><a class="header" href="#requirements-94">Requirements</a></h2>
 <h3 id="compilation"><a class="header" href="#compilation">Compilation</a></h3>
@@ -21811,7 +21867,7 @@ standard library. While the WASI targets are portable across different hosts
 Emscripten has the ability to run arbitrary JS from WASM and access many web APIs.
 If you are only targeting the web and need to access web APIs, the
 <code>wasm32-unknown-emscripten</code> target may be preferable.</p>
-<h2 id="target-maintainers-102"><a class="header" href="#target-maintainers-102">Target maintainers</a></h2>
+<h2 id="target-maintainers-103"><a class="header" href="#target-maintainers-103">Target maintainers</a></h2>
 <p><a href="https://github.com/hoodmane">@hoodmane</a>
 <a href="https://github.com/juntyr">@juntyr</a></p>
 <h2 id="requirements-95"><a class="header" href="#requirements-95">Requirements</a></h2>
@@ -21925,7 +21981,7 @@ hash maps are not randomized like they are on other platforms.</p>
 too) is the <a href="https://github.com/rustwasm/wasm-bindgen"><code>wasm-bindgen</code> project</a>
 which facilitates Rust code interoperating with JavaScript code. Note, though,
 that not all uses of <code>wasm32-unknown-unknown</code> are using JavaScript and the web.</p>
-<h2 id="target-maintainers-103"><a class="header" href="#target-maintainers-103">Target maintainers</a></h2>
+<h2 id="target-maintainers-104"><a class="header" href="#target-maintainers-104">Target maintainers</a></h2>
 <p>When this target was added to the compiler, platform-specific documentation here
 was not maintained at that time. This means that the list below is not
 exhaustive, and there are more interested parties in this target. That being
@@ -22118,7 +22174,7 @@ passing the appropriate flags to rustc.</p>
 <li>Enabling the <a href="https://github.com/WebAssembly/mutable-global">Import/Export of Mutable Globals</a> proposal (i.e. the <code>+mutable-globals</code> LLVM target feature flag)</li>
 <li>Not compiling the <code>std</code> library at all, rather than compiling it with stubs.</li>
 </ul>
-<h2 id="target-maintainers-104"><a class="header" href="#target-maintainers-104">Target maintainers</a></h2>
+<h2 id="target-maintainers-105"><a class="header" href="#target-maintainers-105">Target maintainers</a></h2>
 <p><a href="https://github.com/alexcrichton">@alexcrichton</a>
 <a href="https://github.com/graydon">@graydon</a></p>
 <h2 id="requirements-97"><a class="header" href="#requirements-97">Requirements</a></h2>
@@ -22187,7 +22243,7 @@ using <code>-Cpanic=unwind</code> see the <a href="#unwinding-2">documentation o
 <p><strong>Tier: 3</strong></p>
 <p>WebAssembly target which uses 64-bit memories, relying on the <a href="https://github.com/webassembly/memory64">memory64</a>
 WebAssembly proposal.</p>
-<h2 id="target-maintainers-105"><a class="header" href="#target-maintainers-105">Target maintainers</a></h2>
+<h2 id="target-maintainers-106"><a class="header" href="#target-maintainers-106">Target maintainers</a></h2>
 <p><a href="https://github.com/alexcrichton">@alexcrichton</a></p>
 <h2 id="requirements-98"><a class="header" href="#requirements-98">Requirements</a></h2>
 <p>This target is cross-compiled. The target supports <code>std</code> in the same manner as
@@ -22266,7 +22322,7 @@ effectively cannot be done.</p>
 <li><code>i686-pc-windows-gnu</code>: Tier 2</li>
 <li><code>x86_64-pc-windows-gnu</code>: Tier 1</li>
 </ul>
-<h2 id="target-maintainers-106"><a class="header" href="#target-maintainers-106">Target maintainers</a></h2>
+<h2 id="target-maintainers-107"><a class="header" href="#target-maintainers-107">Target maintainers</a></h2>
 <p><strong>⚠️ These targets do not have any maintainers and are not properly maintained. ⚠️</strong></p>
 <p>If you are using this target, consider signing up to become a target maintainer.
 See the target tier policy for details.
@@ -22290,7 +22346,7 @@ GCC/Binutils.</p>
 <li><code>i686-pc-windows-gnullvm</code></li>
 <li><code>x86_64-pc-windows-gnullvm</code></li>
 </ul>
-<h2 id="target-maintainers-107"><a class="header" href="#target-maintainers-107">Target maintainers</a></h2>
+<h2 id="target-maintainers-108"><a class="header" href="#target-maintainers-108">Target maintainers</a></h2>
 <p><a href="https://github.com/mati865">@mati865</a>
 <a href="https://github.com/thomcc">@thomcc</a></p>
 <h2 id="requirements-100"><a class="header" href="#requirements-100">Requirements</a></h2>
@@ -22328,7 +22384,7 @@ Testing AArch64 on x86_64 is problematic, though, and requires launching a whole
 <li><code>i686-win7-windows-gnu</code></li>
 <li><code>x86_64-win7-windows-gnu</code></li>
 </ul>
-<h2 id="target-maintainers-108"><a class="header" href="#target-maintainers-108">Target maintainers</a></h2>
+<h2 id="target-maintainers-109"><a class="header" href="#target-maintainers-109">Target maintainers</a></h2>
 <p><a href="https://github.com/tbu-">@tbu-</a></p>
 <h2 id="requirements-101"><a class="header" href="#requirements-101">Requirements</a></h2>
 <p>This target supports all of core, alloc, std and test. Host
@@ -22360,7 +22416,7 @@ testing is possible using the <code>remote-test-server</code> described <a href=
 <li><code>i686-win7-windows-msvc</code></li>
 <li><code>x86_64-win7-windows-msvc</code></li>
 </ul>
-<h2 id="target-maintainers-109"><a class="header" href="#target-maintainers-109">Target maintainers</a></h2>
+<h2 id="target-maintainers-110"><a class="header" href="#target-maintainers-110">Target maintainers</a></h2>
 <p><a href="https://github.com/roblabla">@roblabla</a></p>
 <h2 id="requirements-102"><a class="header" href="#requirements-102">Requirements</a></h2>
 <p>This target supports all of core, alloc, std and test. This is automatically
@@ -22430,7 +22486,7 @@ cc = "path/to/xwin-clang-cl"
 (SGX)</a>
 based on the ABI defined by Fortanix for the <a href="https://edp.fortanix.com/">Enclave Development Platform
 (EDP)</a>.</p>
-<h2 id="target-maintainers-110"><a class="header" href="#target-maintainers-110">Target maintainers</a></h2>
+<h2 id="target-maintainers-111"><a class="header" href="#target-maintainers-111">Target maintainers</a></h2>
 <p><a href="https://github.com/jethrogb">@jethrogb</a>
 <a href="https://github.com/raoulstrackx">@raoulstrackx</a>
 <a href="https://github.com/aditijannu">@aditijannu</a></p>
@@ -22479,7 +22535,7 @@ that’s known to work with this target.</p>
 The <code>*-cygwin</code> targets are <strong>not</strong> intended as native target for applications,
 a developer writing Windows applications should use the <code>*-pc-windows-*</code> targets instead, which are <em>native</em> Windows.</p>
 <p>Cygwin is only intended as an emulation layer for Unix-only programs which do not support the native Windows targets.</p>
-<h2 id="target-maintainers-111"><a class="header" href="#target-maintainers-111">Target maintainers</a></h2>
+<h2 id="target-maintainers-112"><a class="header" href="#target-maintainers-112">Target maintainers</a></h2>
 <p><a href="https://github.com/Berrysoft">@Berrysoft</a></p>
 <h2 id="requirements-104"><a class="header" href="#requirements-104">Requirements</a></h2>
 <p>This target is cross compiled. It needs <code>x86_64-pc-cygwin-gcc</code> as linker.</p>
@@ -22501,7 +22557,7 @@ this target, you will either need to build Rust with the target enabled (see
 <h1 id="x86_64-unknown-linux-none"><a class="header" href="#x86_64-unknown-linux-none"><code>x86_64-unknown-linux-none</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Freestanding x86-64 linux binary with no dependency on libc.</p>
-<h2 id="target-maintainers-112"><a class="header" href="#target-maintainers-112">Target maintainers</a></h2>
+<h2 id="target-maintainers-113"><a class="header" href="#target-maintainers-113">Target maintainers</a></h2>
 <p><a href="https://github.com/morr0ne">@morr0ne</a></p>
 <h2 id="requirements-105"><a class="header" href="#requirements-105">Requirements</a></h2>
 <p>This target is cross compiled and can be built from any host.</p>
@@ -22529,7 +22585,7 @@ this target, you will either need to build Rust with the target enabled (see
 <h1 id="x86_64-unknown-none"><a class="header" href="#x86_64-unknown-none"><code>x86_64-unknown-none</code></a></h1>
 <p><strong>Tier: 2</strong></p>
 <p>Freestanding/bare-metal x86-64 binaries in ELF format: firmware, kernels, etc.</p>
-<h2 id="target-maintainers-113"><a class="header" href="#target-maintainers-113">Target maintainers</a></h2>
+<h2 id="target-maintainers-114"><a class="header" href="#target-maintainers-114">Target maintainers</a></h2>
 <p><a href="https://github.com/haraldh">@haraldh</a>
 <a href="https://github.com/mikeleany">@mikeleany</a></p>
 <h2 id="requirements-106"><a class="header" href="#requirements-106">Requirements</a></h2>
@@ -22590,7 +22646,7 @@ The goal of this target is to allow shipping ASAN-instrumented standard
 libraries through rustup, enabling a fully instrumented binary without requiring
 nightly features (build-std).
 Once build-std stabilizes, this target is no longer needed and will be removed.</p>
-<h2 id="target-maintainers-114"><a class="header" href="#target-maintainers-114">Target maintainers</a></h2>
+<h2 id="target-maintainers-115"><a class="header" href="#target-maintainers-115">Target maintainers</a></h2>
 <ul>
 <li><a href="https://github.com/jakos-sec">@jakos-sec</a></li>
 <li><a href="https://github.com/1c3t3a">@1c3t3a</a></li>
@@ -22622,7 +22678,7 @@ target = ["x86_64-unknown-linux-gnuasan"]
 <h1 id="xtensa--none-elf"><a class="header" href="#xtensa--none-elf"><code>xtensa-*-none-elf</code></a></h1>
 <p><strong>Tier: 3</strong></p>
 <p>Targets for Xtensa CPUs.</p>
-<h2 id="target-maintainers-115"><a class="header" href="#target-maintainers-115">Target maintainers</a></h2>
+<h2 id="target-maintainers-116"><a class="header" href="#target-maintainers-116">Target maintainers</a></h2>
 <p><a href="https://github.com/MabezDev">@MabezDev</a>
 <a href="https://github.com/SergioGasquez">@SergioGasquez</a></p>
 <h2 id="requirements-108"><a class="header" href="#requirements-108">Requirements</a></h2>
@@ -22649,7 +22705,7 @@ target = ["x86_64-unknown-linux-gnuasan"]
 <p>Apache NuttX is a real-time operating system (RTOS) with an emphasis on standards compliance and small footprint. It is scalable from 8-bit to 64-bit microcontroller environments. The primary governing standards in NuttX are POSIX and ANSI standards.</p>
 <p>NuttX adopts additional standard APIs from Unix and other common RTOSs, such as VxWorks. These APIs are used for functionality not available under the POSIX and ANSI standards. However, some APIs, like fork(), are not appropriate for deeply-embedded environments and are not implemented in NuttX.</p>
 <p>For brevity, many parts of the documentation will refer to Apache NuttX as simply NuttX.</p>
-<h2 id="target-maintainers-116"><a class="header" href="#target-maintainers-116">Target maintainers</a></h2>
+<h2 id="target-maintainers-117"><a class="header" href="#target-maintainers-117">Target maintainers</a></h2>
 <p><a href="https://github.com/no1wudi">@no1wudi</a></p>
 <h2 id="requirements-109"><a class="header" href="#requirements-109">Requirements</a></h2>
 <p>The target name follow this format: <code>ARCH[-VENDOR]-nuttx-ABI</code>, where <code>ARCH</code> is the target architecture, <code>VENDOR</code> is the vendor name, and <code>ABI</code> is the ABI used.</p>

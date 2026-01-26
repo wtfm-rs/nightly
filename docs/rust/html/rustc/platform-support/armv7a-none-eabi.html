@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>armv7a-none-eabi{,hf} - The rustc book</title>
+        <title>{arm,thumb}v7a-none-eabi{,hf} - The rustc book</title>
 
 
         <!-- Custom HTML head -->
@@ -35,10 +35,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-a631a4e8.js";
+            window.path_to_searchindex_js = "../searchindex-29630132.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-46ab57f5.js"></script>
+        <script src="../toc-d63a11d1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -180,13 +180,17 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="armv7a-none-eabi-and-armv7a-none-eabihf"><a class="header" href="#armv7a-none-eabi-and-armv7a-none-eabihf"><code>armv7a-none-eabi</code> and <code>armv7a-none-eabihf</code></a></h1>
+                        <h1 id="armv7a-none-eabi-and-thumbv7a-none-eabi"><a class="header" href="#armv7a-none-eabi-and-thumbv7a-none-eabi"><code>armv7a-none-eabi*</code> and <code>thumbv7a-none-eabi*</code></a></h1>
 <ul>
-<li><strong>Tier: 2</strong></li>
+<li><strong>Tier: 2</strong> (<code>armv7a-none-eabi</code> and <code>armv7a-none-eabihf</code>)</li>
+<li><strong>Tier: 3</strong> (<code>thumbv7a-none-eabi</code> and <code>thumbv7a-none-eabihf</code>)</li>
 <li><strong>Library Support:</strong> core and alloc (bare-metal, <code>#![no_std]</code>)</li>
 </ul>
-<p>Bare-metal target for CPUs in the Armv7-A architecture family, supporting
-dual ARM/Thumb mode, with ARM mode as the default.</p>
+<p>Bare-metal target for CPUs in the Armv7-A architecture family, supporting dual
+ARM/Thumb mode. The <code>armv7a-none-eabi*</code> targets use Arm mode by default and the
+<code>thumbv7a-none-eabi</code> targets use Thumb mode by default. The <code>-eabi</code> targets use
+a soft-float ABI and do not require an FPU, while the <code>-eabihf</code> targets use a
+hard-float ABI and do require an FPU.</p>
 <p>Note, this is for processors running in AArch32 mode. For the AArch64 mode
 added in Armv8-A, see <a href="aarch64-unknown-none.html"><code>aarch64-unknown-none</code></a> instead.</p>
 <p>Processors in this family include the <a href="https://en.wikipedia.org/wiki/ARM_Cortex-A">Arm Cortex-A5, 8, 32, etc</a>.</p>
@@ -235,7 +239,7 @@ build using these targets.</p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../platform-support/armv5te-none-eabi.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../platform-support/armv6-none-eabi.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
@@ -249,7 +253,7 @@ build using these targets.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../platform-support/armv5te-none-eabi.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../platform-support/armv6-none-eabi.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 

@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-fe73a51c.js";
+            window.path_to_searchindex_js = "searchindex-dcbce744.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-f39945cd.js"></script>
+        <script src="toc-6746af44.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -3949,6 +3949,10 @@ $ arm-none-eabi-objdump -D function.o
 <p>Allows <code>async {}</code> expressions in const contexts.</p>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/85368">#85368</a></p>
 <hr><div style="break-before: page; page-break-before: always;"></div>
+<h1 id="const_block_items"><a class="header" href="#const_block_items"><code>const_block_items</code></a></h1>
+<p>Allows <code>const { ... }</code> as a shorthand for <code>const _: () = const { ... };</code> for module items.</p>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/149226">#149226</a></p>
+<hr><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="const_closures"><a class="header" href="#const_closures"><code>const_closures</code></a></h1>
 <p>Allows <code>const || {}</code> closures in const contexts.</p>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/106003">#106003</a></p>
@@ -5629,6 +5633,10 @@ pub mod operations_h {
 <p>Allows <code>extern "rust-cold"</code>.</p>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/97544">#97544</a></p>
 <hr><div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rust_preserve_none_cc"><a class="header" href="#rust_preserve_none_cc"><code>rust_preserve_none_cc</code></a></h1>
+<p>Allows <code>extern "rust-preserve-none"</code>.</p>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/151401">#151401</a></p>
+<hr><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="rustc_allow_const_fn_unstable"><a class="header" href="#rustc_allow_const_fn_unstable"><code>rustc_allow_const_fn_unstable</code></a></h1>
 <p>Allows using <code>#[rustc_allow_const_fn_unstable]</code>. This is an attribute on <code>const fn</code> for the same purpose as <code>#[allow_internal_unstable]</code>.</p>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/69399">#69399</a></p>
@@ -6455,6 +6463,9 @@ that borrows from itself (<code>FnOnce::Output</code> has no lifetime parameters
 <hr><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="const_array"><a class="header" href="#const_array"><code>const_array</code></a></h1>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/147606">#147606</a></p>
+<hr><div style="break-before: page; page-break-before: always;"></div>
+<h1 id="const_bool"><a class="header" href="#const_bool"><code>const_bool</code></a></h1>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/151531">#151531</a></p>
 <hr><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="const_btree_len"><a class="header" href="#const_btree_len"><code>const_btree_len</code></a></h1>
 <p>This feature has no tracking issue, and is therefore likely internal to the compiler, not being intended for general use.</p>

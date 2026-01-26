@@ -35,10 +35,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a631a4e8.js";
+            window.path_to_searchindex_js = "searchindex-29630132.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-46ab57f5.js"></script>
+        <script src="toc-d63a11d1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -267,6 +267,7 @@ so Rustup may install the documentation for a similar tier 1 target instead.</p>
 <tr><td><a href="platform-support/windows-gnu.html"><code>i686-pc-windows-gnu</code></a></td><td>32-bit MinGW (Windows 10+, Windows Server 2016+, Pentium 4) <sup class="footnote-reference" id="fr-x86_32-floats-return-ABI-3"><a href="#footnote-x86_32-floats-return-ABI">1</a></sup> <sup class="footnote-reference" id="fr-win32-msvc-alignment-2"><a href="#footnote-win32-msvc-alignment">2</a></sup></td></tr>
 <tr><td><code>powerpc-unknown-linux-gnu</code></td><td>PowerPC Linux (kernel 3.2+, glibc 2.17)</td></tr>
 <tr><td><code>powerpc64-unknown-linux-gnu</code></td><td>PPC64 Linux (kernel 3.2+, glibc 2.17)</td></tr>
+<tr><td><a href="platform-support/powerpc64-unknown-linux-musl.html"><code>powerpc64-unknown-linux-musl</code></a></td><td>PPC64 Linux (kernel 4.19+, musl 1.2.5)</td></tr>
 <tr><td><a href="platform-support/powerpc64le-unknown-linux-gnu.html"><code>powerpc64le-unknown-linux-gnu</code></a></td><td>PPC64LE Linux (kernel 3.10+, glibc 2.17)</td></tr>
 <tr><td><a href="platform-support/powerpc64le-unknown-linux-musl.html"><code>powerpc64le-unknown-linux-musl</code></a></td><td>PPC64LE Linux (kernel 4.19+, musl 1.2.5)</td></tr>
 <tr><td><a href="platform-support/riscv64gc-unknown-linux-gnu.html"><code>riscv64gc-unknown-linux-gnu</code></a></td><td>RISC-V Linux (kernel 4.20+, glibc 2.29)</td></tr>
@@ -451,6 +452,8 @@ host tools.</p>
 <tr><td><code>armv4t-unknown-linux-gnueabi</code></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>Armv4T Linux</td></tr>
 <tr><td><a href="platform-support/armv5te-none-eabi.html"><code>armv5te-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Bare Armv5TE</td></tr>
 <tr><td><code>armv5te-unknown-linux-uclibceabi</code></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>Armv5TE Linux with uClibc</td></tr>
+<tr><td><a href="platform-support/armv6-none-eabi.html"><code>armv6-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Bare Armv6</td></tr>
+<tr><td><a href="platform-support/armv6-none-eabi.html"><code>armv6-none-eabihf</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Bare Armv6, hardfloat</td></tr>
 <tr><td><a href="platform-support/freebsd.html"><code>armv6-unknown-freebsd</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>Armv6 FreeBSD</td></tr>
 <tr><td><a href="platform-support/netbsd.html"><code>armv6-unknown-netbsd-eabihf</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>Armv6 NetBSD w/hard-float</td></tr>
 <tr><td><a href="platform-support/armv6k-nintendo-3ds.html"><code>armv6k-nintendo-3ds</code></a></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>Armv6k Nintendo 3DS, Horizon (Requires devkitARM toolchain)</td></tr>
@@ -530,7 +533,6 @@ host tools.</p>
 <tr><td><a href="platform-support/vxworks.html"><code>powerpc-wrs-vxworks-spe</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td></td></tr>
 <tr><td><a href="platform-support/aix.html"><code>powerpc64-ibm-aix</code></a></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>64-bit AIX (7.2 and newer)</td></tr>
 <tr><td><a href="platform-support/freebsd.html"><code>powerpc64-unknown-freebsd</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>PPC64 FreeBSD (ELFv2)</td></tr>
-<tr><td><a href="platform-support/powerpc64-unknown-linux-musl.html"><code>powerpc64-unknown-linux-musl</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>PPC64 Linux (kernel 4.19, musl 1.2.5)</td></tr>
 <tr><td><a href="platform-support/openbsd.html"><code>powerpc64-unknown-openbsd</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>OpenBSD/powerpc64</td></tr>
 <tr><td><a href="platform-support/vxworks.html"><code>powerpc64-wrs-vxworks</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td></td></tr>
 <tr><td><a href="platform-support/freebsd.html"><code>powerpc64le-unknown-freebsd</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>PPC64LE FreeBSD</td></tr>
@@ -569,18 +571,24 @@ host tools.</p>
 <tr><td><a href="platform-support/openbsd.html"><code>sparc64-unknown-openbsd</code></a></td><td style="text-align: center">✓</td><td style="text-align: center">✓</td><td>OpenBSD/sparc64</td></tr>
 <tr><td><a href="platform-support/armv4t-none-eabi.html"><code>thumbv4t-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv4T</td></tr>
 <tr><td><a href="platform-support/armv5te-none-eabi.html"><code>thumbv5te-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv5TE</td></tr>
+<tr><td><a href="platform-support/armv6-none-eabi.html"><code>thumbv6-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv6</td></tr>
 <tr><td><a href="platform-support/nuttx.html"><code>thumbv6m-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv6M with NuttX</td></tr>
-<tr><td><code>thumbv7a-pc-windows-msvc</code></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
-<tr><td><a href="platform-support/uwp-windows-msvc.html"><code>thumbv7a-uwp-windows-msvc</code></a></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><a href="platform-support/armv7a-none-eabi.html"><code>thumbv7a-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv7-A</td></tr>
+<tr><td><a href="platform-support/armv7a-none-eabi.html"><code>thumbv7a-none-eabihf</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv7-A, hardfloat</td></tr>
 <tr><td><a href="platform-support/nuttx.html"><code>thumbv7a-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv7-A with NuttX</td></tr>
 <tr><td><a href="platform-support/nuttx.html"><code>thumbv7a-nuttx-eabihf</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv7-A with NuttX, hardfloat</td></tr>
+<tr><td><code>thumbv7a-pc-windows-msvc</code></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
+<tr><td><a href="platform-support/uwp-windows-msvc.html"><code>thumbv7a-uwp-windows-msvc</code></a></td><td style="text-align: center"></td><td style="text-align: center"></td><td></td></tr>
 <tr><td><a href="platform-support/nuttx.html"><code>thumbv7em-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv7EM with NuttX</td></tr>
 <tr><td><a href="platform-support/nuttx.html"><code>thumbv7em-nuttx-eabihf</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv7EM with NuttX, hardfloat</td></tr>
 <tr><td><a href="platform-support/nuttx.html"><code>thumbv7m-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv7M with NuttX</td></tr>
 <tr><td><code>thumbv7neon-unknown-linux-musleabihf</code></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>Thumb2-mode Armv7-A Linux with NEON, musl 1.2.5</td></tr>
+<tr><td><a href="platform-support/armv7r-none-eabi.html"><code>thumbv7r-none-eabi</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv7-R</td></tr>
+<tr><td><a href="platform-support/armv7r-none-eabi.html"><code>thumbv7r-none-eabihf</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv7-R, hardfloat</td></tr>
 <tr><td><a href="platform-support/nuttx.html"><code>thumbv8m.base-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv8M Baseline with NuttX</td></tr>
 <tr><td><a href="platform-support/nuttx.html"><code>thumbv8m.main-nuttx-eabi</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv8M Mainline with NuttX</td></tr>
 <tr><td><a href="platform-support/nuttx.html"><code>thumbv8m.main-nuttx-eabihf</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>ARMv8M Mainline with NuttX, hardfloat</td></tr>
+<tr><td><a href="platform-support/armv8r-none-eabihf.html"><code>thumbv8r-none-eabihf</code></a></td><td style="text-align: center">*</td><td style="text-align: center"></td><td>Thumb-mode Bare Armv8-R, hardfloat</td></tr>
 <tr><td><a href="platform-support/wasm64-unknown-unknown.html"><code>wasm64-unknown-unknown</code></a></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>WebAssembly</td></tr>
 <tr><td><a href="platform-support/wasm32-wali-linux.html"><code>wasm32-wali-linux-musl</code></a></td><td style="text-align: center">?</td><td style="text-align: center"></td><td>WebAssembly with <a href="https://github.com/arjunr2/WALI">WALI</a></td></tr>
 <tr><td><a href="platform-support/wasm32-wasip3.html"><code>wasm32-wasip3</code></a></td><td style="text-align: center">✓</td><td style="text-align: center"></td><td>WebAssembly with WASIp3</td></tr>

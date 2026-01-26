@@ -2,14 +2,19 @@ RUSTC = rustup run nightly rustc
 RUSTDOC = rustup run nightly rustdoc --out-dir docs 
 CARGO = rustup run nightly cargo
 
-all:	install versions build test pass
+all:	CI build test pass versions
 	cp README.md docs
 
-install:
-	rustup toolchain list
+CI:
+	env
+	rustup --verbose --version
+
 	rustup toolchain install nightly
-	rustup update nightly
+	rustup component add --toolchain nightly rustfmt
 	rustup override set nightly
+
+	cargo install cargo-expand
+
 
 build:
 	$(RUSTDOC) src/introduction.rs
@@ -30,10 +35,11 @@ pass:
 	rustup run nightly cargo clean
 
 versions:
-	$(RUSTC) --version --verbose
-	$(RUSTDOC) --version --verbose
-	$(CARGO) --version --verbose
+	rustc --version | tee rustc-version.log
+	cargo --version | tee cargo-vesion.log
 
 doc:
 	rustup doc
+	rm -rf docs/*
 	cp -r ~/.rustup/toolchains/nightly-aarch64-apple-darwin/share/doc/* docs
+
