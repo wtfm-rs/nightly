@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,24 +256,21 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="derive"><a class="header" href="#derive">Derive</a></h1>
-<p>The compiler is capable of providing basic implementations for some traits via
-the <code>#[derive]</code> <a href="../attribute.html">attribute</a>. These traits can still be
-manually implemented if a more complex behavior is required.</p>
-<p>The following is a list of derivable traits:</p>
+<p>컴파일러는 <code>#[derive]</code> <a href="../attribute.html">속성</a>을 통해 일부 트레이트에 대한 기본적인 구현을 제공할 수 있습니다. 더 복잡한 동작이 필요한 경우에는 이러한 트레이트들을 수동으로 구현할 수도 있습니다.</p>
+<p>다음은 derive 가능한 트레이트 목록입니다:</p>
 <ul>
-<li>Comparison traits:
-<a href="https://doc.rust-lang.org/std/cmp/trait.Eq.html"><code>Eq</code></a>, <a href="https://doc.rust-lang.org/std/cmp/trait.PartialEq.html"><code>PartialEq</code></a>, <a href="https://doc.rust-lang.org/std/cmp/trait.Ord.html"><code>Ord</code></a>, <a href="https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html"><code>PartialOrd</code></a>.</li>
-<li><a href="https://doc.rust-lang.org/std/clone/trait.Clone.html"><code>Clone</code></a>, to create <code>T</code> from <code>&amp;T</code> via a copy.</li>
-<li><a href="https://doc.rust-lang.org/core/marker/trait.Copy.html"><code>Copy</code></a>, to give a type ‘copy semantics’ instead of ‘move semantics’.</li>
-<li><a href="https://doc.rust-lang.org/std/hash/trait.Hash.html"><code>Hash</code></a>, to compute a hash from <code>&amp;T</code>.</li>
-<li><a href="https://doc.rust-lang.org/std/default/trait.Default.html"><code>Default</code></a>, to create an empty instance of a data type.</li>
-<li><a href="https://doc.rust-lang.org/std/fmt/trait.Debug.html"><code>Debug</code></a>, to format a value using the <code>{:?}</code> formatter.</li>
+<li>비교 트레이트: <a href="https://doc.rust-lang.org/std/cmp/trait.Eq.html"><code>Eq</code></a>, <a href="https://doc.rust-lang.org/std/cmp/trait.PartialEq.html"><code>PartialEq</code></a>, <a href="https://doc.rust-lang.org/std/cmp/trait.Ord.html"><code>Ord</code></a>, <a href="https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html"><code>PartialOrd</code></a>.</li>
+<li><a href="https://doc.rust-lang.org/std/clone/trait.Clone.html"><code>Clone</code></a>, 복사를 통해 <code>&amp;T</code>로부터 <code>T</code>를 생성합니다.</li>
+<li><a href="https://doc.rust-lang.org/core/marker/trait.Copy.html"><code>Copy</code></a>, 타입에 ‘이동 의미론(move semantics)’ 대신 ’복사 의미론(copy semantics)’을 부여합니다.</li>
+<li><a href="https://doc.rust-lang.org/std/hash/trait.Hash.html"><code>Hash</code></a>, <code>&amp;T</code>로부터 해시를 계산합니다.</li>
+<li><a href="https://doc.rust-lang.org/std/default/trait.Default.html"><code>Default</code></a>, 데이터 타입의 빈 인스턴스를 생성합니다.</li>
+<li><a href="https://doc.rust-lang.org/std/fmt/trait.Debug.html"><code>Debug</code></a>, <code>{:?}</code> 포맷터를 사용하여 값을 형식화합니다.</li>
 </ul>
-<pre class="playground"><code class="language-rust editable edition2021">// `Centimeters`, a tuple struct that can be compared
+<pre class="playground"><code class="language-rust editable edition2021">// `Centimeters`, 비교 가능한 튜플 구조체
 #[derive(PartialEq, PartialOrd)]
 struct Centimeters(f64);
 
-// `Inches`, a tuple struct that can be printed
+// `Inches`, 출력 가능한 튜플 구조체
 #[derive(Debug)]
 struct Inches(i32);
 
@@ -282,36 +282,36 @@ impl Inches {
     }
 }
 
-// `Seconds`, a tuple struct with no additional attributes
+// `Seconds`, 추가 속성이 없는 튜플 구조체
 struct Seconds(i32);
 
 fn main() {
     let _one_second = Seconds(1);
 
-    // Error: `Seconds` can't be printed; it doesn't implement the `Debug` trait
+    // 에러: `Seconds`는 출력될 수 없습니다. `Debug` 트레이트를 구현하지 않았기 때문입니다.
     //println!("One second looks like: {:?}", _one_second);
-    // TODO ^ Try uncommenting this line
+    // TODO ^ 이 줄의 주석을 해제해 보세요.
 
-    // Error: `Seconds` can't be compared; it doesn't implement the `PartialEq` trait
+    // 에러: `Seconds`는 비교될 수 없습니다. `PartialEq` 트레이트를 구현하지 않았기 때문입니다.
     //let _this_is_true = (_one_second == _one_second);
-    // TODO ^ Try uncommenting this line
+    // TODO ^ 이 줄의 주석을 해제해 보세요.
 
     let foot = Inches(12);
 
-    println!("One foot equals {:?}", foot);
+    println!("1피트는 {:?}와 같습니다.", foot);
 
     let meter = Centimeters(100.0);
 
     let cmp =
         if foot.to_centimeters() &lt; meter {
-            "smaller"
+            "더 작습니다"
         } else {
-            "bigger"
+            "더 큽니다"
         };
 
-    println!("One foot is {} than one meter.", cmp);
+    println!("1피트는 1미터보다 {}.", cmp);
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
 <p><a href="https://doc.rust-lang.org/reference/attributes.html#derive"><code>derive</code></a></p>
 
                     </main>

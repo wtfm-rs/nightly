@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Combinators: and_then - Rust By Example</title>
+        <title>콤비네이터: and_then - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,22 +255,16 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="combinators-and_then"><a class="header" href="#combinators-and_then">Combinators: <code>and_then</code></a></h1>
-<p><code>map()</code> was described as a chainable way to simplify <code>match</code> statements.
-However, using <code>map()</code> on a function that returns an <code>Option&lt;T&gt;</code> results
-in the nested <code>Option&lt;Option&lt;T&gt;&gt;</code>. Chaining multiple calls together can
-then become confusing. That’s where another combinator called <code>and_then()</code>,
-known in some languages as flatmap, comes in.</p>
-<p><code>and_then()</code> calls its function input with the wrapped value and returns the result. If the <code>Option</code> is <code>None</code>, then it returns <code>None</code> instead.</p>
-<p>In the following example, <code>cookable_v3()</code> results in an <code>Option&lt;Food&gt;</code>.
-Using <code>map()</code> instead of <code>and_then()</code> would have given an
-<code>Option&lt;Option&lt;Food&gt;&gt;</code>, which is an invalid type for <code>eat()</code>.</p>
+                        <h1 id="콤비네이터-and_then"><a class="header" href="#콤비네이터-and_then">콤비네이터: <code>and_then</code></a></h1>
+<p><code>map()</code>은 <code>match</code> 문을 단순화하기 위한 체인 가능한 방법으로 설명되었습니다. 하지만 <code>Option&lt;T&gt;</code>를 반환하는 함수에 <code>map()</code>을 사용하면 중첩된 <code>Option&lt;Option&lt;T&gt;&gt;</code>가 생성됩니다. 여러 호출을 함께 체인으로 연결하는 것은 혼란스러울 수 있습니다. 이때 다른 언어에서 <code>flatmap</code>으로 알려진 <code>and_then()</code>이라는 또 다른 콤비네이터가 등장합니다.</p>
+<p><code>and_then()</code>은 래핑된 값을 가지고 함수 입력을 호출하고 그 결과를 반환합니다. 만약 <code>Option</code>이 <code>None</code>이라면, 대신 <code>None</code>을 반환합니다.</p>
+<p>다음 예제에서, <code>cookable_v3()</code>는 <code>Option&lt;Food&gt;</code>를 결과로 냅니다. <code>and_then()</code> 대신 <code>map()</code>을 사용했다면 <code>Option&lt;Option&lt;Food&gt;&gt;</code>를 얻었을 것이며, 이는 <code>eat()</code>에 대해 유효하지 않은 타입입니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">#![allow(dead_code)]
 
 #[derive(Debug)] enum Food { CordonBleu, Steak, Sushi }
 #[derive(Debug)] enum Day { Monday, Tuesday, Wednesday }
 
-// We don't have the ingredients to make Sushi.
+// 우리는 스시를 만들 재료가 없습니다.
 fn have_ingredients(food: Food) -&gt; Option&lt;Food&gt; {
     match food {
         Food::Sushi =&gt; None,
@@ -275,7 +272,7 @@ fn have_ingredients(food: Food) -&gt; Option&lt;Food&gt; {
     }
 }
 
-// We have the recipe for everything except Cordon Bleu.
+// 우리는 코르동 블뢰(Cordon Bleu)를 제외한 모든 것의 레시피를 가지고 있습니다.
 fn have_recipe(food: Food) -&gt; Option&lt;Food&gt; {
     match food {
         Food::CordonBleu =&gt; None,
@@ -283,8 +280,8 @@ fn have_recipe(food: Food) -&gt; Option&lt;Food&gt; {
     }
 }
 
-// To make a dish, we need both the recipe and the ingredients.
-// We can represent the logic with a chain of `match`es:
+// 요리를 하려면 레시피와 재료가 모두 필요합니다.
+// 우리는 이 로직을 `match`들의 체인으로 표현할 수 있습니다:
 fn cookable_v1(food: Food) -&gt; Option&lt;Food&gt; {
     match have_recipe(food) {
         None       =&gt; None,
@@ -292,21 +289,20 @@ fn cookable_v1(food: Food) -&gt; Option&lt;Food&gt; {
     }
 }
 
-// This can conveniently be rewritten more compactly with `and_then()`:
+// 이는 `and_then()`을 사용하여 더 간결하게 다시 작성될 수 있습니다:
 fn cookable_v3(food: Food) -&gt; Option&lt;Food&gt; {
     have_recipe(food).and_then(have_ingredients)
 }
 
-// Otherwise we'd need to `flatten()` an `Option&lt;Option&lt;Food&gt;&gt;`
-// to get an `Option&lt;Food&gt;`:
+// 그렇지 않다면 `Option&lt;Food&gt;`를 얻기 위해 `Option&lt;Option&lt;Food&gt;&gt;`를 `flatten()`해야 할 것입니다:
 fn cookable_v2(food: Food) -&gt; Option&lt;Food&gt; {
     have_recipe(food).map(have_ingredients).flatten()
 }
 
 fn eat(food: Food, day: Day) {
     match cookable_v3(food) {
-        Some(food) =&gt; println!("Yay! On {:?} we get to eat {:?}.", day, food),
-        None       =&gt; println!("Oh no. We don't get to eat on {:?}?", day),
+        Some(food) =&gt; println!("야호! {:?}에 우리는 {:?}를 먹게 되었어요.", day, food),
+        None       =&gt; println!("오 이런. {:?}에는 못 먹는 건가요?", day),
     }
 }
 
@@ -317,8 +313,8 @@ fn main() {
     eat(steak, Day::Tuesday);
     eat(sushi, Day::Wednesday);
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../fn/closures.html">closures</a>, <a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a>, <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.and_then"><code>Option::and_then()</code></a>, and <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.flatten"><code>Option::flatten()</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../fn/closures.html">클로저</a>, <a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a>, <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.and_then"><code>Option::and_then()</code></a>, 그리고 <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.flatten"><code>Option::flatten()</code></a></p>
 
                     </main>
 

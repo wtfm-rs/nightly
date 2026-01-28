@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Returning Traits with dyn - Rust By Example</title>
+        <title>dyn으로 트레이트 반환하기 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,41 +255,33 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="returning-traits-with-dyn"><a class="header" href="#returning-traits-with-dyn">Returning Traits with <code>dyn</code></a></h1>
-<p>The Rust compiler needs to know how much space every function’s return type requires. This means all
-your functions have to return a concrete type. Unlike other languages, if you have a trait like
-<code>Animal</code>, you can’t write a function that returns <code>Animal</code>, because its different implementations
-will need different amounts of memory.</p>
-<p>However, there’s an easy workaround. Instead of returning a trait object directly, our functions
-return a <code>Box</code> which <em>contains</em> some <code>Animal</code>. A <code>box</code> is just a reference to some memory in the
-heap. Because a reference has a statically-known size, and the compiler can guarantee it points to a
-heap-allocated <code>Animal</code>, we can return a trait from our function!</p>
-<p>Rust tries to be as explicit as possible whenever it allocates memory on the heap. So if your
-function returns a pointer-to-trait-on-heap in this way, you need to write the return type with the
-<code>dyn</code> keyword, e.g. <code>Box&lt;dyn Animal&gt;</code>.</p>
+                        <h1 id="dyn으로-트레이트-반환하기"><a class="header" href="#dyn으로-트레이트-반환하기"><code>dyn</code>으로 트레이트 반환하기</a></h1>
+<p>Rust 컴파일러는 모든 함수의 반환 타입이 얼마나 많은 공간을 필요로 하는지 알아야 합니다. 이는 여러분의 모든 함수가 구체적인 타입을 반환해야 함을 의미합니다. 다른 언어와 달리, <code>Animal</code>과 같은 트레이트가 있을 때 <code>Animal</code>을 반환하는 함수를 작성할 수 없는데, 그 이유는 서로 다른 구현체들이 서로 다른 양의 메모리를 필요로 하기 때문입니다.</p>
+<p>하지만 쉬운 해결 방법이 있습니다. 트레이트 객체를 직접 반환하는 대신, 우리 함수는 어떤 <code>Animal</code>을 <em>포함하는</em> <code>Box</code>를 반환합니다. <code>Box</code>는 단지 힙 메모리에 대한 참조일 뿐입니다. 참조는 정적으로 알려진 크기를 가지며, 컴파일러는 그것이 힙에 할당된 <code>Animal</code>을 가리키고 있음을 보장할 수 있으므로, 우리 함수에서 트레이트를 반환할 수 있게 됩니다!</p>
+<p>Rust는 힙에 메모리를 할당할 때마다 가능한 한 명시적이려고 노력합니다. 따라서 여러분의 함수가 이런 방식으로 힙상의 트레이트에 대한 포인터를 반환한다면, 반환 타입에 <code>dyn</code> 키워드를 사용해야 합니다. 예: <code>Box&lt;dyn Animal&gt;</code>.</p>
 <pre class="playground"><code class="language-rust editable edition2021">struct Sheep {}
 struct Cow {}
 
 trait Animal {
-    // Instance method signature
+    // 인스턴스 메서드 시그니처
     fn noise(&amp;self) -&gt; &amp;'static str;
 }
 
-// Implement the `Animal` trait for `Sheep`.
+// `Sheep`에 대해 `Animal` 트레이트를 구현합니다.
 impl Animal for Sheep {
     fn noise(&amp;self) -&gt; &amp;'static str {
-        "baaaaah!"
+        "메에에에!"
     }
 }
 
-// Implement the `Animal` trait for `Cow`.
+// `Cow`에 대해 `Animal` 트레이트를 구현합니다.
 impl Animal for Cow {
     fn noise(&amp;self) -&gt; &amp;'static str {
-        "moooooo!"
+        "음메~!"
     }
 }
 
-// Returns some struct that implements Animal, but we don't know which one at compile time.
+// `Animal`을 구현하는 어떤 구조체를 반환하지만, 컴파일 타임에는 그것이 무엇인지 알 수 없습니다.
 fn random_animal(random_number: f64) -&gt; Box&lt;dyn Animal&gt; {
     if random_number &lt; 0.5 {
         Box::new(Sheep {})
@@ -298,7 +293,7 @@ fn random_animal(random_number: f64) -&gt; Box&lt;dyn Animal&gt; {
 fn main() {
     let random_number = 0.234;
     let animal = random_animal(random_number);
-    println!("You've randomly chosen an animal, and it says {}", animal.noise());
+    println!("동물을 무작위로 선택했고, 그 동물은 {}라고 말합니다.", animal.noise());
 }
 </code></pre>
 

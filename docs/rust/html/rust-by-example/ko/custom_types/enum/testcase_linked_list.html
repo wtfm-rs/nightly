@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Testcase: linked-list - Rust By Example</title>
+        <title>테스트케이스: 연결 리스트 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,56 +255,55 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="testcase-linked-list"><a class="header" href="#testcase-linked-list">Testcase: linked-list</a></h1>
-<p>A common way to implement a linked-list is via <code>enums</code>:</p>
+                        <h1 id="테스트케이스-연결-리스트"><a class="header" href="#테스트케이스-연결-리스트">테스트케이스: 연결 리스트</a></h1>
+<p>연결 리스트를 구현하는 일반적인 방법은 <code>enums</code>를 사용하는 것입니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">use crate::List::*;
 
 enum List {
-    // Cons: Tuple struct that wraps an element and a pointer to the next node
+    // Cons: 요소와 다음 노드에 대한 포인터를 감싸는 튜플 구조체
     Cons(u32, Box&lt;List&gt;),
-    // Nil: A node that signifies the end of the linked list
+    // Nil: 연결 리스트의 끝을 나타내는 노드
     Nil,
 }
 
-// Methods can be attached to an enum
+// 열거형에 메서드를 붙일 수 있습니다
 impl List {
-    // Create an empty list
+    // 빈 리스트를 생성합니다
     fn new() -&gt; List {
-        // `Nil` has type `List`
+        // `Nil`은 `List` 타입을 가집니다
         Nil
     }
 
-    // Consume a list, and return the same list with a new element at its front
+    // 리스트를 소비하고, 그 앞에 새로운 요소가 추가된 동일한 리스트를 반환합니다
     fn prepend(self, elem: u32) -&gt; List {
-        // `Cons` also has type List
+        // `Cons` 역시 `List` 타입을 가집니다
         Cons(elem, Box::new(self))
     }
 
-    // Return the length of the list
+    // 리스트의 길이를 반환합니다
     fn len(&amp;self) -&gt; u32 {
-        // `self` has to be matched, because the behavior of this method
-        // depends on the variant of `self`
-        // `self` has type `&amp;List`, and `*self` has type `List`, matching on a
-        // concrete type `T` is preferred over a match on a reference `&amp;T`
-        // after Rust 2018 you can use self here and tail (with no ref) below as well,
-        // rust will infer &amp;s and ref tail.
-        // See https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/default-match-bindings.html
+        // 메서드의 동작이 `self`의 변체에 따라 달라지므로 `self`에 대해 매치(match)를 수행해야 합니다.
+        // `self`는 `&amp;List` 타입이고, `*self`는 `List` 타입입니다. 구체적인 타입 `T`에 대한 매칭이
+        // 참조 `&amp;T`에 대한 매칭보다 선호됩니다.
+        // Rust 2018 이후에는 여기서 self를 사용하고 아래에서 tail(ref 없이)을 사용할 수도 있습니다.
+        // Rust가 &amp;s와 ref tail을 추론할 것입니다.
+        // 참고: https://doc.rust-lang.org/edition-guide/rust-2018/ownership-and-lifetimes/default-match-bindings.html
         match *self {
-            // Can't take ownership of the tail, because `self` is borrowed;
-            // instead take a reference to the tail
-            // And it's a non-tail recursive call which may cause stack overflow for long lists.
+            // `self`가 빌려온 상태이므로 꼬리(tail)의 소유권을 가질 수 없습니다.
+            // 대신 꼬리에 대한 참조를 가져옵니다.
+            // 그리고 이것은 꼬리 재귀가 아닌 호출이므로 긴 리스트의 경우 스택 오버플로우가 발생할 수 있습니다.
             Cons(_, ref tail) =&gt; 1 + tail.len(),
-            // Base Case: An empty list has zero length
+            // 기저 사례(Base Case): 빈 리스트의 길이는 0입니다
             Nil =&gt; 0
         }
     }
 
-    // Return representation of the list as a (heap allocated) string
+    // 리스트를 (힙에 할당된) 문자열 표현으로 반환합니다
     fn stringify(&amp;self) -&gt; String {
         match *self {
             Cons(head, ref tail) =&gt; {
-                // `format!` is similar to `print!`, but returns a heap
-                // allocated string instead of printing to the console
+                // `format!`은 `print!`와 유사하지만, 콘솔에 출력하는 대신
+                // 힙에 할당된 문자열을 반환합니다
                 format!("{}, {}", head, tail.stringify())
             },
             Nil =&gt; {
@@ -312,20 +314,20 @@ impl List {
 }
 
 fn main() {
-    // Create an empty linked list
+    // 빈 연결 리스트를 생성합니다
     let mut list = List::new();
 
-    // Prepend some elements
+    // 몇 가지 요소를 앞에 추가합니다
     list = list.prepend(1);
     list = list.prepend(2);
     list = list.prepend(3);
 
-    // Show the final state of the list
-    println!("linked list has length: {}", list.len());
+    // 리스트의 최종 상태를 보여줍니다
+    println!("연결 리스트의 길이는 {}입니다", list.len());
     println!("{}", list.stringify());
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../std/box.html"><code>Box</code></a> and <a href="../../fn/methods.html">methods</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../std/box.html"><code>Box</code></a>와 <a href="../../fn/methods.html">메서드</a></p>
 
                     </main>
 

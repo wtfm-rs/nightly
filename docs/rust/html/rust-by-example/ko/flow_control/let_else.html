@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -254,22 +257,19 @@
                     <main>
                         <h1 id="let-else"><a class="header" href="#let-else">let-else</a></h1>
 <blockquote>
-<p>🛈 stable since: rust 1.65</p>
-<p>🛈 you can target specific edition by compiling like this
-<code>rustc --edition=2021 main.rs</code></p>
+<p>🛈 안정화 버전: rust 1.65</p>
+<p>🛈 다음과 같이 컴파일하여 특정 에디션을 타겟팅할 수 있습니다: <code>rustc --edition=2021 main.rs</code></p>
 </blockquote>
-<p>With <code>let</code>-<code>else</code>, a refutable pattern can match and bind variables
-in the surrounding scope like a normal <code>let</code>, or else diverge (e.g. <code>break</code>,
-<code>return</code>, <code>panic!</code>) when the pattern doesn’t match.</p>
+<p><code>let</code>-<code>else</code>를 사용하면, 일반적인 <code>let</code>처럼 주변 스코프에서 변수를 매칭하고 바인딩할 수 있으며, 패턴이 매칭되지 않을 경우 분기(예: <code>break</code>, <code>return</code>, <code>panic!</code>)할 수 있습니다.</p>
 <pre class="playground"><code class="language-rust edition2021">use std::str::FromStr;
 
 fn get_count_item(s: &amp;str) -&gt; (u64, &amp;str) {
     let mut it = s.split(' ');
     let (Some(count_str), Some(item)) = (it.next(), it.next()) else {
-        panic!("Can't segment count item pair: '{s}'");
+        panic!("카운트 아이템 쌍을 분리할 수 없습니다: '{s}'");
     };
     let Ok(count) = u64::from_str(count_str) else {
-        panic!("Can't parse integer: '{count_str}'");
+        panic!("정수를 파싱할 수 없습니다: '{count_str}'");
     };
     (count, item)
 }
@@ -277,9 +277,7 @@ fn get_count_item(s: &amp;str) -&gt; (u64, &amp;str) {
 fn main() {
     assert_eq!(get_count_item("3 chairs"), (3, "chairs"));
 }</code></pre>
-<p>The scope of name bindings is the main thing that makes this different from
-<code>match</code> or <code>if let</code>-<code>else</code> expressions. You could previously approximate these
-patterns with an unfortunate bit of repetition and an outer <code>let</code>:</p>
+<p>이름 바인딩의 스코프는 이것이 <code>match</code>나 <code>if let</code>-<code>else</code> 표현식과 다른 주요 점입니다. 이전에는 외부 <code>let</code>과 약간의 반복을 통해 이러한 패턴을 흉내 낼 수 있었습니다:</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span><span class="boring">use std::str::FromStr;
@@ -288,20 +286,20 @@ patterns with an unfortunate bit of repetition and an outer <code>let</code>:</p
 </span><span class="boring">    let mut it = s.split(' ');
 </span>    let (count_str, item) = match (it.next(), it.next()) {
         (Some(count_str), Some(item)) =&gt; (count_str, item),
-        _ =&gt; panic!("Can't segment count item pair: '{s}'"),
+        _ =&gt; panic!("카운트 아이템 쌍을 분리할 수 없습니다: '{s}'"),
     };
     let count = if let Ok(count) = u64::from_str(count_str) {
         count
     } else {
-        panic!("Can't parse integer: '{count_str}'");
+        panic!("정수를 파싱할 수 없습니다: '{count_str}'");
     };
 <span class="boring">    (count, item)
 </span><span class="boring">}
 </span><span class="boring">
 </span><span class="boring">assert_eq!(get_count_item("3 chairs"), (3, "chairs"));
 </span><span class="boring">}</span></code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../std/option.html">option</a>, <a href="./match.html">match</a>, <a href="./if_let.html">if let</a> and the <a href="https://rust-lang.github.io/rfcs/3137-let-else.html">let-else RFC</a>.</p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../std/option.html">option</a>, <a href="./match.html">match</a>, <a href="./if_let.html">if let</a> 그리고 <a href="https://rust-lang.github.io/rfcs/3137-let-else.html">let-else RFC</a>.</p>
 
                     </main>
 

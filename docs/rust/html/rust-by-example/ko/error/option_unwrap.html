@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Option &amp; unwrap - Rust By Example</title>
+        <title>Option과 unwrap - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,57 +255,47 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="option--unwrap"><a class="header" href="#option--unwrap"><code>Option</code> &amp; <code>unwrap</code></a></h1>
-<p>In the last example, we showed that we can induce program failure at will.
-We told our program to <code>panic</code> if we drink a sugary lemonade.
-But what if we expect <em>some</em> drink but don’t receive one?
-That case would be just as bad, so it needs to be handled!</p>
-<p>We <em>could</em> test this against the null string (<code>""</code>) as we do with a lemonade.
-Since we’re using Rust, let’s instead have the compiler point out cases
-where there’s no drink.</p>
-<p>An <code>enum</code> called <code>Option&lt;T&gt;</code> in the <code>std</code> library is used when absence is a
-possibility. It manifests itself as one of two “options”:</p>
+                        <h1 id="option과-unwrap"><a class="header" href="#option과-unwrap"><code>Option</code>과 <code>unwrap</code></a></h1>
+<p>지난 예제에서, 우리는 프로그램을 의도적으로 실패하게 만들 수 있음을 보여주었습니다. 설탕이 든 레모네이드를 마시면 <code>panic</code>하도록 프로그램에 지시했습니다. 하지만 음료가 있을 것으로 예상했는데 아무것도 받지 못하면 어떨까요? 그 경우도 마찬가지로 나쁠 것이므로, 처리가 필요합니다!</p>
+<p>레모네이드의 경우처럼 빈 문자열(<code>""</code>)인지 테스트할 수도 있습니다. 하지만 우리는 Rust를 사용하고 있으니, 대신 컴파일러가 음료가 없는 경우를 지적하도록 해봅시다.</p>
+<p>표준 라이브러리의 <code>Option&lt;T&gt;</code>라는 열거형은 부재의 가능성이 있을 때 사용됩니다. 이는 두 가지 “옵션” 중 하나로 나타납니다:</p>
 <ul>
-<li><code>Some(T)</code>: An element of type <code>T</code> was found</li>
-<li><code>None</code>: No element was found</li>
+<li><code>Some(T)</code>: <code>T</code> 타입의 요소가 발견됨</li>
+<li><code>None</code>: 요소가 발견되지 않음</li>
 </ul>
-<p>These cases can either be explicitly handled via <code>match</code> or implicitly with
-<code>unwrap</code>. Implicit handling will either return the inner element or <code>panic</code>.</p>
-<p>Note that it’s possible to manually customize <code>panic</code> with <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.expect">expect</a>,
-but <code>unwrap</code> otherwise leaves us with a less meaningful output than explicit
-handling. In the following example, explicit handling yields a more
-controlled result while retaining the option to <code>panic</code> if desired.</p>
-<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// The adult has seen it all, and can handle any drink well.
-// All drinks are handled explicitly using `match`.
+<p>이러한 경우들은 <code>match</code>를 통해 명시적으로 처리하거나 <code>unwrap</code>을 통해 암시적으로 처리할 수 있습니다. 암시적 처리는 내부 요소를 반환하거나 <code>panic</code>을 일으킵니다.</p>
+<p><a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.expect">expect</a>를 사용하여 <code>panic</code>을 수동으로 커스터마이징할 수 있지만, 그렇지 않으면 <code>unwrap</code>은 명시적 처리보다 덜 의미 있는 출력을 남깁니다. 다음 예제에서, 명시적 처리는 원하는 경우 <code>panic</code>할 수 있는 옵션을 유지하면서도 더 제어된 결과를 제공합니다.</p>
+<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// 어른은 모든 것을 보았고, 어떤 음료든 잘 다룰 수 있습니다.
+// 모든 음료는 `match`를 사용하여 명시적으로 처리됩니다.
 fn give_adult(drink: Option&lt;&amp;str&gt;) {
-    // Specify a course of action for each case.
+    // 각 경우에 대한 행동 지침을 지정합니다.
     match drink {
-        Some("lemonade") =&gt; println!("Yuck! Too sugary."),
-        Some(inner)   =&gt; println!("{}? How nice.", inner),
-        None          =&gt; println!("No drink? Oh well."),
+        Some("레모네이드") =&gt; println!("윽! 너무 달아요."),
+        Some(inner)   =&gt; println!("{}요? 좋네요.", inner),
+        None          =&gt; println!("음료가 없나요? 뭐, 어쩔 수 없죠."),
     }
 }
 
-// Others will `panic` before drinking sugary drinks.
-// All drinks are handled implicitly using `unwrap`.
+// 다른 사람들은 단 음료를 마시기 전에 `panic`할 것입니다.
+// 모든 음료는 `unwrap`을 사용하여 암시적으로 처리됩니다.
 fn drink(drink: Option&lt;&amp;str&gt;) {
-    // `unwrap` returns a `panic` when it receives a `None`.
+    // `unwrap`은 `None`을 받으면 `panic`을 반환합니다.
     let inside = drink.unwrap();
-    if inside == "lemonade" { panic!("AAAaaaaa!!!!"); }
+    if inside == "레모네이드" { panic!("으아아아아!!!!"); }
 
-    println!("I love {}s!!!!!", inside);
+    println!("난 {}가 너무 좋아요!!!!!", inside);
 }
 
 fn main() {
-    let water  = Some("water");
-    let lemonade = Some("lemonade");
+    let water  = Some("물");
+    let lemonade = Some("레모네이드");
     let void  = None;
 
     give_adult(water);
     give_adult(lemonade);
     give_adult(void);
 
-    let coffee = Some("coffee");
+    let coffee = Some("커피");
     let nothing = None;
 
     drink(coffee);

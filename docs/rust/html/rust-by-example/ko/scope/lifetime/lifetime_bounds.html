@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Bounds - Rust By Example</title>
+        <title>바운드 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,37 +255,32 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="bounds"><a class="header" href="#bounds">Bounds</a></h1>
-<p>Just like generic types can be bounded, lifetimes (themselves generic)
-use bounds as well. The <code>:</code> character has a slightly different meaning here,
-but <code>+</code> is the same. Note how the following read:</p>
+                        <h1 id="바운드"><a class="header" href="#바운드">바운드</a></h1>
+<p>제네릭 타입이 바운드될 수 있는 것처럼, (그 자체로 제네릭인) 라이프타임도 바운드를 사용합니다. 여기서 <code>:</code> 문자는 약간 다른 의미를 갖지만, <code>+</code>는 동일합니다. 다음이 어떻게 읽히는지 주목하세요:</p>
 <ol>
-<li><code>T: 'a</code>: <em>All</em> references in <code>T</code> must outlive lifetime <code>'a</code>.</li>
-<li><code>T: Trait + 'a</code>: Type <code>T</code> must implement trait <code>Trait</code> and <em>all</em> references
-in <code>T</code> must outlive <code>'a</code>.</li>
+<li><code>T: 'a</code>: <code>T</code> 내의 <em>모든</em> 참조는 라이프타임 <code>'a</code>보다 오래 살아야 합니다.</li>
+<li><code>T: Trait + 'a</code>: 타입 <code>T</code>는 트레이트 <code>Trait</code>를 구현해야 하며, <code>T</code> 내의 <em>모든</em> 참조는 <code>'a</code>보다 오래 살아야 합니다.</li>
 </ol>
-<p>The example below shows the above syntax in action used after keyword <code>where</code>:</p>
-<pre class="playground"><code class="language-rust editable edition2021">use std::fmt::Debug; // Trait to bound with.
+<p>아래 예제는 <code>where</code> 키워드 뒤에 사용된 위 구문의 실제 사용 예를 보여줍니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">use std::fmt::Debug; // 바운드할 트레이트.
 
 #[derive(Debug)]
 struct Ref&lt;'a, T: 'a&gt;(&amp;'a T);
-// `Ref` contains a reference to a generic type `T` that has
-// some lifetime `'a` unknown by `Ref`. `T` is bounded such that any
-// *references* in `T` must outlive `'a`. Additionally, the lifetime
-// of `Ref` may not exceed `'a`.
+// `Ref`는 `Ref`가 알 수 없는 어떤 라이프타임 `'a`를 가진 제네릭 타입 `T`에 대한
+// 참조를 포함합니다. `T`는 `T` 내부의 모든 *참조*가 `'a`보다 오래 살아야 한다는
+// 바운드를 가집니다. 추가적으로, `Ref`의 라이프타임은 `'a`를 초과할 수 없습니다.
 
-// A generic function which prints using the `Debug` trait.
+// `Debug` 트레이트를 사용하여 출력하는 제네릭 함수.
 fn print&lt;T&gt;(t: T) where
     T: Debug {
-    println!("`print`: t is {:?}", t);
+    println!("`print`: t는 {:?}입니다", t);
 }
 
-// Here a reference to `T` is taken where `T` implements
-// `Debug` and all *references* in `T` outlive `'a`. In
-// addition, `'a` must outlive the function.
+// 여기서 `T`는 `Debug`를 구현하고 `T`의 모든 *참조*가 `'a`보다 오래 사는
+// `T`에 대한 참조를 받습니다. 또한, `'a`는 함수보다 오래 살아야 합니다.
 fn print_ref&lt;'a, T&gt;(t: &amp;'a T) where
     T: Debug + 'a {
-    println!("`print_ref`: t is {:?}", t);
+    println!("`print_ref`: t는 {:?}입니다", t);
 }
 
 fn main() {
@@ -292,9 +290,8 @@ fn main() {
     print_ref(&amp;ref_x);
     print(ref_x);
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../generics.html">generics</a>, <a href="../../generics/bounds.html">bounds in generics</a>, and
-<a href="../../generics/multi_bounds.html">multiple bounds in generics</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../generics.html">제네릭</a>, <a href="../../generics/bounds.html">제네릭의 바운드</a>, 그리고 <a href="../../generics/multi_bounds.html">제네릭의 다중 바운드</a></p>
 
                     </main>
 

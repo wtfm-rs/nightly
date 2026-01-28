@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Vectors - Rust By Example</title>
+        <title>벡터 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,70 +255,64 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="vectors"><a class="header" href="#vectors">Vectors</a></h1>
-<p>Vectors are re-sizable arrays. Like slices, their size is not known at compile
-time, but they can grow or shrink at any time. A vector is represented using
-3 parameters:</p>
+                        <h1 id="벡터"><a class="header" href="#벡터">벡터</a></h1>
+<p>벡터는 크기 조절이 가능한 배열입니다. 슬라이스와 마찬가지로 크기를 컴파일 타임에 알 수 없지만, 언제든지 늘리거나 줄일 수 있습니다. 벡터는 3개의 파라미터로 표현됩니다:</p>
 <ul>
-<li>pointer to the data</li>
-<li>length</li>
-<li>capacity</li>
+<li>데이터에 대한 포인터</li>
+<li>길이</li>
+<li>용량</li>
 </ul>
-<p>The capacity indicates how much memory is reserved for the vector. The vector
-can grow as long as the length is smaller than the capacity. When this threshold
-needs to be surpassed, the vector is reallocated with a larger capacity.</p>
+<p>용량은 벡터를 위해 예약된 메모리 양을 나타냅니다. 벡터는 길이가 용량보다 작은 동안에는 계속 늘어날 수 있습니다. 이 임계값을 넘어야 할 때, 벡터는 더 큰 용량으로 재할당됩니다.</p>
 <pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">fn main() {
-    // Iterators can be collected into vectors
+    // 이터레이터는 벡터로 수집(collect)될 수 있습니다
     let collected_iterator: Vec&lt;i32&gt; = (0..10).collect();
-    println!("Collected (0..10) into: {:?}", collected_iterator);
+    println!("(0..10)을 다음으로 수집함: {:?}", collected_iterator);
 
-    // The `vec!` macro can be used to initialize a vector
+    // `vec!` 매크로는 벡터를 초기화하는 데 사용될 수 있습니다
     let mut xs = vec![1i32, 2, 3];
-    println!("Initial vector: {:?}", xs);
+    println!("초기 벡터: {:?}", xs);
 
-    // Insert new element at the end of the vector
-    println!("Push 4 into the vector");
+    // 벡터 끝에 새로운 요소를 삽입합니다
+    println!("벡터에 4를 푸시합니다");
     xs.push(4);
-    println!("Vector: {:?}", xs);
+    println!("벡터: {:?}", xs);
 
-    // Error! Immutable vectors can't grow
+    // 에러! 불변 벡터는 늘어날 수 없습니다
     collected_iterator.push(0);
-    // FIXME ^ Comment out this line
+    // FIXME ^ 이 줄을 주석 처리하세요
 
-    // The `len` method yields the number of elements currently stored in a vector
-    println!("Vector length: {}", xs.len());
+    // `len` 메서드는 현재 벡터에 저장된 요소의 개수를 반환합니다
+    println!("벡터 길이: {}", xs.len());
 
-    // Indexing is done using the square brackets (indexing starts at 0)
-    println!("Second element: {}", xs[1]);
+    // 인덱싱은 대괄호를 사용하여 수행됩니다 (인덱싱은 0부터 시작합니다)
+    println!("두 번째 요소: {}", xs[1]);
 
-    // `pop` removes the last element from the vector and returns it
-    println!("Pop last element: {:?}", xs.pop());
+    // `pop`은 벡터에서 마지막 요소를 제거하고 이를 반환합니다
+    println!("마지막 요소 팝: {:?}", xs.pop());
 
-    // Out of bounds indexing yields a panic
-    println!("Fourth element: {}", xs[3]);
-    // FIXME ^ Comment out this line
+    // 범위를 벗어난 인덱싱은 패닉을 일으킵니다
+    println!("네 번째 요소: {}", xs[3]);
+    // FIXME ^ 이 줄을 주석 처리하세요
 
-    // `Vector`s can be easily iterated over
-    println!("Contents of xs:");
+    // 벡터는 쉽게 순회(iterate)될 수 있습니다
+    println!("xs의 내용:");
     for x in xs.iter() {
         println!("&gt; {}", x);
     }
 
-    // A `Vector` can also be iterated over while the iteration
-    // count is enumerated in a separate variable (`i`)
+    // 벡터는 반복 횟수가 별도의 변수(`i`)에 열거되면서 순회될 수도 있습니다
     for (i, x) in xs.iter().enumerate() {
-        println!("In position {} we have value {}", i, x);
+        println!("{} 위치에 {} 값이 있습니다", i, x);
     }
 
-    // Thanks to `iter_mut`, mutable `Vector`s can also be iterated
-    // over in a way that allows modifying each value
+    // `iter_mut` 덕분에 가변 벡터도 각 값을 수정할 수 있는 방식으로
+    // 순회될 수 있습니다
     for x in xs.iter_mut() {
         *x *= 3;
     }
-    println!("Updated vector: {:?}", xs);
+    println!("업데이트된 벡터: {:?}", xs);
 }</code></pre>
-<p>More <code>Vec</code> methods can be found under the
-<a href="https://doc.rust-lang.org/std/vec/">std::vec</a> module</p>
+<p>더 많은 <code>Vec</code> 메서드는 <a href="https://doc.rust-lang.org/std/vec/">std::vec</a> 모듈에서 찾을 수 있습니다</p>
 
                     </main>
 

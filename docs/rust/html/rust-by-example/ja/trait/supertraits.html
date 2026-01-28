@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,7 +110,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-16ffbbfa.js";
+            window.path_to_searchindex_js = "../searchindex-8c1736ca.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5df99dd2.js"></script>
@@ -284,7 +287,48 @@ fn comp_sci_student_greeting(student: &amp;dyn CompSciStudent) -&gt; String {
     )
 }
 
-fn main() {}</code></pre>
+struct CSStudent {
+    name: String,
+    university: String,
+    fav_language: String,
+    git_username: String
+}
+
+impl Programmer for CSStudent {
+    fn fav_language(&amp;self) -&gt; String {
+        self.fav_language.clone()
+    }
+}
+
+impl Student for CSStudent {
+    fn university(&amp;self) -&gt; String {
+        self.university.clone()
+    }
+}
+
+impl Person for CSStudent {
+    fn name(&amp;self) -&gt; String {
+        self.name.clone()
+    }
+}
+
+impl CompSciStudent for CSStudent {
+    fn git_username(&amp;self) -&gt; String {
+        self.git_username.clone()
+    }
+}
+
+fn main() {
+    let student = CSStudent {
+        name: String::from("Alice"),
+        university: String::from("MIT"),
+        fav_language: String::from("Rust"),
+        git_username: String::from("alice_codes"),
+    };
+
+    let greeting = comp_sci_student_greeting(&amp;student);
+    println!("{}", greeting);
+}</code></pre>
 <h3 id="参照"><a class="header" href="#参照">参照</a></h3>
 <p><a href="https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-supertraits-to-require-one-traits-functionality-within-another-trait">The Rust Programming Language chapter on supertraits</a></p>
 

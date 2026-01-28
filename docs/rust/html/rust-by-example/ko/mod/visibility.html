@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Visibility - Rust By Example</title>
+        <title>가시성 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,129 +255,127 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="visibility"><a class="header" href="#visibility">Visibility</a></h1>
-<p>By default, the items in a module have private visibility, but this can be
-overridden with the <code>pub</code> modifier. Only the public items of a module can be
-accessed from outside the module scope.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// A module named `my_mod`
+                        <h1 id="가시성"><a class="header" href="#가시성">가시성</a></h1>
+<p>기본적으로 모듈 내의 아이템들은 비공개(private) 가시성을 가지지만, <code>pub</code> 수식어를 사용하여 이를 재정의할 수 있습니다. 모듈 스코프 외부에서는 모듈의 공개(public) 아이템만 접근할 수 있습니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// `my_mod`라는 이름의 모듈
 mod my_mod {
-    // Items in modules default to private visibility.
+    // 모듈 내의 아이템들은 기본적으로 비공개 가시성을 가집니다.
     fn private_function() {
-        println!("called `my_mod::private_function()`");
+        println!("`my_mod::private_function()` 호출됨");
     }
 
-    // Use the `pub` modifier to override default visibility.
+    // 기본 가시성을 재정의하려면 `pub` 수식어를 사용하세요.
     pub fn function() {
-        println!("called `my_mod::function()`");
+        println!("`my_mod::function()` 호출됨");
     }
 
-    // Items can access other items in the same module,
-    // even when private.
+    // 아이템들은 같은 모듈 내의 다른 아이템들에 접근할 수 있으며,
+// 이는 비공개 아이템이라도 마찬가지입니다.
     pub fn indirect_access() {
-        print!("called `my_mod::indirect_access()`, that\n&gt; ");
+        print!("`my_mod::indirect_access()` 호출됨, 결과는\n&gt; ");
         private_function();
     }
 
-    // Modules can also be nested
+    // 모듈은 중첩될 수도 있습니다
     pub mod nested {
         pub fn function() {
-            println!("called `my_mod::nested::function()`");
+            println!("`my_mod::nested::function()` 호출됨");
         }
 
         #[allow(dead_code)]
         fn private_function() {
-            println!("called `my_mod::nested::private_function()`");
+            println!("`my_mod::nested::private_function()` 호출됨");
         }
 
-        // Functions declared using `pub(in path)` syntax are only visible
-        // within the given path. `path` must be a parent or ancestor module
+        // `pub(in path)` 구문을 사용하여 선언된 함수들은 오직 지정된
+// 경로 내에서만 보입니다. `path`는 반드시 부모 또는 조상 모듈이어야 합니다.
         pub(in crate::my_mod) fn public_function_in_my_mod() {
-            print!("called `my_mod::nested::public_function_in_my_mod()`, that\n&gt; ");
+            print!("`my_mod::nested::public_function_in_my_mod()` 호출됨, 결과는\n&gt; ");
             public_function_in_nested();
         }
 
-        // Functions declared using `pub(self)` syntax are only visible within
-        // the current module, which is the same as leaving them private
+        // `pub(self)` 구문을 사용하여 선언된 함수들은 오직 현재 모듈
+// 내에서만 보이며, 이는 비공개로 두는 것과 동일합니다.
         pub(self) fn public_function_in_nested() {
-            println!("called `my_mod::nested::public_function_in_nested()`");
+            println!("`my_mod::nested::public_function_in_nested()` 호출됨");
         }
 
-        // Functions declared using `pub(super)` syntax are only visible within
-        // the parent module
+        // `pub(super)` 구문을 사용하여 선언된 함수들은 오직 부모 모듈
+// 내에서만 보입니다.
         pub(super) fn public_function_in_super_mod() {
-            println!("called `my_mod::nested::public_function_in_super_mod()`");
+            println!("`my_mod::nested::public_function_in_super_mod()` 호출됨");
         }
     }
 
     pub fn call_public_function_in_my_mod() {
-        print!("called `my_mod::call_public_function_in_my_mod()`, that\n&gt; ");
+        print!("`my_mod::call_public_function_in_my_mod()` 호출됨, 결과는\n&gt; ");
         nested::public_function_in_my_mod();
         print!("&gt; ");
         nested::public_function_in_super_mod();
     }
 
-    // pub(crate) makes functions visible only within the current crate
+    // pub(crate)는 함수를 오직 현재 크레이트 내에서만 보이게 만듭니다
     pub(crate) fn public_function_in_crate() {
-        println!("called `my_mod::public_function_in_crate()`");
+        println!("`my_mod::public_function_in_crate()` 호출됨");
     }
 
-    // Nested modules follow the same rules for visibility
+    // 중첩된 모듈도 동일한 가시성 규칙을 따릅니다
     mod private_nested {
         #[allow(dead_code)]
         pub fn function() {
-            println!("called `my_mod::private_nested::function()`");
+            println!("`my_mod::private_nested::function()` 호출됨");
         }
 
-        // Private parent items will still restrict the visibility of a child item,
-        // even if it is declared as visible within a bigger scope.
+        // 비공개 부모 아이템은 자식 아이템이 더 큰 스코프 내에서 보이도록
+// 선언되어 있더라도 여전히 그 가시성을 제한합니다.
         #[allow(dead_code)]
         pub(crate) fn restricted_function() {
-            println!("called `my_mod::private_nested::restricted_function()`");
+            println!("`my_mod::private_nested::restricted_function()` 호출됨");
         }
     }
 }
 
 fn function() {
-    println!("called `function()`");
+    println!("`function()` 호출됨");
 }
 
 fn main() {
-    // Modules allow disambiguation between items that have the same name.
+    // 모듈은 이름이 같은 아이템들 간의 모호함을 해소할 수 있게 해줍니다.
     function();
     my_mod::function();
 
-    // Public items, including those inside nested modules, can be
-    // accessed from outside the parent module.
+    // 중첩된 모듈 내부에 있는 아이템을 포함한 공개 아이템들은
+// 부모 모듈 외부에서 접근할 수 있습니다.
     my_mod::indirect_access();
     my_mod::nested::function();
     my_mod::call_public_function_in_my_mod();
 
-    // pub(crate) items can be called from anywhere in the same crate
+    // pub(crate) 아이템은 같은 크레이트 내 어디에서나 호출될 수 있습니다
     my_mod::public_function_in_crate();
 
-    // pub(in path) items can only be called from within the module specified
-    // Error! function `public_function_in_my_mod` is private
-    //my_mod::nested::public_function_in_my_mod();
-    // TODO ^ Try uncommenting this line
+    // `pub(in path)` 아이템은 오직 지정된 모듈 내에서만 호출될 수 있습니다
+// 에러! `public_function_in_my_mod` 함수는 비공개입니다
+// my_mod::nested::public_function_in_my_mod();
+// TODO ^ 이 줄의 주석을 해제해 보세요
 
-    // Private items of a module cannot be directly accessed, even if
-    // nested in a public module:
+    // 모듈의 비공개 아이템은 공개 모듈에 중첩되어 있더라도
+// 직접 접근할 수 없습니다:
 
-    // Error! `private_function` is private
-    //my_mod::private_function();
-    // TODO ^ Try uncommenting this line
+    // 에러! `private_function`은 비공개입니다
+// my_mod::private_function();
+// TODO ^ 이 줄의 주석을 해제해 보세요
 
-    // Error! `private_function` is private
-    //my_mod::nested::private_function();
-    // TODO ^ Try uncommenting this line
+    // 에러! `private_function`은 비공개입니다
+// my_mod::nested::private_function();
+// TODO ^ 이 줄의 주석을 해제해 보세요
 
-    // Error! `private_nested` is a private module
-    //my_mod::private_nested::function();
-    // TODO ^ Try uncommenting this line
+    // 에러! `private_nested`는 비공개 모듈입니다
+// my_mod::private_nested::function();
+// TODO ^ 이 줄의 주석을 해제해 보세요
 
-    // Error! `private_nested` is a private module
-    //my_mod::private_nested::restricted_function();
-    // TODO ^ Try uncommenting this line
+    // 에러! `private_nested`는 비공개 모듈입니다
+// my_mod::private_nested::restricted_function();
+// TODO ^ 이 줄의 주석을 해제해 보세요
 }</code></pre>
 
                     </main>

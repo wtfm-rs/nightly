@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,39 +256,37 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="cfg"><a class="header" href="#cfg"><code>cfg</code></a></h1>
-<p>Configuration conditional checks are possible through two different operators:</p>
+<p>설정 조건 검사는 두 가지 다른 연산자를 통해 가능합니다:</p>
 <ul>
-<li>the <code>cfg</code> attribute: <code>#[cfg(...)]</code> in attribute position</li>
-<li>the <code>cfg!</code> macro: <code>cfg!(...)</code> in boolean expressions</li>
+<li><code>cfg</code> 속성: 속성 위치에서의 <code>#[cfg(...)]</code></li>
+<li><code>cfg!</code> 매크로: 불리언 표현식에서의 <code>cfg!(...)</code></li>
 </ul>
-<p>While the former enables conditional compilation, the latter conditionally
-evaluates to <code>true</code> or <code>false</code> literals allowing for checks at run-time. Both
-utilize identical argument syntax.</p>
-<p><code>cfg!</code>, unlike <code>#[cfg]</code>, does not remove any code and only evaluates to true or false. For example, all blocks in an if/else expression need to be valid when <code>cfg!</code> is used for the condition, regardless of what <code>cfg!</code> is evaluating.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// This function only gets compiled if the target OS is linux
+<p>전자는 조건부 컴파일을 가능하게 하는 반면, 후자는 조건부로 <code>true</code> 또는 <code>false</code> 리터럴로 평가되어 런타임에 검사를 가능하게 합니다. 둘 다 동일한 인자 문법을 사용합니다.</p>
+<p><code>cfg!</code>는 <code>#[cfg]</code>와 달리 코드를 제거하지 않으며 오직 참 또는 거짓으로만 평가됩니다. 예를 들어 <code>cfg!</code>가 조건으로 사용될 때, <code>cfg!</code>가 무엇으로 평가되든 상관없이 if/else 표현식의 모든 블록은 유효해야 합니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 이 함수는 대상 OS가 리눅스인 경우에만 컴파일됩니다
 #[cfg(target_os = "linux")]
 fn are_you_on_linux() {
-    println!("You are running linux!");
+    println!("당신은 리눅스를 사용하고 있습니다!");
 }
 
-// And this function only gets compiled if the target OS is *not* linux
+// 그리고 이 함수는 타겟 OS가 리눅스가 *아닌* 경우에만 컴파일됩니다.
 #[cfg(not(target_os = "linux"))]
 fn are_you_on_linux() {
-    println!("You are *not* running linux!");
+    println!("당신은 리눅스를 사용하고 있지 *않습니다*!");
 }
 
 fn main() {
     are_you_on_linux();
 
-    println!("Are you sure?");
+    println!("확실한가요?");
     if cfg!(target_os = "linux") {
-        println!("Yes. It's definitely linux!");
+        println!("네. 확실히 리눅스입니다!");
     } else {
-        println!("Yes. It's definitely *not* linux!");
+        println!("네. 확실히 리눅스가 *아닙니다*!");
     }
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/reference/attributes.html#conditional-compilation">the reference</a>, <a href="https://doc.rust-lang.org/std/macro.cfg!.html"><code>cfg!</code></a>, and <a href="../macros.html">macros</a>.</p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/reference/attributes.html#conditional-compilation">참조</a>, <a href="https://doc.rust-lang.org/std/macro.cfg!.html"><code>cfg!</code></a>, 그리고 <a href="../macros.html">매크로</a>.</p>
 
                     </main>
 

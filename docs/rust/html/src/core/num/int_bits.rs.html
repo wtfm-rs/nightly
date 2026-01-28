@@ -1,12 +1,12 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `library/core/src/num/int_bits.rs`."><title>int_bits.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-0bd2dfd4.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="core" data-themes="" data-resource-suffix="1.95.0" data-rustdoc-version="1.95.0-nightly (873d4682c 2026-01-25)" data-channel="nightly" data-search-js="search-86d08462.js" data-stringdex-js="stringdex-b897f86f.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-f9617a14.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files1.95.0.js"></script><script defer src="../../../static.files/main-12f88f4f.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-ffcac47a.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc src"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><h1><div class="sub-heading">core/num/</div>int_bits.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="doccomment">//! Implementations for `uN::gather_bits` and `uN::scatter_bits`
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `library/core/src/num/int_bits.rs`."><title>int_bits.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../static.files/rustdoc-0bd2dfd4.css"><meta name="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="core" data-themes="" data-resource-suffix="1.95.0" data-rustdoc-version="1.95.0-nightly (e96bb7e44 2026-01-27)" data-channel="nightly" data-search-js="search-86d08462.js" data-stringdex-js="stringdex-b897f86f.js" data-settings-js="settings-170eb4bf.js" ><script src="../../../static.files/storage-f9617a14.js"></script><script defer src="../../../static.files/src-script-813739b1.js"></script><script defer src="../../../src-files1.95.0.js"></script><script defer src="../../../static.files/main-12f88f4f.js"></script><noscript><link rel="stylesheet" href="../../../static.files/noscript-ffcac47a.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-044be391.svg"></head><body class="rustdoc src"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><h1><div class="sub-heading">core/num/</div>int_bits.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="doccomment">//! Implementations for `uN::extract_bits` and `uN::deposit_bits`
 <a href=#2 id=2 data-nosnippet>2</a>//!
 <a href=#3 id=3 data-nosnippet>3</a>//! For the purposes of this implementation, the operations can be thought
 <a href=#4 id=4 data-nosnippet>4</a>//! of as operating on the input bits as a list, starting from the least
-<a href=#5 id=5 data-nosnippet>5</a>//! significant bit. Gathering is like `Vec::retain` that deletes bits
-<a href=#6 id=6 data-nosnippet>6</a>//! where the mask has a zero. Scattering is like doing the inverse by
-<a href=#7 id=7 data-nosnippet>7</a>//! inserting the zeros that gathering would delete.
+<a href=#5 id=5 data-nosnippet>5</a>//! significant bit. Extraction is like `Vec::retain` that deletes bits
+<a href=#6 id=6 data-nosnippet>6</a>//! where the mask has a zero. Deposition is like doing the inverse by
+<a href=#7 id=7 data-nosnippet>7</a>//! inserting the zeros that extraction would delete.
 <a href=#8 id=8 data-nosnippet>8</a>//!
-<a href=#9 id=9 data-nosnippet>9</a>//! Key observation: Each bit that is gathered/scattered needs to be
+<a href=#9 id=9 data-nosnippet>9</a>//! Key observation: Each extracted or deposited bit needs to be
 <a href=#10 id=10 data-nosnippet>10</a>//! shifted by the count of zeros up to the corresponding mask bit.
 <a href=#11 id=11 data-nosnippet>11</a>//!
 <a href=#12 id=12 data-nosnippet>12</a>//! With that in mind, the general idea is to decompose the operation into
@@ -14,7 +14,7 @@
 <a href=#14 id=14 data-nosnippet>14</a>//! of the bits by `n = 1 &lt;&lt; stage`. The masks for each stage are computed
 <a href=#15 id=15 data-nosnippet>15</a>//! via prefix counts of zeros in the mask.
 <a href=#16 id=16 data-nosnippet>16</a>//!
-<a href=#17 id=17 data-nosnippet>17</a>//! # Gathering
+<a href=#17 id=17 data-nosnippet>17</a>//! # Extraction
 <a href=#18 id=18 data-nosnippet>18</a>//!
 <a href=#19 id=19 data-nosnippet>19</a>//! Consider the input as a sequence of runs of data (bitstrings A,B,C,...),
 <a href=#20 id=20 data-nosnippet>20</a>//! split by fixed-width groups of zeros ('.'), initially at width `n = 1`.
@@ -36,9 +36,9 @@
 <a href=#36 id=36 data-nosnippet>36</a>//! ........abbbcccccddeghh
 <a href=#37 id=37 data-nosnippet>37</a>//! ```
 <a href=#38 id=38 data-nosnippet>38</a>//!
-<a href=#39 id=39 data-nosnippet>39</a>//! # Scattering
+<a href=#39 id=39 data-nosnippet>39</a>//! # Deposition
 <a href=#40 id=40 data-nosnippet>40</a>//!
-<a href=#41 id=41 data-nosnippet>41</a>//! For `scatter_bits`, the stages are reversed. We start with a single run of
+<a href=#41 id=41 data-nosnippet>41</a>//! For `deposit_bits`, the stages are reversed. We start with a single run of
 <a href=#42 id=42 data-nosnippet>42</a>//! data in the low bits. Each stage then splits each run of data in two by
 <a href=#43 id=43 data-nosnippet>43</a>//! shifting part of it left by `n`, which is halved each stage.
 <a href=#44 id=44 data-nosnippet>44</a>//! ```text
@@ -100,7 +100,7 @@
 <a href=#100 id=100 data-nosnippet>100</a>            }
 <a href=#101 id=101 data-nosnippet>101</a>
 <a href=#102 id=102 data-nosnippet>102</a>            <span class="attr">#[inline(always)]
-<a href=#103 id=103 data-nosnippet>103</a>            </span><span class="kw">pub</span>(<span class="kw">in </span><span class="kw">super</span>::<span class="kw">super</span>) <span class="kw">const fn </span>gather_impl(<span class="kw-2">mut </span>x: <span class="macro-nonterminal">$U</span>, sparse: <span class="macro-nonterminal">$U</span>) -&gt; <span class="macro-nonterminal">$U </span>{
+<a href=#103 id=103 data-nosnippet>103</a>            </span><span class="kw">pub</span>(<span class="kw">in </span><span class="kw">super</span>::<span class="kw">super</span>) <span class="kw">const fn </span>extract_impl(<span class="kw-2">mut </span>x: <span class="macro-nonterminal">$U</span>, sparse: <span class="macro-nonterminal">$U</span>) -&gt; <span class="macro-nonterminal">$U </span>{
 <a href=#104 id=104 data-nosnippet>104</a>                <span class="kw">let </span>masks = prepare(sparse);
 <a href=#105 id=105 data-nosnippet>105</a>                x &amp;= sparse;
 <a href=#106 id=106 data-nosnippet>106</a>                <span class="kw">let </span><span class="kw-2">mut </span>stage = <span class="number">0</span>;
@@ -131,7 +131,7 @@
 <a href=#131 id=131 data-nosnippet>131</a>                x
 <a href=#132 id=132 data-nosnippet>132</a>            }
 <a href=#133 id=133 data-nosnippet>133</a>            <span class="attr">#[inline(always)]
-<a href=#134 id=134 data-nosnippet>134</a>            </span><span class="kw">pub</span>(<span class="kw">in </span><span class="kw">super</span>::<span class="kw">super</span>) <span class="kw">const fn </span>scatter_impl(<span class="kw-2">mut </span>x: <span class="macro-nonterminal">$U</span>, sparse: <span class="macro-nonterminal">$U</span>) -&gt; <span class="macro-nonterminal">$U </span>{
+<a href=#134 id=134 data-nosnippet>134</a>            </span><span class="kw">pub</span>(<span class="kw">in </span><span class="kw">super</span>::<span class="kw">super</span>) <span class="kw">const fn </span>deposit_impl(<span class="kw-2">mut </span>x: <span class="macro-nonterminal">$U</span>, sparse: <span class="macro-nonterminal">$U</span>) -&gt; <span class="macro-nonterminal">$U </span>{
 <a href=#135 id=135 data-nosnippet>135</a>                <span class="kw">let </span>masks = prepare(sparse);
 <a href=#136 id=136 data-nosnippet>136</a>                <span class="kw">let </span><span class="kw-2">mut </span>stage = STAGES;
 <a href=#137 id=137 data-nosnippet>137</a>                <span class="kw">while </span>stage &gt; <span class="number">0 </span>{

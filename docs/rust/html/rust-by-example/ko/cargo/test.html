@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Tests - Rust By Example</title>
+        <title>테스트 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,13 +255,9 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="testing"><a class="header" href="#testing">Testing</a></h1>
-<p>As we know testing is integral to any piece of software! Rust has first-class
-support for unit and integration testing (<a href="https://doc.rust-lang.org/book/ch11-00-testing.html">see this
-chapter</a> in TRPL).</p>
-<p>From the testing chapters linked above, we see how to write unit tests and
-integration tests. Organizationally, we can place unit tests in the modules they
-test and integration tests in their own <code>tests/</code> directory:</p>
+                        <h1 id="테스트"><a class="header" href="#테스트">테스트</a></h1>
+<p>우리 모두 알다시피 테스트는 모든 소프트웨어의 필수적인 부분입니다! Rust는 유닛 테스트와 통합 테스트를 위한 일류(first-class) 지원을 제공합니다(TRPL의 <a href="https://doc.rust-lang.org/book/ch11-00-testing.html">이 장</a>을 참조하세요).</p>
+<p>위에 링크된 테스트 장들에서 유닛 테스트와 통합 테스트를 작성하는 방법을 확인할 수 있습니다. 구조적으로 유닛 테스트는 테스트 대상 모듈에 배치하고, 통합 테스트는 별도의 <code>tests/</code> 디렉터리에 배치할 수 있습니다.</p>
 <pre><code class="language-txt">foo
 ├── Cargo.toml
 ├── src
@@ -268,16 +267,12 @@ test and integration tests in their own <code>tests/</code> directory:</p>
     ├── my_test.rs
     └── my_other_test.rs
 </code></pre>
-<p>Each file in <code>tests</code> is a separate
-<a href="https://doc.rust-lang.org/book/ch11-03-test-organization.html#integration-tests">integration test</a>,
-i.e. a test that is meant to test your library as if it were being called from a dependent
-crate.</p>
-<p>The <a href="../testing.html">Testing</a> chapter elaborates on the three different testing styles:
-<a href="../testing/unit_testing.html">Unit</a>, <a href="../testing/doc_testing.html">Doc</a>, and <a href="../testing/integration_testing.html">Integration</a>.</p>
-<p><code>cargo</code> naturally provides an easy way to run all of your tests!</p>
+<p><code>tests</code> 내의 각 파일은 별도의 <a href="https://doc.rust-lang.org/book/ch11-03-test-organization.html#integration-tests">통합 테스트</a>입니다. 즉, 의존성 있는 크레이트에서 호출되는 것처럼 라이브러리를 테스트하기 위한 것입니다.</p>
+<p><a href="../testing.html">테스트</a> 장에서는 <a href="../testing/unit_testing.html">유닛(Unit)</a>, <a href="../testing/doc_testing.html">문서(Doc)</a>, <a href="../testing/integration_testing.html">통합(Integration)</a>의 세 가지 테스트 스타일에 대해 자세히 설명합니다.</p>
+<p><code>cargo</code>는 당연히 모든 테스트를 실행할 수 있는 쉬운 방법을 제공합니다!</p>
 <pre><code class="language-shell">$ cargo test
 </code></pre>
-<p>You should see output like this:</p>
+<p>다음과 같은 출력을 볼 수 있을 것입니다:</p>
 <pre><code class="language-shell">$ cargo test
    Compiling blah v0.1.0 (file:///nobackup/blah)
     Finished dev [unoptimized + debuginfo] target(s) in 0.89 secs
@@ -290,8 +285,21 @@ test test_foo_bar ... ok
 test test_foo ... ok
 
 test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+``````shell
+$ cargo test
+   Compiling blah v0.1.0 (file:///nobackup/blah)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.89 secs
+     Running target/debug/deps/blah-d3b32b97275ec472
+
+running 4 tests
+test test_bar ... ok
+test test_baz ... ok
+test test_foo_bar ... ok
+test test_foo ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 </code></pre>
-<p>You can also run tests whose name matches a pattern:</p>
+<p>이름이 패턴과 일치하는 테스트만 실행할 수도 있습니다:</p>
 <pre><code class="language-shell">$ cargo test test_foo
 </code></pre>
 <pre><code class="language-shell">$ cargo test test_foo
@@ -305,54 +313,52 @@ test test_foo_bar ... ok
 
 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out
 </code></pre>
-<p>One word of caution: Cargo may run multiple tests concurrently, so make sure
-that they don’t race with each other.</p>
-<p>One example of this concurrency causing issues is if two tests output to a
-file, such as below:</p>
+<p>한 가지 주의할 점: Cargo는 여러 테스트를 동시에 실행할 수 있으므로 서로 경쟁(race)하지 않도록 확인해야 합니다.</p>
+<p>이러한 동시성이 문제를 일으키는 한 가지 예는 아래와 같이 두 테스트가 하나의 파일에 출력하는 경우입니다:</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[cfg(test)]
 mod tests {
-    // Import the necessary modules
+    // 필요한 모듈 가져오기
     use std::fs::OpenOptions;
     use std::io::Write;
 
-    // This test writes to a file
+    // 이 테스트는 파일에 씁니다
     #[test]
     fn test_file() {
-        // Opens the file ferris.txt or creates one if it doesn't exist.
+        // ferris.txt 파일을 열거나 없으면 생성합니다.
         let mut file = OpenOptions::new()
             .append(true)
             .create(true)
             .open("ferris.txt")
-            .expect("Failed to open ferris.txt");
+            .expect("ferris.txt를 여는 데 실패했습니다");
 
-        // Print "Ferris" 5 times.
+        // "Ferris"를 5번 출력합니다.
         for _ in 0..5 {
             file.write_all("Ferris\n".as_bytes())
-                .expect("Could not write to ferris.txt");
+                .expect("ferris.txt에 쓸 수 없습니다");
         }
     }
 
-    // This test tries to write to the same file
+    // 이 테스트는 동일한 파일에 쓰기를 시도합니다
     #[test]
     fn test_file_also() {
-        // Opens the file ferris.txt or creates one if it doesn't exist.
+        // ferris.txt 파일을 열거나 없으면 생성합니다.
         let mut file = OpenOptions::new()
             .append(true)
             .create(true)
             .open("ferris.txt")
-            .expect("Failed to open ferris.txt");
+            .expect("ferris.txt를 여는 데 실패했습니다");
 
-        // Print "Corro" 5 times.
+        // "Corro"를 5번 출력합니다.
         for _ in 0..5 {
             file.write_all("Corro\n".as_bytes())
-                .expect("Could not write to ferris.txt");
+                .expect("ferris.txt에 쓸 수 없습니다");
         }
     }
 }
 <span class="boring">}</span></code></pre>
-<p>Although the intent is to get the following:</p>
+<p>의도는 다음과 같은 결과를 얻는 것이었지만:</p>
 <pre><code class="language-shell">$ cat ferris.txt
 Ferris
 Ferris
@@ -365,7 +371,7 @@ Corro
 Corro
 Corro
 </code></pre>
-<p>What actually gets put into <code>ferris.txt</code> is this:</p>
+<p><code>ferris.txt</code>에 실제로 기록된 내용은 다음과 같습니다:</p>
 <pre><code class="language-shell">$ cargo test test_file &amp;&amp; cat ferris.txt
 Corro
 Ferris

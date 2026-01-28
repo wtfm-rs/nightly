@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Mutability - Rust By Example</title>
+        <title>가변성 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,25 +255,25 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="mutability"><a class="header" href="#mutability">Mutability</a></h1>
-<p>Mutability of data can be changed when ownership is transferred.</p>
+                        <h1 id="가변성"><a class="header" href="#가변성">가변성</a></h1>
+<p>소유권이 이전될 때 데이터의 가변성이 변경될 수 있습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
     let immutable_box = Box::new(5u32);
 
-    println!("immutable_box contains {}", immutable_box);
+    println!("불변 상자가 포함하는 것: {}", immutable_box);
 
-    // Mutability error
+    // 가변성 에러
     //*immutable_box = 4;
 
-    // *Move* the box, changing the ownership (and mutability)
+    // 상자를 *이동*하여 소유권(및 가변성)을 변경합니다
     let mut mutable_box = immutable_box;
 
-    println!("mutable_box contains {}", mutable_box);
+    println!("가변 상자가 포함하는 것: {}", mutable_box);
 
-    // Modify the contents of the box
+    // 상자의 내용물을 수정합니다
     *mutable_box = 4;
 
-    println!("mutable_box now contains {}", mutable_box);
+    println!("가변 상자가 이제 포함하는 것: {}", mutable_box);
 }</code></pre>
 
                     </main>

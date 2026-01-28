@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Type anonymity - Rust By Example</title>
+        <title>타입 익명성 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,31 +255,20 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="type-anonymity"><a class="header" href="#type-anonymity">Type anonymity</a></h1>
-<p>Closures succinctly capture variables from enclosing scopes. Does this have
-any consequences? It surely does. Observe how using a closure as a function
-parameter requires <a href="../../generics.html">generics</a>, which is necessary because of how they are
-defined:</p>
+                        <h1 id="타입-익명성"><a class="header" href="#타입-익명성">타입 익명성</a></h1>
+<p>클로저는 자신을 감싸고 있는 스코프에서 변수를 간결하게 캡처합니다. 이것이 어떤 결과를 초래할까요? 분명히 결과가 있습니다. 클로저를 함수 파라미터로 사용할 때 <a href="../../generics.html">제네릭</a>이 왜 필요한지, 클로저가 어떻게 정의되는지를 통해 살펴보세요:</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// `F` must be generic.
+</span>// `F`는 제네릭이어야 합니다.
 fn apply&lt;F&gt;(f: F) where
     F: FnOnce() {
     f();
 }
 <span class="boring">}</span></code></pre>
-<p>When a closure is defined, the compiler implicitly creates a new
-anonymous structure to store the captured variables inside, meanwhile
-implementing the functionality via one of the <code>traits</code>: <code>Fn</code>, <code>FnMut</code>, or
-<code>FnOnce</code> for this unknown type. This type is assigned to the variable which
-is stored until calling.</p>
-<p>Since this new type is of unknown type, any usage in a function will require
-generics. However, an unbounded type parameter <code>&lt;T&gt;</code> would still be ambiguous
-and not be allowed. Thus, bounding by one of the <code>traits</code>: <code>Fn</code>, <code>FnMut</code>, or
-<code>FnOnce</code> (which it implements) is sufficient to specify its type.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// `F` must implement `Fn` for a closure which takes no
-// inputs and returns nothing - exactly what is required
-// for `print`.
+<p>클로저가 정의될 때, 컴파일러는 내부에 캡처된 변수를 저장하기 위해 새로운 익명 구조체를 암시적으로 생성하며, 동시에 이 알 수 없는 타입에 대해 <code>Fn</code>, <code>FnMut</code>, 또는 <code>FnOnce</code> 트레이트 중 하나를 통해 기능을 구현합니다. 이 타입은 변수에 할당되어 호출될 때까지 저장됩니다.</p>
+<p>이 새로운 타입은 알 수 없는 타입이므로, 함수에서 사용할 때는 제네릭이 필요합니다. 하지만 제약이 없는 타입 파라미터 <code>&lt;T&gt;</code>는 여전히 모호하므로 허용되지 않습니다. 따라서 클로저가 구현하는 <code>Fn</code>, <code>FnMut</code>, 또는 <code>FnOnce</code> 트레이트 중 하나로 바운딩하는 것이 그 타입을 지정하기에 충분합니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// `F`는 입력이 없고 아무것도 반환하지 않는 클로저를 위해
+// `Fn`을 구현해야 합니다. 이는 정확히 `print`에 요구되는 사항입니다.
 fn apply&lt;F&gt;(f: F) where
     F: Fn() {
     f();
@@ -285,15 +277,14 @@ fn apply&lt;F&gt;(f: F) where
 fn main() {
     let x = 7;
 
-    // Capture `x` into an anonymous type and implement
-    // `Fn` for it. Store it in `print`.
+    // `x`를 익명 타입으로 캡처하고 그에 대해 `Fn`을 구현합니다.
+// 이를 `print`에 저장합니다.
     let print = || println!("{}", x);
 
     apply(print);
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://huonw.github.io/blog/2015/05/finding-closure-in-rust/">A thorough analysis</a>, <a href="https://doc.rust-lang.org/std/ops/trait.Fn.html"><code>Fn</code></a>, <a href="https://doc.rust-lang.org/std/ops/trait.FnMut.html"><code>FnMut</code></a>,
-and <a href="https://doc.rust-lang.org/std/ops/trait.FnOnce.html"><code>FnOnce</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://huonw.github.io/blog/2015/05/finding-closure-in-rust/">철저한 분석</a>, <a href="https://doc.rust-lang.org/std/ops/trait.Fn.html"><code>Fn</code></a>, <a href="https://doc.rust-lang.org/std/ops/trait.FnMut.html"><code>FnMut</code></a>, 그리고 <a href="https://doc.rust-lang.org/std/ops/trait.FnOnce.html"><code>FnOnce</code></a></p>
 
                     </main>
 

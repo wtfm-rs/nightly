@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>New Type Idiom - Rust By Example</title>
+        <title>New Type 관용구 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,11 +255,9 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="new-type-idiom"><a class="header" href="#new-type-idiom">New Type Idiom</a></h1>
-<p>The <code>newtype</code> idiom gives compile time guarantees that the right type of value is supplied
-to a program.</p>
-<p>For example, an age verification function that checks age in years, <em>must</em> be given
-a value of type <code>Years</code>.</p>
+                        <h1 id="new-type-관용구"><a class="header" href="#new-type-관용구">New Type 관용구</a></h1>
+<p><code>newtype</code> 관용구는 프로그램에 올바른 타입의 값이 제공됨을 컴파일 타임에 보장해 줍니다.</p>
+<p>예를 들어, 나이를 연 단위로 확인하는 나이 검증 함수는 반드시 <code>Years</code> 타입의 값을 받아야 합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">struct Years(i64);
 
 struct Days(i64);
@@ -268,7 +269,7 @@ impl Years {
 }
 
 impl Days {
-    /// truncates partial years
+    /// 부분적인 연도는 버립니다
     pub fn to_years(&amp;self) -&gt; Years {
         Years(self.0 / 365)
     }
@@ -281,20 +282,20 @@ fn is_adult(age: &amp;Years) -&gt; bool {
 fn main() {
     let age = Years(25);
     let age_days = age.to_days();
-    println!("Is an adult? {}", is_adult(&amp;age));
-    println!("Is an adult? {}", is_adult(&amp;age_days.to_years()));
-    // println!("Is an adult? {}", is_adult(&amp;age_days));
+    println!("성인입니까? {}", is_adult(&amp;age));
+    println!("성인입니까? {}", is_adult(&amp;age_days.to_years()));
+    // println!("성인입니까? {}", is_adult(&amp;age_days));
 }</code></pre>
-<p>Uncomment the last print statement to observe that the type supplied must be <code>Years</code>.</p>
-<p>To obtain the <code>newtype</code>’s value as the base type, you may use the tuple or destructuring syntax like so:</p>
+<p>마지막 출력문의 주석을 해제하여 제공되는 타입이 반드시 <code>Years</code>여야 함을 관찰해 보세요.</p>
+<p><code>newtype</code>의 값을 기본 타입으로 얻으려면, 다음과 같이 튜플 또는 구조 분해 문법을 사용할 수 있습니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">struct Years(i64);
 
 fn main() {
     let years = Years(42);
-    let years_as_primitive_1: i64 = years.0; // Tuple
-    let Years(years_as_primitive_2) = years; // Destructuring
+    let years_as_primitive_1: i64 = years.0; // 튜플
+    let Years(years_as_primitive_2) = years; // 구조 분해
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
 <p><a href="../custom_types/structs.html"><code>structs</code></a></p>
 
                     </main>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Argument parsing - Rust By Example</title>
+        <title>인자 파싱 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,8 +255,8 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="argument-parsing"><a class="header" href="#argument-parsing">Argument parsing</a></h1>
-<p>Matching can be used to parse simple arguments:</p>
+                        <h1 id="인자-파싱"><a class="header" href="#인자-파싱">인자 파싱</a></h1>
+<p><code>match</code>를 사용하여 간단한 인자들을 파싱할 수 있습니다:</p>
 <pre><code class="language-rust ignore">use std::env;
 
 fn increase(number: i32) {
@@ -265,61 +268,61 @@ fn decrease(number: i32) {
 }
 
 fn help() {
-    println!("usage:
+    println!("사용법:
 match_args &lt;string&gt;
-    Check whether given string is the answer.
+    주어진 문자열이 정답인지 확인합니다.
 match_args {{increase|decrease}} &lt;integer&gt;
-    Increase or decrease given integer by one.");
+    주어진 정수를 1만큼 증가시키거나 감소시킵니다.");
 }
 
 fn main() {
     let args: Vec&lt;String&gt; = env::args().collect();
 
     match args.len() {
-        // no arguments passed
+        // 전달된 인자가 없음
         1 =&gt; {
-            println!("My name is 'match_args'. Try passing some arguments!");
+            println!("제 이름은 'match_args'입니다. 인자를 전달해 보세요!");
         },
-        // one argument passed
+        // 한 개의 인자가 전달됨
         2 =&gt; {
             match args[1].parse() {
-                Ok(42) =&gt; println!("This is the answer!"),
-                _ =&gt; println!("This is not the answer."),
+                Ok(42) =&gt; println!("정답입니다!"),
+                _ =&gt; println!("정답이 아닙니다."),
             }
         },
-        // one command and one argument passed
+        // 하나의 명령어와 하나의 인자가 전달됨
         3 =&gt; {
             let cmd = &amp;args[1];
             let num = &amp;args[2];
-            // parse the number
+            // 숫자를 파싱합니다
             let number: i32 = match num.parse() {
                 Ok(n) =&gt; {
                     n
                 },
                 Err(_) =&gt; {
-                    eprintln!("error: second argument not an integer");
+                    eprintln!("에러: 두 번째 인자가 정수가 아닙니다");
                     help();
                     return;
                 },
             };
-            // parse the command
+            // 명령어를 파싱합니다
             match &amp;cmd[..] {
                 "increase" =&gt; increase(number),
                 "decrease" =&gt; decrease(number),
                 _ =&gt; {
-                    eprintln!("error: invalid command");
+                    eprintln!("에러: 유효하지 않은 명령어");
                     help();
                 },
             }
         },
-        // all the other cases
+        // 그 외의 모든 경우
         _ =&gt; {
-            // show a help message
+            // 도움말 메시지를 표시함
             help();
         }
     }
 }</code></pre>
-<p>If you named your program <code>match_args.rs</code> and compile it like this <code>rustc match_args.rs</code>, you can execute it as follows:</p>
+<p>프로그램 이름을 <code>match_args.rs</code>라고 짓고 <code>rustc match_args.rs</code>와 같이 컴파일했다면, 다음과 같이 실행할 수 있습니다:</p>
 <pre><code class="language-shell">$ ./match_args Rust
 This is not the answer.
 $ ./match_args 42

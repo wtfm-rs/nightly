@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Nesting and labels - Rust By Example</title>
+        <title>중첩과 레이블 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,30 +255,28 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="nesting-and-labels"><a class="header" href="#nesting-and-labels">Nesting and labels</a></h1>
-<p>It’s possible to <code>break</code> or <code>continue</code> outer loops when dealing with nested
-loops. In these cases, the loops must be annotated with some <code>'label</code>, and the
-label must be passed to the <code>break</code>/<code>continue</code> statement.</p>
+                        <h1 id="중첩과-레이블"><a class="header" href="#중첩과-레이블">중첩과 레이블</a></h1>
+<p>중첩 루프를 다룰 때 외부 루프를 <code>break</code>하거나 <code>continue</code>하는 것이 가능합니다. 이 경우 루프에는 어떤 <code>'label</code>을 붙여야 하며, 해당 레이블은 <code>break</code>/<code>continue</code> 문에 전달되어야 합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">#![allow(unreachable_code, unused_labels)]
 
 fn main() {
     'outer: loop {
-        println!("Entered the outer loop");
+        println!("외부 루프에 진입했습니다");
 
         'inner: loop {
-            println!("Entered the inner loop");
+            println!("내부 루프에 진입했습니다");
 
-            // This would break only the inner loop
+            // 이것은 내부 루프만 종료시킵니다
             //break;
 
-            // This breaks the outer loop
+            // 이것은 외부 루프를 종료시킵니다
             break 'outer;
         }
 
-        println!("This point will never be reached");
+        println!("이 지점에는 결코 도달하지 않습니다");
     }
 
-    println!("Exited the outer loop");
+    println!("외부 루프에서 나갔습니다");
 }</code></pre>
 
                     </main>

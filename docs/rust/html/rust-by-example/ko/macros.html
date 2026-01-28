@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-61902a00.js"></script>
+        <script src="toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,42 +256,31 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="macro_rules"><a class="header" href="#macro_rules"><code>macro_rules!</code></a></h1>
-<p>Rust provides a powerful macro system that allows metaprogramming. As you’ve
-seen in previous chapters, macros look like functions, except that their name
-ends with a bang <code>!</code>, but instead of generating a function call, macros are
-expanded into source code that gets compiled with the rest of the program.
-However, unlike macros in C and other languages, Rust macros are expanded into
-abstract syntax trees, rather than string preprocessing, so you don’t get
-unexpected precedence bugs.</p>
-<p>Macros are created using the <code>macro_rules!</code> macro.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// This is a simple macro named `say_hello`.
+<p>Rust는 메타프로그래밍을 가능하게 하는 강력한 매크로 시스템을 제공합니다. 이전 장들에서 보았듯이, 매크로는 이름이 느낌표 <code>!</code>로 끝난다는 점을 제외하면 함수와 비슷해 보입니다. 하지만 함수 호출을 생성하는 대신, 매크로는 프로그램의 나머지 부분과 함께 컴파일되는 소스 코드로 확장됩니다. 그러나 C나 다른 언어의 매크로와 달리, Rust 매크로는 문자열 전처리가 아닌 추상 구문 트리(AST)로 확장되므로, 예상치 못한 연산자 우선순위 버그가 발생하지 않습니다.</p>
+<p>매크로는 <code>macro_rules!</code> 매크로를 사용하여 생성됩니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// `say_hello`라는 이름의 간단한 매크로입니다.
 macro_rules! say_hello {
-    // `()` indicates that the macro takes no argument.
+    // `()`는 매크로가 인자를 취하지 않음을 나타냅니다.
     () =&gt; {
-        // The macro will expand into the contents of this block.
-        println!("Hello!")
+        // 매크로는 이 블록의 내용으로 확장됩니다.
+        println!("안녕하세요!")
     };
 }
 
 fn main() {
-    // This call will expand into `println!("Hello!")`
+    // 이 호출은 `println!("안녕하세요!")`로 확장됩니다.
     say_hello!()
 }</code></pre>
-<p>So why are macros useful?</p>
+<p>그렇다면 왜 매크로가 유용할까요?</p>
 <ol>
 <li>
-<p>Don’t repeat yourself. There are many cases where you may need similar
-functionality in multiple places but with different types. Often, writing a
-macro is a useful way to avoid repeating code. (More on this later)</p>
+<p>반복하지 마세요(DRY, Don’t repeat yourself). 여러 곳에서 서로 다른 타입에 대해 유사한 기능이 필요할 수 있는 경우가 많습니다. 종종 매크로를 작성하는 것은 코드 반복을 피하는 유용한 방법입니다. (이에 대해서는 나중에 자세히 다룹니다)</p>
 </li>
 <li>
-<p>Domain-specific languages. Macros allow you to define special syntax for a
-specific purpose. (More on this later)</p>
+<p>도메인 특화 언어(DSL, Domain-specific languages). 매크로를 사용하면 특정 목적을 위한 특정 구문을 정의할 수 있습니다. (이에 대해서는 나중에 자세히 다룹니다)</p>
 </li>
 <li>
-<p>Variadic interfaces. Sometimes you want to define an interface that takes a
-variable number of arguments. An example is <code>println!</code> which could take any
-number of arguments, depending on the format string. (More on this later)</p>
+<p>가변 인자 인터페이스. 때로는 가변적인 개수의 인자를 취하는 인터페이스를 정의하고 싶을 때가 있습니다. 예를 들어 <code>println!</code>은 형식 문자열에 따라 인자를 몇 개든 취할 수 있습니다! (이에 대해서는 나중에 자세히 다룹니다)</p>
 </li>
 </ol>
 

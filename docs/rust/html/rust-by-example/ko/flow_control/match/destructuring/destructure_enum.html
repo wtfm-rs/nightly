@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>enums - Rust By Example</title>
+        <title>열거형 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../../toc-61902a00.js"></script>
+        <script src="../../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,17 +255,16 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="enums"><a class="header" href="#enums">enums</a></h1>
-<p>An <code>enum</code> is destructured similarly:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// `allow` required to silence warnings because only
-// one variant is used.
+                        <h1 id="열거형"><a class="header" href="#열거형">열거형</a></h1>
+<p><code>enum</code>도 비슷하게 구조 분해됩니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 단 하나의 변체만 사용되므로 경고를 억제하기 위해 `allow`가 필요합니다.
 #[allow(dead_code)]
 enum Color {
-    // These 3 are specified solely by their name.
+    // 이 세 가지는 오직 이름으로만 지정됩니다.
     Red,
     Blue,
     Green,
-    // These likewise tie `u32` tuples to different names: color models.
+    // 이들은 마찬가지로 `u32` 튜플을 서로 다른 이름(컬러 모델)에 연결합니다.
     RGB(u32, u32, u32),
     HSV(u32, u32, u32),
     HSL(u32, u32, u32),
@@ -272,30 +274,30 @@ enum Color {
 
 fn main() {
     let color = Color::RGB(122, 17, 40);
-    // TODO ^ Try different variants for `color`
+    // TODO ^ `color`에 다른 변체들을 넣어보세요
 
-    println!("What color is it?");
-    // An `enum` can be destructured using a `match`.
+    println!("이것은 무슨 색인가요?");
+    // `match`를 사용하여 `enum`을 구조 분해할 수 있습니다.
     match color {
-        Color::Red   =&gt; println!("The color is Red!"),
-        Color::Blue  =&gt; println!("The color is Blue!"),
-        Color::Green =&gt; println!("The color is Green!"),
+        Color::Red   =&gt; println!("빨간색입니다!"),
+        Color::Blue  =&gt; println!("파란색입니다!"),
+        Color::Green =&gt; println!("초록색입니다!"),
         Color::RGB(r, g, b) =&gt;
-            println!("Red: {}, green: {}, and blue: {}!", r, g, b),
+            println!("빨강: {}, 초록: {}, 파랑: {}!", r, g, b),
         Color::HSV(h, s, v) =&gt;
-            println!("Hue: {}, saturation: {}, value: {}!", h, s, v),
+            println!("색상: {}, 채도: {}, 명도: {}!", h, s, v),
         Color::HSL(h, s, l) =&gt;
-            println!("Hue: {}, saturation: {}, lightness: {}!", h, s, l),
+            println!("색상: {}, 채도: {}, 밝기: {}!", h, s, l),
         Color::CMY(c, m, y) =&gt;
-            println!("Cyan: {}, magenta: {}, yellow: {}!", c, m, y),
+            println!("청록: {}, 자주: {}, 노랑: {}!", c, m, y),
         Color::CMYK(c, m, y, k) =&gt;
-            println!("Cyan: {}, magenta: {}, yellow: {}, key (black): {}!",
+            println!("청록: {}, 자주: {}, 노랑: {}, 검정: {}!",
                 c, m, y, k),
-        // Don't need another arm because all variants have been examined
+        // 모든 변체를 검사했으므로 다른 팔(arm)은 필요하지 않습니다.
     }
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../../attribute/unused.html"><code>#[allow(...)]</code></a>, <a href="https://en.wikipedia.org/wiki/Color_model">color models</a> and <a href="../../../custom_types/enum.html"><code>enum</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../../attribute/unused.html"><code>#[allow(...)]</code></a>, <a href="https://en.wikipedia.org/wiki/Color_model">컬러 모델</a> 및 <a href="../../../custom_types/enum.html"><code>enum</code></a></p>
 
                     </main>
 

@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/reference-ce12791d.css">
+        <link rel="stylesheet" href="theme/reference-bb0bdaf8.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-fb3845b4.js";
+            window.path_to_searchindex_js = "searchindex-45a698e8.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-edc1c836.js"></script>
@@ -928,14 +928,8 @@ DelimTokenTree</text>
 <div class="rule" id="r-macro.decl.intro"><a class="rule-link" href="#r-macro.decl.intro" title="macro.decl.intro"><span>[macro<wbr>.decl<wbr>.intro]</span></a>
 </div>
 
-<p><code>macro_rules</code> allows users to define syntax extension in a declarative way.  We
-call such extensions “macros by example” or simply “macros”.</p>
-<p>Each macro by example has a name, and one or more <em>rules</em>. Each rule has two
-parts: a <em>matcher</em>, describing the syntax that it matches, and a <em>transcriber</em>,
-describing the syntax that will replace a successfully matched invocation. Both
-the matcher and the transcriber must be surrounded by delimiters. Macros can
-expand to expressions, statements, items (including traits, impls, and foreign
-items), types, or patterns.</p>
+<p><code>macro_rules</code> allows users to define syntax extension in a declarative way.  We call such extensions “macros by example” or simply “macros”.</p>
+<p>Each macro by example has a name, and one or more <em>rules</em>. Each rule has two parts: a <em>matcher</em>, describing the syntax that it matches, and a <em>transcriber</em>, describing the syntax that will replace a successfully matched invocation. Both the matcher and the transcriber must be surrounded by delimiters. Macros can expand to expressions, statements, items (including traits, impls, and foreign items), types, or patterns.</p>
 <div class="rule" id="r-macro.decl.transcription"><a class="rule-link" href="#r-macro.decl.transcription" title="macro.decl.transcription"><span>[macro<wbr>.decl<wbr>.transcription]</span></a>
 </div>
 
@@ -943,17 +937,11 @@ items), types, or patterns.</p>
 <div class="rule" id="r-macro.decl.transcription.intro"><a class="rule-link" href="#r-macro.decl.transcription.intro" title="macro.decl.transcription.intro"><span>[macro<wbr>.decl<wbr>.transcription<wbr>.intro]</span></a>
 </div>
 
-<p>When a macro is invoked, the macro expander looks up macro invocations by name,
-and tries each macro rule in turn. It transcribes the first successful match; if
-this results in an error, then future matches are not tried.</p>
+<p>When a macro is invoked, the macro expander looks up macro invocations by name, and tries each macro rule in turn. It transcribes the first successful match; if this results in an error, then future matches are not tried.</p>
 <div class="rule" id="r-macro.decl.transcription.lookahead"><a class="rule-link" href="#r-macro.decl.transcription.lookahead" title="macro.decl.transcription.lookahead"><span>[macro<wbr>.decl<wbr>.transcription<wbr>.lookahead]</span></a>
 </div>
 
-<p>When matching, no lookahead is performed; if the compiler cannot unambiguously determine how to
-parse the macro invocation one token at a time, then it is an error. In the
-following example, the compiler does not look ahead past the identifier to see
-if the following token is a <code>)</code>, even though that would allow it to parse the
-invocation unambiguously:</p>
+<p>When matching, no lookahead is performed; if the compiler cannot unambiguously determine how to parse the macro invocation one token at a time, then it is an error. In the following example, the compiler does not look ahead past the identifier to see if the following token is a <code>)</code>, even though that would allow it to parse the invocation unambiguously:</p>
 <pre class="playground"><code class="language-rust compile_fail edition2024"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>macro_rules! ambiguity {
@@ -965,23 +953,12 @@ ambiguity!(error); // Error: local ambiguity
 <div class="rule" id="r-macro.decl.transcription.syntax"><a class="rule-link" href="#r-macro.decl.transcription.syntax" title="macro.decl.transcription.syntax"><span>[macro<wbr>.decl<wbr>.transcription<wbr>.syntax]</span></a>
 </div>
 
-<p>In both the matcher and the transcriber, the <code>$</code> token is used to invoke special
-behaviours from the macro engine (described below in <a href="#metavariables">Metavariables</a> and
-<a href="#repetitions">Repetitions</a>). Tokens that aren’t part of such an invocation are matched and
-transcribed literally, with one exception. The exception is that the outer
-delimiters for the matcher will match any pair of delimiters. Thus, for
-instance, the matcher <code>(())</code> will match <code>{()}</code> but not <code>{{}}</code>. The character
-<code>$</code> cannot be matched or transcribed literally.</p>
+<p>In both the matcher and the transcriber, the <code>$</code> token is used to invoke special behaviours from the macro engine (described below in <a href="#metavariables">Metavariables</a> and <a href="#repetitions">Repetitions</a>). Tokens that aren’t part of such an invocation are matched and transcribed literally, with one exception. The exception is that the outer delimiters for the matcher will match any pair of delimiters. Thus, for instance, the matcher <code>(())</code> will match <code>{()}</code> but not <code>{{}}</code>. The character <code>$</code> cannot be matched or transcribed literally.</p>
 <div class="rule" id="r-macro.decl.transcription.fragment"><a class="rule-link" href="#r-macro.decl.transcription.fragment" title="macro.decl.transcription.fragment"><span>[macro<wbr>.decl<wbr>.transcription<wbr>.fragment]</span></a>
 </div>
 
 <h3 id="forwarding-a-matched-fragment"><a class="header" href="#forwarding-a-matched-fragment">Forwarding a matched fragment</a></h3>
-<p>When forwarding a matched fragment to another macro-by-example, matchers in
-the second macro will see an opaque AST of the fragment type. The second macro
-can’t use literal tokens to match the fragments in the matcher, only a
-fragment specifier of the same type. The <code>ident</code>, <code>lifetime</code>, and <code>tt</code>
-fragment types are an exception, and <em>can</em> be matched by literal tokens. The
-following illustrates this restriction:</p>
+<p>When forwarding a matched fragment to another macro-by-example, matchers in the second macro will see an opaque AST of the fragment type. The second macro can’t use literal tokens to match the fragments in the matcher, only a fragment specifier of the same type. The <code>ident</code>, <code>lifetime</code>, and <code>tt</code> fragment types are an exception, and <em>can</em> be matched by literal tokens. The following illustrates this restriction:</p>
 <pre class="playground"><code class="language-rust compile_fail edition2024"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>macro_rules! foo {
@@ -995,8 +972,7 @@ macro_rules! bar {
 
 foo!(3);
 <span class="boring">}</span></code></pre>
-<p>The following illustrates how tokens can be directly matched after matching a
-<code>tt</code> fragment:</p>
+<p>The following illustrates how tokens can be directly matched after matching a <code>tt</code> fragment:</p>
 <pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// compiles OK
@@ -1017,8 +993,7 @@ foo!(3);
 <div class="rule" id="r-macro.decl.meta.intro"><a class="rule-link" href="#r-macro.decl.meta.intro" title="macro.decl.meta.intro"><span>[macro<wbr>.decl<wbr>.meta<wbr>.intro]</span></a>
 </div>
 
-<p>In the matcher, <code>$</code> <em>name</em> <code>:</code> <em>fragment-specifier</em> matches a Rust syntax
-fragment of the kind specified and binds it to the metavariable <code>$</code><em>name</em>.</p>
+<p>In the matcher, <code>$</code> <em>name</em> <code>:</code> <em>fragment-specifier</em> matches a Rust syntax fragment of the kind specified and binds it to the metavariable <code>$</code><em>name</em>.</p>
 <div class="rule" id="r-macro.decl.meta.specifier"><a class="rule-link" href="#r-macro.decl.meta.specifier" title="macro.decl.meta.specifier"><span>[macro<wbr>.decl<wbr>.meta<wbr>.specifier]</span></a>
 </div>
 
@@ -1043,10 +1018,7 @@ fragment of the kind specified and binds it to the metavariable <code>$</code><e
 <div class="rule" id="r-macro.decl.meta.transcription"><a class="rule-link" href="#r-macro.decl.meta.transcription" title="macro.decl.meta.transcription"><span>[macro<wbr>.decl<wbr>.meta<wbr>.transcription]</span></a>
 </div>
 
-<p>In the transcriber, metavariables are referred to simply by <code>$</code><em>name</em>, since
-the fragment kind is specified in the matcher. Metavariables are replaced with
-the syntax element that matched them.
-Metavariables can be transcribed more than once or not at all.</p>
+<p>In the transcriber, metavariables are referred to simply by <code>$</code><em>name</em>, since the fragment kind is specified in the matcher. Metavariables are replaced with the syntax element that matched them. Metavariables can be transcribed more than once or not at all.</p>
 <div class="rule" id="r-macro.decl.meta.dollar-crate"><a class="rule-link" href="#r-macro.decl.meta.dollar-crate" title="macro.decl.meta.dollar-crate"><span>[macro<wbr>.decl<wbr>.meta<wbr>.dollar-crate]</span></a>
 </div>
 
@@ -1083,16 +1055,11 @@ Metavariables can be transcribed more than once or not at all.</p>
 <div class="rule" id="r-macro.decl.repetition.intro"><a class="rule-link" href="#r-macro.decl.repetition.intro" title="macro.decl.repetition.intro"><span>[macro<wbr>.decl<wbr>.repetition<wbr>.intro]</span></a>
 </div>
 
-<p>In both the matcher and transcriber, repetitions are indicated by placing the
-tokens to be repeated inside <code>$(</code>…<code>)</code>, followed by a repetition operator,
-optionally with a separator token between.</p>
+<p>In both the matcher and transcriber, repetitions are indicated by placing the tokens to be repeated inside <code>$(</code>…<code>)</code>, followed by a repetition operator, optionally with a separator token between.</p>
 <div class="rule" id="r-macro.decl.repetition.separator"><a class="rule-link" href="#r-macro.decl.repetition.separator" title="macro.decl.repetition.separator"><span>[macro<wbr>.decl<wbr>.repetition<wbr>.separator]</span></a>
 </div>
 
-<p>The separator token can be any token
-other than a delimiter or one of the repetition operators, but <code>;</code> and <code>,</code> are
-the most common. For instance, <code>$( $i:ident ),*</code> represents any number of
-identifiers separated by commas. Nested repetitions are permitted.</p>
+<p>The separator token can be any token other than a delimiter or one of the repetition operators, but <code>;</code> and <code>,</code> are the most common. For instance, <code>$( $i:ident ),*</code> represents any number of identifiers separated by commas. Nested repetitions are permitted.</p>
 <div class="rule" id="r-macro.decl.repetition.operators"><a class="rule-link" href="#r-macro.decl.repetition.operators" title="macro.decl.repetition.operators"><span>[macro<wbr>.decl<wbr>.repetition<wbr>.operators]</span></a>
 </div>
 
@@ -1105,32 +1072,15 @@ identifiers separated by commas. Nested repetitions are permitted.</p>
 <div class="rule" id="r-macro.decl.repetition.optional-restriction"><a class="rule-link" href="#r-macro.decl.repetition.optional-restriction" title="macro.decl.repetition.optional-restriction"><span>[macro<wbr>.decl<wbr>.repetition<wbr>.optional-restriction]</span></a>
 </div>
 
-<p>Since <code>?</code> represents at most one occurrence, it cannot be used with a
-separator.</p>
+<p>Since <code>?</code> represents at most one occurrence, it cannot be used with a separator.</p>
 <div class="rule" id="r-macro.decl.repetition.fragment"><a class="rule-link" href="#r-macro.decl.repetition.fragment" title="macro.decl.repetition.fragment"><span>[macro<wbr>.decl<wbr>.repetition<wbr>.fragment]</span></a>
 </div>
 
-<p>The repeated fragment both matches and transcribes to the specified number of
-the fragment, separated by the separator token. Metavariables are matched to
-every repetition of their corresponding fragment. For instance, the <code>$( $i:ident ),*</code> example above matches <code>$i</code> to all of the identifiers in the list.</p>
-<p>During transcription, additional restrictions apply to repetitions so that the
-compiler knows how to expand them properly:</p>
+<p>The repeated fragment both matches and transcribes to the specified number of the fragment, separated by the separator token. Metavariables are matched to every repetition of their corresponding fragment. For instance, the <code>$( $i:ident ),*</code> example above matches <code>$i</code> to all of the identifiers in the list.</p>
+<p>During transcription, additional restrictions apply to repetitions so that the compiler knows how to expand them properly:</p>
 <ol>
-<li>A metavariable must appear in exactly the same number, kind, and nesting
-order of repetitions in the transcriber as it did in the matcher. So for the
-matcher <code>$( $i:ident ),*</code>, the transcribers <code>=&gt; { $i }</code>,
-<code>=&gt; { $( $( $i )* )* }</code>, and <code>=&gt; { $( $i )+ }</code> are all illegal, but
-<code>=&gt; { $( $i );* }</code> is correct and replaces a comma-separated list of
-identifiers with a semicolon-separated list.</li>
-<li>Each repetition in the transcriber must contain at least one metavariable to
-decide how many times to expand it. If multiple metavariables appear in the
-same repetition, they must be bound to the same number of fragments. For
-instance, <code>( $( $i:ident ),* ; $( $j:ident ),* ) =&gt; (( $( ($i,$j) ),* ))</code> must
-bind the same number of <code>$i</code> fragments as <code>$j</code> fragments. This means that
-invoking the macro with <code>(a, b, c; d, e, f)</code> is legal and expands to
-<code>((a,d), (b,e), (c,f))</code>, but <code>(a, b, c; d, e)</code> is illegal because it does
-not have the same number. This requirement applies to every layer of nested
-repetitions.</li>
+<li>A metavariable must appear in exactly the same number, kind, and nesting order of repetitions in the transcriber as it did in the matcher. So for the matcher <code>$( $i:ident ),*</code>, the transcribers <code>=&gt; { $i }</code>, <code>=&gt; { $( $( $i )* )* }</code>, and <code>=&gt; { $( $i )+ }</code> are all illegal, but <code>=&gt; { $( $i );* }</code> is correct and replaces a comma-separated list of identifiers with a semicolon-separated list.</li>
+<li>Each repetition in the transcriber must contain at least one metavariable to decide how many times to expand it. If multiple metavariables appear in the same repetition, they must be bound to the same number of fragments. For instance, <code>( $( $i:ident ),* ; $( $j:ident ),* ) =&gt; (( $( ($i,$j) ),* ))</code> must bind the same number of <code>$i</code> fragments as <code>$j</code> fragments. This means that invoking the macro with <code>(a, b, c; d, e, f)</code> is legal and expands to <code>((a,d), (b,e), (c,f))</code>, but <code>(a, b, c; d, e)</code> is illegal because it does not have the same number. This requirement applies to every layer of nested repetitions.</li>
 </ol>
 <div class="rule" id="r-macro.decl.scope"><a class="rule-link" href="#r-macro.decl.scope" title="macro.decl.scope"><span>[macro<wbr>.decl<wbr>.scope]</span></a>
 </div>
@@ -1139,19 +1089,11 @@ repetitions.</li>
 <div class="rule" id="r-macro.decl.scope.intro"><a class="rule-link" href="#r-macro.decl.scope.intro" title="macro.decl.scope.intro"><span>[macro<wbr>.decl<wbr>.scope<wbr>.intro]</span></a>
 </div>
 
-<p>For historical reasons, the scoping of macros by example does not work entirely
-like items. Macros have two forms of scope: textual scope, and path-based scope.
-Textual scope is based on the order that things appear in source files, or even
-across multiple files, and is the default scoping. It is explained further below.
-Path-based scope works exactly the same way that item scoping does. The scoping,
-exporting, and importing of macros is controlled largely by attributes.</p>
+<p>For historical reasons, the scoping of macros by example does not work entirely like items. Macros have two forms of scope: textual scope, and path-based scope. Textual scope is based on the order that things appear in source files, or even across multiple files, and is the default scoping. It is explained further below. Path-based scope works exactly the same way that item scoping does. The scoping, exporting, and importing of macros is controlled largely by attributes.</p>
 <div class="rule" id="r-macro.decl.scope.unqualified"><a class="rule-link" href="#r-macro.decl.scope.unqualified" title="macro.decl.scope.unqualified"><span>[macro<wbr>.decl<wbr>.scope<wbr>.unqualified]</span></a>
 </div>
 
-<p>When a macro is invoked by an unqualified identifier (not part of a multi-part
-path), it is first looked up in textual scoping. If this does not yield any
-results, then it is looked up in path-based scoping. If the macro’s name is
-qualified with a path, then it is only looked up in path-based scoping.</p>
+<p>When a macro is invoked by an unqualified identifier (not part of a multi-part path), it is first looked up in textual scoping. If this does not yield any results, then it is looked up in path-based scoping. If the macro’s name is qualified with a path, then it is only looked up in path-based scoping.</p>
 <!-- ignore: requires external crates -->
 <pre><code class="language-rust ignore">use lazy_static::lazy_static; // Path-based import.
 
@@ -1168,13 +1110,7 @@ self::lazy_static!{} // Path-based lookup ignores our macro, finds imported one.
 <div class="rule" id="r-macro.decl.scope.textual.intro"><a class="rule-link" href="#r-macro.decl.scope.textual.intro" title="macro.decl.scope.textual.intro"><span>[macro<wbr>.decl<wbr>.scope<wbr>.textual<wbr>.intro]</span></a>
 </div>
 
-<p>Textual scope is based largely on the order that things appear in source files,
-and works similarly to the scope of local variables declared with <code>let</code> except
-it also applies at the module level. When <code>macro_rules!</code> is used to define a
-macro, the macro enters the scope after the definition (note that it can still
-be used recursively, since names are looked up from the invocation site), up
-until its surrounding scope, typically a module, is closed. This can enter child
-modules and even span across multiple files:</p>
+<p>Textual scope is based largely on the order that things appear in source files, and works similarly to the scope of local variables declared with <code>let</code> except it also applies at the module level. When <code>macro_rules!</code> is used to define a macro, the macro enters the scope after the definition (note that it can still be used recursively, since names are looked up from the invocation site), up until its surrounding scope, typically a module, is closed. This can enter child modules and even span across multiple files:</p>
 <!-- ignore: requires external modules -->
 <pre><code class="language-rust ignore">//// src/lib.rs
 mod has_macro {
@@ -1196,8 +1132,7 @@ m!{} // OK: appears after declaration of m in src/lib.rs</code></pre>
 <div class="rule" id="r-macro.decl.scope.textual.shadow"><a class="rule-link" href="#r-macro.decl.scope.textual.shadow" title="macro.decl.scope.textual.shadow"><span>[macro<wbr>.decl<wbr>.scope<wbr>.textual<wbr>.shadow]</span></a>
 </div>
 
-<p>It is not an error to define a macro multiple times; the most recent declaration
-will shadow the previous one unless it has gone out of scope.</p>
+<p>It is not an error to define a macro multiple times; the most recent declaration will shadow the previous one unless it has gone out of scope.</p>
 <pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>macro_rules! m {
@@ -1223,8 +1158,7 @@ mod inner {
 
 m!(1);
 <span class="boring">}</span></code></pre>
-<p>Macros can be declared and used locally inside functions as well, and work
-similarly:</p>
+<p>Macros can be declared and used locally inside functions as well, and work similarly:</p>
 <pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn foo() {
@@ -1705,8 +1639,7 @@ use helper_macro::helped;
 fn unit() {
     helped!();
 }</code></pre>
-<p>Note that, because <code>$crate</code> refers to the current crate, it must be used with a
-fully qualified module path when referring to non-macro items:</p>
+<p>Note that, because <code>$crate</code> refers to the current crate, it must be used with a fully qualified module path when referring to non-macro items:</p>
 <pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub mod inner {
@@ -1721,11 +1654,7 @@ fully qualified module path when referring to non-macro items:</p>
 <div class="rule" id="r-macro.decl.hygiene.vis"><a class="rule-link" href="#r-macro.decl.hygiene.vis" title="macro.decl.hygiene.vis"><span>[macro<wbr>.decl<wbr>.hygiene<wbr>.vis]</span></a>
 </div>
 
-<p>Additionally, even though <code>$crate</code> allows a macro to refer to items within its
-own crate when expanding, its use has no effect on visibility. An item or macro
-referred to must still be visible from the invocation site. In the following
-example, any attempt to invoke <code>call_foo!()</code> from outside its crate will fail
-because <code>foo()</code> is not public.</p>
+<p>Additionally, even though <code>$crate</code> allows a macro to refer to items within its own crate when expanding, its use has no effect on visibility. An item or macro referred to must still be visible from the invocation site. In the following example, any attempt to invoke <code>call_foo!()</code> from outside its crate will fail because <code>foo()</code> is not public.</p>
 <pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[macro_export]
@@ -1750,22 +1679,12 @@ fn foo() {}
 <div class="rule" id="r-macro.decl.follow-set.intro"><a class="rule-link" href="#r-macro.decl.follow-set.intro" title="macro.decl.follow-set.intro"><span>[macro<wbr>.decl<wbr>.follow-set<wbr>.intro]</span></a>
 </div>
 
-<p>The parser used by the macro system is reasonably powerful, but it is limited in
-order to prevent ambiguity in current or future versions of the language.</p>
+<p>The parser used by the macro system is reasonably powerful, but it is limited in order to prevent ambiguity in current or future versions of the language.</p>
 <div class="rule" id="r-macro.decl.follow-set.token-restriction"><a class="rule-link" href="#r-macro.decl.follow-set.token-restriction" title="macro.decl.follow-set.token-restriction"><span>[macro<wbr>.decl<wbr>.follow-set<wbr>.token-restriction]</span></a>
 </div>
 
-<p>In particular, in addition to the rule about ambiguous expansions, a nonterminal
-matched by a metavariable must be followed by a token which has been decided can
-be safely used after that kind of match.</p>
-<p>As an example, a macro matcher like <code>$i:expr [ , ]</code> could in theory be accepted
-in Rust today, since <code>[,]</code> cannot be part of a legal expression and therefore
-the parse would always be unambiguous. However, because <code>[</code> can start trailing
-expressions, <code>[</code> is not a character which can safely be ruled out as coming
-after an expression. If <code>[,]</code> were accepted in a later version of Rust, this
-matcher would become ambiguous or would misparse, breaking working code.
-Matchers like <code>$i:expr,</code> or <code>$i:expr;</code> would be legal, however, because <code>,</code> and
-<code>;</code> are legal expression separators. The specific rules are:</p>
+<p>In particular, in addition to the rule about ambiguous expansions, a nonterminal matched by a metavariable must be followed by a token which has been decided can be safely used after that kind of match.</p>
+<p>As an example, a macro matcher like <code>$i:expr [ , ]</code> could in theory be accepted in Rust today, since <code>[,]</code> cannot be part of a legal expression and therefore the parse would always be unambiguous. However, because <code>[</code> can start trailing expressions, <code>[</code> is not a character which can safely be ruled out as coming after an expression. If <code>[,]</code> were accepted in a later version of Rust, this matcher would become ambiguous or would misparse, breaking working code. Matchers like <code>$i:expr,</code> or <code>$i:expr;</code> would be legal, however, because <code>,</code> and <code>;</code> are legal expression separators. The specific rules are:</p>
 <div class="rule" id="r-macro.decl.follow-set.token-expr-stmt"><a class="rule-link" href="#r-macro.decl.follow-set.token-expr-stmt" title="macro.decl.follow-set.token-expr-stmt"><span>[macro<wbr>.decl<wbr>.follow-set<wbr>.token-expr-stmt]</span></a>
 </div>
 
@@ -1788,17 +1707,13 @@ Matchers like <code>$i:expr,</code> or <code>$i:expr;</code> would be legal, how
 </div>
 
 <ul>
-<li><code>path</code> and <code>ty</code> may only be followed by one of: <code>=&gt;</code>, <code>,</code>, <code>=</code>, <code>|</code>, <code>;</code>,
-<code>:</code>, <code>&gt;</code>, <code>&gt;&gt;</code>, <code>[</code>, <code>{</code>, <code>as</code>, <code>where</code>, or a macro variable of <code>block</code>
-fragment specifier.</li>
+<li><code>path</code> and <code>ty</code> may only be followed by one of: <code>=&gt;</code>, <code>,</code>, <code>=</code>, <code>|</code>, <code>;</code>, <code>:</code>, <code>&gt;</code>, <code>&gt;&gt;</code>, <code>[</code>, <code>{</code>, <code>as</code>, <code>where</code>, or a macro variable of <code>block</code> fragment specifier.</li>
 </ul>
 <div class="rule" id="r-macro.decl.follow-set.token-vis"><a class="rule-link" href="#r-macro.decl.follow-set.token-vis" title="macro.decl.follow-set.token-vis"><span>[macro<wbr>.decl<wbr>.follow-set<wbr>.token-vis]</span></a>
 </div>
 
 <ul>
-<li><code>vis</code> may only be followed by one of: <code>,</code>, an identifier other than a
-non-raw <code>priv</code>, any token that can begin a type, or a metavariable with a
-<code>ident</code>, <code>ty</code>, or <code>path</code> fragment specifier.</li>
+<li><code>vis</code> may only be followed by one of: <code>,</code>, an identifier other than a non-raw <code>priv</code>, any token that can begin a type, or a metavariable with a <code>ident</code>, <code>ty</code>, or <code>path</code> fragment specifier.</li>
 </ul>
 <div class="rule" id="r-macro.decl.follow-set.token-other"><a class="rule-link" href="#r-macro.decl.follow-set.token-other" title="macro.decl.follow-set.token-other"><span>[macro<wbr>.decl<wbr>.follow-set<wbr>.token-other]</span></a>
 </div>
@@ -1820,18 +1735,12 @@ non-raw <code>priv</code>, any token that can begin a type, or a metavariable wi
 <div class="rule" id="r-macro.decl.follow-set.repetition"><a class="rule-link" href="#r-macro.decl.follow-set.repetition" title="macro.decl.follow-set.repetition"><span>[macro<wbr>.decl<wbr>.follow-set<wbr>.repetition]</span></a>
 </div>
 
-<p>When repetitions are involved, then the rules apply to every possible number of
-expansions, taking separators into account. This means:</p>
+<p>When repetitions are involved, then the rules apply to every possible number of expansions, taking separators into account. This means:</p>
 <ul>
-<li>If the repetition includes a separator, that separator must be able to
-follow the contents of the repetition.</li>
-<li>If the repetition can repeat multiple times (<code>*</code> or <code>+</code>), then the contents
-must be able to follow themselves.</li>
-<li>The contents of the repetition must be able to follow whatever comes
-before, and whatever comes after must be able to follow the contents of the
-repetition.</li>
-<li>If the repetition can match zero times (<code>*</code> or <code>?</code>), then whatever comes
-after must be able to follow whatever comes before.</li>
+<li>If the repetition includes a separator, that separator must be able to follow the contents of the repetition.</li>
+<li>If the repetition can repeat multiple times (<code>*</code> or <code>+</code>), then the contents must be able to follow themselves.</li>
+<li>The contents of the repetition must be able to follow whatever comes before, and whatever comes after must be able to follow the contents of the repetition.</li>
+<li>If the repetition can match zero times (<code>*</code> or <code>?</code>), then whatever comes after must be able to follow whatever comes before.</li>
 </ul>
 <p>For more detail, see the <a href="macro-ambiguity.html">formal specification</a>.</p>
 

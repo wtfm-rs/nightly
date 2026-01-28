@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Formatting - Rust By Example</title>
+        <title>형식화 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,36 +255,33 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="formatting"><a class="header" href="#formatting">Formatting</a></h1>
-<p>We’ve seen that formatting is specified via a <em>format string</em>:</p>
+                        <h1 id="형식화"><a class="header" href="#형식화">형식화</a></h1>
+<p>형식화는 _형식 문자열_을 통해 지정되는 것을 보았습니다:</p>
 <ul>
 <li><code>format!("{}", foo)</code> -&gt; <code>"3735928559"</code></li>
 <li><code>format!("0x{:X}", foo)</code> -&gt; <a href="https://en.wikipedia.org/wiki/Deadbeef#Magic_debug_values"><code>"0xDEADBEEF"</code></a></li>
 <li><code>format!("0o{:o}", foo)</code> -&gt; <code>"0o33653337357"</code></li>
 </ul>
-<p>The same variable (<code>foo</code>) can be formatted differently depending on which
-<em>argument type</em> is used: <code>X</code> vs <code>o</code> vs <em>unspecified</em>.</p>
-<p>This formatting functionality is implemented via traits, and there is one trait
-for each argument type. The most common formatting trait is <code>Display</code>, which
-handles cases where the argument type is left unspecified: <code>{}</code> for instance.</p>
+<p>동일한 변수(<code>foo</code>)라도 <code>X</code>, <code>o</code> 또는 _지정되지 않음_과 같이 어떤 _인자 타입_이 사용되느냐에 따라 다르게 형식화될 수 있습니다.</p>
+<p>이 형식화 기능은 트레이트를 통해 구현되며, 각 인자 타입에 대해 하나의 트레이트가 존재합니다. 가장 일반적인 형식화 트레이트는 <code>Display</code>이며, 인자 타입이 지정되지 않은 경우(예: <code>{}</code>)를 처리합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::fmt::{self, Formatter, Display};
 
 struct City {
     name: &amp;'static str,
-    // Latitude
+    // 위도
     lat: f32,
-    // Longitude
+    // 경도
     lon: f32,
 }
 
 impl Display for City {
-    // `f` is a buffer, and this method must write the formatted string into it.
+    // `f`는 버퍼이며, 이 메서드는 버퍼에 형식화된 문자열을 써야 합니다.
     fn fmt(&amp;self, f: &amp;mut Formatter) -&gt; fmt::Result {
-        let lat_c = if self.lat &gt;= 0.0 { 'N' } else { 'S' };
-        let lon_c = if self.lon &gt;= 0.0 { 'E' } else { 'W' };
+        let lat_c = if self.lat &gt;= 0.0 { '북' } else { '남' };
+        let lon_c = if self.lon &gt;= 0.0 { '동' } else { '서' };
 
-        // `write!` is like `format!`, but it will write the formatted string
-        // into a buffer (the first argument).
+        // `write!`는 `format!`과 비슷하지만, 형식화된 문자열을
+        // 버퍼(첫 번째 인자)에 씁니다.
         write!(f, "{}: {:.3}°{} {:.3}°{}",
                self.name, self.lat.abs(), lat_c, self.lon.abs(), lon_c)
     }
@@ -296,9 +296,9 @@ struct Color {
 
 fn main() {
     for city in [
-        City { name: "Dublin", lat: 53.347778, lon: -6.259722 },
-        City { name: "Oslo", lat: 59.95, lon: 10.75 },
-        City { name: "Vancouver", lat: 49.25, lon: -123.1 },
+        City { name: "더블린", lat: 53.347778, lon: -6.259722 },
+        City { name: "오슬로", lat: 59.95, lon: 10.75 },
+        City { name: "밴쿠버", lat: 49.25, lon: -123.1 },
     ] {
         println!("{}", city);
     }
@@ -307,34 +307,27 @@ fn main() {
         Color { red: 0, green: 3, blue: 254 },
         Color { red: 0, green: 0, blue: 0 },
     ] {
-        // Switch this to use {} once you've added an implementation
-        // for fmt::Display.
+        // fmt::Display 구현을 추가한 후에는 {}를 사용하도록 변경하세요.
         println!("{:?}", color);
     }
 }</code></pre>
-<p>You can view a <a href="https://doc.rust-lang.org/std/fmt/#formatting-traits">full list of formatting traits</a> and their argument
-types in the <a href="https://doc.rust-lang.org/std/fmt/"><code>std::fmt</code></a> documentation.</p>
-<h3 id="activity"><a class="header" href="#activity">Activity</a></h3>
-<p>Add an implementation of the <code>fmt::Display</code> trait for the <code>Color</code> struct above
-so that the output displays as:</p>
+<p><a href="https://doc.rust-lang.org/std/fmt/"><code>std::fmt</code></a> 문서에서 <a href="https://doc.rust-lang.org/std/fmt/#formatting-traits">형식화 트레이트 전체 목록</a>과 해당 인자 타입을 확인할 수 있습니다.</p>
+<h3 id="실습"><a class="header" href="#실습">실습</a></h3>
+<p>위의 <code>Color</code> 구조체에 <code>fmt::Display</code> 트레이트 구현을 추가하여 다음과 같이 출력되도록 하세요:</p>
 <pre><code class="language-text">RGB (128, 255, 90) 0x80FF5A
 RGB (0, 3, 254) 0x0003FE
 RGB (0, 0, 0) 0x000000
 </code></pre>
-<p>Two hints if you get stuck:</p>
+<p>막혔을 때를 위한 두 가지 힌트:</p>
 <ul>
-<li>You <a href="https://doc.rust-lang.org/std/fmt/#named-parameters">may need to list each color more than once</a>.</li>
-<li>You can <a href="https://doc.rust-lang.org/std/fmt/#width">pad with zeros to a width of 2</a> with <code>:0&gt;2</code>.
-For hexadecimals, you can use <code>:02X</code>.</li>
+<li><a href="https://doc.rust-lang.org/std/fmt/#named-parameters">각 색상을 두 번 이상 나열해야 할 수도 있습니다</a>.</li>
+<li><code>:0&gt;2</code>를 사용하여 <a href="https://doc.rust-lang.org/std/fmt/#width">0을 채워 너비를 2로 맞출</a> 수 있습니다. 16진수의 경우 <code>:02X</code>를 사용할 수 있습니다.</li>
 </ul>
-<p>Bonus:</p>
+<p>보너스:</p>
 <ul>
-<li>If you would like to experiment with <a href="../../types/cast.html">type casting</a> in advance,
-the formula for <a href="https://www.rapidtables.com/web/color/RGB_Color.html#rgb-format">calculating a color in the RGB color space</a> is
-<code>RGB = (R * 65_536) + (G * 256) + B</code>, where <code>R is RED, G is GREEN, and B is BLUE</code>.
-An unsigned 8-bit integer (<code>u8</code>) can only hold numbers up to 255. To cast <code>u8</code> to <code>u32</code>, you can write <code>variable_name as u32</code>.</li>
+<li><a href="../../types/cast.html">타입 변환(type casting)</a>을 미리 실험해보고 싶다면, <a href="https://www.rapidtables.com/web/color/RGB_Color.html#rgb-format">RGB 색 공간에서 색상을 계산하는 공식</a>은 <code>RGB = (R * 65_536) + (G * 256) + B</code>이며, 여기서 <code>R은 RED, G는 GREEN, B는 BLUE</code>입니다. 부호 없는 8비트 정수(<code>u8</code>)는 255까지의 숫자만 담을 수 있습니다. <code>u8</code>을 <code>u32</code>로 변환하려면 <code>variable_name as u32</code>와 같이 쓸 수 있습니다.</li>
 </ul>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
 <p><a href="https://doc.rust-lang.org/std/fmt/"><code>std::fmt</code></a></p>
 
                     </main>

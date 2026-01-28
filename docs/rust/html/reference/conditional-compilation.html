@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/reference-ce12791d.css">
+        <link rel="stylesheet" href="theme/reference-bb0bdaf8.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-fb3845b4.js";
+            window.path_to_searchindex_js = "searchindex-45a698e8.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-edc1c836.js"></script>
@@ -534,7 +534,7 @@ ConfigurationPredicate</text>
 
 </div>
 
-<div class="rule" id="r-cfg.general"><a class="rule-link" href="#r-cfg.general" title="cfg.general"><span>[cfg<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.intro"><a class="rule-link" href="#r-cfg.intro" title="cfg.intro"><span>[cfg<wbr>.intro]</span></a>
 </div>
 
 <p><em>Conditionally compiled source code</em> is source code that is compiled only under certain conditions.</p>
@@ -549,8 +549,7 @@ ConfigurationPredicate</text>
 <div class="rule" id="r-cfg.predicate"><a class="rule-link" href="#r-cfg.predicate" title="cfg.predicate"><span>[cfg<wbr>.predicate]</span></a>
 </div>
 
-<p>Each form of conditional compilation takes a <em>configuration predicate</em> that
-evaluates to true or false. The predicate is one of the following:</p>
+<p>Each form of conditional compilation takes a <em>configuration predicate</em> that evaluates to true or false. The predicate is one of the following:</p>
 <div class="rule" id="r-cfg.predicate.option"><a class="rule-link" href="#r-cfg.predicate.option" title="cfg.predicate.option"><span>[cfg<wbr>.predicate<wbr>.option]</span></a>
 </div>
 
@@ -609,11 +608,10 @@ evaluates to true or false. The predicate is one of the following:</p>
 </div>
 
 <h2 id="set-configuration-options"><a class="header" href="#set-configuration-options">Set configuration options</a></h2>
-<div class="rule" id="r-cfg.options.general"><a class="rule-link" href="#r-cfg.options.general" title="cfg.options.general"><span>[cfg<wbr>.options<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.options.intro"><a class="rule-link" href="#r-cfg.options.intro" title="cfg.options.intro"><span>[cfg<wbr>.options<wbr>.intro]</span></a>
 </div>
 
-<p>Which configuration options are set is determined statically during the
-compilation of the crate.</p>
+<p>Which configuration options are set is determined statically during the compilation of the crate.</p>
 <div class="rule" id="r-cfg.options.target"><a class="rule-link" href="#r-cfg.options.target" title="cfg.options.target"><span>[cfg<wbr>.options<wbr>.target]</span></a>
 </div>
 
@@ -625,8 +623,7 @@ compilation of the crate.</p>
 <div class="rule" id="r-cfg.options.crate"><a class="rule-link" href="#r-cfg.options.crate" title="cfg.options.crate"><span>[cfg<wbr>.options<wbr>.crate]</span></a>
 </div>
 
-<p>It is not possible to set a
-configuration option from within the source code of the crate being compiled.</p>
+<p>It is not possible to set a configuration option from within the source code of the crate being compiled.</p>
 <div class="alert alert-note">
 <blockquote>
 <p class="alert-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
@@ -647,12 +644,10 @@ configuration option from within the source code of the crate being compiled.</p
 </div>
 
 <h3 id="target_arch"><a class="header" href="#target_arch"><code>target_arch</code></a></h3>
-<div class="rule" id="r-cfg.target_arch.gen"><a class="rule-link" href="#r-cfg.target_arch.gen" title="cfg.target_arch.gen"><span>[cfg<wbr>.target_arch<wbr>.gen]</span></a>
+<div class="rule" id="r-cfg.target_arch.def"><a class="rule-link" href="#r-cfg.target_arch.def" title="cfg.target_arch.def"><span>[cfg<wbr>.target_arch<wbr>.def]</span></a>
 </div>
 
-<p>Key-value option set once with the target’s CPU architecture. The value is
-similar to the first element of the platform’s target triple, but not
-identical.</p>
+<p>Key-value option set once with the target’s CPU architecture. The value is similar to the first element of the platform’s target triple, but not identical.</p>
 <div class="rule" id="r-cfg.target_arch.values"><a class="rule-link" href="#r-cfg.target_arch.values" title="cfg.target_arch.values"><span>[cfg<wbr>.target_arch<wbr>.values]</span></a>
 </div>
 
@@ -670,11 +665,10 @@ identical.</p>
 </div>
 
 <h3 id="target_feature"><a class="header" href="#target_feature"><code>target_feature</code></a></h3>
-<div class="rule" id="r-cfg.target_feature.general"><a class="rule-link" href="#r-cfg.target_feature.general" title="cfg.target_feature.general"><span>[cfg<wbr>.target_feature<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.target_feature.def"><a class="rule-link" href="#r-cfg.target_feature.def" title="cfg.target_feature.def"><span>[cfg<wbr>.target_feature<wbr>.def]</span></a>
 </div>
 
-<p>Key-value option set for each platform feature available for the current
-compilation target.</p>
+<p>Key-value option set for each platform feature available for the current compilation target.</p>
 <div class="rule" id="r-cfg.target_feature.values"><a class="rule-link" href="#r-cfg.target_feature.values" title="cfg.target_feature.values"><span>[cfg<wbr>.target_feature<wbr>.values]</span></a>
 </div>
 
@@ -688,22 +682,19 @@ compilation target.</p>
 <li><code>"sse2"</code></li>
 <li><code>"sse4.1"</code></li>
 </ul>
-<p>See the <a href="attributes/codegen.html#the-target_feature-attribute"><code>target_feature</code> attribute</a> for more details on the available
-features.</p>
+<p>See the <a href="attributes/codegen.html#the-target_feature-attribute"><code>target_feature</code> attribute</a> for more details on the available features.</p>
 <div class="rule" id="r-cfg.target_feature.crt_static"><a class="rule-link" href="#r-cfg.target_feature.crt_static" title="cfg.target_feature.crt_static"><span>[cfg<wbr>.target_feature<wbr>.crt_static]</span></a>
 </div>
 
-<p>An additional feature of <code>crt-static</code> is available to the
-<code>target_feature</code> option to indicate that a <a href="linkage.html#static-and-dynamic-c-runtimes">static C runtime</a> is available.</p>
+<p>An additional feature of <code>crt-static</code> is available to the <code>target_feature</code> option to indicate that a <a href="linkage.html#static-and-dynamic-c-runtimes">static C runtime</a> is available.</p>
 <div class="rule" id="r-cfg.target_os"><a class="rule-link" href="#r-cfg.target_os" title="cfg.target_os"><span>[cfg<wbr>.target_os]</span></a>
 </div>
 
 <h3 id="target_os"><a class="header" href="#target_os"><code>target_os</code></a></h3>
-<div class="rule" id="r-cfg.target_os.general"><a class="rule-link" href="#r-cfg.target_os.general" title="cfg.target_os.general"><span>[cfg<wbr>.target_os<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.target_os.def"><a class="rule-link" href="#r-cfg.target_os.def" title="cfg.target_os.def"><span>[cfg<wbr>.target_os<wbr>.def]</span></a>
 </div>
 
-<p>Key-value option set once with the target’s operating system. This value is
-similar to the second and third element of the platform’s target triple.</p>
+<p>Key-value option set once with the target’s operating system. This value is similar to the second and third element of the platform’s target triple.</p>
 <div class="rule" id="r-cfg.target_os.values"><a class="rule-link" href="#r-cfg.target_os.values" title="cfg.target_os.values"><span>[cfg<wbr>.target_os<wbr>.values]</span></a>
 </div>
 
@@ -724,12 +715,10 @@ similar to the second and third element of the platform’s target triple.</p>
 </div>
 
 <h3 id="target_family"><a class="header" href="#target_family"><code>target_family</code></a></h3>
-<div class="rule" id="r-cfg.target_family.general"><a class="rule-link" href="#r-cfg.target_family.general" title="cfg.target_family.general"><span>[cfg<wbr>.target_family<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.target_family.def"><a class="rule-link" href="#r-cfg.target_family.def" title="cfg.target_family.def"><span>[cfg<wbr>.target_family<wbr>.def]</span></a>
 </div>
 
-<p>Key-value option providing a more generic description of a target, such as the family of the
-operating systems or architectures that the target generally falls into. Any number of
-<code>target_family</code> key-value pairs can be set.</p>
+<p>Key-value option providing a more generic description of a target, such as the family of the operating systems or architectures that the target generally falls into. Any number of <code>target_family</code> key-value pairs can be set.</p>
 <div class="rule" id="r-cfg.target_family.values"><a class="rule-link" href="#r-cfg.target_family.values" title="cfg.target_family.values"><span>[cfg<wbr>.target_family<wbr>.values]</span></a>
 </div>
 
@@ -753,16 +742,10 @@ operating systems or architectures that the target generally falls into. Any num
 </div>
 
 <h3 id="target_env"><a class="header" href="#target_env"><code>target_env</code></a></h3>
-<div class="rule" id="r-cfg.target_env.general"><a class="rule-link" href="#r-cfg.target_env.general" title="cfg.target_env.general"><span>[cfg<wbr>.target_env<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.target_env.def"><a class="rule-link" href="#r-cfg.target_env.def" title="cfg.target_env.def"><span>[cfg<wbr>.target_env<wbr>.def]</span></a>
 </div>
 
-<p>Key-value option set with further disambiguating information about the target
-platform with information about the ABI or <code>libc</code> used. For historical reasons,
-this value is only defined as not the empty-string when actually needed for
-disambiguation. Thus, for example, on many GNU platforms, this value will be
-empty. This value is similar to the fourth element of the platform’s target
-triple. One difference is that embedded ABIs such as <code>gnueabihf</code> will simply
-define <code>target_env</code> as <code>"gnu"</code>.</p>
+<p>Key-value option set with further disambiguating information about the target platform with information about the ABI or <code>libc</code> used. For historical reasons, this value is only defined as not the empty-string when actually needed for disambiguation. Thus, for example, on many GNU platforms, this value will be empty. This value is similar to the fourth element of the platform’s target triple. One difference is that embedded ABIs such as <code>gnueabihf</code> will simply define <code>target_env</code> as <code>"gnu"</code>.</p>
 <div class="rule" id="r-cfg.target_env.values"><a class="rule-link" href="#r-cfg.target_env.values" title="cfg.target_env.values"><span>[cfg<wbr>.target_env<wbr>.values]</span></a>
 </div>
 
@@ -780,17 +763,14 @@ define <code>target_env</code> as <code>"gnu"</code>.</p>
 </div>
 
 <h3 id="target_abi"><a class="header" href="#target_abi"><code>target_abi</code></a></h3>
-<div class="rule" id="r-cfg.target_abi.general"><a class="rule-link" href="#r-cfg.target_abi.general" title="cfg.target_abi.general"><span>[cfg<wbr>.target_abi<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.target_abi.def"><a class="rule-link" href="#r-cfg.target_abi.def" title="cfg.target_abi.def"><span>[cfg<wbr>.target_abi<wbr>.def]</span></a>
 </div>
 
-<p>Key-value option set to further disambiguate the target with information about
-the target ABI.</p>
+<p>Key-value option set to further disambiguate the target with information about the target ABI.</p>
 <div class="rule" id="r-cfg.target_abi.disambiguation"><a class="rule-link" href="#r-cfg.target_abi.disambiguation" title="cfg.target_abi.disambiguation"><span>[cfg<wbr>.target_abi<wbr>.disambiguation]</span></a>
 </div>
 
-<p>For historical reasons, this value is only defined as not the empty-string when actually
-needed for disambiguation. Thus, for example, on many GNU platforms, this value will be
-empty.</p>
+<p>For historical reasons, this value is only defined as not the empty-string when actually needed for disambiguation. Thus, for example, on many GNU platforms, this value will be empty.</p>
 <div class="rule" id="r-cfg.target_abi.values"><a class="rule-link" href="#r-cfg.target_abi.values" title="cfg.target_abi.values"><span>[cfg<wbr>.target_abi<wbr>.values]</span></a>
 </div>
 
@@ -805,13 +785,12 @@ empty.</p>
 </div>
 
 <h3 id="target_endian"><a class="header" href="#target_endian"><code>target_endian</code></a></h3>
-<p>Key-value option set once with either a value of “little” or “big” depending
-on the endianness of the target’s CPU.</p>
+<p>Key-value option set once with either a value of “little” or “big” depending on the endianness of the target’s CPU.</p>
 <div class="rule" id="r-cfg.target_pointer_width"><a class="rule-link" href="#r-cfg.target_pointer_width" title="cfg.target_pointer_width"><span>[cfg<wbr>.target_pointer_width]</span></a>
 </div>
 
 <h3 id="target_pointer_width"><a class="header" href="#target_pointer_width"><code>target_pointer_width</code></a></h3>
-<div class="rule" id="r-cfg.target_pointer_width.general"><a class="rule-link" href="#r-cfg.target_pointer_width.general" title="cfg.target_pointer_width.general"><span>[cfg<wbr>.target_pointer_width<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.target_pointer_width.def"><a class="rule-link" href="#r-cfg.target_pointer_width.def" title="cfg.target_pointer_width.def"><span>[cfg<wbr>.target_pointer_width<wbr>.def]</span></a>
 </div>
 
 <p>Key-value option set once with the target’s pointer width in bits.</p>
@@ -828,7 +807,7 @@ on the endianness of the target’s CPU.</p>
 </div>
 
 <h3 id="target_vendor"><a class="header" href="#target_vendor"><code>target_vendor</code></a></h3>
-<div class="rule" id="r-cfg.target_vendor.general"><a class="rule-link" href="#r-cfg.target_vendor.general" title="cfg.target_vendor.general"><span>[cfg<wbr>.target_vendor<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.target_vendor.def"><a class="rule-link" href="#r-cfg.target_vendor.def" title="cfg.target_vendor.def"><span>[cfg<wbr>.target_vendor<wbr>.def]</span></a>
 </div>
 
 <p>Key-value option set once with the vendor of the target.</p>
@@ -846,16 +825,14 @@ on the endianness of the target’s CPU.</p>
 </div>
 
 <h3 id="target_has_atomic"><a class="header" href="#target_has_atomic"><code>target_has_atomic</code></a></h3>
-<div class="rule" id="r-cfg.target_has_atomic.general"><a class="rule-link" href="#r-cfg.target_has_atomic.general" title="cfg.target_has_atomic.general"><span>[cfg<wbr>.target_has_atomic<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.target_has_atomic.def"><a class="rule-link" href="#r-cfg.target_has_atomic.def" title="cfg.target_has_atomic.def"><span>[cfg<wbr>.target_has_atomic<wbr>.def]</span></a>
 </div>
 
-<p>Key-value option set for each bit width that the target supports
-atomic loads, stores, and compare-and-swap operations.</p>
+<p>Key-value option set for each bit width that the target supports atomic loads, stores, and compare-and-swap operations.</p>
 <div class="rule" id="r-cfg.target_has_atomic.stdlib"><a class="rule-link" href="#r-cfg.target_has_atomic.stdlib" title="cfg.target_has_atomic.stdlib"><span>[cfg<wbr>.target_has_atomic<wbr>.stdlib]</span></a>
 </div>
 
-<p>When this cfg is present, all of the stable <a href="../core/sync/atomic/index.html"><code>core::sync::atomic</code></a> APIs are available for
-the relevant atomic width.</p>
+<p>When this cfg is present, all of the stable <a href="../core/sync/atomic/index.html"><code>core::sync::atomic</code></a> APIs are available for the relevant atomic width.</p>
 <div class="rule" id="r-cfg.target_has_atomic.values"><a class="rule-link" href="#r-cfg.target_has_atomic.values" title="cfg.target_has_atomic.values"><span>[cfg<wbr>.target_has_atomic<wbr>.values]</span></a>
 </div>
 
@@ -872,27 +849,22 @@ the relevant atomic width.</p>
 </div>
 
 <h3 id="test"><a class="header" href="#test"><code>test</code></a></h3>
-<p>Enabled when compiling the test harness. Done with <code>rustc</code> by using the
-<a href="../rustc/command-line-arguments.html#--test-build-a-test-harness"><code>--test</code></a> flag. See <a href="attributes/testing.html">Testing</a> for more on testing support.</p>
+<p>Enabled when compiling the test harness. Done with <code>rustc</code> by using the <a href="../rustc/command-line-arguments.html#--test-build-a-test-harness"><code>--test</code></a> flag. See <a href="attributes/testing.html">Testing</a> for more on testing support.</p>
 <div class="rule" id="r-cfg.debug_assertions"><a class="rule-link" href="#r-cfg.debug_assertions" title="cfg.debug_assertions"><span>[cfg<wbr>.debug_assertions]</span></a>
 </div>
 
 <h3 id="debug_assertions"><a class="header" href="#debug_assertions"><code>debug_assertions</code></a></h3>
-<p>Enabled by default when compiling without optimizations.
-This can be used to enable extra debugging code in development but not in
-production.  For example, it controls the behavior of the standard library’s
-<a href="../core/macro.debug_assert.html"><code>debug_assert!</code></a> macro.</p>
+<p>Enabled by default when compiling without optimizations. This can be used to enable extra debugging code in development but not in production.  For example, it controls the behavior of the standard library’s <a href="../core/macro.debug_assert.html"><code>debug_assert!</code></a> macro.</p>
 <div class="rule" id="r-cfg.proc_macro"><a class="rule-link" href="#r-cfg.proc_macro" title="cfg.proc_macro"><span>[cfg<wbr>.proc_macro]</span></a>
 </div>
 
 <h3 id="proc_macro"><a class="header" href="#proc_macro"><code>proc_macro</code></a></h3>
-<p>Set when the crate being compiled is being compiled with the <code>proc_macro</code>
-<a href="linkage.html">crate type</a>.</p>
+<p>Set when the crate being compiled is being compiled with the <code>proc_macro</code> <a href="linkage.html">crate type</a>.</p>
 <div class="rule" id="r-cfg.panic"><a class="rule-link" href="#r-cfg.panic" title="cfg.panic"><span>[cfg<wbr>.panic]</span></a>
 </div>
 
 <h3 id="panic"><a class="header" href="#panic"><code>panic</code></a></h3>
-<div class="rule" id="r-cfg.panic.general"><a class="rule-link" href="#r-cfg.panic.general" title="cfg.panic.general"><span>[cfg<wbr>.panic<wbr>.general]</span></a>
+<div class="rule" id="r-cfg.panic.def"><a class="rule-link" href="#r-cfg.panic.def" title="cfg.panic.def"><span>[cfg<wbr>.panic<wbr>.def]</span></a>
 </div>
 
 <p>Key-value option set depending on the <a href="panic.html#panic-strategy">panic strategy</a>. Note that more values may be added in the future.</p>
@@ -1246,9 +1218,7 @@ fn bewitched() {}</code></pre>
 </div>
 
 <h3 id="the-cfg-macro"><a class="header" href="#the-cfg-macro">The <code>cfg</code> macro</a></h3>
-<p>The built-in <code>cfg</code> macro takes in a single configuration predicate and evaluates
-to the <code>true</code> literal when the predicate is true and the <code>false</code> literal when
-it is false.</p>
+<p>The built-in <code>cfg</code> macro takes in a single configuration predicate and evaluates to the <code>true</code> literal when the predicate is true and the <code>false</code> literal when it is false.</p>
 <p>For example:</p>
 <pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Display - Rust By Example</title>
+        <title>디스플레이 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,73 +255,62 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="display"><a class="header" href="#display">Display</a></h1>
-<p><code>fmt::Debug</code> hardly looks compact and clean, so it is often advantageous to
-customize the output appearance. This is done by manually implementing
-<a href="https://doc.rust-lang.org/std/fmt/"><code>fmt::Display</code></a>, which uses the <code>{}</code> print marker. Implementing it
-looks like this:</p>
+                        <h1 id="디스플레이"><a class="header" href="#디스플레이">디스플레이</a></h1>
+<p><code>fmt::Debug</code>는 콤팩트하고 깔끔해 보이지 않으므로, 출력 모양을 커스터마이징하는 것이 종종 유리합니다. 이는 <code>{}</code> 출력 마커를 사용하는 <a href="https://doc.rust-lang.org/std/fmt/"><code>fmt::Display</code></a>를 수동으로 구현함으로써 수행됩니다. 구현은 다음과 같습니다:</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// Import (via `use`) the `fmt` module to make it available.
+</span>// `fmt` 모듈을 (`use`를 통해) 가져와서 사용할 수 있게 합니다.
 use std::fmt;
 
-// Define a structure for which `fmt::Display` will be implemented. This is
-// a tuple struct named `Structure` that contains an `i32`.
+// `fmt::Display`를 구현할 구조체를 정의합니다. 이것은
+// `i32`를 포함하는 `Structure`라는 이름의 튜플 구조체입니다.
 struct Structure(i32);
 
-// To use the `{}` marker, the trait `fmt::Display` must be implemented
-// manually for the type.
+// `{}` 마커를 사용하려면, `fmt::Display` 트레이트가 해당 타입에 대해
+// 수동으로 구현되어야 합니다.
 impl fmt::Display for Structure {
-    // This trait requires `fmt` with this exact signature.
+    // 이 트레이트는 정확히 이 시그니처를 가진 `fmt`를 요구합니다.
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
-        // Write strictly the first element into the supplied output
-        // stream: `f`. Returns `fmt::Result` which indicates whether the
-        // operation succeeded or failed. Note that `write!` uses syntax which
-        // is very similar to `println!`.
+        // 제공된 출력 스트림 `f`에 첫 번째 요소를 씁니다.
+        // 작업의 성공 또는 실패 여부를 나타내는 `fmt::Result`를 반환합니다.
+        // `write!`는 `println!`과 매우 유사한 구문을 사용한다는 점에 유의하세요.
         write!(f, "{}", self.0)
     }
 }
 <span class="boring">}</span></code></pre>
-<p><code>fmt::Display</code> may be cleaner than <code>fmt::Debug</code> but this presents
-a problem for the <code>std</code> library. How should ambiguous types be displayed?
-For example, if the <code>std</code> library implemented a single style for all
-<code>Vec&lt;T&gt;</code>, what style should it be? Would it be either of these two?</p>
+<p><code>fmt::Display</code>가 <code>fmt::Debug</code>보다 깔끔할 수 있지만, 이는 <code>std</code> 라이브러리에 문제를 제기합니다. 모호한 타입들은 어떻게 표시되어야 할까요? 예를 들어, <code>std</code> 라이브러리가 모든 <code>Vec&lt;T&gt;</code>에 대해 단일 스타일을 구현했다면, 어떤 스타일이어야 할까요? 다음 두 가지 중 하나일까요?</p>
 <ul>
-<li><code>Vec&lt;path&gt;</code>: <code>/:/etc:/home/username:/bin</code> (split on <code>:</code>)</li>
-<li><code>Vec&lt;number&gt;</code>: <code>1,2,3</code> (split on <code>,</code>)</li>
+<li><code>Vec&lt;path&gt;</code>: <code>/:/etc:/home/username:/bin</code> (<code>:</code>로 구분)</li>
+<li><code>Vec&lt;number&gt;</code>: <code>1,2,3</code> (<code>,</code>로 구분)</li>
 </ul>
-<p>No, because there is no ideal style for all types and the <code>std</code> library
-doesn’t presume to dictate one. <code>fmt::Display</code> is not implemented for <code>Vec&lt;T&gt;</code>
-or for any other generic containers. <code>fmt::Debug</code> must then be used for these
-generic cases.</p>
-<p>This is not a problem though because for any new <em>container</em> type which is
-<em>not</em> generic, <code>fmt::Display</code> can be implemented.</p>
-<pre class="playground"><code class="language-rust editable edition2021">use std::fmt; // Import `fmt`
+<p>아니요, 모든 타입에 이상적인 스타일은 없으며 <code>std</code> 라이브러리가 하나를 독단적으로 정하지 않기 때문입니다. <code>fmt::Display</code>는 <code>Vec&lt;T&gt;</code>나 다른 제네릭 컨테이너에 대해 구현되어 있지 않습니다. 따라서 이러한 제네릭 케이스에는 <code>fmt::Debug</code>를 사용해야 합니다.</p>
+<p>하지만 제네릭이 <em>아닌</em> 새로운 <em>컨테이너</em> 타입에 대해서는 <code>fmt::Display</code>를 구현할 수 있으므로 이는 문제가 되지 않습니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">use std::fmt; // `fmt` 가져오기
 
-// A structure holding two numbers. `Debug` will be derived so the results can
-// be contrasted with `Display`.
+// 두 숫자를 보유하는 구조체입니다. `Display`와 대조해 볼 수 있도록
+// `Debug`를 유도(derive)할 것입니다.
 #[derive(Debug)]
 struct MinMax(i64, i64);
 
-// Implement `Display` for `MinMax`.
+// `MinMax`에 대해 `Display`를 구현합니다.
 impl fmt::Display for MinMax {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
-        // Use `self.number` to refer to each positional data point.
+        // 각 위치별 데이터 지점을 참조하기 위해 `self.number`를 사용합니다.
         write!(f, "({}, {})", self.0, self.1)
     }
 }
 
-// Define a structure where the fields are nameable for comparison.
+// 비교를 위해 필드에 이름을 붙일 수 있는 구조체를 정의합니다.
 #[derive(Debug)]
 struct Point2D {
     x: f64,
     y: f64,
 }
 
-// Similarly, implement `Display` for `Point2D`.
+// 마찬가지로, `Point2D`에 대해 `Display`를 구현합니다.
 impl fmt::Display for Point2D {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
-        // Customize so only `x` and `y` are denoted.
+        // `x`와 `y`만 표시되도록 커스터마이징합니다.
         write!(f, "x: {}, y: {}", self.x, self.y)
     }
 }
@@ -326,49 +318,44 @@ impl fmt::Display for Point2D {
 fn main() {
     let minmax = MinMax(0, 14);
 
-    println!("Compare structures:");
-    println!("Display: {}", minmax);
-    println!("Debug: {:?}", minmax);
+    println!("구조체 비교:");
+    println!("디스플레이: {}", minmax);
+    println!("디버그: {:?}", minmax);
 
     let big_range =   MinMax(-300, 300);
     let small_range = MinMax(-3, 3);
 
-    println!("The big range is {big} and the small is {small}",
+    println!("큰 범위는 {big}이고 작은 범위는 {small}입니다.",
              small = small_range,
              big = big_range);
 
     let point = Point2D { x: 3.3, y: 7.2 };
 
-    println!("Compare points:");
-    println!("Display: {}", point);
-    println!("Debug: {:?}", point);
+    println!("좌표 비교:");
+    println!("디스플레이: {}", point);
+    println!("디버그: {:?}", point);
 
-    // Error. Both `Debug` and `Display` were implemented, but `{:b}`
-    // requires `fmt::Binary` to be implemented. This will not work.
-    // println!("What does Point2D look like in binary: {:b}?", point);
+    // 에러. `Debug`와 `Display`는 모두 구현되었지만, `{:b}`는
+    // `fmt::Binary` 구현을 요구합니다. 이것은 작동하지 않을 것입니다.
+    // println!("Point2D의 2진수 형태는 무엇일까요: {:b}?", point);
 }</code></pre>
-<p>So, <code>fmt::Display</code> has been implemented but <code>fmt::Binary</code> has not, and therefore
-cannot be used. <code>std::fmt</code> has many such <a href="https://doc.rust-lang.org/std/fmt/#formatting-traits"><code>traits</code></a> and each requires
-its own implementation. This is detailed further in <a href="https://doc.rust-lang.org/std/fmt/"><code>std::fmt</code></a>.</p>
-<h3 id="activity"><a class="header" href="#activity">Activity</a></h3>
-<p>After checking the output of the above example, use the <code>Point2D</code> struct as a
-guide to add a <code>Complex</code> struct to the example. When printed in the same
-way, the output should be:</p>
+<p>따라서, <code>fmt::Display</code>는 구현되었지만 <code>fmt::Binary</code>는 구현되지 않았으므로 사용할 수 없습니다. <code>std::fmt</code>에는 이와 같은 많은 <a href="https://doc.rust-lang.org/std/fmt/#formatting-traits"><code>트레이트</code></a>가 있으며 각각은 자체적인 구현을 요구합니다. 이에 대한 자세한 내용은 <a href="https://doc.rust-lang.org/std/fmt/"><code>std::fmt</code></a>에 나와 있습니다.</p>
+<h3 id="실습"><a class="header" href="#실습">실습</a></h3>
+<p>위 예제의 출력을 확인한 후, <code>Point2D</code> 구조체를 가이드로 삼아 예제에 <code>Complex</code> 구조체를 추가해 보세요. 같은 방식으로 출력했을 때의 결과는 다음과 같아야 합니다:</p>
 <pre><code class="language-txt">Display: 3.3 +7.2i
 Debug: Complex { real: 3.3, imag: 7.2 }
 
 Display: 4.7 -2.3i
 Debug: Complex { real: 4.7, imag: -2.3 }
 </code></pre>
-<p>Bonus: Add a space before the <code>+</code>/<code>-</code> signs.</p>
-<p>Hints in case you get stuck:</p>
+<p>보너스: <code>+</code>/<code>-</code> 기호 앞에 공백을 추가하세요.</p>
+<p>막혔을 때를 위한 힌트:</p>
 <ul>
-<li>Check the documentation for <a href="https://doc.rust-lang.org/std/fmt/#sign0"><code>Sign/#/0</code></a> in <code>std::fmt</code>.</li>
-<li>Bonus: Check <a href="../../flow_control/if_else.html"><code>if</code>-<code>else</code></a> branching and the <a href="https://doc.rust-lang.org/std/primitive.f64.html#method.abs"><code>abs</code></a> function.</li>
+<li><code>std::fmt</code>에서 <a href="https://doc.rust-lang.org/std/fmt/#sign0"><code>Sign/#/0</code></a>에 대한 문서를 확인하세요.</li>
+<li>보너스: <a href="../../flow_control/if_else.html"><code>if</code>-<code>else</code></a> 분기와 <a href="https://doc.rust-lang.org/std/primitive.f64.html#method.abs"><code>abs</code></a> 함수를 확인하세요.</li>
 </ul>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../trait/derive.html"><code>derive</code></a>, <a href="https://doc.rust-lang.org/std/fmt/"><code>std::fmt</code></a>, <a href="../../macros.html"><code>macros</code></a>, <a href="../../custom_types/structs.html"><code>struct</code></a>,
-<a href="https://doc.rust-lang.org/std/fmt/#formatting-traits"><code>trait</code></a>, and <a href="../../mod/use.html"><code>use</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../trait/derive.html"><code>derive</code></a>, <a href="https://doc.rust-lang.org/std/fmt/"><code>std::fmt</code></a>, <a href="../../macros.html"><code>매크로</code></a>, <a href="../../custom_types/structs.html"><code>구조체</code></a>, <a href="https://doc.rust-lang.org/std/fmt/#formatting-traits"><code>트레이트</code></a>, 그리고 <a href="../../mod/use.html"><code>use</code></a></p>
 
                     </main>
 

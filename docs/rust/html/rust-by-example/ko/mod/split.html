@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>File hierarchy - Rust By Example</title>
+        <title>파일 계층 구조 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,9 +255,8 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="file-hierarchy"><a class="header" href="#file-hierarchy">File hierarchy</a></h1>
-<p>Modules can be mapped to a file/directory hierarchy. Let’s break down the
-<a href="visibility.html">visibility example</a> in files:</p>
+                        <h1 id="파일-계층-구조"><a class="header" href="#파일-계층-구조">파일 계층 구조</a></h1>
+<p>모듈은 파일/디렉토리 계층 구조에 매핑될 수 있습니다. <a href="visibility.html">가시성 예제</a>를 파일별로 나누어 봅시다:</p>
 <pre><code class="language-shell">$ tree .
 .
 ├── my
@@ -263,13 +265,13 @@
 ├── my.rs
 └── split.rs
 </code></pre>
-<p>In <code>split.rs</code>:</p>
-<pre><code class="language-rust ignore">// This declaration will look for a file named `my.rs` and will
-// insert its contents inside a module named `my` under this scope
+<p><code>split.rs</code>에서:</p>
+<pre><code class="language-rust ignore">// 이 선언은 `my.rs`라는 파일을 찾아 그 내용을
+// 이 스코프 아래의 `my`라는 이름의 모듈로 삽입할 것입니다
 mod my;
 
 fn function() {
-    println!("called `function()`");
+    println!("`function()` 호출됨");
 }
 
 fn main() {
@@ -282,41 +284,41 @@ fn main() {
     my::nested::function();
 }
 </code></pre>
-<p>In <code>my.rs</code>:</p>
-<pre><code class="language-rust ignore">// Similarly `mod inaccessible` and `mod nested` will locate the `nested.rs`
-// and `inaccessible.rs` files and insert them here under their respective
-// modules
+<p><code>my.rs</code>에서:</p>
+<pre><code class="language-rust ignore">// 마찬가지로 `mod inaccessible`과 `mod nested`는 `nested.rs`와
+// `inaccessible.rs` 파일을 찾아 각각의 모듈 아래에
+// 삽입할 것입니다
 mod inaccessible;
 pub mod nested;
 
 pub fn function() {
-    println!("called `my::function()`");
+    println!("`my::function()` 호출됨");
 }
 
 fn private_function() {
-    println!("called `my::private_function()`");
+    println!("`my::private_function()` 호출됨");
 }
 
 pub fn indirect_access() {
-    print!("called `my::indirect_access()`, that\n&gt; ");
+    print!("`my::indirect_access()` 호출됨, 결과는\n&gt; ");
 
     private_function();
 }</code></pre>
-<p>In <code>my/nested.rs</code>:</p>
+<p><code>my/nested.rs</code>에서:</p>
 <pre><code class="language-rust ignore">pub fn function() {
-    println!("called `my::nested::function()`");
+    println!("`my::nested::function()` 호출됨");
 }
 
 #[allow(dead_code)]
 fn private_function() {
-    println!("called `my::nested::private_function()`");
+    println!("`my::nested::private_function()` 호출됨");
 }</code></pre>
-<p>In <code>my/inaccessible.rs</code>:</p>
+<p><code>my/inaccessible.rs</code>에서:</p>
 <pre><code class="language-rust ignore">#[allow(dead_code)]
 pub fn public_function() {
-    println!("called `my::inaccessible::public_function()`");
+    println!("`my::inaccessible::public_function()` 호출됨");
 }</code></pre>
-<p>Let’s check that things still work as before:</p>
+<p>모든 것이 이전과 같이 여전히 잘 작동하는지 확인해 봅시다:</p>
 <pre><code class="language-shell">$ rustc split.rs &amp;&amp; ./split
 called `my::function()`
 called `function()`

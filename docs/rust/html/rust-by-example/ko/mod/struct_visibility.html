@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Struct visibility - Rust By Example</title>
+        <title>구조체 가시성 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,24 +255,21 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="struct-visibility"><a class="header" href="#struct-visibility">Struct visibility</a></h1>
-<p>Structs have an extra level of visibility with their fields. The visibility
-defaults to private, and can be overridden with the <code>pub</code> modifier. This
-visibility only matters when a struct is accessed from outside the module
-where it is defined, and has the goal of hiding information (encapsulation).</p>
+                        <h1 id="구조체-가시성"><a class="header" href="#구조체-가시성">구조체 가시성</a></h1>
+<p>구조체는 필드에 대해 추가적인 수준의 가시성을 가집니다. 가시성은 기본적으로 비공개이며, <code>pub</code> 수식어로 재정의할 수 있습니다. 이 가시성은 구조체가 정의된 모듈 외부에서 접근할 때만 의미가 있으며, 정보를 숨기는 것(캡슐화)이 목적입니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">mod my {
-    // A public struct with a public field of generic type `T`
+    // 제네릭 타입 `T`의 공개 필드를 가진 공개 구조체
     pub struct OpenBox&lt;T&gt; {
         pub contents: T,
     }
 
-    // A public struct with a private field of generic type `T`
+    // 제네릭 타입 `T`의 비공개 필드를 가진 공개 구조체
     pub struct ClosedBox&lt;T&gt; {
         contents: T,
     }
 
     impl&lt;T&gt; ClosedBox&lt;T&gt; {
-        // A public constructor method
+        // 공개 생성자 메서드
         pub fn new(contents: T) -&gt; ClosedBox&lt;T&gt; {
             ClosedBox {
                 contents: contents,
@@ -279,28 +279,27 @@ where it is defined, and has the goal of hiding information (encapsulation).</p>
 }
 
 fn main() {
-    // Public structs with public fields can be constructed as usual
-    let open_box = my::OpenBox { contents: "public information" };
+    // 공개 필드를 가진 공개 구조체는 평소처럼 생성할 수 있습니다
+    let open_box = my::OpenBox { contents: "공개 정보" };
 
-    // and their fields can be normally accessed.
-    println!("The open box contains: {}", open_box.contents);
+    // 그리고 그 필드들에 정상적으로 접근할 수 있습니다.
+    println!("열린 박스 내용물: {}", open_box.contents);
 
-    // Public structs with private fields cannot be constructed using field names.
-    // Error! `ClosedBox` has private fields
-    //let closed_box = my::ClosedBox { contents: "classified information" };
-    // TODO ^ Try uncommenting this line
+    // 비공개 필드를 가진 공개 구조체는 필드 이름을 사용하여 생성할 수 없습니다.
+// 에러! `ClosedBox`에 비공개 필드가 있습니다
+// let closed_box = my::ClosedBox { contents: "classified information" };
+// TODO ^ 이 줄의 주석을 해제해 보세요
 
-    // However, structs with private fields can be created using
-    // public constructors
-    let _closed_box = my::ClosedBox::new("classified information");
+    // 하지만 비공개 필드를 가진 구조체는 공개 생성자를 통해 생성할 수 있습니다
+    let _closed_box = my::ClosedBox::new("기밀 정보");
 
-    // and the private fields of a public struct cannot be accessed.
-    // Error! The `contents` field is private
-    //println!("The closed box contains: {}", _closed_box.contents);
-    // TODO ^ Try uncommenting this line
+    // 그리고 공개 구조체의 비공개 필드에는 접근할 수 없습니다.
+// 에러! `contents` 필드는 비공개입니다
+// println!("닫힌 박스 내용물: {}", _closed_box.contents);
+// TODO ^ 이 줄의 주석을 해제해 보세요
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../generics.html">generics</a> and <a href="../fn/methods.html">methods</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../generics.html">제네릭</a> 및 <a href="../fn/methods.html">메서드</a></p>
 
                     </main>
 

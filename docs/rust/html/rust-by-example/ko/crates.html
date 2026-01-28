@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Crates - Rust By Example</title>
+        <title>크레이트 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-61902a00.js"></script>
+        <script src="toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,16 +255,9 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="crates"><a class="header" href="#crates">Crates</a></h1>
-<p>A crate is a compilation unit in Rust. Whenever <code>rustc some_file.rs</code> is called,
-<code>some_file.rs</code> is treated as the <em>crate file</em>. If <code>some_file.rs</code> has <code>mod</code>
-declarations in it, then the contents of the module files would be inserted in
-places where <code>mod</code> declarations in the crate file are found, <em>before</em> running
-the compiler over it. In other words, modules do <em>not</em> get compiled
-individually, only crates get compiled.</p>
-<p>A crate can be compiled into a binary or into a library. By default, <code>rustc</code>
-will produce a binary from a crate. This behavior can be overridden by passing
-the <code>--crate-type</code> flag to <code>lib</code>.</p>
+                        <h1 id="크레이트"><a class="header" href="#크레이트">크레이트</a></h1>
+<p>크레이트(crate)는 Rust의 컴파일 단위입니다. <code>rustc some_file.rs</code>가 호출될 때마다 <code>some_file.rs</code>는 _크레이트 파일_로 처리됩니다. 만약 <code>some_file.rs</code> 내부에 <code>mod</code> 선언이 있다면, 컴파일러가 실행되기 _전_에 크레이트 파일에서 <code>mod</code> 선언이 발견된 위치에 모듈 파일의 내용이 삽입됩니다. 즉, 모듈은 개별적으로 컴파일되지 않으며 오직 크레이트만 컴파일됩니다.</p>
+<p>크레이트는 바이너리 또는 라이브러리로 컴파일될 수 있습니다. 기본적으로 <code>rustc</code>는 크레이트로부터 바이너리를 생성합니다. 이 동작은 <code>--crate-type</code> 플래그에 <code>lib</code>을 전달하여 재정의할 수 있습니다.</p>
 
                     </main>
 

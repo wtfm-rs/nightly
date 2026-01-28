@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Conversion - Rust By Example</title>
+        <title>타입 변환 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-61902a00.js"></script>
+        <script src="toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,13 +255,9 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="conversion"><a class="header" href="#conversion">Conversion</a></h1>
-<p>Primitive types can be converted to each other through <a href="types/cast.html">casting</a>.</p>
-<p>Rust addresses conversion between custom types (i.e., <code>struct</code> and <code>enum</code>)
-by the use of <a href="trait.html">traits</a>. The generic
-conversions will use the <a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From</code></a> and <a href="https://doc.rust-lang.org/std/convert/trait.Into.html"><code>Into</code></a> traits. However there are more
-specific ones for the more common cases, in particular when converting to and
-from <code>String</code>s.</p>
+                        <h1 id="타입-변환"><a class="header" href="#타입-변환">타입 변환</a></h1>
+<p>기본 타입들은 <a href="types/cast.html">캐스팅(casting)</a>을 통해 서로 변환될 수 있습니다.</p>
+<p>Rust는 <a href="trait.html">트레이트(traits)</a>를 사용하여 사용자 정의 타입(예: <code>struct</code>, <code>enum</code>) 간의 변환을 처리합니다. 범용 변환에는 <a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From</code></a>과 <a href="https://doc.rust-lang.org/std/convert/trait.Into.html"><code>Into</code></a> 트레이트를 사용합니다. 하지만 더 흔한 경우, 특히 <code>String</code>과의 상호 변환을 위한 더 구체적인 트레이트들이 존재합니다.</p>
 
                     </main>
 

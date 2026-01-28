@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Mutability - Rust By Example</title>
+        <title>가변성 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,24 +255,23 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="mutability"><a class="header" href="#mutability">Mutability</a></h1>
-<p>Variable bindings are immutable by default, but this can be overridden using
-the <code>mut</code> modifier.</p>
+                        <h1 id="가변성"><a class="header" href="#가변성">가변성</a></h1>
+<p>변수 바인딩은 기본적으로 불변(immutable)이지만, <code>mut</code> 수식어를 사용하여 이를 재정의할 수 있습니다.</p>
 <pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">fn main() {
     let _immutable_binding = 1;
     let mut mutable_binding = 1;
 
-    println!("Before mutation: {}", mutable_binding);
+    println!("변경 전: {}", mutable_binding);
 
-    // Ok
+    // 좋습니다
     mutable_binding += 1;
 
-    println!("After mutation: {}", mutable_binding);
+    println!("변경 후: {}", mutable_binding);
 
-    // Error! Cannot assign a new value to an immutable variable
+    // 에러! 불변 변수에는 새로운 값을 할당할 수 없습니다
     _immutable_binding += 1;
 }</code></pre>
-<p>The compiler will throw a detailed diagnostic about mutability errors.</p>
+<p>컴파일러는 가변성 에러에 대해 상세한 진단을 제공할 것입니다.</p>
 
                     </main>
 

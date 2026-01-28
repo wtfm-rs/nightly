@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Wrapping errors - Rust By Example</title>
+        <title>에러 감싸기 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,8 +255,8 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="wrapping-errors"><a class="header" href="#wrapping-errors">Wrapping errors</a></h1>
-<p>An alternative to boxing errors is to wrap them in your own error type.</p>
+                        <h1 id="에러-감싸기"><a class="header" href="#에러-감싸기">에러 감싸기</a></h1>
+<p>에러를 박싱하는 것의 대안은 에러를 여러분만의 에러 타입으로 감싸는 것입니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::error;
 use std::error::Error;
 use std::num::ParseIntError;
@@ -264,8 +267,8 @@ type Result&lt;T&gt; = std::result::Result&lt;T, DoubleError&gt;;
 #[derive(Debug)]
 enum DoubleError {
     EmptyVec,
-    // We will defer to the parse error implementation for their error.
-    // Supplying extra info requires adding more data to the type.
+    // 파싱 에러에 대해서는 해당 에러 구현에 위임할 것입니다.
+// 추가 정보를 제공하려면 타입에 더 많은 데이터를 추가해야 합니다.
     Parse(ParseIntError),
 }
 
@@ -273,11 +276,11 @@ impl fmt::Display for DoubleError {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
         match *self {
             DoubleError::EmptyVec =&gt;
-                write!(f, "please use a vector with at least one element"),
-            // The wrapped error contains additional information and is available
-            // via the source() method.
+                write!(f, "최소한 하나의 요소를 가진 벡터를 사용하세요"),
+            // 감싸진 에러는 추가 정보를 포함하며 `source()` 메서드를 통해
+// 사용할 수 있습니다.
             DoubleError::Parse(..) =&gt;
-                write!(f, "the provided string could not be parsed as int"),
+                write!(f, "제공된 문자열을 정수로 파싱할 수 없습니다"),
         }
     }
 }
@@ -286,17 +289,17 @@ impl error::Error for DoubleError {
     fn source(&amp;self) -&gt; Option&lt;&amp;(dyn error::Error + 'static)&gt; {
         match *self {
             DoubleError::EmptyVec =&gt; None,
-            // The cause is the underlying implementation error type. Is implicitly
-            // cast to the trait object `&amp;error::Error`. This works because the
-            // underlying type already implements the `Error` trait.
+            // 원인은 기저 구현 에러 타입입니다. 이는 트레이트 객체 `&amp;error::Error`로
+// 암시적으로 캐스팅됩니다. 기저 타입이 이미 `Error` 트레이트를
+// 구현하고 있기 때문에 작동합니다.
             DoubleError::Parse(ref e) =&gt; Some(e),
         }
     }
 }
 
-// Implement the conversion from `ParseIntError` to `DoubleError`.
-// This will be automatically called by `?` if a `ParseIntError`
-// needs to be converted into a `DoubleError`.
+// `ParseIntError`에서 `DoubleError`로의 변환을 구현합니다.
+// `ParseIntError`를 `DoubleError`로 변환해야 할 때 `?`에 의해
+// 자동으로 호출됩니다.
 impl From&lt;ParseIntError&gt; for DoubleError {
     fn from(err: ParseIntError) -&gt; DoubleError {
         DoubleError::Parse(err)
@@ -305,8 +308,8 @@ impl From&lt;ParseIntError&gt; for DoubleError {
 
 fn double_first(vec: Vec&lt;&amp;str&gt;) -&gt; Result&lt;i32&gt; {
     let first = vec.first().ok_or(DoubleError::EmptyVec)?;
-    // Here we implicitly use the `ParseIntError` implementation of `From` (which
-    // we defined above) in order to create a `DoubleError`.
+    // 여기서 우리는 `DoubleError`를 생성하기 위해 (위에서 정의한)
+// `From`의 `ParseIntError` 구현을 암시적으로 사용합니다.
     let parsed = first.parse::&lt;i32&gt;()?;
 
     Ok(2 * parsed)
@@ -314,11 +317,11 @@ fn double_first(vec: Vec&lt;&amp;str&gt;) -&gt; Result&lt;i32&gt; {
 
 fn print(result: Result&lt;i32&gt;) {
     match result {
-        Ok(n)  =&gt; println!("The first doubled is {}", n),
+        Ok(n)  =&gt; println!("두 배가 된 첫 번째 값은 {}입니다", n),
         Err(e) =&gt; {
-            println!("Error: {}", e);
+            println!("에러: {}", e);
             if let Some(source) = e.source() {
-                println!("  Caused by: {}", source);
+                println!("  원인: {}", source);
             }
         },
     }
@@ -327,18 +330,16 @@ fn print(result: Result&lt;i32&gt;) {
 fn main() {
     let numbers = vec!["42", "93", "18"];
     let empty = vec![];
-    let strings = vec!["tofu", "93", "18"];
+    let strings = vec!["두부", "93", "18"];
 
     print(double_first(numbers));
     print(double_first(empty));
     print(double_first(strings));
 }</code></pre>
-<p>This adds a bit more boilerplate for handling errors and might not be needed in
-all applications. There are some libraries that can take care of the boilerplate
-for you.</p>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From::from</code></a> and <a href="../../custom_types/enum.html"><code>Enums</code></a></p>
-<p><a href="https://crates.io/keywords/error-handling"><code>Crates for handling errors</code></a></p>
+<p>이는 에러 처리를 위해 상용구(boilerplate) 코드를 조금 더 추가하며, 모든 애플리케이션에서 필요하지는 않을 수 있습니다. 상용구 코드를 대신 처리해 주는 몇몇 라이브러리들이 있습니다.</p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From::from</code></a>과 <a href="../../custom_types/enum.html">열거형(Enums)</a></p>
+<p><a href="https://crates.io/keywords/error-handling">에러 처리를 위한 크레이트들</a></p>
 
                     </main>
 

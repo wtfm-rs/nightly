@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Lifetimes - Rust By Example</title>
+        <title>라이프타임 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,41 +255,32 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="lifetimes"><a class="header" href="#lifetimes">Lifetimes</a></h1>
-<p>A <em>lifetime</em> is a construct the compiler (or more specifically, its <em>borrow
-checker</em>) uses to ensure all borrows are valid. Specifically, a variable’s
-lifetime begins when it is created and ends when it is destroyed. While
-lifetimes and scopes are often referred to together, they are not the same.</p>
-<p>Take, for example, the case where we borrow a variable via <code>&amp;</code>. The
-borrow has a lifetime that is determined by where it is declared. As a result,
-the borrow is valid as long as it ends before the lender is destroyed. However,
-the scope of the borrow is determined by where the reference is used.</p>
-<p>In the following example and in the rest of this section, we will see how
-lifetimes relate to scopes, as well as how the two differ.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// Lifetimes are annotated below with lines denoting the creation
-// and destruction of each variable.
-// `i` has the longest lifetime because its scope entirely encloses
-// both `borrow1` and `borrow2`. The duration of `borrow1` compared
-// to `borrow2` is irrelevant since they are disjoint.
+                        <h1 id="라이프타임"><a class="header" href="#라이프타임">라이프타임</a></h1>
+<p>_라이프타임(lifetime)_은 컴파일러(더 구체적으로는 <em>빌림 검사기</em>)가 모든 빌림이 유효한지 확인하기 위해 사용하는 구성 요소입니다. 구체적으로, 변수의 라이프타임은 생성될 때 시작하고 파괴될 때 끝납니다. 라이프타임과 스코프는 종종 함께 언급되지만, 같은 것은 아닙니다.</p>
+<p>예를 들어, <code>&amp;</code>를 통해 변수를 빌리는 경우를 생각해 봅시다. 빌림은 선언된 위치에 따라 결정되는 라이프타임을 가집니다. 결과적으로 빌림은 빌려준 대상이 파괴되기 전에 끝나는 한 유효합니다. 하지만 빌림의 스코프는 참조가 사용되는 위치에 따라 결정됩니다.</p>
+<p>다음 예제와 이 섹션의 나머지 부분에서 라이프타임이 스코프와 어떻게 관련되어 있는지, 그리고 두 가지가 어떻게 다른지 살펴보겠습니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 아래에는 각 변수의 생성과 파괴를 나타내는 선으로 라이프타임이 주석 처리되어 있습니다.
+// `i`의 스코프가 `borrow1`과 `borrow2`를 완전히 감싸고 있기 때문에
+// `i`는 가장 긴 라이프타임을 가집니다. `borrow1`과 `borrow2`는 서로 겹치지 않으므로
+// 둘의 기간 비교는 무의미합니다.
 fn main() {
-    let i = 3; // Lifetime for `i` starts. ────────────────┐
+    let i = 3; // `i`의 라이프타임 시작. ──────────────────┐
     //                                                     │
     { //                                                   │
-        let borrow1 = &amp;i; // `borrow1` lifetime starts. ──┐│
+        let borrow1 = &amp;i; // `borrow1` 라이프타임 시작. ──┐│
         //                                                ││
         println!("borrow1: {}", borrow1); //              ││
-    } // `borrow1` ends. ─────────────────────────────────┘│
+    } // `borrow1` 끝. ───────────────────────────────────┘│
     //                                                     │
     //                                                     │
     { //                                                   │
-        let borrow2 = &amp;i; // `borrow2` lifetime starts. ──┐│
+        let borrow2 = &amp;i; // `borrow2` 라이프타임 시작. ──┐│
         //                                                ││
         println!("borrow2: {}", borrow2); //              ││
-    } // `borrow2` ends. ─────────────────────────────────┘│
+    } // `borrow2` 끝. ───────────────────────────────────┘│
     //                                                     │
-}   // Lifetime ends. ─────────────────────────────────────┘</code></pre>
-<p>Note that no names or types are assigned to label lifetimes.
-This restricts how lifetimes will be able to be used as we will see.</p>
+}   // 라이프타임 끝. ─────────────────────────────────────┘</code></pre>
+<p>레이블 라이프타임에는 이름이나 타입이 할당되지 않는다는 점에 유의하세요. 이는 앞으로 보게 될 것처럼 라이프타임을 사용하는 방식에 제한을 줍니다.</p>
 
                     </main>
 

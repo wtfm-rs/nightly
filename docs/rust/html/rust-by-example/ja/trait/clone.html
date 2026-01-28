@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,7 +110,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-16ffbbfa.js";
+            window.path_to_searchindex_js = "../searchindex-8c1736ca.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5df99dd2.js"></script>
@@ -252,21 +255,32 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="クローン"><a class="header" href="#クローン">クローン</a></h1>
+                        <h1 id="clone-and-copy"><a class="header" href="#clone-and-copy">Clone and Copy</a></h1>
 <p>メモリ上の資源を扱う際、変数束縛や関数呼び出しを介して移動させるのがデフォルトの挙動です。しかしながら、場合によっては資源のコピーを作るのが適切なこともあります。</p>
 <p><a href="https://doc.rust-lang.org/std/clone/trait.Clone.html"><code>Clone</code></a>トレイトはまさにこのためにあります。普通は<code>Clone</code>トレイトで定義されている<code>.clone()</code>を用います。</p>
-<pre class="playground"><code class="language-rust editable edition2021">// いかなる資源も持たない構造体
+<h2 id="copy-implicit-cloning"><a class="header" href="#copy-implicit-cloning">Copy: Implicit Cloning</a></h2>
+<p>The <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html"><code>Copy</code></a> trait allows a type to be duplicated simply by copying bits, with no additional logic required. When a type implements <code>Copy</code>, assignments and function calls will implicitly copy the value instead of moving it.</p>
+<p><strong>Important:</strong> <code>Copy</code> requires <code>Clone</code> - any type that implements <code>Copy</code> must also implement <code>Clone</code>. This is because <code>Copy</code> is defined as a subtrait: <code>trait Copy: Clone {}</code>. The <code>Clone</code> implementation for <code>Copy</code> types simply copies the bits.</p>
+<p>Not all types can implement <code>Copy</code>. A type can only be <code>Copy</code> if:</p>
+<ul>
+<li>All of its components are <code>Copy</code></li>
+<li>It doesn’t manage external resources (like heap memory, file handles, etc.)</li>
+</ul>
+<pre class="playground"><code class="language-rust editable edition2021">// A unit struct without resources
+// Note: Copy requires Clone, so we must derive both
 #[derive(Debug, Clone, Copy)]
 struct Unit;
 
-// `Clone`トレイトを実装する型の変数を資源として持つタプル
+// A tuple struct with resources that implements the `Clone` trait
+// This CANNOT be Copy because Box&lt;T&gt; is not Copy
 #[derive(Clone, Debug)]
 struct Pair(Box&lt;i32&gt;, Box&lt;i32&gt;);
 
 fn main() {
     // `Unit`のインスタンスを作成。
     let unit = Unit;
-    // `Unit`をコピー、移動させる資源は存在しません。
+    // Copy `Unit` - this is an implicit copy, not a move!
+    // Because Unit implements Copy, the value is duplicated automatically
     let copied_unit = unit;
 
     // いずれの`Unit`も独立に使用できます。
@@ -277,7 +291,8 @@ fn main() {
     let pair = Pair(Box::new(1), Box::new(2));
     println!("original: {:?}", pair);
 
-    // `pair`を`moved_pair`に移動、資源は移動します。
+    // Move `pair` into `moved_pair`, moves resources
+    // Pair does not implement Copy, so this is a move
     let moved_pair = pair;
     println!("moved: {:?}", moved_pair);
 
@@ -285,7 +300,8 @@ fn main() {
     //println!("original: {:?}", pair);
     // TODO ^ この行をアンコメントしてみましょう。
 
-    // `moved_pair`を`cloned_pair`にクローンします。（資源もクローンされます。）
+    // Clone `moved_pair` into `cloned_pair` (resources are included)
+    // Unlike Copy, Clone is explicit - we must call .clone()
     let cloned_pair = moved_pair.clone();
     // std::mem::dropを用いて元のpairをドロップします。
     drop(moved_pair);

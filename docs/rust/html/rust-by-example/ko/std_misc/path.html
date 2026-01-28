@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Path - Rust By Example</title>
+        <title>경로 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,50 +255,39 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="path"><a class="header" href="#path">Path</a></h1>
-<p>The <code>Path</code> type represents file paths in the underlying filesystem. Across all
-platforms there is a single <code>std::path::Path</code> that abstracts over
-platform-specific path semantics and separators. Bring it into scope with
-<code>use std::path::Path;</code> when needed.</p>
-<p>A <code>Path</code> can be created from an <code>OsStr</code>, and provides several methods to get
-information from the file/directory the path points to.</p>
-<p>A <code>Path</code> is immutable. The owned version of <code>Path</code> is <code>PathBuf</code>. The relation
-between <code>Path</code> and <code>PathBuf</code> is similar to that of <code>str</code> and <code>String</code>:
-a <code>PathBuf</code> can be mutated in-place, and can be dereferenced to a <code>Path</code>.</p>
-<p>Note that a <code>Path</code> is <em>not</em> internally represented as an UTF-8 string, but
-instead is stored as an <code>OsString</code>. Therefore, converting a <code>Path</code> to a <code>&amp;str</code>
-is <em>not</em> free and may fail (an <code>Option</code> is returned). However, a <code>Path</code> can be
-freely converted to an <code>OsString</code> or <code>&amp;OsStr</code> using <code>into_os_string</code> and
-<code>as_os_str</code>, respectively.</p>
+                        <h1 id="경로"><a class="header" href="#경로">경로</a></h1>
+<p><code>Path</code> 타입은 기저 파일 시스템의 파일 경로를 나타냅니다. 모든 플랫폼에 걸쳐 플랫폼별 경로 의미론과 구분자를 추상화하는 단일 <code>std::path::Path</code>가 존재합니다. 필요할 때 <code>use std::path::Path;</code>를 사용하여 스코프로 가져오세요.</p>
+<p><code>Path</code>는 <code>OsStr</code>로부터 생성될 수 있으며, 경로가 가리키는 파일/디렉터리로부터 정보를 얻기 위한 여러 메서드를 제공합니다.</p>
+<p><code>Path</code>는 불변(immutable)입니다. <code>Path</code>의 소유형(owned) 버전은 <code>PathBuf</code>입니다. <code>Path</code>와 <code>PathBuf</code>의 관계는 <code>str</code>과 <code>String</code>의 관계와 유사합니다. <code>PathBuf</code>는 그 자리에서 수정될 수 있으며, <code>Path</code>로 역참조(dereference)될 수 있습니다.</p>
+<p><code>Path</code>는 내부적으로 UTF-8 문자열로 표현되지 않고, 대신 <code>OsString</code>으로 저장됩니다. 따라서 <code>Path</code>를 <code>&amp;str</code>로 변환하는 것은 비용이 들며 실패할 수도 있습니다(<code>Option</code>이 반환됩니다). 하지만 <code>Path</code>는 각각 <code>into_os_string</code>과 <code>as_os_str</code>을 사용하여 <code>OsString</code>이나 <code>&amp;OsStr</code>로 자유롭게 변환될 수 있습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::path::Path;
 
 fn main() {
-    // Create a `Path` from an `&amp;'static str`
+    // &amp;'static str로부터 Path를 생성합니다
     let path = Path::new(".");
 
-    // The `display` method returns a `Display`able structure
+    // `display` 메서드는 `Display` 가능한 구조체를 반환합니다
     let _display = path.display();
 
-    // `join` merges a path with a byte container using the OS specific
-    // separator, and returns a `PathBuf`
+    // `join`은 OS 전용 구분자를 사용하여 경로를 바이트 컨테이너와 병합하고, `PathBuf`를 반환합니다.
     let mut new_path = path.join("a").join("b");
 
-    // `push` extends the `PathBuf` with a `&amp;Path`
+    // `push`는 `PathBuf`를 `&amp;Path`로 확장합니다
     new_path.push("c");
     new_path.push("myfile.tar.gz");
 
-    // `set_file_name` updates the file name of the `PathBuf`
+    // `set_file_name`은 `PathBuf`의 파일 이름을 업데이트합니다
     new_path.set_file_name("package.tgz");
 
-    // Convert the `PathBuf` into a string slice
+    // `PathBuf`를 문자열 슬라이스로 변환합니다
     match new_path.to_str() {
-        None =&gt; panic!("new path is not a valid UTF-8 sequence"),
-        Some(s) =&gt; println!("new path is {}", s),
+        None =&gt; panic!("새 경로가 유효한 UTF-8 시퀀스가 아닙니다"),
+        Some(s) =&gt; println!("새 경로는 {}입니다", s),
     }
 }</code></pre>
-<p>Be sure to check other <code>Path</code> methods and the <code>Metadata</code> struct.</p>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/std/ffi/struct.OsStr.html">OsStr</a> and <a href="https://doc.rust-lang.org/std/fs/struct.Metadata.html">Metadata</a>.</p>
+<p>다른 <code>Path</code> 메서드들과 <code>Metadata</code> 구조체도 반드시 확인해 보세요.</p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/std/ffi/struct.OsStr.html">OsStr</a>와 <a href="https://doc.rust-lang.org/std/fs/struct.Metadata.html">Metadata</a>.</p>
 
                     </main>
 

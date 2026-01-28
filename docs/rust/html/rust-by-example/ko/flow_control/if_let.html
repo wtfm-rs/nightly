@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,58 +256,57 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="if-let"><a class="header" href="#if-let">if let</a></h1>
-<p>For some use cases, when matching enums, <code>match</code> is awkward. For example:</p>
+<p>어떤 경우에는 열거형을 매칭할 때 <code>match</code>가 어색할 수 있습니다. 예를 들어:</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// Make `optional` of type `Option&lt;i32&gt;`
+</span>// `Option&lt;i32&gt;` 타입의 `optional` 생성
 let optional = Some(7);
 
 match optional {
-    Some(i) =&gt; println!("This is a really long string and `{:?}`", i),
+    Some(i) =&gt; println!("이것은 정말 긴 문자열이며 `{:?}`입니다", i),
     _ =&gt; {},
-    // ^ Required because `match` is exhaustive. Doesn't it seem
-    // like wasted space?
+    // ^ `match`는 철저해야(exhaustive) 하기 때문에 필요합니다. 공간 낭비처럼
+// 보이진 않나요?
 };
 
 <span class="boring">}</span></code></pre>
-<p><code>if let</code> is cleaner for this use case and in addition allows various
-failure options to be specified:</p>
+<p>이런 경우 <code>if let</code>이 더 깔끔하며, 추가로 다양한 실패 옵션을 지정할 수 있습니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
-    // All have type `Option&lt;i32&gt;`
+    // 모두 `Option&lt;i32&gt;` 타입입니다
     let number = Some(7);
     let letter: Option&lt;i32&gt; = None;
     let emoticon: Option&lt;i32&gt; = None;
 
-    // The `if let` construct reads: "if `let` destructures `number` into
-    // `Some(i)`, evaluate the block (`{}`).
+    // `if let` 구문은 다음과 같이 읽힙니다: "만약 `let`이 `number`를
+// `Some(i)`로 구조 분해한다면, 블록(`{}`)을 실행하라."
     if let Some(i) = number {
-        println!("Matched {:?}!", i);
+        println!("{:?}가 매칭되었습니다!", i);
     }
 
-    // If you need to specify a failure, use an else:
+    // 실패한 경우를 지정해야 한다면, else를 사용하세요:
     if let Some(i) = letter {
-        println!("Matched {:?}!", i);
+        println!("{:?}가 매칭되었습니다!", i);
     } else {
-        // Destructure failed. Change to the failure case.
-        println!("Didn't match a number. Let's go with a letter!");
+        // 구조 분해에 실패했습니다. 실패 사례로 전환합니다.
+        println!("숫자와 매칭되지 않았습니다. 문자로 해봅시다!");
     }
 
-    // Provide an altered failing condition.
+    // 변경된 실패 조건을 제공합니다.
     let i_like_letters = false;
 
     if let Some(i) = emoticon {
-        println!("Matched {:?}!", i);
-    // Destructure failed. Evaluate an `else if` condition to see if the
-    // alternate failure branch should be taken:
+        println!("{:?}가 매칭되었습니다!", i);
+    // 구조 분해에 실패했습니다. 다른 실패 분기를 타야 하는지
+// `else if` 조건을 평가합니다:
     } else if i_like_letters {
-        println!("Didn't match a number. Let's go with a letter!");
+        println!("숫자와 매칭되지 않았습니다. 문자로 해봅시다!");
     } else {
-        // The condition evaluated false. This branch is the default:
-        println!("I don't like letters. Let's go with an emoticon :)!");
+        // 조건이 거짓(false)으로 평가되었습니다. 이 분기가 기본입니다:
+        println!("문자는 별로예요. 이모티콘 :)으로 가봅시다!");
     }
 }</code></pre>
-<p>In the same way, <code>if let</code> can be used to match any enum value:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// Our example enum
+<p>같은 방식으로, <code>if let</code>은 모든 열거형 값을 매칭하는 데 사용될 수 있습니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 예제 열거형
 enum Foo {
     Bar,
     Baz,
@@ -312,50 +314,50 @@ enum Foo {
 }
 
 fn main() {
-    // Create example variables
+    // 예제 변수 생성
     let a = Foo::Bar;
     let b = Foo::Baz;
     let c = Foo::Qux(100);
 
-    // Variable a matches Foo::Bar
+    // 변수 a는 Foo::Bar와 매칭됩니다
     if let Foo::Bar = a {
-        println!("a is foobar");
+        println!("a는 foobar입니다");
     }
 
-    // Variable b does not match Foo::Bar
-    // So this will print nothing
+    // 변수 b는 Foo::Bar와 매칭되지 않습니다
+// 따라서 아무것도 출력되지 않습니다
     if let Foo::Bar = b {
-        println!("b is foobar");
+        println!("b는 foobar입니다");
     }
 
-    // Variable c matches Foo::Qux which has a value
-    // Similar to Some() in the previous example
+    // 변수 c는 값을 가진 Foo::Qux와 매칭됩니다
+// 앞선 예제의 Some()과 유사합니다
     if let Foo::Qux(value) = c {
-        println!("c is {}", value);
+        println!("c는 {}입니다", value);
     }
 
-    // Binding also works with `if let`
+    // 바인딩은 `if let`에서도 작동합니다
     if let Foo::Qux(value @ 100) = c {
-        println!("c is one hundred");
+        println!("c는 100입니다");
     }
 }</code></pre>
-<p>Another benefit is that <code>if let</code> allows us to match non-parameterized enum variants. This is true even in cases where the enum doesn’t implement or derive <code>PartialEq</code>. In such cases <code>if Foo::Bar == a</code> would fail to compile, because instances of the enum cannot be equated, however <code>if let</code> will continue to work.</p>
-<p>Would you like a challenge? Fix the following example to use <code>if let</code>:</p>
-<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// This enum purposely neither implements nor derives PartialEq.
-// That is why comparing Foo::Bar == a fails below.
+<p>또 다른 장점은 <code>if let</code>을 사용하면 파라미터가 없는 열거형 변체도 매칭할 수 있다는 점입니다. 이는 열거형이 <code>PartialEq</code>를 구현하거나 유도하지 않는 경우에도 마찬가지입니다. 이러한 경우 <code>if Foo::Bar == a</code>는 열거형 인스턴스를 비교할 수 없기 때문에 컴파일에 실패하지만, <code>if let</code>은 계속 작동합니다.</p>
+<p>도전해 보시겠습니까? 다음 예제를 <code>if let</code>을 사용하도록 수정해 보세요:</p>
+<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// 이 열거형은 의도적으로 PartialEq를 구현하거나 유도(derive)하지 않았습니다.
+// 그래서 아래에서 Foo::Bar == a 를 비교하는 것이 실패합니다.
 enum Foo {Bar}
 
 fn main() {
     let a = Foo::Bar;
 
-    // Variable a matches Foo::Bar
+    // 변수 a는 Foo::Bar와 매칭됩니다
     if Foo::Bar == a {
-    // ^-- this causes a compile-time error. Use `if let` instead.
-        println!("a is foobar");
+    // ^-- 이것은 컴파일 타임 에러를 발생시킵니다. 대신 `if let`을 사용하세요.
+        println!("a는 foobar입니다");
     }
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../custom_types/enum.html"><code>enum</code></a>, <a href="../std/option.html"><code>Option</code></a>, and the <a href="https://github.com/rust-lang/rfcs/pull/160">RFC</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../custom_types/enum.html"><code>enum</code></a>, <a href="../std/option.html"><code>Option</code></a>, 그리고 <a href="https://github.com/rust-lang/rfcs/pull/160">RFC</a></p>
 
                     </main>
 

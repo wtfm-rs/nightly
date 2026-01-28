@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>structs - Rust By Example</title>
+        <title>구조체 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../../toc-61902a00.js"></script>
+        <script src="../../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,47 +255,46 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="structs"><a class="header" href="#structs">structs</a></h1>
-<p>Similarly, a <code>struct</code> can be destructured as shown:</p>
+                        <h1 id="구조체"><a class="header" href="#구조체">구조체</a></h1>
+<p>마찬가지로, <code>struct</code>는 다음과 같이 구조 분해될 수 있습니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
     struct Foo {
         x: (u32, u32),
         y: u32,
     }
 
-    // Try changing the values in the struct to see what happens
+    // 구조체의 값을 변경하여 어떤 일이 일어나는지 확인해 보세요
     let foo = Foo { x: (1, 2), y: 3 };
 
     match foo {
-        Foo { x: (1, b), y } =&gt; println!("First of x is 1, b = {},  y = {} ", b, y),
+        Foo { x: (1, b), y } =&gt; println!("x의 첫 번째는 1이고, b = {}, y = {} 입니다", b, y),
 
-        // you can destructure structs and rename the variables,
-        // the order is not important
-        Foo { y: 2, x: i } =&gt; println!("y is 2, i = {:?}", i),
+        // 구조체를 구조 분해하고 변수 이름을 바꿀 수 있으며, 순서는 중요하지 않습니다
+        Foo { y: 2, x: i } =&gt; println!("y는 2이고, i = {:?}입니다", i),
 
-        // and you can also ignore some variables:
-        Foo { y, .. } =&gt; println!("y = {}, we don't care about x", y),
-        // this will give an error: pattern does not mention field `x`
-        //Foo { y } =&gt; println!("y = {}", y),
+        // 그리고 일부 변수를 무시할 수도 있습니다:
+        Foo { y, .. } =&gt; println!("y = {}이며, x는 신경 쓰지 않습니다", y),
+        // 이것은 에러를 발생시킵니다: 패턴에 `x` 필드가 언급되지 않았습니다
+//Foo { y } =&gt; println!("y = {}", y),
     }
 
     let faa = Foo { x: (1, 2), y: 3 };
 
-    // You do not need a match block to destructure structs:
+    // 구조체를 구조 분해하기 위해 반드시 match 블록이 필요한 것은 아닙니다:
     let Foo { x : x0, y: y0 } = faa;
-    println!("Outside: x0 = {x0:?}, y0 = {y0}");
+    println!("외부: x0 = {x0:?}, y0 = {y0}");
 
-    // Destructuring works with nested structs as well:
+    // 구조 분해는 중첩된 구조체에서도 작동합니다:
     struct Bar {
         foo: Foo,
     }
 
     let bar = Bar { foo: faa };
     let Bar { foo: Foo { x: nested_x, y: nested_y } } = bar;
-    println!("Nested: nested_x = {nested_x:?}, nested_y = {nested_y:?}");
+    println!("중첩됨: nested_x = {nested_x:?}, nested_y = {nested_y:?}");
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../../custom_types/structs.html">Structs</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../../custom_types/structs.html">구조체</a></p>
 
                     </main>
 

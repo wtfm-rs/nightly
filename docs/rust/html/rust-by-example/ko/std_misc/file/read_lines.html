@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,9 +256,8 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="read_lines"><a class="header" href="#read_lines"><code>read_lines</code></a></h1>
-<h2 id="a-naive-approach"><a class="header" href="#a-naive-approach">A naive approach</a></h2>
-<p>This might be a reasonable first attempt for a beginner’s first
-implementation for reading lines from a file.</p>
+<h2 id="단순한-접근-방식"><a class="header" href="#단순한-접근-방식">단순한 접근 방식</a></h2>
+<p>이는 초보자가 파일에서 줄을 읽기 위해 처음 시도해 볼 만한 합리적인 방식일 수 있습니다.</p>
 <pre class="playground"><code class="language-rust no_run edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::fs::read_to_string;
@@ -270,60 +272,52 @@ fn read_lines(filename: &amp;str) -&gt; Vec&lt;String&gt; {
     result
 }
 <span class="boring">}</span></code></pre>
-<p>Since the method <code>lines()</code> returns an iterator over the lines in the file,
-we can also perform a map inline and collect the results, yielding a more
-concise and fluent expression.</p>
+<p><code>lines()</code> 메서드가 파일의 줄들에 대한 이터레이터를 반환하므로, 인라인에서 <code>map</code>을 수행하고 결과를 <code>collect</code>하여 더 간결하고 유려한 표현식을 만들 수도 있습니다.</p>
 <pre class="playground"><code class="language-rust no_run edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::fs::read_to_string;
 
 fn read_lines(filename: &amp;str) -&gt; Vec&lt;String&gt; {
     read_to_string(filename)
-        .unwrap()  // panic on possible file-reading errors
-        .lines()  // split the string into an iterator of string slices
-        .map(String::from)  // make each slice into a string
-        .collect()  // gather them together into a vector
+        .unwrap()  // 발생 가능한 파일 읽기 에러에 대해 패닉을 일으킵니다
+        .lines()  // 문자열을 문자열 슬라이스 이터레이터로 분할합니다
+        .map(String::from)  // 각 슬라이스를 String으로 만듭니다
+        .collect()  // 이들을 벡터로 모읍니다
 }
 <span class="boring">}</span></code></pre>
-<p>Note that in both examples above, we must convert the <code>&amp;str</code> reference
-returned from <code>lines()</code> to the owned type <code>String</code>, using <code>.to_string()</code>
-and <code>String::from</code> respectively.</p>
-<h2 id="a-more-efficient-approach"><a class="header" href="#a-more-efficient-approach">A more efficient approach</a></h2>
-<p>Here we pass ownership of the open <code>File</code> to a <code>BufReader</code> struct. <code>BufReader</code> uses an internal
-buffer to reduce intermediate allocations.</p>
-<p>We also update <code>read_lines</code> to return an iterator instead of allocating new
-<code>String</code> objects in memory for each line.</p>
+<p>위의 두 예제 모두에서, <code>lines()</code>가 반환한 <code>&amp;str</code> 참조를 <code>.to_string()</code> 또는 <code>String::from</code>을 사용하여 소유형인 <code>String</code>으로 변환해야 한다는 점에 유의하세요.</p>
+<h2 id="더-효율적인-접근-방식"><a class="header" href="#더-효율적인-접근-방식">더 효율적인 접근 방식</a></h2>
+<p>여기서는 열려 있는 <code>File</code>의 소유권을 <code>BufReader</code> 구조체로 넘깁니다. <code>BufReader</code>는 내부 버퍼를 사용하여 중간 할당을 줄입니다.</p>
+<p>또한 각 줄마다 메모리에 새로운 <code>String</code> 객체를 할당하는 대신 이터레이터를 반환하도록 <code>read_lines</code>를 업데이트합니다.</p>
 <pre class="playground"><code class="language-rust no_run edition2021">use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
 
 fn main() {
-    // File hosts.txt must exist in the current path
+    // hosts.txt 파일이 현재 경로에 존재해야 합니다
     if let Ok(lines) = read_lines("./hosts.txt") {
-        // Consumes the iterator, returns an (Optional) String
+        // 이터레이터를 소비하여, (선택적인) String을 반환합니다
         for line in lines.map_while(Result::ok) {
             println!("{}", line);
         }
     }
 }
 
-// The output is wrapped in a Result to allow matching on errors.
-// Returns an Iterator to the Reader of the lines of the file.
+// 에러에 대한 매칭이 가능하도록 출력을 `Result`로 감쌉니다.
+// 파일의 각 줄을 읽어오는 이터레이터를 반환합니다.
 fn read_lines&lt;P&gt;(filename: P) -&gt; io::Result&lt;io::Lines&lt;io::BufReader&lt;File&gt;&gt;&gt;
 where P: AsRef&lt;Path&gt;, {
     let file = File::open(filename)?;
     Ok(io::BufReader::new(file).lines())
 }</code></pre>
-<p>Running this program simply prints the lines individually.</p>
+<p>이 프로그램을 실행하면 단순히 각 줄을 개별적으로 출력합니다.</p>
 <pre><code class="language-shell">$ echo -e "127.0.0.1\n192.168.0.1\n" &gt; hosts.txt
 $ rustc read_lines.rs &amp;&amp; ./read_lines
 127.0.0.1
 192.168.0.1
 </code></pre>
-<p>(Note that since <code>File::open</code> expects a generic <code>AsRef&lt;Path&gt;</code> as argument, we define our
-generic <code>read_lines()</code> method with the same generic constraint, using the <code>where</code> keyword.)</p>
-<p>This process is more efficient than creating a <code>String</code> in memory with all of the file’s
-contents. This can especially cause performance issues when working with larger files.</p>
+<p>(<code>File::open</code>이 인자로 제네릭 <code>AsRef&lt;Path&gt;</code>를 요구하므로, 우리의 제네릭 <code>read_lines()</code> 메서드도 <code>where</code> 키워드를 사용하여 동일한 제네릭 제약 조건을 정의한다는 점에 유의하세요.)</p>
+<p>이 과정은 파일의 모든 내용을 메모리에 <code>String</code>으로 생성하는 것보다 효율적입니다. 특히 대용량 파일을 다룰 때 메모리에 모두 올리는 방식은 성능 문제를 일으킬 수 있습니다.</p>
 
                     </main>
 

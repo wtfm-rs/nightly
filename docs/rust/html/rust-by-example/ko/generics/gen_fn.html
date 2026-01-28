@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Functions - Rust By Example</title>
+        <title>함수 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,54 +255,49 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
-<p>The same set of rules can be applied to functions: a type <code>T</code> becomes
-generic when preceded by <code>&lt;T&gt;</code>.</p>
-<p>Using generic functions sometimes requires explicitly specifying type
-parameters. This may be the case if the function is called where the return type
-is generic, or if the compiler doesn’t have enough information to infer
-the necessary type parameters.</p>
-<p>A function call with explicitly specified type parameters looks like:
-<code>fun::&lt;A, B, ...&gt;()</code>.</p>
-<pre class="playground"><code class="language-rust editable edition2021">struct A;          // Concrete type `A`.
-struct S(A);       // Concrete type `S`.
-struct SGen&lt;T&gt;(T); // Generic type `SGen`.
+                        <h1 id="함수"><a class="header" href="#함수">함수</a></h1>
+<p>함수에도 동일한 규칙이 적용될 수 있습니다: 타입 <code>T</code> 앞에 <code>&lt;T&gt;</code>가 붙으면 제네릭이 됩니다.</p>
+<p>제네릭 함수를 사용할 때 때로는 타입 파라미터를 명시적으로 지정해야 할 필요가 있습니다. 반환 타입이 제네릭인 곳에서 함수가 호출되거나, 컴파일러가 필요한 타입 파라미터를 추론하기에 충분한 정보를 가지고 있지 않은 경우가 이에 해당할 수 있습니다.</p>
+<p>명시적으로 지정된 타입 파라미터를 사용한 함수 호출은 다음과 같습니다: <code>fun::&lt;A, B, ...&gt;()</code>.</p>
+<pre class="playground"><code class="language-rust editable edition2021">struct A;          // 구체적인 타입 `A`.
+struct S(A);       // 구체적인 타입 `S`.
+struct SGen&lt;T&gt;(T); // 제네릭 타입 `SGen`.
 
-// The following functions all take ownership of the variable passed into
-// them and immediately go out of scope, freeing the variable.
+// 다음 함수들은 모두 전달된 변수의 소유권을 가져가며,
+// 즉시 스코프를 벗어나 변수를 해제합니다.
 
-// Define a function `reg_fn` that takes an argument `_s` of type `S`.
-// This has no `&lt;T&gt;` so this is not a generic function.
+// `S` 타입의 인자 `_s`를 받는 `reg_fn` 함수를 정의합니다.
+// `&lt;T&gt;`가 없으므로 이것은 제네릭 함수가 아닙니다.
 fn reg_fn(_s: S) {}
 
-// Define a function `gen_spec_t` that takes an argument `_s` of type `SGen&lt;T&gt;`.
-// It has been explicitly given the type parameter `A`, but because `A` has not
-// been specified as a generic type parameter for `gen_spec_t`, it is not generic.
+// `SGen&lt;T&gt;` 타입의 인자 `_s`를 받는 `gen_spec_t` 함수를 정의합니다.
+// 타입 파라미터 `A`가 명시적으로 주어졌지만, `A`가 `gen_spec_t`의
+// 제네릭 타입 파라미터로 지정되지 않았으므로, 이것은 제네릭이 아닙니다.
 fn gen_spec_t(_s: SGen&lt;A&gt;) {}
 
-// Define a function `gen_spec_i32` that takes an argument `_s` of type `SGen&lt;i32&gt;`.
-// It has been explicitly given the type parameter `i32`, which is a specific type.
-// Because `i32` is not a generic type, this function is also not generic.
+// `SGen&lt;i32&gt;` 타입의 인자 `_s`를 받는 `gen_spec_i32` 함수를 정의합니다.
+// 구체적인 타입인 `i32`가 타입 파라미터로 명시적으로 주어졌습니다.
+// `i32`는 제네릭 타입이 아니므로, 이 함수 또한 제네릭이 아닙니다.
 fn gen_spec_i32(_s: SGen&lt;i32&gt;) {}
 
-// Define a function `generic` that takes an argument `_s` of type `SGen&lt;T&gt;`.
-// Because `SGen&lt;T&gt;` is preceded by `&lt;T&gt;`, this function is generic over `T`.
+// `SGen&lt;T&gt;` 타입의 인자 `_s`를 받는 `generic` 함수를 정의합니다.
+// `SGen&lt;T&gt;` 앞에 `&lt;T&gt;`가 오기 때문에, 이 함수는 `T`에 대해 제네릭입니다.
 fn generic&lt;T&gt;(_s: SGen&lt;T&gt;) {}
 
 fn main() {
-    // Using the non-generic functions
-    reg_fn(S(A));          // Concrete type.
-    gen_spec_t(SGen(A));   // Implicitly specified type parameter `A`.
-    gen_spec_i32(SGen(6)); // Implicitly specified type parameter `i32`.
+    // 제네릭이 아닌 함수들 사용
+    reg_fn(S(A));          // 구체적인 타입.
+    gen_spec_t(SGen(A));   // 암시적으로 지정된 타입 파라미터 `A`.
+    gen_spec_i32(SGen(6)); // 암시적으로 지정된 타입 파라미터 `i32`.
 
-    // Explicitly specified type parameter `char` to `generic()`.
+    // `generic()`에 명시적으로 지정된 타입 파라미터 `char`.
     generic::&lt;char&gt;(SGen('a'));
 
-    // Implicitly specified type parameter `char` to `generic()`.
+    // `generic()`에 암시적으로 지정된 타입 파라미터 `char`.
     generic(SGen('c'));
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../fn.html">functions</a> and <a href="../custom_types/structs.html"><code>struct</code>s</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../fn.html">함수</a>와 <a href="../custom_types/structs.html"><code>struct</code></a></p>
 
                     </main>
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Alternate/custom key types - Rust By Example</title>
+        <title>대체/사용자 정의 키 타입 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,31 +255,21 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="alternatecustom-key-types"><a class="header" href="#alternatecustom-key-types">Alternate/custom key types</a></h1>
-<p>Any type that implements the <code>Eq</code> and <code>Hash</code> traits can be a key in <code>HashMap</code>.
-This includes:</p>
+                        <h1 id="대체사용자-정의-키-타입"><a class="header" href="#대체사용자-정의-키-타입">대체/사용자 정의 키 타입</a></h1>
+<p><code>Eq</code>와 <code>Hash</code> 트레이트를 구현하는 어떤 타입이든 <code>HashMap</code>의 키가 될 수 있습니다. 여기에는 다음이 포함됩니다:</p>
 <ul>
-<li><code>bool</code> (though not very useful since there are only two possible keys)</li>
-<li><code>int</code>, <code>uint</code>, and all variations thereof</li>
-<li><code>String</code> and <code>&amp;str</code> (protip: you can have a <code>HashMap</code> keyed by <code>String</code>
-and call <code>.get()</code> with an <code>&amp;str</code>)</li>
+<li><code>bool</code> (가능한 키가 두 개뿐이라 그리 유용하진 않지만요)</li>
+<li><code>int</code>, <code>uint</code> 및 그 모든 변형들</li>
+<li><code>String</code>과 <code>&amp;str</code> (꿀팁: <code>String</code>을 키로 하는 <code>HashMap</code>을 만들고 <code>&amp;str</code>을 사용하여 <code>.get()</code>을 호출할 수 있습니다)</li>
 </ul>
-<p>Note that <code>f32</code> and <code>f64</code> do <em>not</em> implement <code>Hash</code>,
-likely because <a href="https://en.wikipedia.org/wiki/Floating_point#Accuracy_problems">floating-point precision errors</a>
-would make using them as hashmap keys horribly error-prone.</p>
-<p>All collection classes implement <code>Eq</code> and <code>Hash</code>
-if their contained type also respectively implements <code>Eq</code> and <code>Hash</code>.
-For example, <code>Vec&lt;T&gt;</code> will implement <code>Hash</code> if <code>T</code> implements <code>Hash</code>.</p>
-<p>You can easily implement <code>Eq</code> and <code>Hash</code> for a custom type with just one line:
-<code>#[derive(PartialEq, Eq, Hash)]</code></p>
-<p>The compiler will do the rest. If you want more control over the details,
-you can implement <code>Eq</code> and/or <code>Hash</code> yourself.
-This guide will not cover the specifics of implementing <code>Hash</code>.</p>
-<p>To play around with using a <code>struct</code> in <code>HashMap</code>,
-let’s try making a very simple user logon system:</p>
+<p><code>f32</code>와 <code>f64</code>는 <code>Hash</code>를 구현하지 않는다는 점에 유의하세요. 아마도 <a href="https://en.wikipedia.org/wiki/Floating_point#Accuracy_problems">부동 소수점 정밀도 에러</a>로 인해 이들을 해시 맵 키로 사용하는 것이 극도로 에러에 취약해질 수 있기 때문일 것입니다.</p>
+<p>모든 컬렉션 클래스는 포함된 타입이 각각 <code>Eq</code>와 <code>Hash</code>를 구현한다면 <code>Eq</code>와 <code>Hash</code>를 구현합니다. 예를 들어, <code>Vec&lt;T&gt;</code>는 <code>T</code>가 <code>Hash</code>를 구현한다면 <code>Hash</code>를 구현합니다.</p>
+<p>단 한 줄의 코드로 커스텀 타입에 대해 <code>Eq</code>와 <code>Hash</code>를 쉽게 구현할 수 있습니다: <code>#[derive(PartialEq, Eq, Hash)]</code></p>
+<p>컴파일러가 나머지를 알아서 할 것입니다. 만약 세부 사항을 더 제어하고 싶다면, <code>Eq</code>나 <code>Hash</code>를 직접 구현할 수 있습니다. 이 가이드에서는 <code>Hash</code> 구현의 구체적인 내용은 다루지 않습니다.</p>
+<p><code>HashMap</code>에서 <code>struct</code>를 사용하는 것을 연습해 보기 위해, 매우 간단한 사용자 로그인 시스템을 만들어 봅시다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::collections::HashMap;
 
-// Eq requires that you derive PartialEq on the type.
+// Eq는 해당 타입에 대해 PartialEq를 유도(derive)할 것을 요구합니다.
 #[derive(PartialEq, Eq, Hash)]
 struct Account&lt;'a&gt;{
     username: &amp;'a str,
@@ -292,9 +285,9 @@ type Accounts&lt;'a&gt; = HashMap&lt;Account&lt;'a&gt;, AccountInfo&lt;'a&gt;&gt
 
 fn try_logon&lt;'a&gt;(accounts: &amp;Accounts&lt;'a&gt;,
         username: &amp;'a str, password: &amp;'a str){
-    println!("Username: {}", username);
-    println!("Password: {}", password);
-    println!("Attempting logon...");
+    println!("사용자 이름: {}", username);
+    println!("비밀번호: {}", password);
+    println!("로그인 시도 중...");
 
     let logon = Account {
         username,
@@ -303,11 +296,11 @@ fn try_logon&lt;'a&gt;(accounts: &amp;Accounts&lt;'a&gt;,
 
     match accounts.get(&amp;logon) {
         Some(account_info) =&gt; {
-            println!("Successful logon!");
-            println!("Name: {}", account_info.name);
-            println!("Email: {}", account_info.email);
+            println!("로그인 성공!");
+            println!("이름: {}", account_info.name);
+            println!("이메일: {}", account_info.email);
         },
-        _ =&gt; println!("Login failed!"),
+        _ =&gt; println!("로그인 실패!"),
     }
 }
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Casting - Rust By Example</title>
+        <title>형변환 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,89 +255,84 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="casting"><a class="header" href="#casting">Casting</a></h1>
-<p>Rust provides no implicit type conversion (coercion) between primitive types.
-But, explicit type conversion (casting) can be performed using the <code>as</code> keyword.</p>
-<p>Rules for converting between integral types follow C conventions generally,
-except in cases where C has undefined behavior. The behavior of all casts
-between integral types is well defined in Rust.</p>
-<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// Suppress all errors from casts which overflow.
+                        <h1 id="형변환"><a class="header" href="#형변환">형변환</a></h1>
+<p>Rust는 기본 타입 간의 암시적 타입 변환(강제)을 제공하지 않습니다. 하지만 <code>as</code> 키워드를 사용하여 명시적 타입 변환(캐스팅)을 수행할 수 있습니다.</p>
+<p>정수 타입 간의 변환 규칙은 일반적으로 C 언어의 관례를 따르지만, C에서 정의되지 않은 동작(undefined behavior)이 발생하는 경우는 예외입니다. Rust에서 정수 타입 간의 모든 캐스팅 동작은 잘 정의되어 있습니다.</p>
+<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// 오버플로우가 발생하는 캐스팅으로 인한 모든 에러를 억제합니다.
 #![allow(overflowing_literals)]
 
 fn main() {
     let decimal = 65.4321_f32;
 
-    // Error! No implicit conversion
+    // 에러! 암시적 변환 없음
     let integer: u8 = decimal;
-    // FIXME ^ Comment out this line
+    // FIXME ^ 이 줄을 주석 처리하세요
 
-    // Explicit conversion
+    // 명시적 변환
     let integer = decimal as u8;
     let character = integer as char;
 
-    // Error! There are limitations in conversion rules.
-    // A float cannot be directly converted to a char.
+    // 에러! 변환 규칙에 제한이 있습니다.
+    // 부동 소수점은 문자로 직접 변환할 수 없습니다.
     let character = decimal as char;
-    // FIXME ^ Comment out this line
+    // FIXME ^ 이 줄을 주석 처리하세요
 
-    println!("Casting: {} -&gt; {} -&gt; {}", decimal, integer, character);
+    println!("형변환: {} -&gt; {} -&gt; {}", decimal, integer, character);
 
-    // when casting any value to an unsigned type, T,
-    // T::MAX + 1 is added or subtracted until the value
-    // fits into the new type ONLY when the #![allow(overflowing_literals)]
-    // lint is specified like above. Otherwise there will be a compiler error.
+    // 값을 부호 없는 타입 T로 캐스팅할 때, #![allow(overflowing_literals)]
+    // 린트가 위와 같이 지정된 경우에만 값이 새로운 타입에 맞을 때까지
+    // T::MAX + 1을 더하거나 뺍니다. 그렇지 않으면 컴파일 에러가 발생합니다.
 
-    // 1000 already fits in a u16
-    println!("1000 as a u16 is: {}", 1000 as u16);
+    // 1000은 이미 u16에 들어맞습니다
+    println!("1000을 u16으로 변환하면: {}", 1000 as u16);
 
     // 1000 - 256 - 256 - 256 = 232
-    // Under the hood, the first 8 least significant bits (LSB) are kept,
-    // while the rest towards the most significant bit (MSB) get truncated.
-    println!("1000 as a u8 is : {}", 1000 as u8);
+    // 내부적으로는 첫 8개의 최하위 비트(LSB)는 유지되고,
+    // 최상위 비트(MSB) 쪽의 나머지 비트들은 잘려 나갑니다.
+    println!("1000을 u8로 변환하면 : {}", 1000 as u8);
     // -1 + 256 = 255
-    println!("  -1 as a u8 is : {}", (-1i8) as u8);
+    println!("  -1을 u8로 변환하면 : {}", (-1i8) as u8);
 
-    // For positive numbers, this is the same as the modulus
-    println!("1000 mod 256 is : {}", 1000 % 256);
+    // 양수의 경우, 이는 나머지 연산(modulus)과 동일합니다
+    println!("1000 mod 256은 : {}", 1000 % 256);
 
-    // When casting to a signed type, the (bitwise) result is the same as
-    // first casting to the corresponding unsigned type. If the most significant
-    // bit of that value is 1, then the value is negative.
+    // 부호 있는 타입으로 캐스팅할 때, (비트 단위) 결과는 먼저
+    // 대응하는 부호 없는 타입으로 캐스팅하는 것과 같습니다. 만약 그 값의
+    // 최상위 비트가 1이면, 그 값은 음수입니다.
 
-    // Unless it already fits, of course.
-    println!(" 128 as a i16 is: {}", 128 as i16);
+    // 물론 이미 들어맞는 경우는 제외합니다.
+    println!(" 128을 i16으로 변환하면: {}", 128 as i16);
 
-    // In boundary case 128 value in 8-bit two's complement representation is -128
-    println!(" 128 as a i8 is : {}", 128 as i8);
+    // 경계 케이스의 경우, 8비트 2의 보수 표현에서 128이라는 값은 -128입니다.
+    println!(" 128을 i8로 변환하면 : {}", 128 as i8);
 
-    // repeating the example above
-    // 1000 as u8 -&gt; 232
-    println!("1000 as a u8 is : {}", 1000 as u8);
-    // and the value of 232 in 8-bit two's complement representation is -24
-    println!(" 232 as a i8 is : {}", 232 as i8);
+    // 위 예제를 반복합니다
+    // 1000을 u8로 변환 -&gt; 232
+    println!("1000을 u8로 변환하면 : {}", 1000 as u8);
+    // 그리고 8비트 2의 보수 표현에서 232라는 값은 -24입니다.
+    println!(" 232를 i8로 변환하면 : {}", 232 as i8);
 
-    // Since Rust 1.45, the `as` keyword performs a *saturating cast*
-    // when casting from float to int. If the floating point value exceeds
-    // the upper bound or is less than the lower bound, the returned value
-    // will be equal to the bound crossed.
+    // Rust 1.45부터, 부동 소수점을 정수로 캐스팅할 때 `as` 키워드는
+    // *포화 캐스팅(saturating cast)*을 수행합니다. 부동 소수점 값이
+    // 상한을 초과하거나 하한보다 작으면, 반환되는 값은 해당 경계값이 됩니다.
 
-    // 300.0 as u8 is 255
-    println!(" 300.0 as u8 is : {}", 300.0_f32 as u8);
-    // -100.0 as u8 is 0
-    println!("-100.0 as u8 is : {}", -100.0_f32 as u8);
-    // nan as u8 is 0
-    println!("   nan as u8 is : {}", f32::NAN as u8);
+    // 300.0을 u8로 변환하면 255입니다
+    println!(" 300.0을 u8로 변환하면 : {}", 300.0_f32 as u8);
+    // -100.0을 u8로 변환하면 0입니다
+    println!("-100.0을 u8로 변환하면 : {}", -100.0_f32 as u8);
+    // nan을 u8로 변환하면 0입니다
+    println!("   nan을 u8로 변환하면 : {}", f32::NAN as u8);
 
-    // This behavior incurs a small runtime cost and can be avoided
-    // with unsafe methods, however the results might overflow and
-    // return **unsound values**. Use these methods wisely:
+    // 이러한 동작은 약간의 런타임 비용을 발생시키며, unsafe 메서드를 사용하여
+    // 피할 수 있습니다. 하지만 결과가 오버플로우되어 **불건전한 값(unsound values)**을
+    // 반환할 수 있습니다. 이러한 메서드들은 현명하게 사용하세요:
     unsafe {
-        // 300.0 as u8 is 44
-        println!(" 300.0 as u8 is : {}", 300.0_f32.to_int_unchecked::&lt;u8&gt;());
-        // -100.0 as u8 is 156
-        println!("-100.0 as u8 is : {}", (-100.0_f32).to_int_unchecked::&lt;u8&gt;());
-        // nan as u8 is 0
-        println!("   nan as u8 is : {}", f32::NAN.to_int_unchecked::&lt;u8&gt;());
+        // 300.0을 u8로 변환하면 44입니다
+        println!(" 300.0을 u8로 변환하면 : {}", 300.0_f32.to_int_unchecked::&lt;u8&gt;());
+        // -100.0을 u8로 변환하면 156입니다
+        println!("-100.0을 u8로 변환하면 : {}", (-100.0_f32).to_int_unchecked::&lt;u8&gt;());
+        // nan을 u8로 변환하면 0입니다
+        println!("   nan을 u8로 변환하면 : {}", f32::NAN.to_int_unchecked::&lt;u8&gt;());
     }
 }</code></pre>
 

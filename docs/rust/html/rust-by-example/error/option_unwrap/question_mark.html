@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,7 +110,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-8a7729ff.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-61902a00.js"></script>
@@ -275,6 +278,7 @@ struct Job {
 }
 
 #[derive(Clone, Copy)]
+#[allow(dead_code)]
 struct PhoneNumber {
     area_code: Option&lt;u8&gt;,
     number: u32,

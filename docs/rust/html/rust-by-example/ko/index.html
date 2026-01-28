@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introduction - Rust By Example</title>
+        <title>소개 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-61902a00.js"></script>
+        <script src="toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,86 +256,81 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="rust-by-example"><a class="header" href="#rust-by-example">Rust by Example</a></h1>
-<p><a href="https://www.rust-lang.org/">Rust</a> is a modern systems programming language focusing on safety, speed,
-and concurrency. It accomplishes these goals by being memory safe without using
-garbage collection.</p>
-<p>Rust by Example (RBE) is a collection of runnable examples that illustrate various Rust
-concepts and standard libraries. To get even more out of these examples, don’t forget
-to <a href="https://www.rust-lang.org/tools/install">install Rust locally</a> and check out the <a href="https://doc.rust-lang.org/std/">official docs</a>.
-Additionally for the curious, you can also <a href="https://github.com/rust-lang/rust-by-example">check out the source code for this site</a>.</p>
-<p>Now let’s begin!</p>
+<p><a href="https://www.rust-lang.org/">Rust</a>는 안전성, 속도, 동시성에 중점을 둔 현대적인 시스템 프로그래밍 언어입니다. 가비지 컬렉션을 사용하지 않고도 메모리 안전성을 확보하여 이러한 목표를 달성합니다.</p>
+<p>Rust by Example (RBE)는 다양한 Rust 개념과 표준 라이브러리를 보여주는 실행 가능한 예제 모음입니다. 이러한 예제를 더 잘 활용하려면 <a href="https://www.rust-lang.org/tools/install">Rust를 로컬에 설치</a>하고 <a href="https://doc.rust-lang.org/std/">공식 문서</a>를 확인해 보세요. 또한 궁금하신 분들은 <a href="https://github.com/rust-lang/rust-by-example">이 사이트의 소스 코드</a>도 확인하실 수 있습니다.</p>
+<p>자, 이제 시작해 봅시다!</p>
 <ul>
 <li>
-<p><a href="hello.html">Hello World</a> - Start with a traditional Hello World program.</p>
+<p><a href="hello.html">Hello World</a> - 전통적인 Hello World 프로그램으로 시작합니다.</p>
 </li>
 <li>
-<p><a href="primitives.html">Primitives</a> - Learn about signed integers, unsigned integers and other primitives.</p>
+<p><a href="primitives.html">기본 자료형</a> - 부호 있는 정수, 부호 없는 정수 및 기타 기본 자료형에 대해 배웁니다.</p>
 </li>
 <li>
-<p><a href="custom_types.html">Custom Types</a> - <code>struct</code> and <code>enum</code>.</p>
+<p><a href="custom_types.html">사용자 정의 타입</a> - <code>struct</code>와 <code>enum</code>.</p>
 </li>
 <li>
-<p><a href="variable_bindings.html">Variable Bindings</a> - mutable bindings, scope, shadowing.</p>
+<p><a href="variable_bindings.html">변수 바인딩</a> - 가변 바인딩, 스코프, 섀도잉.</p>
 </li>
 <li>
-<p><a href="types.html">Types</a> - Learn about changing and defining types.</p>
+<p><a href="types.html">타입</a> - 타입을 변경하고 정의하는 법을 배웁니다.</p>
 </li>
 <li>
-<p><a href="conversion.html">Conversion</a> - Convert between different types, such as strings, integers, and floats.</p>
+<p><a href="conversion.html">타입 변환</a> - 문자열, 정수, 부동 소수점 등 서로 다른 타입 간의 변환에 대해 배웁니다.</p>
 </li>
 <li>
-<p><a href="expression.html">Expressions</a> - Learn about Expressions &amp; how to use them.</p>
+<p><a href="expression.html">표현식</a> - 표현식과 그 사용법에 대해 배웁니다.</p>
 </li>
 <li>
-<p><a href="flow_control.html">Flow of Control</a> - <code>if</code>/<code>else</code>, <code>for</code>, and others.</p>
+<p><a href="flow_control.html">제어 흐름</a> - <code>if</code>/<code>else</code>, <code>for</code> 등을 배웁니다.</p>
 </li>
 <li>
-<p><a href="fn.html">Functions</a> - Learn about Methods, Closures and Higher Order Functions.</p>
+<p><a href="fn.html">함수</a> - 메서드, 클로저, 고차 함수에 대해 배웁니다.</p>
 </li>
 <li>
-<p><a href="mod.html">Modules</a> - Organize code using modules</p>
+<p><a href="mod.html">모듈</a> - 모듈을 사용하여 코드를 구성합니다.</p>
 </li>
 <li>
-<p><a href="crates.html">Crates</a> - A crate is a compilation unit in Rust. Learn to create a library.</p>
+<p><a href="crates.html">크레이트</a> - 크레이트는 Rust의 컴파일 단위입니다. 라이브러리를 만드는 법을 배웁니다.</p>
 </li>
 <li>
-<p><a href="cargo.html">Cargo</a> - Go through some basic features of the official Rust package management tool.</p>
+<p><a href="cargo.html">Cargo</a> - Rust 공식 패키지 관리 도구의 기본적인 기능을 살펴봅니다.</p>
 </li>
 <li>
-<p><a href="attribute.html">Attributes</a> - An attribute is metadata applied to some module, crate or item.</p>
+<p><a href="attribute.html">속성</a> - 속성은 모듈, 크레이트 또는 아이템에 적용되는 메타데이터입니다.</p>
 </li>
 <li>
-<p><a href="generics.html">Generics</a> - Learn about writing a function or data type which can work for multiple types of arguments.</p>
+<p><a href="generics.html">제네릭</a> - 다양한 타입의 인자에 대해 작동할 수 있는 함수나 데이터 타입을 작성하는 법을 배웁니다.</p>
 </li>
 <li>
-<p><a href="scope.html">Scoping rules</a> - Scopes play an important part in ownership, borrowing, and lifetimes.</p>
+<p><a href="scope.html">스코프 규칙</a> - 스코프는 소유권, 빌림, 라이프타임에서 중요한 역할을 합니다.</p>
 </li>
 <li>
-<p><a href="trait.html">Traits</a> - A trait is a collection of methods defined for an unknown type: <code>Self</code></p>
+<p><a href="trait.html">트레이트</a> - 트레이트는 알 수 없는 타입 <code>Self</code>에 대해 정의된 메서드 모음입니다.</p>
 </li>
 <li>
-<p><a href="macros.html">Macros</a> - Macros are a way of writing code that writes other code, which is known as metaprogramming.</p>
+<p><a href="macros.html">매크로</a> - 매크로는 다른 코드를 작성하는 코드를 작성하는 방법으로, 메타프로그래밍이라고도 합니다.</p>
 </li>
 <li>
-<p><a href="error.html">Error handling</a> - Learn Rust way of handling failures.</p>
+<p><a href="error.html">에러 핸들링</a> - 실패를 처리하는 Rust의 방식을 배웁니다.</p>
 </li>
 <li>
-<p><a href="std.html">Std library types</a> - Learn about some custom types provided by <code>std</code> library.</p>
+<p><a href="std.html">표준 라이브러리 타입</a> - <code>std</code> 라이브러리에서 제공하는 몇 가지 사용자 정의 타입에 대해 배웁니다.</p>
 </li>
 <li>
-<p><a href="std_misc.html">Std misc</a> - More custom types for file handling, threads.</p>
+<p><a href="std_misc.html">기타 표준 라이브러리</a> - 파일 처리, 스레드 등을 위한 추가적인 사용자 정의 타입을 배웁니다.</p>
 </li>
 <li>
-<p><a href="testing.html">Testing</a> - All sorts of testing in Rust.</p>
+<p><a href="testing.html">테스트</a> - Rust에서의 다양한 테스트 방식을 배웁니다.</p>
 </li>
 <li>
-<p><a href="unsafe.html">Unsafe Operations</a> - Learn about entering a block of unsafe operations.</p>
+<p><a href="unsafe.html">Unsafe 연산</a> - Unsafe 연산 블록에 진입하는 법을 배웁니다.</p>
 </li>
 <li>
-<p><a href="compatibility.html">Compatibility</a> - Handling Rust’s evolution and potential compatibility issues.</p>
+<p><a href="compatibility.html">호환성</a> - Rust의 발전과 잠재적인 호환성 문제를 처리하는 법을 배웁니다.</p>
 </li>
 <li>
-<p><a href="meta.html">Meta</a> - Documentation, Benchmarking.</p>
+<p><a href="meta.html">메타</a> - 문서화, 벤치마킹.</p>
 </li>
 </ul>
 

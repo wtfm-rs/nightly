@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,9 +256,7 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="create"><a class="header" href="#create"><code>create</code></a></h1>
-<p>The <code>create</code> function opens a file in write-only mode. If the file
-already existed, the old content is destroyed. Otherwise, a new file is
-created.</p>
+<p><code>create</code> 함수는 파일을 쓰기 전용 모드로 엽니다. 파일이 이미 존재한다면 이전 내용은 파괴됩니다. 그렇지 않으면 새로운 파일이 생성됩니다.</p>
 <pre><code class="language-rust ignore">static LOREM_IPSUM: &amp;str =
     "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -273,19 +274,19 @@ fn main() {
     let path = Path::new("lorem_ipsum.txt");
     let display = path.display();
 
-    // Open a file in write-only mode, returns `io::Result&lt;File&gt;`
+    // 파일을 쓰기 전용 모드로 엽니다. `io::Result&lt;File&gt;`을 반환합니다
     let mut file = match File::create(&amp;path) {
-        Err(why) =&gt; panic!("couldn't create {}: {}", display, why),
+        Err(why) =&gt; panic!("{}를 생성할 수 없습니다: {}", display, why),
         Ok(file) =&gt; file,
     };
 
-    // Write the `LOREM_IPSUM` string to `file`, returns `io::Result&lt;()&gt;`
+    // `LOREM_IPSUM` 문자열을 `file`에 씁니다. `io::Result&lt;()&gt;`를 반환합니다
     match file.write_all(LOREM_IPSUM.as_bytes()) {
-        Err(why) =&gt; panic!("couldn't write to {}: {}", display, why),
-        Ok(_) =&gt; println!("successfully wrote to {}", display),
+        Err(why) =&gt; panic!("{}에 쓸 수 없습니다: {}", display, why),
+        Ok(_) =&gt; println!("{}에 성공적으로 썼습니다", display),
     }
 }</code></pre>
-<p>Here’s the expected successful output:</p>
+<p>예상되는 성공적인 출력 결과는 다음과 같습니다:</p>
 <pre><code class="language-shell">$ rustc create.rs &amp;&amp; ./create
 successfully wrote to lorem_ipsum.txt
 
@@ -297,9 +298,8 @@ consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </code></pre>
-<p>(As in the previous example, you are encouraged to test this example under
-failure conditions.)</p>
-<p>The <a href="https://doc.rust-lang.org/std/fs/struct.OpenOptions.html"><code>OpenOptions</code></a> struct can be used to configure how a file is opened.</p>
+<p>(이전 예제와 마찬가지로, 이 예제를 실패 조건에서 테스트해 보시길 권장합니다.)</p>
+<p><a href="https://doc.rust-lang.org/std/fs/struct.OpenOptions.html"><code>OpenOptions</code></a> 구조체는 파일이 열리는 방식을 구성하는 데 사용될 수 있습니다.</p>
 
                     </main>
 

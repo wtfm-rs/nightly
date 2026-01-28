@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Freezing - Rust By Example</title>
+        <title>동결 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,24 +255,23 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="freezing"><a class="header" href="#freezing">Freezing</a></h1>
-<p>When data is bound by the same name immutably, it also <em>freezes</em>. <em>Frozen</em> data can’t be
-modified until the immutable binding goes out of scope:</p>
+                        <h1 id="동결"><a class="header" href="#동결">동결</a></h1>
+<p>데이터가 동일한 이름으로 불변하게 바인딩되면, 해당 데이터는 _동결(freeze)_됩니다. <em>동결된</em> 데이터는 불변 바인딩이 스코프를 벗어날 때까지 수정할 수 없습니다.</p>
 <pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">fn main() {
     let mut _mutable_integer = 7i32;
 
     {
-        // Shadowing by immutable `_mutable_integer`
+        // 불변 `_mutable_integer`에 의한 섀도잉
         let _mutable_integer = _mutable_integer;
 
-        // Error! `_mutable_integer` is frozen in this scope
+        // 에러! `_mutable_integer`는 이 스코프에서 동결되었습니다
         _mutable_integer = 50;
-        // FIXME ^ Comment out this line
+        // FIXME ^ 이 줄을 주석 처리하세요
 
-        // `_mutable_integer` goes out of scope
+        // `_mutable_integer`가 스코프를 벗어납니다
     }
 
-    // Ok! `_mutable_integer` is not frozen in this scope
+    // 좋습니다! `_mutable_integer`는 이 스코프에서 동결되지 않았습니다
     _mutable_integer = 3;
 }</code></pre>
 

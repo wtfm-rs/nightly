@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Methods - Rust By Example</title>
+        <title>메서드 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,28 +255,25 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="associated-functions--methods"><a class="header" href="#associated-functions--methods">Associated functions &amp; Methods</a></h1>
-<p>Some functions are connected to a particular type. These come in two forms:
-associated functions, and methods. Associated functions are functions that
-are defined on a type generally, while methods are associated functions that are
-called on a particular instance of a type.</p>
+                        <h1 id="연관-함수와-메서드"><a class="header" href="#연관-함수와-메서드">연관 함수와 메서드</a></h1>
+<p>일부 함수는 특정 타입과 연결되어 있습니다. 이들은 연관 함수와 메서드라는 두 가지 형태로 제공됩니다. 연관 함수는 일반적으로 타입 상에 정의된 함수인 반면, 메서드는 특정 타입의 인스턴스에서 호출되는 연관 함수입니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">struct Point {
     x: f64,
     y: f64,
 }
 
-// Implementation block, all `Point` associated functions &amp; methods go in here
+// 구현(Implementation) 블록으로, 모든 `Point` 연관 함수와 메서드가 여기에 들어갑니다.
 impl Point {
-    // This is an "associated function" because this function is associated with
-    // a particular type, that is, Point.
-    //
-    // Associated functions don't need to be called with an instance.
-    // These functions are generally used like constructors.
+    // 이것은 이 함수가 특정 타입인 Point와 연관되어 있기 때문에
+// "연관 함수"라고 불립니다.
+//
+// 연관 함수는 인스턴스를 통해 호출될 필요가 없습니다.
+// 이러한 함수들은 일반적으로 생성자처럼 사용됩니다.
     fn origin() -&gt; Point {
         Point { x: 0.0, y: 0.0 }
     }
 
-    // Another associated function, taking two arguments:
+    // 두 개의 인자를 받는 또 다른 연관 함수:
     fn new(x: f64, y: f64) -&gt; Point {
         Point { x: x, y: y }
     }
@@ -285,16 +285,15 @@ struct Rectangle {
 }
 
 impl Rectangle {
-    // This is a method
-    // `&amp;self` is sugar for `self: &amp;Self`, where `Self` is the type of the
-    // caller object. In this case `Self` = `Rectangle`
+    // 이것은 메서드입니다
+// `&amp;self`는 `self: &amp;Self`를 줄여 쓴 것인데, 여기서 `Self`는
+// 호출 객체의 타입을 의미합니다. 이 경우 `Self` = `Rectangle`입니다.
     fn area(&amp;self) -&gt; f64 {
-        // `self` gives access to the struct fields via the dot operator
+        // `self`는 점(dot) 연산자를 통해 구조체 필드에 대한 접근을 제공합니다.
         let Point { x: x1, y: y1 } = self.p1;
         let Point { x: x2, y: y2 } = self.p2;
 
-        // `abs` is a `f64` method that returns the absolute value of the
-        // caller
+        // `abs`는 호출자의 절댓값을 반환하는 `f64` 메서드입니다.
         ((x1 - x2) * (y1 - y2)).abs()
     }
 
@@ -305,8 +304,8 @@ impl Rectangle {
         2.0 * ((x1 - x2).abs() + (y1 - y2).abs())
     }
 
-    // This method requires the caller object to be mutable
-    // `&amp;mut self` desugars to `self: &amp;mut Self`
+    // 이 메서드는 호출 객체가 가변적일 것을 요구합니다
+// `&amp;mut self`는 `self: &amp;mut Self`로 풀어서 쓸 수 있습니다.
     fn translate(&amp;mut self, x: f64, y: f64) {
         self.p1.x += x;
         self.p2.x += x;
@@ -316,55 +315,54 @@ impl Rectangle {
     }
 }
 
-// `Pair` owns resources: two heap allocated integers
+// `Pair`는 리소스를 소유합니다: 힙에 할당된 두 개의 정수
 struct Pair(Box&lt;i32&gt;, Box&lt;i32&gt;);
 
 impl Pair {
-    // This method "consumes" the resources of the caller object
-    // `self` desugars to `self: Self`
+    // 이 메서드는 호출 객체의 리소스를 "소비"합니다
+// `self`는 `self: Self`로 풀어서 쓸 수 있습니다.
     fn destroy(self) {
-        // Destructure `self`
+        // `self` 구조 분해
         let Pair(first, second) = self;
 
-        println!("Destroying Pair({}, {})", first, second);
+        println!("Pair({}, {}) 파괴 중", first, second);
 
-        // `first` and `second` go out of scope and get freed
+        // `first`와 `second`는 스코프를 벗어나며 해제됩니다.
     }
 }
 
 fn main() {
     let rectangle = Rectangle {
-        // Associated functions are called using double colons
+        // 연관 함수는 이중 콜론을 사용하여 호출됩니다.
         p1: Point::origin(),
         p2: Point::new(3.0, 4.0),
     };
 
-    // Methods are called using the dot operator
-    // Note that the first argument `&amp;self` is implicitly passed, i.e.
-    // `rectangle.perimeter()` === `Rectangle::perimeter(&amp;rectangle)`
-    println!("Rectangle perimeter: {}", rectangle.perimeter());
-    println!("Rectangle area: {}", rectangle.area());
+    // 메서드는 점 연산자를 사용하여 호출됩니다.
+// 첫 번째 인자인 `&amp;self`는 암시적으로 전달됩니다. 즉,
+// `rectangle.perimeter()`는 `Rectangle::perimeter(&amp;rectangle)`와 동일합니다.
+    println!("사각형 둘레: {}", rectangle.perimeter());
+    println!("사각형 넓이: {}", rectangle.area());
 
     let mut square = Rectangle {
         p1: Point::origin(),
         p2: Point::new(1.0, 1.0),
     };
 
-    // Error! `rectangle` is immutable, but this method requires a mutable
-    // object
-    //rectangle.translate(1.0, 0.0);
-    // TODO ^ Try uncommenting this line
+    // 에러! `rectangle`은 불변이지만, 이 메서드는 가변 객체를 요구합니다.
+// rectangle.translate(1.0, 0.0);
+// TODO ^ 이 줄의 주석을 해제해 보세요
 
-    // Okay! Mutable objects can call mutable methods
+    // 좋습니다! 가변 객체는 가변 메서드를 호출할 수 있습니다
     square.translate(1.0, 1.0);
 
     let pair = Pair(Box::new(1), Box::new(2));
 
     pair.destroy();
 
-    // Error! Previous `destroy` call "consumed" `pair`
-    //pair.destroy();
-    // TODO ^ Try uncommenting this line
+    // 에러! 이전의 `destroy` 호출이 `pair`를 "소비"했습니다
+// pair.destroy();
+// TODO ^ 이 줄의 주석을 해제해 보세요
 }</code></pre>
 
                     </main>

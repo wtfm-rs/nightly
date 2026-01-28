@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,29 +256,28 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="option"><a class="header" href="#option"><code>Option</code></a></h1>
-<p>Sometimes it’s desirable to catch the failure of some parts of a program
-instead of calling <code>panic!</code>; this can be accomplished using the <code>Option</code> enum.</p>
-<p>The <code>Option&lt;T&gt;</code> enum has two variants:</p>
+<p>때로는 프로그램의 일부에서 발생하는 실패를 <code>panic!</code>을 호출하는 대신 포착하고 싶을 때가 있습니다. 이는 <code>Option</code> 열거형을 사용하여 수행할 수 있습니다.</p>
+<p><code>Option&lt;T&gt;</code> 열거형은 두 가지 변체를 가집니다:</p>
 <ul>
-<li><code>None</code>, to indicate failure or lack of value, and</li>
-<li><code>Some(value)</code>, a tuple struct that wraps a <code>value</code> with type <code>T</code>.</li>
+<li><code>None</code>: 실패나 값의 부재를 나타냄</li>
+<li><code>Some(value)</code>: <code>T</code> 타입의 <code>value</code>를 감싸는 튜플 구조체</li>
 </ul>
-<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// An integer division that doesn't `panic!`
+<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// `panic!`을 일으키지 않는 정수 나눗셈
 fn checked_division(dividend: i32, divisor: i32) -&gt; Option&lt;i32&gt; {
     if divisor == 0 {
-        // Failure is represented as the `None` variant
+        // 실패는 `None` 변체로 표현됩니다
         None
     } else {
-        // Result is wrapped in a `Some` variant
+        // 결과는 `Some` 변체로 감싸집니다
         Some(dividend / divisor)
     }
 }
 
-// This function handles a division that may not succeed
+// 이 함수는 성공하지 않을 수 있는 나눗셈을 처리합니다
 fn try_division(dividend: i32, divisor: i32) {
-    // `Option` values can be pattern matched, just like other enums
+    // `Option` 값은 다른 열거형과 마찬가지로 패턴 매칭될 수 있습니다
     match checked_division(dividend, divisor) {
-        None =&gt; println!("{} / {} failed!", dividend, divisor),
+        None =&gt; println!("{} / {} 실패!", dividend, divisor),
         Some(quotient) =&gt; {
             println!("{} / {} = {}", dividend, divisor, quotient)
         },
@@ -286,17 +288,17 @@ fn main() {
     try_division(4, 2);
     try_division(1, 0);
 
-    // Binding `None` to a variable needs to be type annotated
+    // `None`을 변수에 바인딩할 때는 타입 어노테이션이 필요합니다
     let none: Option&lt;i32&gt; = None;
     let _equivalent_none = None::&lt;i32&gt;;
 
     let optional_float = Some(0f32);
 
-    // Unwrapping a `Some` variant will extract the value wrapped.
-    println!("{:?} unwraps to {:?}", optional_float, optional_float.unwrap());
+    // `Some` 변체의 래핑을 해제(unwrap)하면 감싸진 값을 추출합니다.
+    println!("{:?}의 래핑을 해제하면 {:?}가 됩니다", optional_float, optional_float.unwrap());
 
-    // Unwrapping a `None` variant will `panic!`
-    println!("{:?} unwraps to {:?}", none, none.unwrap());
+    // `None` 변체의 래핑을 해제하면 `panic!`이 발생합니다
+    println!("{:?}의 래핑을 해제하면 {:?}가 됩니다", none, none.unwrap());
 }</code></pre>
 
                     </main>

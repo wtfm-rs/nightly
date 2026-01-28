@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Pipes - Rust By Example</title>
+        <title>파이프 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,10 +255,8 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="pipes"><a class="header" href="#pipes">Pipes</a></h1>
-<p>The <code>std::process::Child</code> struct represents a child process, and exposes the
-<code>stdin</code>, <code>stdout</code> and <code>stderr</code> handles for interaction with the underlying
-process via pipes.</p>
+                        <h1 id="파이프"><a class="header" href="#파이프">파이프</a></h1>
+<p><code>std::process::Child</code> 구조체는 자식 프로세스를 나타내며, 파이프를 통해 기저 프로세스와 상호작용하기 위한 <code>stdin</code>, <code>stdout</code>, <code>stderr</code> 핸들을 노출합니다.</p>
 <pre><code class="language-rust ignore">use std::io::prelude::*;
 use std::process::{Command, Stdio};
 
@@ -263,7 +264,7 @@ static PANGRAM: &amp;'static str =
 "the quick brown fox jumps over the lazy dog\n";
 
 fn main() {
-    // Spawn the `wc` command
+    // `wc` 명령어를 실행(spawn)합니다
     let mut cmd = if cfg!(target_family = "windows") {
         let mut cmd = Command::new("powershell");
         cmd.arg("-Command").arg("$input | Measure-Object -Line -Word -Character");
@@ -275,30 +276,30 @@ fn main() {
                                 .stdin(Stdio::piped())
                                 .stdout(Stdio::piped())
                                 .spawn() {
-        Err(why) =&gt; panic!("couldn't spawn wc: {}", why),
+        Err(why) =&gt; panic!("wc를 실행할 수 없습니다: {}", why),
         Ok(process) =&gt; process,
     };
 
-    // Write a string to the `stdin` of `wc`.
-    //
-    // `stdin` has type `Option&lt;ChildStdin&gt;`, but since we know this instance
-    // must have one, we can directly `unwrap` it.
+    // `wc`의 표준 입력(stdin)에 문자열을 씁니다.
+//
+// `stdin`은 `Option&lt;ChildStdin&gt;` 타입이지만, 이 인스턴스에는 반드시
+// 존재한다는 것을 알고 있으므로 직접 `unwrap`할 수 있습니다.
     match process.stdin.unwrap().write_all(PANGRAM.as_bytes()) {
-        Err(why) =&gt; panic!("couldn't write to wc stdin: {}", why),
-        Ok(_) =&gt; println!("sent pangram to wc"),
+        Err(why) =&gt; panic!("wc의 표준 입력에 쓸 수 없습니다: {}", why),
+        Ok(_) =&gt; println!("wc에 팬그램을 보냈습니다"),
     }
 
-    // Because `stdin` does not live after the above calls, it is `drop`ed,
-    // and the pipe is closed.
-    //
-    // This is very important, otherwise `wc` wouldn't start processing the
-    // input we just sent.
+    // 위의 호출 이후에는 `stdin`이 더 이상 살아있지 않으므로 `drop`되고,
+// 파이프가 닫힙니다.
+//
+// 이는 매우 중요합니다. 그렇지 않으면 `wc`가 우리가 보낸 입력을
+// 처리하기 시작하지 않을 것이기 때문입니다.
 
-    // The `stdout` field also has type `Option&lt;ChildStdout&gt;` so must be unwrapped.
+    // `stdout` 필드도 `Option&lt;ChildStdout&gt;` 타입이므로 `unwrap`해야 합니다.
     let mut s = String::new();
     match process.stdout.unwrap().read_to_string(&amp;mut s) {
-        Err(why) =&gt; panic!("couldn't read wc stdout: {}", why),
-        Ok(_) =&gt; print!("wc responded with:\n{}", s),
+        Err(why) =&gt; panic!("wc의 표준 출력을 읽을 수 없습니다: {}", why),
+        Ok(_) =&gt; print!("wc의 응답:\n{}", s),
     }
 }</code></pre>
 

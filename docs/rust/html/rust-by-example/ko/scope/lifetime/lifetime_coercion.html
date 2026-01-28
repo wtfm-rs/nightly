@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Coercion - Rust By Example</title>
+        <title>강제 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,31 +255,28 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="coercion"><a class="header" href="#coercion">Coercion</a></h1>
-<p>A longer lifetime can be coerced into a shorter one
-so that it works inside a scope it normally wouldn’t work in.
-This comes in the form of inferred coercion by the Rust compiler,
-and also in the form of declaring a lifetime difference:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// Here, Rust infers a lifetime that is as short as possible.
-// The two references are then coerced to that lifetime.
+                        <h1 id="강제"><a class="header" href="#강제">강제</a></h1>
+<p>더 긴 라이프타임은 평소에는 작동하지 않을 스코프 내에서도 작동하도록 더 짧은 라이프타임으로 강제 변환(coerced)될 수 있습니다. 이는 Rust 컴파일러에 의한 추론된 강제 변환 형태와 라이프타임 차이를 선언하는 형태로 나타납니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 여기서 Rust는 가능한 한 짧은 라이프타임을 추론합니다.
+// 그 후 두 참조는 해당 라이프타임으로 강제 변환됩니다.
 fn multiply&lt;'a&gt;(first: &amp;'a i32, second: &amp;'a i32) -&gt; i32 {
     first * second
 }
 
-// `&lt;'a: 'b, 'b&gt;` reads as lifetime `'a` is at least as long as `'b`.
-// Here, we take in an `&amp;'a i32` and return a `&amp;'b i32` as a result of coercion.
+// `&lt;'a: 'b, 'b&gt;`는 라이프타임 `'a`가 적어도 `'b`만큼 길다는 뜻으로 읽힙니다.
+// 여기서 우리는 `&amp;'a i32`를 받아 강제 변환의 결과로 `&amp;'b i32`를 반환합니다.
 fn choose_first&lt;'a: 'b, 'b&gt;(first: &amp;'a i32, _: &amp;'b i32) -&gt; &amp;'b i32 {
     first
 }
 
 fn main() {
-    let first = 2; // Longer lifetime
+    let first = 2; // 더 긴 라이프타임
 
     {
-        let second = 3; // Shorter lifetime
+        let second = 3; // 더 짧은 라이프타임
 
-        println!("The product is {}", multiply(&amp;first, &amp;second));
-        println!("{} is the first", choose_first(&amp;first, &amp;second));
+        println!("곱은 {}입니다", multiply(&amp;first, &amp;second));
+        println!("{}은(는) 첫 번째입니다", choose_first(&amp;first, &amp;second));
     };
 }</code></pre>
 

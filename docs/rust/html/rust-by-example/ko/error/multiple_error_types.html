@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Multiple error types - Rust By Example</title>
+        <title>여러 에러 타입 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,35 +255,29 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="multiple-error-types"><a class="header" href="#multiple-error-types">Multiple error types</a></h1>
-<p>The previous examples have always been very convenient; <code>Result</code>s interact
-with other <code>Result</code>s and <code>Option</code>s interact with other <code>Option</code>s.</p>
-<p>Sometimes an <code>Option</code> needs to interact with a <code>Result</code>, or a
-<code>Result&lt;T, Error1&gt;</code> needs to interact with a <code>Result&lt;T, Error2&gt;</code>. In those
-cases, we want to manage our different error types in a way that makes them
-composable and easy to interact with.</p>
-<p>In the following code, two instances of <code>unwrap</code> generate different error
-types. <code>Vec::first</code> returns an <code>Option</code>, while <code>parse::&lt;i32&gt;</code> returns a
-<code>Result&lt;i32, ParseIntError&gt;</code>:</p>
+                        <h1 id="여러-에러-타입"><a class="header" href="#여러-에러-타입">여러 에러 타입</a></h1>
+<p>이전 예제들은 항상 매우 편리했습니다. <code>Result</code>는 다른 <code>Result</code>와 상호작용하고, <code>Option</code>은 다른 <code>Option</code>과 상호작용했습니다.</p>
+<p>때때로는 <code>Option</code>이 <code>Result</code>와 상호작용해야 하거나, <code>Result&lt;T, Error1&gt;</code>이 <code>Result&lt;T, Error2&gt;</code>와 상호작용해야 할 때가 있습니다. 그런 경우, 우리는 서로 다른 에러 타입들을 구성 가능하고 상호작용하기 쉬운 방식으로 관리하고 싶어 합니다.</p>
+<p>다음 코드에서, 두 개의 <code>unwrap</code> 인스턴스는 서로 다른 에러 타입을 생성합니다. <code>Vec::first</code>는 <code>Option</code>을 반환하는 반면, <code>parse::&lt;i32&gt;</code>는 <code>Result&lt;i32, ParseIntError&gt;</code>를 반환합니다:</p>
 <pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">fn double_first(vec: Vec&lt;&amp;str&gt;) -&gt; i32 {
-    let first = vec.first().unwrap(); // Generate error 1
-    2 * first.parse::&lt;i32&gt;().unwrap() // Generate error 2
+    let first = vec.first().unwrap(); // 에러 1 발생
+    2 * first.parse::&lt;i32&gt;().unwrap() // 에러 2 발생
 }
 
 fn main() {
     let numbers = vec!["42", "93", "18"];
     let empty = vec![];
-    let strings = vec!["tofu", "93", "18"];
+    let strings = vec!["두부", "93", "18"];
 
-    println!("The first doubled is {}", double_first(numbers));
+    println!("두 배가 된 첫 번째 값은 {}입니다", double_first(numbers));
 
-    println!("The first doubled is {}", double_first(empty));
-    // Error 1: the input vector is empty
+    println!("두 배가 된 첫 번째 값은 {}입니다", double_first(empty));
+    // 에러 1: 입력 벡터가 비어 있습니다
 
-    println!("The first doubled is {}", double_first(strings));
-    // Error 2: the element doesn't parse to a number
+    println!("두 배가 된 첫 번째 값은 {}입니다", double_first(strings));
+    // 에러 2: 요소를 숫자로 파싱할 수 없습니다
 }</code></pre>
-<p>Over the next sections, we’ll see several strategies for handling these kind of problems.</p>
+<p>다음 섹션들에서 이러한 종류의 문제들을 처리하기 위한 몇 가지 전략을 살펴볼 것입니다.</p>
 
                     </main>
 

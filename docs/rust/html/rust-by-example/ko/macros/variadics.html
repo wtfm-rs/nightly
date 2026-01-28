@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Variadics - Rust By Example</title>
+        <title>가변 인자 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,21 +255,19 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="variadic-interfaces"><a class="header" href="#variadic-interfaces">Variadic Interfaces</a></h1>
-<p>A <em>variadic</em> interface takes an arbitrary number of arguments. For example,
-<code>println!</code> can take an arbitrary number of arguments, as determined by the
-format string.</p>
-<p>We can extend our <code>calculate!</code> macro from the previous section to be variadic:</p>
+                        <h1 id="가변-인자-인터페이스"><a class="header" href="#가변-인자-인터페이스">가변 인자 인터페이스</a></h1>
+<p>가변 인자 인터페이스는 임의의 개수의 인자를 취합니다. 예를 들어, <code>println!</code>은 형식 문자열에 따라 결정되는 임의의 개수의 인자를 취할 수 있습니다.</p>
+<p>이전 섹션의 <code>calculate!</code> 매크로를 가변 인자를 취하도록 확장할 수 있습니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">macro_rules! calculate {
-    // The pattern for a single `eval`
+    // 단일 `eval`을 위한 패턴
     (eval $e:expr) =&gt; {
         {
-            let val: usize = $e; // Force types to be integers
+            let val: usize = $e; // 타입을 정수로 강제합니다
             println!("{} = {}", stringify!{$e}, val);
         }
     };
 
-    // Decompose multiple `eval`s recursively
+    // 여러 개의 `eval`을 재귀적으로 분해합니다
     (eval $e:expr, $(eval $es:expr),+) =&gt; {{
         calculate! { eval $e }
         calculate! { $(eval $es),+ }
@@ -274,13 +275,13 @@ format string.</p>
 }
 
 fn main() {
-    calculate! { // Look ma! Variadic `calculate!`!
+    calculate! { // 보세요! 가변 인자 `calculate!`입니다!
         eval 1 + 2,
         eval 3 + 4,
         eval (2 * 3) + 1
     }
 }</code></pre>
-<p>Output:</p>
+<p>출력:</p>
 <pre><code class="language-txt">1 + 2 = 3
 3 + 4 = 7
 (2 * 3) + 1 = 7

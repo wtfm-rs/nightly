@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Comments - Rust By Example</title>
+        <title>주석 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,59 +255,58 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="comments"><a class="header" href="#comments">Comments</a></h1>
-<p>Any program requires comments, and Rust supports
-a few different varieties:</p>
-<h2 id="regular-comments"><a class="header" href="#regular-comments">Regular Comments</a></h2>
-<p>These are ignored by the compiler:</p>
+                        <h1 id="주석"><a class="header" href="#주석">주석</a></h1>
+<p>어떤 프로그램이든 주석이 필요하며, Rust는 몇 가지 다른 종류를 지원합니다.</p>
+<h2 id="일반-주석"><a class="header" href="#일반-주석">일반 주석</a></h2>
+<p>이것들은 컴파일러에 의해 무시됩니다:</p>
 <ul>
-<li><strong>Line comments</strong>: Start with <code>//</code> and continue to the end of the line</li>
-<li><strong>Block comments</strong>: Enclosed in <code>/* ... */</code> and can span multiple lines</li>
+<li><strong>라인 주석</strong>: <code>//</code>로 시작하여 줄의 끝까지 이어집니다.</li>
+<li><strong>블록 주석</strong>: <code>/* ... */</code>로 감싸여 여러 줄에 걸쳐 있을 수 있습니다.</li>
 </ul>
-<h2 id="documentation-comments-doc-comments-which-are-parsed-into-html-library-documentation"><a class="header" href="#documentation-comments-doc-comments-which-are-parsed-into-html-library-documentation">Documentation Comments (Doc Comments) which are parsed into HTML library <a href="../meta/doc.html">documentation</a>:</a></h2>
+<h2 id="html-라이브러리-문서로-파싱되는-문서화-주석-doc-comments"><a class="header" href="#html-라이브러리-문서로-파싱되는-문서화-주석-doc-comments">HTML 라이브러리 <a href="../meta/doc.html">문서</a>로 파싱되는 문서화 주석 (Doc Comments):</a></h2>
 <ul>
-<li><code>///</code> - Generates docs for the item that follows it</li>
-<li><code>//!</code> - Generates docs for the enclosing item (typically used at the top of a file or module)</li>
+<li><code>///</code> - 다음에 오는 아이템에 대한 문서를 생성합니다.</li>
+<li><code>//!</code> - 해당 아이템을 포함하는 아이템(주로 파일이나 모듈의 상단에서 사용됨)에 대한 문서를 생성합니다.</li>
 </ul>
 <pre class="playground"><code class="language-rust editable edition2021">
 fn main() {
-    // Line comments start with two slashes.
-    // Everything after the slashes is ignored by the compiler.
+    // 라인 주석은 두 개의 슬래시로 시작합니다.
+    // 슬래시 이후의 모든 내용은 컴파일러에 의해 무시됩니다.
 
-    // Example: This line won't execute
+    // 예시: 이 줄은 실행되지 않습니다
     // println!("Hello, world!");
 
-    // Try removing the slashes above and running the code again.
+    // 위의 슬래시를 제거하고 코드를 다시 실행해 보세요.
 
     /*
-     * Block comments are useful for temporarily disabling code.
-     * They can also be nested: /* like this */ which makes it easy
-     * to comment out large sections quickly.
+     * 블록 주석은 코드를 일시적으로 비활성화하는 데 유용합니다.
+     * 블록 주석은 중첩될 수도 있습니다: /* 이와 같이 */ 중첩이 가능하여
+     * 큰 섹션을 빠르게 주석 처리하기 쉽습니다.
      */
 
     /*
-    Note: The asterisk column on the left is just for style - 
-    it's not required by the language.
+    참고: 왼쪽의 별표 기둥은 단지 스타일을 위한 것입니다 - 
+    언어적으로 요구되는 사항은 아닙니다.
     */
 
-    // Block comments make it easy to toggle code on/off by adding
-    // or removing just one slash:
+    // 블록 주석은 슬래시 하나를 추가하거나 제거하여
+    // 코드를 켜고 끄기 쉽게 만들어 줍니다:
 
-    /* &lt;- Add a '/' here to uncomment the entire block below
+    /* &lt;- 여기에 '/'를 추가하면 아래 블록 전체의 주석이 해제됩니다
 
-    println!("Now");
-    println!("everything");
-    println!("executes!");
-    // Line comments inside remain unaffected
+    println!("이제");
+    println!("모든 것이");
+    println!("실행됩니다!");
+    // 내부의 라인 주석은 영향을 받지 않습니다
 
     // */
 
-    // Block comments can also be used within expressions:
+    // 블록 주석은 표현식 내에서도 사용될 수 있습니다:
     let x = 5 + /* 90 + */ 5;
-    println!("Is `x` 10 or 100? x = {}", x);
+    println!("`x`는 10인가요 100인가요? x = {}", x);
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../meta/doc.html">Library documentation</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../meta/doc.html">라이브러리 문서</a></p>
 
                     </main>
 

@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-61902a00.js"></script>
+        <script src="toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,34 +256,32 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
-<p>This is the source code of the traditional Hello World program.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// This is a comment, and is ignored by the compiler.
-// You can test this code by clicking the "Run" button over there -&gt;
-// or if you prefer to use your keyboard, you can use the "Ctrl + Enter"
-// shortcut.
+<p>전통적인 Hello World 프로그램의 소스 코드입니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 이것은 주석이며, 컴파일러에 의해 무시됩니다.
+// 오른쪽에 있는 "Run" 버튼을 클릭하거나,
+// 키보드를 사용하고 싶다면 "Ctrl + Enter" 단축키를 사용하여
+// 이 코드를 테스트해 볼 수 있습니다.
 
-// This code is editable, feel free to hack it!
-// You can always return to the original code by clicking the "Reset" button -&gt;
+// 이 코드는 수정 가능하므로, 자유롭게 고쳐보세요!
+// "Reset" 버튼을 클릭하면 언제든지 원래 코드로 되돌릴 수 있습니다 -&gt;
 
-// This is the main function.
+// 메인 함수입니다.
 fn main() {
-    // Statements here are executed when the compiled binary is called.
+    // 여기에 있는 문장들은 컴파일된 바이너리가 호출될 때 실행됩니다.
 
-    // Print text to the console.
+    // 콘솔에 텍스트를 출력합니다.
     println!("Hello World!");
 }</code></pre>
-<p><code>println!</code> is a <a href="macros.html"><em>macro</em></a> that prints text to the
-console.</p>
-<p>A binary can be generated using the Rust compiler: <code>rustc</code>.</p>
+<p><code>println!</code>은 콘솔에 텍스트를 출력하는 <a href="macros.html"><em>매크로</em></a>입니다.</p>
+<p>Rust 컴파일러인 <code>rustc</code>를 사용하여 바이너리를 생성할 수 있습니다.</p>
 <pre><code class="language-bash">$ rustc hello.rs
 </code></pre>
-<p><code>rustc</code> will produce a <code>hello</code> binary that can be executed.</p>
+<p><code>rustc</code>는 실행 가능한 <code>hello</code> 바이너리를 생성합니다.</p>
 <pre><code class="language-bash">$ ./hello
 Hello World!
 </code></pre>
-<h3 id="activity"><a class="header" href="#activity">Activity</a></h3>
-<p>Click ‘Run’ above to see the expected output. Next, add a new
-line with a second <code>println!</code> macro so that the output shows:</p>
+<h3 id="실습"><a class="header" href="#실습">실습</a></h3>
+<p>위의 ’Run’을 클릭하여 예상 출력을 확인하세요. 그런 다음, 두 번째 <code>println!</code> 매크로를 사용하여 다음과 같은 출력이 나오도록 새로운 라인을 추가하세요.</p>
 <pre><code class="language-text">Hello World!
 I'm a Rustacean!
 </code></pre>

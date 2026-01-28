@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>abort &amp; unwind - Rust By Example</title>
+        <title>abort와 unwind - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,50 +255,50 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="abort-and-unwind"><a class="header" href="#abort-and-unwind"><code>abort</code> and <code>unwind</code></a></h1>
-<p>The previous section illustrates the error handling mechanism <code>panic</code>.  Different code paths can be conditionally compiled based on the panic setting. The current values available are <code>unwind</code> and <code>abort</code>.</p>
-<p>Building on the prior lemonade example, we explicitly use the panic strategy to exercise different lines of code.</p>
+                        <h1 id="abort와-unwind"><a class="header" href="#abort와-unwind"><code>abort</code>와 <code>unwind</code></a></h1>
+<p>이전 섹션에서는 에러 핸들링 메커니즘인 <code>panic</code>을 설명했습니다. 패닉 설정에 따라 서로 다른 코드 경로를 조건부로 컴파일할 수 있습니다. 현재 사용 가능한 값은 <code>unwind</code>와 <code>abort</code>입니다.</p>
+<p>앞선 레모네이드 예제를 바탕으로, 서로 다른 코드 라인을 실행해 보기 위해 패닉 전략을 명시적으로 사용합니다.</p>
 <pre class="playground"><code class="language-rust editable mdbook-runnable edition2021">fn drink(beverage: &amp;str) {
-    // You shouldn't drink too much sugary beverages.
-    if beverage == "lemonade" {
+    // 설탕이 든 음료를 너무 많이 마시면 안 됩니다.
+    if beverage == "레모네이드" {
         if cfg!(panic = "abort") {
-            println!("This is not your party. Run!!!!");
+            println!("여긴 당신 파티가 아니에요. 도망쳐요!!!!");
         } else {
-            println!("Spit it out!!!!");
+            println!("뱉어내요!!!!");
         }
     } else {
-        println!("Some refreshing {} is all I need.", beverage);
+        println!("상쾌한 {}만 있으면 돼요.", beverage);
     }
 }
 
 fn main() {
-    drink("water");
-    drink("lemonade");
+    drink("물");
+    drink("레모네이드");
 }</code></pre>
-<p>Here is another example focusing on rewriting <code>drink()</code> and explicitly use the <code>unwind</code> keyword.</p>
+<p>여기 <code>drink()</code>를 다시 작성하고 <code>unwind</code> 키워드를 명시적으로 사용하는 또 다른 예제가 있습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">#[cfg(panic = "unwind")]
 fn ah() {
-    println!("Spit it out!!!!");
+    println!("뱉어내요!!!!");
 }
 
 #[cfg(not(panic = "unwind"))]
 fn ah() {
-    println!("This is not your party. Run!!!!");
+    println!("여긴 당신 파티가 아니에요. 도망쳐요!!!!");
 }
 
 fn drink(beverage: &amp;str) {
-    if beverage == "lemonade" {
+    if beverage == "레모네이드" {
         ah();
     } else {
-        println!("Some refreshing {} is all I need.", beverage);
+        println!("상쾌한 {}만 있으면 돼요.", beverage);
     }
 }
 
 fn main() {
-    drink("water");
-    drink("lemonade");
+    drink("물");
+    drink("레모네이드");
 }</code></pre>
-<p>The panic strategy can be set from the command line by using <code>abort</code> or <code>unwind</code>.</p>
+<p>패닉 전략은 커맨드 라인에서 <code>abort</code> 또는 <code>unwind</code>를 사용하여 설정할 수 있습니다.</p>
 <pre><code class="language-console">rustc  lemonade.rs -C panic=abort
 </code></pre>
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Filesystem Operations - Rust By Example</title>
+        <title>파일시스템 연산 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,8 +255,8 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="filesystem-operations"><a class="header" href="#filesystem-operations">Filesystem Operations</a></h1>
-<p>The <code>std::fs</code> module contains several functions that deal with the filesystem.</p>
+                        <h1 id="파일시스템-연산"><a class="header" href="#파일시스템-연산">파일시스템 연산</a></h1>
+<p><code>std::fs</code> 모듈은 파일 시스템을 다루는 여러 함수들을 포함하고 있습니다.</p>
 <pre><code class="language-rust ignore">use std::fs;
 use std::fs::{File, OpenOptions};
 use std::io;
@@ -264,7 +267,7 @@ use std::os::unix;
 use std::os::windows;
 use std::path::Path;
 
-// A simple implementation of `% cat path`
+// `% cat path`를 간단히 구현한 것
 fn cat(path: &amp;Path) -&gt; io::Result&lt;String&gt; {
     let mut f = File::open(path)?;
     let mut s = String::new();
@@ -274,14 +277,14 @@ fn cat(path: &amp;Path) -&gt; io::Result&lt;String&gt; {
     }
 }
 
-// A simple implementation of `% echo s &gt; path`
+// `% echo s &gt; path`를 간단히 구현한 것
 fn echo(s: &amp;str, path: &amp;Path) -&gt; io::Result&lt;()&gt; {
     let mut f = File::create(path)?;
 
     f.write_all(s.as_bytes())
 }
 
-// A simple implementation of `% touch path` (ignores existing files)
+// `% touch path`를 간단히 구현한 것 (기존 파일은 무시함)
 fn touch(path: &amp;Path) -&gt; io::Result&lt;()&gt; {
     match OpenOptions::new().create(true).write(true).open(path) {
         Ok(_) =&gt; Ok(()),
@@ -291,20 +294,20 @@ fn touch(path: &amp;Path) -&gt; io::Result&lt;()&gt; {
 
 fn main() {
     println!("`mkdir a`");
-    // Create a directory, returns `io::Result&lt;()&gt;`
+    // 디렉터리를 생성합니다. `io::Result&lt;()&gt;`를 반환합니다
     match fs::create_dir("a") {
         Err(why) =&gt; println!("! {:?}", why.kind()),
         Ok(_) =&gt; {},
     }
 
     println!("`echo hello &gt; a/b.txt`");
-    // The previous match can be simplified using the `unwrap_or_else` method
-    echo("hello", &amp;Path::new("a/b.txt")).unwrap_or_else(|why| {
+    // 이전의 `match`는 `unwrap_or_else` 메서드를 사용하여 단순화될 수 있습니다
+    echo("안녕", &amp;Path::new("a/b.txt")).unwrap_or_else(|why| {
         println!("! {:?}", why.kind());
     });
 
     println!("`mkdir -p a/c/d`");
-    // Recursively create a directory, returns `io::Result&lt;()&gt;`
+    // 디렉터리를 재귀적으로 생성합니다. `io::Result&lt;()&gt;`를 반환합니다
     fs::create_dir_all("a/c/d").unwrap_or_else(|why| {
         println!("! {:?}", why.kind());
     });
@@ -315,7 +318,7 @@ fn main() {
     });
 
     println!("`ln -s ../b.txt a/c/b.txt`");
-    // Create a symbolic link, returns `io::Result&lt;()&gt;`
+    // 심볼릭 링크를 생성합니다. `io::Result&lt;()&gt;`를 반환합니다
     #[cfg(target_family = "unix")] {
         unix::fs::symlink("../b.txt", "a/c/b.txt").unwrap_or_else(|why| {
             println!("! {:?}", why.kind());
@@ -334,7 +337,7 @@ fn main() {
     }
 
     println!("`ls a`");
-    // Read the contents of a directory, returns `io::Result&lt;Vec&lt;Path&gt;&gt;`
+    // 디렉터리의 내용을 읽습니다. `io::Result&lt;Vec&lt;Path&gt;&gt;`를 반환합니다
     match fs::read_dir("a") {
         Err(why) =&gt; println!("! {:?}", why.kind()),
         Ok(paths) =&gt; for path in paths {
@@ -343,18 +346,18 @@ fn main() {
     }
 
     println!("`rm a/c/e.txt`");
-    // Remove a file, returns `io::Result&lt;()&gt;`
+    // 파일을 제거합니다. `io::Result&lt;()&gt;`를 반환합니다
     fs::remove_file("a/c/e.txt").unwrap_or_else(|why| {
         println!("! {:?}", why.kind());
     });
 
     println!("`rmdir a/c/d`");
-    // Remove an empty directory, returns `io::Result&lt;()&gt;`
+    // 빈 디렉터리를 제거합니다. `io::Result&lt;()&gt;`를 반환합니다
     fs::remove_dir("a/c/d").unwrap_or_else(|why| {
         println!("! {:?}", why.kind());
     });
 }</code></pre>
-<p>Here’s the expected successful output:</p>
+<p>예상되는 성공적인 출력 결과는 다음과 같습니다:</p>
 <pre><code class="language-shell">$ rustc fs.rs &amp;&amp; ./fs
 `mkdir a`
 `echo hello &gt; a/b.txt`
@@ -369,7 +372,7 @@ fn main() {
 `rm a/c/e.txt`
 `rmdir a/c/d`
 </code></pre>
-<p>And the final state of the <code>a</code> directory is:</p>
+<p><code>a</code> 디렉터리의 최종 상태는 다음과 같습니다:</p>
 <pre><code class="language-shell">$ tree a
 a
 |-- b.txt
@@ -378,14 +381,14 @@ a
 
 1 directory, 2 files
 </code></pre>
-<p>An alternative way to define the function <code>cat</code> is with <code>?</code> notation:</p>
+<p><code>cat</code> 함수를 정의하는 또 다른 방법은 <code>?</code> 표기법을 사용하는 것입니다:</p>
 <pre><code class="language-rust ignore">fn cat(path: &amp;Path) -&gt; io::Result&lt;String&gt; {
     let mut f = File::open(path)?;
     let mut s = String::new();
     f.read_to_string(&amp;mut s)?;
     Ok(s)
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
 <p><a href="../attribute/cfg.html"><code>cfg!</code></a></p>
 
                     </main>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Testcase: List - Rust By Example</title>
+        <title>테스트케이스: 리스트 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../../toc-61902a00.js"></script>
+        <script src="../../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,40 +255,35 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="testcase-list"><a class="header" href="#testcase-list">Testcase: List</a></h1>
-<p>Implementing <code>fmt::Display</code> for a structure where the elements must each be
-handled sequentially is tricky. The problem is that each <code>write!</code> generates a
-<code>fmt::Result</code>. Proper handling of this requires dealing with <em>all</em> the
-results. Rust provides the <code>?</code> operator for exactly this purpose.</p>
-<p>Using <code>?</code> on <code>write!</code> looks like this:</p>
-<pre><code class="language-rust ignore">// Try `write!` to see if it errors. If it errors, return
-// the error. Otherwise continue.
+                        <h1 id="테스트케이스-리스트"><a class="header" href="#테스트케이스-리스트">테스트케이스: 리스트</a></h1>
+<p>각 요소를 순차적으로 처리해야 하는 구조체에 대해 <code>fmt::Display</code>를 구현하는 것은 까다롭습니다. 문제는 각 <code>write!</code>가 <code>fmt::Result</code>를 생성한다는 것입니다. 이를 적절히 처리하려면 <em>모든</em> 결과를 다뤄야 합니다. Rust는 정확히 이 목적을 위해 <code>?</code> 연산자를 제공합니다.</p>
+<p><code>write!</code>에 <code>?</code>를 사용하는 것은 다음과 같습니다:</p>
+<pre><code class="language-rust ignore">// `write!`가 에러를 발생시키는지 확인합니다. 에러가 발생하면
+// 에러를 반환합니다. 그렇지 않으면 계속 진행합니다.
 write!(f, "{}", value)?;</code></pre>
-<p>With <code>?</code> available, implementing <code>fmt::Display</code> for a <code>Vec</code> is
-straightforward:</p>
-<pre class="playground"><code class="language-rust editable edition2021">use std::fmt; // Import the `fmt` module.
+<p><code>?</code>가 사용 가능해지면 <code>Vec</code>에 대한 <code>fmt::Display</code> 구현은 간단해집니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">use std::fmt; // `fmt` 모듈을 가져옵니다.
 
-// Define a structure named `List` containing a `Vec`.
+// `Vec`을 포함하는 `List`라는 이름의 구조체를 정의합니다.
 struct List(Vec&lt;i32&gt;);
 
 impl fmt::Display for List {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
-        // Extract the value using tuple indexing,
-        // and create a reference to `vec`.
+        // 튜플 인덱싱을 사용하여 값을 추출하고,
+        // `vec`에 대한 참조를 생성합니다.
         let vec = &amp;self.0;
 
         write!(f, "[")?;
 
-        // Iterate over `v` in `vec` while enumerating the iteration
-        // index in `index`.
+        // `vec`의 `v`를 순회하면서 반복 인덱스를 `index`에 열거합니다.
         for (index, v) in vec.iter().enumerate() {
-            // For every element except the first, add a comma.
-            // Use the ? operator to return on errors.
+            // 첫 번째를 제외한 모든 요소에 콤마를 추가합니다.
+            // 에러 시 반환하기 위해 ? 연산자를 사용합니다.
             if index != 0 { write!(f, ", ")?; }
             write!(f, "{}", v)?;
         }
 
-        // Close the opened bracket and return a fmt::Result value.
+        // 열려 있는 대괄호를 닫고 `fmt::Result` 값을 반환합니다.
         write!(f, "]")
     }
 }
@@ -294,13 +292,11 @@ fn main() {
     let v = List(vec![1, 2, 3]);
     println!("{}", v);
 }</code></pre>
-<h3 id="activity"><a class="header" href="#activity">Activity</a></h3>
-<p>Try changing the program so that the index of each element in the vector is also
-printed. The new output should look like this:</p>
+<h3 id="실습"><a class="header" href="#실습">실습</a></h3>
+<p>벡터의 각 요소의 인덱스도 출력되도록 프로그램을 변경해 보세요. 새로운 출력은 다음과 같아야 합니다:</p>
 <pre><code class="language-rust ignore">[0: 1, 1: 2, 2: 3]</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../../flow_control/for.html"><code>for</code></a>, <a href="../../../scope/borrow/ref.html"><code>ref</code></a>, <a href="../../../std/result.html"><code>Result</code></a>, <a href="../../../custom_types/structs.html"><code>struct</code></a>,
-<a href="../../../std/result/question_mark.html"><code>?</code></a>, and <a href="../../../std/vec.html"><code>vec!</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../../flow_control/for.html"><code>for</code></a>, <a href="../../../scope/borrow/ref.html"><code>ref</code></a>, <a href="../../../std/result.html"><code>Result</code></a>, <a href="../../../custom_types/structs.html"><code>구조체</code></a>, <a href="../../../std/result/question_mark.html"><code>?</code></a>, 그리고 <a href="../../../std/vec.html"><code>vec!</code></a></p>
 
                     </main>
 

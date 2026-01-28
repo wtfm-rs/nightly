@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>As input parameters - Rust By Example</title>
+        <title>입력 파라미터로 사용 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,43 +255,30 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="as-input-parameters"><a class="header" href="#as-input-parameters">As input parameters</a></h1>
-<p>While Rust chooses how to capture variables on the fly mostly without type
-annotation, this ambiguity is not allowed when writing functions. When
-taking a closure as an input parameter, the closure’s complete type must be
-annotated using one of a few <code>traits</code>, and they’re determined by what the
-closure does with captured value. In order of decreasing restriction,
-they are:</p>
+                        <h1 id="입력-파라미터로-사용"><a class="header" href="#입력-파라미터로-사용">입력 파라미터로 사용</a></h1>
+<p>Rust는 대부분 타입 어노테이션 없이 즉석에서 변수를 캡처하는 방식을 선택하지만, 함수를 작성할 때는 이러한 모호함이 허용되지 않습니다. 클로저를 입력 파라미터로 받을 때, 클로저의 전체 타입은 몇 가지 <code>트레이트</code> 중 하나를 사용하여 어노테이션되어야 하며, 이는 클로저가 캡처된 값으로 무엇을 하는지에 따라 결정됩니다. 제약이 강한 순서대로 나열하면 다음과 같습니다:</p>
 <ul>
-<li><code>Fn</code>: the closure uses the captured value by reference (<code>&amp;T</code>)</li>
-<li><code>FnMut</code>: the closure uses the captured value by mutable reference (<code>&amp;mut T</code>)</li>
-<li><code>FnOnce</code>: the closure uses the captured value by value (<code>T</code>)</li>
+<li><code>Fn</code>: 클로저가 캡처된 값을 참조(<code>&amp;T</code>)로 사용합니다</li>
+<li><code>FnMut</code>: 클로저가 캡처된 값을 가변 참조(<code>&amp;mut T</code>)로 사용합니다</li>
+<li><code>FnOnce</code>: 클로저가 캡처된 값을 값(<code>T</code>)으로 사용합니다</li>
 </ul>
-<p>On a variable-by-variable basis, the compiler will capture variables in the
-least restrictive manner possible.</p>
-<p>For instance, consider a parameter annotated as <code>FnOnce</code>. This specifies
-that the closure <em>may</em> capture by <code>&amp;T</code>, <code>&amp;mut T</code>, or <code>T</code>, but the compiler
-will ultimately choose based on how the captured variables are used in the
-closure.</p>
-<p>This is because if a move is possible, then any type of borrow should also
-be possible. Note that the reverse is not true. If the parameter is
-annotated as <code>Fn</code>, then capturing variables by <code>&amp;mut T</code> or <code>T</code> are not
-allowed. However, <code>&amp;T</code> is allowed.</p>
-<p>In the following example, try swapping the usage of <code>Fn</code>, <code>FnMut</code>, and
-<code>FnOnce</code> to see what happens:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// A function which takes a closure as an argument and calls it.
-// &lt;F&gt; denotes that F is a "Generic type parameter"
+<p>변수별로 컴파일러는 가능한 가장 제약이 적은 방식으로 변수를 캡처합니다.</p>
+<p>예를 들어, <code>FnOnce</code>로 어노테이션된 파라미터를 생각해 보세요. 이는 클로저가 <code>&amp;T</code>, <code>&amp;mut T</code>, 또는 <code>T</code>로 캡처할 수 있음을 나타내지만, 컴파일러는 최종적으로 클로저 내에서 캡처된 변수가 어떻게 사용되는지에 따라 선택합니다.</p>
+<p>이동(move)이 가능하다면 어떤 유형의 빌림(borrow)도 가능해야 하기 때문입니다. 그 반대는 성립하지 않음에 유의하세요. 파라미터가 <code>Fn</code>으로 어노테이션된 경우, <code>&amp;mut T</code>나 <code>T</code>로 변수를 캡처하는 것은 허용되지 않습니다. 하지만 <code>&amp;T</code>는 허용됩니다.</p>
+<p>다음 예제에서 <code>Fn</code>, <code>FnMut</code>, <code>FnOnce</code>의 사용을 서로 바꿔보며 어떤 일이 일어나는지 확인해 보세요:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 클로저를 인자로 받아 호출하는 함수입니다.
+// &lt;F&gt;는 F가 "제네릭 타입 파라미터"임을 나타냅니다.
 fn apply&lt;F&gt;(f: F) where
-    // The closure takes no input and returns nothing.
+    // 이 클로저는 입력을 받지 않고 아무것도 반환하지 않습니다.
     F: FnOnce() {
-    // ^ TODO: Try changing this to `Fn` or `FnMut`.
+    // ^ TODO: 이를 `Fn`이나 `FnMut`로 변경해 보세요.
 
     f();
 }
 
-// A function which takes a closure and returns an `i32`.
+// 클로저를 받아 `i32`를 반환하는 함수입니다.
 fn apply_to_3&lt;F&gt;(f: F) -&gt; i32 where
-    // The closure takes an `i32` and returns an `i32`.
+    // 이 클로저는 `i32`를 받아 `i32`를 반환합니다.
     F: Fn(i32) -&gt; i32 {
 
     f(3)
@@ -297,38 +287,37 @@ fn apply_to_3&lt;F&gt;(f: F) -&gt; i32 where
 fn main() {
     use std::mem;
 
-    let greeting = "hello";
-    // A non-copy type.
-    // `to_owned` creates owned data from borrowed one
-    let mut farewell = "goodbye".to_owned();
+    let greeting = "안녕";
+    // 복사되지 않는 타입.
+// `to_owned`는 빌려온 데이터로부터 소유권이 있는 데이터를 생성합니다.
+    let mut farewell = "잘 가요".to_owned();
 
-    // Capture 2 variables: `greeting` by reference and
-    // `farewell` by value.
+    // 두 개의 변수를 캡처합니다: `greeting`은 참조로, `farewell`은 값으로.
     let diary = || {
-        // `greeting` is by reference: requires `Fn`.
-        println!("I said {}.", greeting);
+        // `greeting`은 참조에 의한 방식입니다: `Fn`이 필요합니다.
+        println!("저는 {}라고 말했습니다.", greeting);
 
-        // Mutation forces `farewell` to be captured by
-        // mutable reference. Now requires `FnMut`.
+        // 수정을 위해 `farewell`을 가변 참조로 캡처해야 합니다.
+// 이제 `FnMut`가 필요합니다.
         farewell.push_str("!!!");
-        println!("Then I screamed {}.", farewell);
-        println!("Now I can sleep. zzzzz");
+        println!("그러고 나서 저는 {}라고 소리쳤습니다.", farewell);
+        println!("이제 잘 수 있겠네요. zzzzz");
 
-        // Manually calling drop forces `farewell` to
-        // be captured by value. Now requires `FnOnce`.
+        // 수동으로 drop을 호출하면 `farewell`을 값으로
+// 캡처해야 합니다. 이제 `FnOnce`가 필요합니다.
         mem::drop(farewell);
     };
 
-    // Call the function which applies the closure.
+    // 클로저를 적용하는 함수를 호출합니다.
     apply(diary);
 
-    // `double` satisfies `apply_to_3`'s trait bound
+    // `double`은 `apply_to_3`의 트레이트 바운드를 만족합니다
     let double = |x| 2 * x;
 
-    println!("3 doubled: {}", apply_to_3(double));
+    println!("3의 두 배: {}", apply_to_3(double));
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/std/mem/fn.drop.html"><code>std::mem::drop</code></a>, <a href="https://doc.rust-lang.org/std/ops/trait.Fn.html"><code>Fn</code></a>, <a href="https://doc.rust-lang.org/std/ops/trait.FnMut.html"><code>FnMut</code></a>, <a href="../../generics.html">Generics</a>, <a href="../../generics/where.html">where</a> and <a href="https://doc.rust-lang.org/std/ops/trait.FnOnce.html"><code>FnOnce</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/std/mem/fn.drop.html"><code>std::mem::drop</code></a>, <a href="https://doc.rust-lang.org/std/ops/trait.Fn.html"><code>Fn</code></a>, <a href="https://doc.rust-lang.org/std/ops/trait.FnMut.html"><code>FnMut</code></a>, <a href="../../generics.html">제네릭</a>, <a href="../../generics/where.html">where</a> 및 <a href="https://doc.rust-lang.org/std/ops/trait.FnOnce.html"><code>FnOnce</code></a></p>
 
                     </main>
 

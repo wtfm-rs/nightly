@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Foreign Function Interface - Rust By Example</title>
+        <title>외부 함수 인터페이스 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,18 +255,16 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="foreign-function-interface"><a class="header" href="#foreign-function-interface">Foreign Function Interface</a></h1>
-<p>Rust provides a Foreign Function Interface (FFI) to C libraries. Foreign
-functions must be declared inside an <code>extern</code> block annotated with a <code>#[link]</code>
-attribute containing the name of the foreign library.</p>
+                        <h1 id="외부-함수-인터페이스"><a class="header" href="#외부-함수-인터페이스">외부 함수 인터페이스</a></h1>
+<p>Rust는 C 라이브러리에 대한 외부 함수 인터페이스(Foreign Function Interface, FFI)를 제공합니다. 외부 함수는 외부 라이브러리의 이름이 포함된 <code>#[link]</code> 속성이 달린 <code>extern</code> 블록 내에 선언되어야 합니다.</p>
 <pre><code class="language-rust ignore">use std::fmt;
 
-// this extern block links to the libm library
+// 이 extern 블록은 libm 라이브러리에 링크됩니다
 #[cfg(target_family = "windows")]
 #[link(name = "msvcrt")]
 extern {
-    // this is a foreign function
-    // that computes the square root of a single precision complex number
+    // 이는 단정도 복소수의 제곱근을 계산하는
+// 외부 함수입니다
     fn csqrtf(z: Complex) -&gt; Complex;
 
     fn ccosf(z: Complex) -&gt; Complex;
@@ -271,15 +272,15 @@ extern {
 #[cfg(target_family = "unix")]
 #[link(name = "m")]
 extern {
-    // this is a foreign function
-    // that computes the square root of a single precision complex number
+    // 이는 단정도 복소수의 제곱근을 계산하는
+// 외부 함수입니다
     fn csqrtf(z: Complex) -&gt; Complex;
 
     fn ccosf(z: Complex) -&gt; Complex;
 }
 
-// Since calling foreign functions is considered unsafe,
-// it's common to write safe wrappers around them.
+// 외부 함수를 호출하는 것은 안전하지 않은(unsafe) 것으로 간주되므로,
+// 이를 감싸는 안전한 래퍼(wrapper)를 작성하는 것이 일반적입니다.
 fn cos(z: Complex) -&gt; Complex {
     unsafe { ccosf(z) }
 }
@@ -288,16 +289,16 @@ fn main() {
     // z = -1 + 0i
     let z = Complex { re: -1., im: 0. };
 
-    // calling a foreign function is an unsafe operation
+    // 외부 함수를 호출하는 것은 안전하지 않은(unsafe) 작업입니다
     let z_sqrt = unsafe { csqrtf(z) };
 
-    println!("the square root of {:?} is {:?}", z, z_sqrt);
+    println!("{:?}의 제곱근은 {:?}입니다", z, z_sqrt);
 
-    // calling safe API wrapped around unsafe operation
+    // unsafe 연산을 감싼 안전한 API 호출
     println!("cos({:?}) = {:?}", z, cos(z));
 }
 
-// Minimal implementation of single precision complex numbers
+// 단정밀도 복소수의 최소 구현
 #[repr(C)]
 #[derive(Clone, Copy)]
 struct Complex {

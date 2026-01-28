@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Where clauses - Rust By Example</title>
+        <title>Where 절 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,24 +255,20 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="where-clauses"><a class="header" href="#where-clauses">Where clauses</a></h1>
-<p>A bound can also be expressed using a <code>where</code> clause immediately
-before the opening <code>{</code>, rather than at the type’s first mention.
-Additionally, <code>where</code> clauses can apply bounds to arbitrary types,
-rather than just to type parameters.</p>
-<p>Some cases that a <code>where</code> clause is useful:</p>
+                        <h1 id="where-절"><a class="header" href="#where-절">Where 절</a></h1>
+<p>바운드는 타입이 처음 언급되는 곳이 아닌, 여는 중괄호 <code>{</code> 직전에 <code>where</code> 절을 사용하여 표현할 수도 있습니다. 또한, <code>where</code> 절은 타입 파라미터뿐만 아니라 임의의 타입에도 바운드를 적용할 수 있습니다.</p>
+<p><code>where</code> 절이 유용한 몇 가지 경우:</p>
 <ul>
-<li>When specifying generic types and bounds separately is clearer:</li>
+<li>제네릭 타입과 바운드를 따로 명시하는 것이 더 명확할 때:</li>
 </ul>
 <pre><code class="language-rust ignore">impl &lt;A: TraitB + TraitC, D: TraitE + TraitF&gt; MyTrait&lt;A, D&gt; for YourType {}
 
-// Expressing bounds with a `where` clause
+// `where` 절로 바운드 표현하기
 impl &lt;A, D&gt; MyTrait&lt;A, D&gt; for YourType where
     A: TraitB + TraitC,
     D: TraitE + TraitF {}</code></pre>
 <ul>
-<li>When using a <code>where</code> clause is more expressive than using normal syntax.
-The <code>impl</code> in this example cannot be directly expressed without a <code>where</code> clause:</li>
+<li><code>where</code> 절을 사용하는 것이 일반 구문을 사용하는 것보다 더 표현력이 좋을 때. 이 예제의 <code>impl</code>은 <code>where</code> 절 없이는 직접 표현할 수 없습니다:</li>
 </ul>
 <pre class="playground"><code class="language-rust editable edition2021">use std::fmt::Debug;
 
@@ -277,12 +276,12 @@ trait PrintInOption {
     fn print_in_option(self);
 }
 
-// Because we would otherwise have to express this as `T: Debug` or
-// use another method of indirect approach, this requires a `where` clause:
+// 그렇지 않으면 `T: Debug`로 표현하거나
+// 다른 간접적인 방법을 사용해야 하므로, 여기에는 `where` 절이 필요합니다:
 impl&lt;T&gt; PrintInOption for T where
     Option&lt;T&gt;: Debug {
-    // We want `Option&lt;T&gt;: Debug` as our bound because that is what's
-    // being printed. Doing otherwise would be using the wrong bound.
+    // 출력되는 것이 `Option&lt;T&gt;`이므로, 바운드로 `Option&lt;T&gt;: Debug`를 원합니다.
+    // 다르게 하면 잘못된 바운드를 사용하는 셈이 됩니다.
     fn print_in_option(self) {
         println!("{:?}", Some(self));
     }
@@ -293,8 +292,8 @@ fn main() {
 
     vec.print_in_option();
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://github.com/rust-lang/rfcs/blob/master/text/0135-where.md">RFC</a>, <a href="../custom_types/structs.html"><code>struct</code></a>, and <a href="../trait.html"><code>trait</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://github.com/rust-lang/rfcs/blob/master/text/0135-where.md">RFC</a>, <a href="../custom_types/structs.html"><code>struct</code></a>, 그리고 <a href="../trait.html"><code>trait</code></a></p>
 
                     </main>
 

@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,51 +256,49 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="impl-trait"><a class="header" href="#impl-trait"><code>impl Trait</code></a></h1>
-<p><code>impl Trait</code> can be used in two locations:</p>
+<p><code>impl Trait</code>는 두 위치에서 사용될 수 있습니다:</p>
 <ol>
-<li>as an argument type</li>
-<li>as a return type</li>
+<li>인자 타입으로서</li>
+<li>반환 타입으로서</li>
 </ol>
-<h2 id="as-an-argument-type"><a class="header" href="#as-an-argument-type">As an argument type</a></h2>
-<p>If your function is generic over a trait but you don’t mind the specific type, you can simplify the function declaration using <code>impl Trait</code> as the type of the argument.</p>
-<p>For example, consider the following code:</p>
+<h2 id="인자-타입으로서"><a class="header" href="#인자-타입으로서">인자 타입으로서</a></h2>
+<p>함수가 트레이트에 대해 제네릭이지만 구체적인 타입에는 관심이 없다면, 인자 타입으로 <code>impl Trait</code>를 사용하여 함수 선언을 단순화할 수 있습니다.</p>
+<p>예를 들어, 다음 코드를 살펴보세요:</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn parse_csv_document&lt;R: std::io::BufRead&gt;(src: R) -&gt; std::io::Result&lt;Vec&lt;Vec&lt;String&gt;&gt;&gt; {
     src.lines()
         .map(|line| {
-            // For each line in the source
+            // 소스의 각 줄에 대해
             line.map(|line| {
-                // If the line was read successfully, process it, if not, return the error
-                line.split(',') // Split the line separated by commas
-                    .map(|entry| String::from(entry.trim())) // Remove leading and trailing whitespace
-                    .collect() // Collect all strings in a row into a Vec&lt;String&gt;
+                // 줄을 성공적으로 읽었다면 처리하고, 그렇지 않으면 에러를 반환합니다
+                line.split(',') // 콤마로 구분된 줄을 분할합니다
+                    .map(|entry| String::from(entry.trim())) // 앞뒤 공백을 제거합니다
+                    .collect() // 한 행의 모든 문자열을 `Vec&lt;String&gt;`으로 수집합니다
             })
         })
-        .collect() // Collect all lines into a Vec&lt;Vec&lt;String&gt;&gt;
+        .collect() // 모든 줄을 `Vec&lt;Vec&lt;String&gt;&gt;`으로 수집합니다
 }</code></pre>
-<p><code>parse_csv_document</code> is generic, allowing it to take any type which implements BufRead, such as <code>BufReader&lt;File&gt;</code> or <code>[u8]</code>,
-but it’s not important what type <code>R</code> is, and <code>R</code> is only used to declare the type of <code>src</code>, so the function can also be written as:</p>
+<p><code>parse_csv_document</code>는 제네릭이어서 <code>BufReader&lt;File&gt;</code>이나 <code>[u8]</code>과 같이 <code>BufRead</code>를 구현하는 모든 타입을 취할 수 있지만, <code>R</code>이 어떤 타입인지는 중요하지 않고 <code>R</code>은 단지 <code>src</code>의 타입을 선언하는 데만 사용되므로, 다음과 같이 작성할 수도 있습니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn parse_csv_document(src: impl std::io::BufRead) -&gt; std::io::Result&lt;Vec&lt;Vec&lt;String&gt;&gt;&gt; {
     src.lines()
         .map(|line| {
-            // For each line in the source
+            // 소스의 각 줄에 대해
             line.map(|line| {
-                // If the line was read successfully, process it, if not, return the error
-                line.split(',') // Split the line separated by commas
-                    .map(|entry| String::from(entry.trim())) // Remove leading and trailing whitespace
-                    .collect() // Collect all strings in a row into a Vec&lt;String&gt;
+                // 줄을 성공적으로 읽었다면 처리하고, 그렇지 않으면 에러를 반환합니다
+                line.split(',') // 콤마로 구분된 줄을 분할합니다
+                    .map(|entry| String::from(entry.trim())) // 앞뒤 공백을 제거합니다
+                    .collect() // 한 행의 모든 문자열을 `Vec&lt;String&gt;`으로 수집합니다
             })
         })
-        .collect() // Collect all lines into a Vec&lt;Vec&lt;String&gt;&gt;
+        .collect() // 모든 줄을 `Vec&lt;Vec&lt;String&gt;&gt;`으로 수집합니다
 }</code></pre>
-<p>Note that using <code>impl Trait</code> as an argument type means that you cannot explicitly state what form of the function you use, i.e. <code>parse_csv_document::&lt;std::io::Empty&gt;(std::io::empty())</code> will not work with the second example.</p>
-<h2 id="as-a-return-type"><a class="header" href="#as-a-return-type">As a return type</a></h2>
-<p>If your function returns a type that implements <code>MyTrait</code>, you can write its
-return type as <code>-&gt; impl MyTrait</code>. This can help simplify your type signatures quite a lot!</p>
+<p><code>impl Trait</code>를 인자 타입으로 사용하는 것은 여러분이 함수의 어떤 형태를 사용하는지 명시적으로 명시할 수 없음을 의미합니다. 즉, <code>parse_csv_document::&lt;std::io::Empty&gt;(std::io::empty())</code>는 두 번째 예제에서 작동하지 않습니다.</p>
+<h2 id="반환-타입으로서"><a class="header" href="#반환-타입으로서">반환 타입으로서</a></h2>
+<p>여러분의 함수가 <code>MyTrait</code>를 구현하는 타입을 반환한다면, 반환 타입을 <code>-&gt; impl MyTrait</code>로 작성할 수 있습니다. 이는 타입 시그니처를 아주 많이 단순화하는 데 도움이 될 수 있습니다!</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::iter;
 use std::vec::IntoIter;
 
-// This function combines two `Vec&lt;i32&gt;` and returns an iterator over it.
-// Look how complicated its return type is!
+// 이 함수는 두 개의 `Vec&lt;i32&gt;`를 결합하고 그에 대한 이터레이터를 반환합니다.
+// 반환 타입이 얼마나 복잡한지 보세요!
 fn combine_vecs_explicit_return_type(
     v: Vec&lt;i32&gt;,
     u: Vec&lt;i32&gt;,
@@ -305,8 +306,8 @@ fn combine_vecs_explicit_return_type(
     v.into_iter().chain(u.into_iter()).cycle()
 }
 
-// This is the exact same function, but its return type uses `impl Trait`.
-// Look how much simpler it is!
+// 이것은 정확히 동일한 함수이지만, 반환 타입에 `impl Trait`를 사용합니다.
+// 훨씬 더 간단해진 것을 보세요!
 fn combine_vecs(
     v: Vec&lt;i32&gt;,
     u: Vec&lt;i32&gt;,
@@ -323,13 +324,10 @@ fn main() {
     assert_eq!(Some(3), v3.next());
     assert_eq!(Some(4), v3.next());
     assert_eq!(Some(5), v3.next());
-    println!("all done");
+    println!("모두 완료");
 }</code></pre>
-<p>More importantly, some Rust types can’t be written out. For example, every
-closure has its own unnamed concrete type. Before <code>impl Trait</code> syntax, you had
-to allocate on the heap in order to return a closure. But now you can do it all
-statically, like this:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// Returns a function that adds `y` to its input
+<p>더 중요한 점은, 일부 Rust 타입은 명시적으로 작성할 수 없다는 것입니다. 예를 들어, 모든 클로저는 자신만의 이름 없는 구체적인 타입을 가집니다. <code>impl Trait</code> 구문이 생기기 전에는 클로저를 반환하기 위해 힙에 할당해야만 했습니다. 하지만 이제는 다음과 같이 정적으로 처리할 수 있습니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 입력에 `y`를 더하는 함수를 반환합니다.
 fn make_adder_function(y: i32) -&gt; impl Fn(i32) -&gt; i32 {
     let closure = move |x: i32| { x + y };
     closure
@@ -339,10 +337,7 @@ fn main() {
     let plus_one = make_adder_function(1);
     assert_eq!(plus_one(2), 3);
 }</code></pre>
-<p>You can also use <code>impl Trait</code> to return an iterator that uses <code>map</code> or <code>filter</code>
-closures! This makes using <code>map</code> and <code>filter</code> easier. Because closure types don’t
-have names, you can’t write out an explicit return type if your function returns
-iterators with closures. But with <code>impl Trait</code> you can do this easily:</p>
+<p>또한 <code>impl Trait</code>를 사용하여 <code>map</code>이나 <code>filter</code> 클로저를 사용하는 이터레이터를 반환할 수도 있습니다! 이는 <code>map</code>과 <code>filter</code>를 더 쉽게 사용할 수 있게 해줍니다. 클로저 타입은 이름이 없기 때문에, 함수가 클로저를 포함하는 이터레이터를 반환할 경우 명시적인 반환 타입을 작성할 수 없습니다. 하지만 <code>impl Trait</code>를 사용하면 이를 쉽게 할 수 있습니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn double_positives&lt;'a&gt;(numbers: &amp;'a Vec&lt;i32&gt;) -&gt; impl Iterator&lt;Item = i32&gt; + 'a {
     numbers
         .iter()

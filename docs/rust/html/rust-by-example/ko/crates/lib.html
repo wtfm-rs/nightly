@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Creating a Library - Rust By Example</title>
+        <title>라이브러리 생성 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,19 +255,19 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="creating-a-library"><a class="header" href="#creating-a-library">Creating a Library</a></h1>
-<p>Let’s create a library, and then see how to link it to another crate.</p>
-<p>In <code>rary.rs</code>:</p>
+                        <h1 id="라이브러리-생성"><a class="header" href="#라이브러리-생성">라이브러리 생성</a></h1>
+<p>라이브러리를 만든 다음, 이를 다른 크레이트와 어떻게 연결하는지 살펴봅시다.</p>
+<p><code>rary.rs</code>에서:</p>
 <pre><code class="language-rust ignore">pub fn public_function() {
-    println!("called rary's `public_function()`");
+    println!(rary의 `public_function()` 호출됨);
 }
 
 fn private_function() {
-    println!("called rary's `private_function()`");
+    println!(rary의 `private_function()` 호출됨);
 }
 
 pub fn indirect_access() {
-    print!("called rary's `indirect_access()`, that\n&gt; ");
+    print!(rary의 `indirect_access()` 호출됨, 결과는\n&gt; ");
 
     private_function();
 }</code></pre>
@@ -272,10 +275,7 @@ pub fn indirect_access() {
 $ ls lib*
 library.rlib
 </code></pre>
-<p>Libraries get prefixed with “lib”, and by default they get named after their
-crate file, but this default name can be overridden by passing
-the <code>--crate-name</code> option to <code>rustc</code> or by using the <a href="../attribute/crate.html"><code>crate_name</code>
-attribute</a>.</p>
+<p>라이브러리에는 “lib” 접두사가 붙으며, 기본적으로 크레이트 파일의 이름을 따서 명명되지만, 이 기본 이름은 <code>rustc</code>에 <code>--crate-name</code> 옵션을 전달하거나 <a href="../attribute/crate.html"><code>crate_name</code> 속성</a>을 사용하여 재정의할 수 있습니다.</p>
 
                     </main>
 

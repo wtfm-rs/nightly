@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Traits - Rust By Example</title>
+        <title>트레이트 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,16 +255,15 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="traits"><a class="header" href="#traits">Traits</a></h1>
-<p>Annotation of lifetimes in trait methods basically are similar to functions.
-Note that <code>impl</code> may have annotation of lifetimes too.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// A struct with annotation of lifetimes.
+                        <h1 id="트레이트"><a class="header" href="#트레이트">트레이트</a></h1>
+<p>트레이트 메서드의 라이프타임 어노테이션은 기본적으로 함수와 유사합니다. <code>impl</code>도 라이프타임 어노테이션을 가질 수 있음에 유의하세요.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 라이프타임 어노테이션이 있는 구조체.
 #[derive(Debug)]
 struct Borrowed&lt;'a&gt; {
     x: &amp;'a i32,
 }
 
-// Annotate lifetimes to impl.
+// impl에 라이프타임을 어노테이션합니다.
 impl&lt;'a&gt; Default for Borrowed&lt;'a&gt; {
     fn default() -&gt; Self {
         Self {
@@ -272,10 +274,10 @@ impl&lt;'a&gt; Default for Borrowed&lt;'a&gt; {
 
 fn main() {
     let b: Borrowed = Default::default();
-    println!("b is {:?}", b);
+    println!("b는 {:?}입니다", b);
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../trait.html"><code>trait</code>s</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../trait.html"><code>trait</code></a></p>
 
                     </main>
 

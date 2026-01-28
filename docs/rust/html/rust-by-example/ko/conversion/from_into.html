@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>From and Into - Rust By Example</title>
+        <title>From과 Into - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,22 +255,17 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="from-and-into"><a class="header" href="#from-and-into"><code>From</code> and <code>Into</code></a></h1>
-<p>The <a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From</code></a> and <a href="https://doc.rust-lang.org/std/convert/trait.Into.html"><code>Into</code></a> traits are inherently linked, and this is actually part of
-its implementation. If you are able to convert type A from type B, then it
-should be easy to believe that we should be able to convert type B to type A.</p>
+                        <h1 id="from과-into"><a class="header" href="#from과-into"><code>From</code>과 <code>Into</code></a></h1>
+<p><a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From</code></a>과 <a href="https://doc.rust-lang.org/std/convert/trait.Into.html"><code>Into</code></a> 트레이트는 본질적으로 연결되어 있으며, 이는 실제로 구현의 일부입니다. 만약 타입 B로부터 타입 A를 만들 수 있다면(<code>From</code>), 타입 B를 타입 A로 변환할 수 있다(<code>Into</code>)는 것을 쉽게 알 수 있습니다.</p>
 <h2 id="from"><a class="header" href="#from"><code>From</code></a></h2>
-<p>The <a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From</code></a> trait allows for a type to define how to create itself from another
-type, hence providing a very simple mechanism for converting between several
-types. There are numerous implementations of this trait within the standard
-library for conversion of primitive and common types.</p>
-<p>For example we can easily convert a <code>str</code> into a <code>String</code></p>
+<p><a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From</code></a> 트레이트는 한 타입이 다른 타입으로부터 자신을 생성하는 방법을 정의할 수 있게 하여, 여러 타입 간의 변환을 위한 매우 단순한 메커니즘을 제공합니다. 표준 라이브러리에는 기본 타입 및 일반적인 타입의 변환을 위해 이 트레이트가 수없이 많이 구현되어 있습니다.</p>
+<p>예를 들어, <code>str</code>을 <code>String</code>으로 쉽게 변환할 수 있습니다.</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let my_str = "hello";
+</span>let my_str = "안녕";
 let my_string = String::from(my_str);
 <span class="boring">}</span></code></pre>
-<p>We can do something similar for defining a conversion for our own type.</p>
+<p>우리는 자신의 타입에 대한 변환을 정의하기 위해 유사한 작업을 수행할 수 있습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::convert::From;
 
 #[derive(Debug)]
@@ -283,12 +281,11 @@ impl From&lt;i32&gt; for Number {
 
 fn main() {
     let num = Number::from(30);
-    println!("My number is {:?}", num);
+    println!("제 숫자는 {:?}입니다", num);
 }</code></pre>
 <h2 id="into"><a class="header" href="#into"><code>Into</code></a></h2>
-<p>The <a href="https://doc.rust-lang.org/std/convert/trait.Into.html"><code>Into</code></a> trait is simply the reciprocal of the <code>From</code> trait. It
-defines how to convert a type into another type.</p>
-<p>Calling <code>into()</code> typically requires us to specify the result type as the compiler is unable to determine this most of the time.</p>
+<p><a href="https://doc.rust-lang.org/std/convert/trait.Into.html"><code>Into</code></a> 트레이트는 단순히 <code>From</code> 트레이트의 반대입니다. 이는 한 타입을 다른 타입으로 변환하는 방법을 정의합니다.</p>
+<p><code>into()</code>를 호출할 때는 일반적으로 결과 타입을 지정해야 합니다. 대부분의 경우 컴파일러가 이를 결정할 수 없기 때문입니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::convert::Into;
 
 #[derive(Debug)]
@@ -304,15 +301,12 @@ impl Into&lt;Number&gt; for i32 {
 
 fn main() {
     let int = 5;
-    // Try removing the type annotation
+    // 타입 어노테이션을 제거해 보세요
     let num: Number = int.into();
-    println!("My number is {:?}", num);
+    println!("제 숫자는 {:?}입니다", num);
 }</code></pre>
-<h2 id="from-and-into-are-interchangeable"><a class="header" href="#from-and-into-are-interchangeable"><code>From</code> and <code>Into</code> are interchangeable</a></h2>
-<p><code>From</code> and <code>Into</code> are designed to be complementary.
-We do not need to provide an implementation for both traits.
-If you have implemented the <code>From</code> trait for your type, <code>Into</code> will call it
-when necessary. Note, however, that the converse is not true: implementing <code>Into</code> for your type will not automatically provide it with an implementation of <code>From</code>.</p>
+<h2 id="from과-into는-상호-교환-가능합니다"><a class="header" href="#from과-into는-상호-교환-가능합니다"><code>From</code>과 <code>Into</code>는 상호 교환 가능합니다</a></h2>
+<p><code>From</code>과 <code>Into</code>는 상호 보완적으로 설계되었습니다. 두 트레이트 모두에 대해 구현을 제공할 필요는 없습니다. 만약 자신의 타입에 대해 <code>From</code> 트레이트를 구현했다면, <code>Into</code>는 필요할 때 이를 호출할 것입니다. 하지만 그 반대는 성립하지 않음에 유의하세요. 즉, 자신의 타입에 대해 <code>Into</code>를 구현한다고 해서 <code>From</code> 구현이 자동으로 제공되지는 않습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::convert::From;
 
 #[derive(Debug)]
@@ -320,7 +314,7 @@ struct Number {
     value: i32,
 }
 
-// Define `From`
+// `From` 정의
 impl From&lt;i32&gt; for Number {
     fn from(item: i32) -&gt; Self {
         Number { value: item }
@@ -329,9 +323,9 @@ impl From&lt;i32&gt; for Number {
 
 fn main() {
     let int = 5;
-    // use `Into`
+    // `Into` 사용
     let num: Number = int.into();
-    println!("My number is {:?}", num);
+    println!("제 숫자는 {:?}입니다", num);
 }</code></pre>
 
                     </main>

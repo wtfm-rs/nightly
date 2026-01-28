@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Playground - Rust By Example</title>
+        <title>플레이그라운드 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,42 +255,35 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="playground"><a class="header" href="#playground">Playground</a></h1>
-<p>The <a href="https://play.rust-lang.org/">Rust Playground</a> is a way to experiment with
-Rust code through a web interface.</p>
-<h2 id="using-it-with-mdbook"><a class="header" href="#using-it-with-mdbook">Using it with <code>mdbook</code></a></h2>
-<p>In <a href="https://github.com/rust-lang/mdBook"><code>mdbook</code></a>, you can make code examples playable and editable.</p>
+                        <h1 id="플레이그라운드"><a class="header" href="#플레이그라운드">플레이그라운드</a></h1>
+<p><a href="https://play.rust-lang.org/">Rust 플레이그라운드</a>는 웹 인터페이스를 통해 Rust 코드를 실험해 볼 수 있는 방법입니다.</p>
+<h2 id="mdbook에서-사용하기"><a class="header" href="#mdbook에서-사용하기"><code>mdbook</code>에서 사용하기</a></h2>
+<p><a href="https://github.com/rust-lang/mdBook"><code>mdbook</code></a>에서는 코드 예제를 실행 가능하고 수정 가능하게 만들 수 있습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
     println!("Hello World!");
 }</code></pre>
-<p>This allows the reader to both run your code sample, but also modify and tweak
-it. The key here is the adding of the word <code>editable</code> to your codefence block
-separated by a comma.</p>
+<p>이를 통해 독자는 코드 샘플을 실행할 뿐만 아니라 수정하고 조정해 볼 수도 있습니다. 여기서 핵심은 코드 펜스(codefence) 블록에 콤마로 구분하여 <code>editable</code>이라는 단어를 추가하는 것입니다.</p>
 <pre><code class="language-markdown">```rust,editable
 //...place your code here
 ```
 </code></pre>
-<p>Additionally, you can add <code>ignore</code> if you want <code>mdbook</code> to skip your code when
-it builds and tests.</p>
+<p>빌드 및 테스트 시에.</p>
 <pre><code class="language-markdown">```rust,editable,ignore
 //...place your code here
 ```
 </code></pre>
-<h2 id="using-it-with-docs"><a class="header" href="#using-it-with-docs">Using it with docs</a></h2>
-<p>You may have noticed in some of the <a href="https://doc.rust-lang.org/core/">official Rust docs</a> a
-button that says “Run”, which opens the code sample up in a new tab in Rust
-Playground. This feature is enabled if you use the <code>#[doc]</code> attribute called
-<a href="https://doc.rust-lang.org/rustdoc/write-documentation/the-doc-attribute.html#html_playground_url"><code>html_playground_url</code></a>.</p>
+<h2 id="문서에서-사용하기"><a class="header" href="#문서에서-사용하기">문서에서 사용하기</a></h2>
+<p><a href="https://doc.rust-lang.org/core/">공식 Rust 문서</a> 중 일부에서 “Run“이라고 적힌 버튼을 본 적이 있을 것입니다. 이 버튼을 누르면 Rust 플레이그라운드의 새 탭에서 코드 샘플이 열립니다. 이 기능은 <a href="https://doc.rust-lang.org/rustdoc/write-documentation/the-doc-attribute.html#html_playground_url"><code>html_playground_url</code></a>이라는 <code>#[doc]</code> 속성을 사용하면 활성화됩니다.</p>
 <pre><code class="language-text">#![doc(html_playground_url = "https://play.rust-lang.org/")]
 //! ```
 //! println!("Hello World");
 //! ```
 </code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
 <ul>
-<li><a href="https://play.rust-lang.org/">The Rust Playground</a></li>
-<li><a href="https://github.com/integer32llc/rust-playground/">The Rust Playground On Github</a></li>
-<li><a href="https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html">The rustdoc Book</a></li>
+<li><a href="https://play.rust-lang.org/">Rust 플레이그라운드</a></li>
+<li><a href="https://github.com/integer32llc/rust-playground/">GitHub의 Rust 플레이그라운드</a></li>
+<li><a href="https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html">rustdoc 책</a></li>
 </ul>
 
                     </main>

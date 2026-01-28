@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,24 +256,18 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="result"><a class="header" href="#result"><code>Result</code></a></h1>
-<p><a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a> is a richer version of the <a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a> type that
-describes possible <em>error</em> instead of possible <em>absence</em>.</p>
-<p>That is, <code>Result&lt;T, E&gt;</code> could have one of two outcomes:</p>
+<p><a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a>은 발생 가능한 _에러_를 설명하는, <a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a> 타입의 더 풍부한 버전입니다.</p>
+<p>즉, <code>Result&lt;T, E&gt;</code>는 다음 두 가지 결과 중 하나를 가질 수 있습니다:</p>
 <ul>
-<li><code>Ok(T)</code>: An element <code>T</code> was found</li>
-<li><code>Err(E)</code>: An error was found with element <code>E</code></li>
+<li><code>Ok(T)</code>: 요소 <code>T</code>가 발견됨</li>
+<li><code>Err(E)</code>: 요소 <code>E</code>와 함께 에러가 발견됨</li>
 </ul>
-<p>By convention, the expected outcome is <code>Ok</code> while the unexpected outcome is <code>Err</code>.</p>
-<p>Like <code>Option</code>, <code>Result</code> has many methods associated with it. <code>unwrap()</code>, for
-example, either yields the element <code>T</code> or <code>panic</code>s. For case handling,
-there are many combinators between <code>Result</code> and <code>Option</code> that overlap.</p>
-<p>In working with Rust, you will likely encounter methods that return the
-<code>Result</code> type, such as the <a href="https://doc.rust-lang.org/std/primitive.str.html#method.parse"><code>parse()</code></a> method. It might not always
-be possible to parse a string into the other type, so <code>parse()</code> returns a
-<code>Result</code> indicating possible failure.</p>
-<p>Let’s see what happens when we successfully and unsuccessfully <code>parse()</code> a string:</p>
+<p>관례적으로 기대되는 결과는 <code>Ok</code>이며, 기대하지 않은 결과는 <code>Err</code>입니다.</p>
+<p><code>Option</code>과 마찬가지로, <code>Result</code>도 많은 메서드들을 가지고 있습니다. 예를 들어 <code>unwrap()</code>은 요소 <code>T</code>를 내놓거나 <code>panic</code>을 일으킵니다. 케이스 처리를 위해 <code>Result</code>와 <code>Option</code> 사이에는 겹치는 많은 콤비네이터들이 있습니다.</p>
+<p>Rust로 작업하다 보면 <a href="https://doc.rust-lang.org/std/primitive.str.html#method.parse"><code>parse()</code></a> 메서드와 같이 <code>Result</code> 타입을 반환하는 메서드들을 자주 만나게 될 것입니다. 문자열을 다른 타입으로 파싱하는 것이 항상 가능한 것은 아니므로, <code>parse()</code>는 실패 가능성을 나타내는 <code>Result</code>를 반환합니다.</p>
+<p>문자열을 <code>parse()</code> 하는 데 성공했을 때와 실패했을 때 어떤 일이 일어나는지 봅시다:</p>
 <pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">fn multiply(first_number_str: &amp;str, second_number_str: &amp;str) -&gt; i32 {
-    // Let's try using `unwrap()` to get the number out. Will it bite us?
+    // `unwrap()`을 사용하여 숫자를 꺼내봅시다. 문제가 생길까요?
     let first_number = first_number_str.parse::&lt;i32&gt;().unwrap();
     let second_number = second_number_str.parse::&lt;i32&gt;().unwrap();
     first_number * second_number
@@ -278,26 +275,19 @@ be possible to parse a string into the other type, so <code>parse()</code> retur
 
 fn main() {
     let twenty = multiply("10", "2");
-    println!("double is {}", twenty);
+    println!("두 배는 {}", twenty);
 
     let tt = multiply("t", "2");
-    println!("double is {}", tt);
+    println!("두 배는 {}", tt);
 }</code></pre>
-<p>In the unsuccessful case, <code>parse()</code> leaves us with an error for <code>unwrap()</code>
-to <code>panic</code> on. Additionally, the <code>panic</code> exits our program and provides an
-unpleasant error message.</p>
-<p>To improve the quality of our error message, we should be more specific
-about the return type and consider explicitly handling the error.</p>
-<h2 id="using-result-in-main"><a class="header" href="#using-result-in-main">Using <code>Result</code> in <code>main</code></a></h2>
-<p>The <code>Result</code> type can also be the return type of the <code>main</code> function if
-specified explicitly. Typically the <code>main</code> function will be of the form:</p>
+<p>실패한 경우, <code>parse()</code>는 <code>unwrap()</code>이 <code>panic</code>을 일으킬 수 있도록 에러를 남깁니다. 게다가 이 <code>panic</code>은 프로그램을 종료시키고 불쾌한 에러 메시지를 제공합니다.</p>
+<p>에러 메시지의 품질을 높이려면, 반환 타입에 대해 더 구체적이어야 하며 에러를 명시적으로 처리하는 것을 고려해야 합니다.</p>
+<h2 id="main에서-result-사용하기"><a class="header" href="#main에서-result-사용하기"><code>main</code>에서 <code>Result</code> 사용하기</a></h2>
+<p><code>Result</code> 타입은 명시적으로 지정될 경우 <code>main</code> 함수의 반환 타입이 될 수도 있습니다. 일반적으로 <code>main</code> 함수는 다음과 같은 형태입니다:</p>
 <pre class="playground"><code class="language-rust edition2021">fn main() {
     println!("Hello World!");
 }</code></pre>
-<p>However <code>main</code> is also able to have a return type of <code>Result</code>. If an error
-occurs within the <code>main</code> function it will return an error code and print a debug
-representation of the error (using the <a href="https://doc.rust-lang.org/std/fmt/trait.Debug.html"><code>Debug</code></a> trait). The following example
-shows such a scenario and touches on aspects covered in <a href="result/early_returns.html">the following section</a>.</p>
+<p>하지만 <code>main</code>은 반환 타입으로 <code>Result</code>를 가질 수도 있습니다. 만약 <code>main</code> 함수 내에서 에러가 발생하면, 에러 코드를 반환하고 에러의 디버그 표현(<a href="https://doc.rust-lang.org/std/fmt/trait.Debug.html"><code>Debug</code></a> 트레이트 사용)을 출력합니다. 다음 예제는 그러한 시나리오를 보여주며 <a href="result/early_returns.html">다음 섹션</a>에서 다루는 측면들을 언급합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::num::ParseIntError;
 
 fn main() -&gt; Result&lt;(), ParseIntError&gt; {

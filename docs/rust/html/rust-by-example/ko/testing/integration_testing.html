@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Integration testing - Rust By Example</title>
+        <title>통합 테스트 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,23 +255,20 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="integration-testing"><a class="header" href="#integration-testing">Integration testing</a></h1>
-<p><a href="unit_testing.html">Unit tests</a> are testing one module in isolation at a time: they’re small
-and can test private code. Integration tests are external to your crate and use
-only its public interface in the same way any other code would. Their purpose is
-to test that many parts of your library work correctly together.</p>
-<p>Cargo looks for integration tests in <code>tests</code> directory next to <code>src</code>.</p>
-<p>File <code>src/lib.rs</code>:</p>
-<pre><code class="language-rust ignore">// Define this in a crate called `adder`.
+                        <h1 id="통합-테스트"><a class="header" href="#통합-테스트">통합 테스트</a></h1>
+<p><a href="unit_testing.html">유닛 테스트</a>는 한 번에 하나의 모듈을 격리하여 테스트합니다. 유닛 테스트는 크기가 작고 프라이빗 코드도 테스트할 수 있습니다. 통합 테스트는 크레이트 외부에 존재하며, 다른 코드와 마찬가지로 공개(public) 인터페이스만 사용합니다. 통합 테스트의 목적은 라이브러리의 여러 부분이 함께 올바르게 작동하는지 테스트하는 것입니다.</p>
+<p>Cargo는 <code>src</code> 옆의 <code>tests</code> 디렉터리에서 통합 테스트를 찾습니다.</p>
+<p><code>src/lib.rs</code> 파일:</p>
+<pre><code class="language-rust ignore">// `adder`라는 이름의 크레이트에 이를 정의합니다.
 pub fn add(a: i32, b: i32) -&gt; i32 {
     a + b
 }</code></pre>
-<p>File with test: <code>tests/integration_test.rs</code>:</p>
+<p>테스트 파일: <code>tests/integration_test.rs</code>:</p>
 <pre><code class="language-rust ignore">#[test]
 fn test_add() {
     assert_eq!(adder::add(3, 2), 5);
 }</code></pre>
-<p>Running tests with <code>cargo test</code> command:</p>
+<p><code>cargo test</code> 명령으로 테스트 실행하기:</p>
 <pre><code class="language-shell">$ cargo test
 running 0 tests
 
@@ -287,27 +287,22 @@ running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
 </code></pre>
-<p>Each Rust source file in the <code>tests</code> directory is compiled as a separate crate. In
-order to share some code between integration tests we can make a module with public
-functions, importing and using it within tests.</p>
-<p>File <code>tests/common/mod.rs</code>:</p>
+<p>통합 테스트 간에 일부 코드를 공유하기 위해 공개 함수가 있는 모듈을 만들고, 이를 테스트 내에서 가져와 사용할 수 있습니다.</p>
+<p><code>tests/common/mod.rs</code> 파일:</p>
 <pre><code class="language-rust ignore">pub fn setup() {
-    // some setup code, like creating required files/directories, starting
-    // servers, etc.
+    // 필요한 파일/디렉터리 생성, 서버 시작 등과 같은 일부 설정 코드
 }</code></pre>
-<p>File with test: <code>tests/integration_test.rs</code></p>
-<pre><code class="language-rust ignore">// importing common module.
+<p>테스트 파일: <code>tests/integration_test.rs</code></p>
+<pre><code class="language-rust ignore">// common 모듈 가져오기.
 mod common;
 
 #[test]
 fn test_add() {
-    // using common code.
+    // 공통 코드 사용하기.
     common::setup();
     assert_eq!(adder::add(3, 2), 5);
 }</code></pre>
-<p>Creating the module as <code>tests/common.rs</code> also works, but is not recommended
-because the test runner will treat the file as a test crate and try to run tests
-inside it.</p>
+<p><code>tests/common.rs</code>로 모듈을 만드는 것도 가능하지만, 테스트 러너가 이 파일을 테스트 크레이트로 취급하여 내부의 테스트를 실행하려 하므로 권장되지 않습니다.</p>
 
                     </main>
 

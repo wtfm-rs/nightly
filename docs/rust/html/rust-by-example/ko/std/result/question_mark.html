@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,11 +256,7 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id=""><a class="header" href="#"><code>?</code></a></h1>
-<p>Chaining results using match can get pretty untidy; luckily, the <code>?</code> operator
-can be used to make things pretty again. <code>?</code> is used at the end of an expression
-returning a <code>Result</code>, and is equivalent to a match expression, where the
-<code>Err(err)</code> branch expands to an early <code>return Err(From::from(err))</code>, and the <code>Ok(ok)</code>
-branch expands to an <code>ok</code> expression.</p>
+<p><code>match</code>를 사용하여 결과를 체인으로 연결하는 것은 꽤 지저분해질 수 있습니다. 다행히 <code>?</code> 연산자를 사용하여 다시 깔끔하게 만들 수 있습니다. <code>?</code>는 <code>Result</code>를 반환하는 표현식의 끝에 사용되며, <code>match</code> 표현식과 동일하게 작동합니다. 여기서 <code>Err(err)</code> 가지는 조기 리턴인 <code>return Err(From::from(err))</code>로 확장되고, <code>Ok(ok)</code> 가지는 <code>ok</code> 표현식으로 확장됩니다.</p>
 <pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">mod checked {
     #[derive(Debug)]
     enum MathError {
@@ -292,12 +291,12 @@ branch expands to an <code>ok</code> expression.</p>
         }
     }
 
-    // Intermediate function
+    // 중간 함수
     fn op_(x: f64, y: f64) -&gt; MathResult {
-        // if `div` "fails", then `DivisionByZero` will be `return`ed
+        // 만약 `div`가 "실패"하면, `DivisionByZero`가 반환됩니다
         let ratio = div(x, y)?;
 
-        // if `ln` "fails", then `NonPositiveLogarithm` will be `return`ed
+        // 만약 `ln`가 "실패"하면, `NonPositiveLogarithm`이 반환됩니다
         let ln = ln(ratio)?;
 
         sqrt(ln)
@@ -307,11 +306,11 @@ branch expands to an <code>ok</code> expression.</p>
         match op_(x, y) {
             Err(why) =&gt; panic!("{}", match why {
                 MathError::NonPositiveLogarithm
-                    =&gt; "logarithm of non-positive number",
+                    =&gt; "0 이하의 수에 대한 로그",
                 MathError::DivisionByZero
-                    =&gt; "division by zero",
+                    =&gt; "0으로 나누기",
                 MathError::NegativeSquareRoot
-                    =&gt; "square root of negative number",
+                    =&gt; "음수의 제곱근",
             }),
             Ok(value) =&gt; println!("{}", value),
         }
@@ -321,8 +320,7 @@ branch expands to an <code>ok</code> expression.</p>
 fn main() {
     checked::op(1.0, 10.0);
 }</code></pre>
-<p>Be sure to check the <a href="https://doc.rust-lang.org/std/result/index.html">documentation</a>,
-as there are many methods to map/compose <code>Result</code>.</p>
+<p><code>Result</code>를 매핑하거나 구성(compose)하는 많은 메서드들이 있으니, 반드시 <a href="https://doc.rust-lang.org/std/result/index.html">문서</a>를 확인해 보세요.</p>
 
                     </main>
 

@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,24 +256,20 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="dead_code"><a class="header" href="#dead_code"><code>dead_code</code></a></h1>
-<p>The compiler provides a <code>dead_code</code>
-<a href="https://en.wikipedia.org/wiki/Lint_%28software%29"><em>lint</em></a> that will warn
-about unused functions. An <em>attribute</em> can be used to disable the lint.</p>
+<p>컴파일러는 사용되지 않는 함수에 대해 경고하는 <code>dead_code</code> <a href="https://en.wikipedia.org/wiki/Lint_%28software%29"><em>린트(lint)</em></a>를 제공합니다. _속성_을 사용하여 이 린트를 비활성화할 수 있습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn used_function() {}
 
-// `#[allow(dead_code)]` is an attribute that disables the `dead_code` lint
+// `#[allow(dead_code)]`는 `dead_code` 린트를 비활성화하는 속성입니다
 #[allow(dead_code)]
 fn unused_function() {}
 
 fn noisy_unused_function() {}
-// FIXME ^ Add an attribute to suppress the warning
+// FIXME ^ 경고를 억제하기 위해 속성을 추가하세요
 
 fn main() {
     used_function();
 }</code></pre>
-<p>Note that in real programs, you should eliminate dead code. In these examples
-we’ll allow dead code in some places because of the interactive nature of the
-examples.</p>
+<p>실제 프로그램에서는 죽은 코드를 제거해야 합니다. 이 예제들에서는 예제의 대화형 특성 때문에 일부 장소에서 죽은 코드를 허용할 것입니다.</p>
 
                     </main>
 

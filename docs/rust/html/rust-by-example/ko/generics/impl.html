@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Implementation - Rust By Example</title>
+        <title>구현 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,18 +255,18 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="implementation"><a class="header" href="#implementation">Implementation</a></h1>
-<p>Similar to functions, implementations require care to remain generic.</p>
+                        <h1 id="구현"><a class="header" href="#구현">구현</a></h1>
+<p>함수와 마찬가지로, 구현(implementation)도 제네릭을 유지하기 위해 주의가 필요합니다.</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>struct S; // Concrete type `S`
-struct GenericVal&lt;T&gt;(T); // Generic type `GenericVal`
+</span>struct S; // 구체적인 타입 `S`
+struct GenericVal&lt;T&gt;(T); // 제네릭 타입 `GenericVal`
 
-// impl of GenericVal where we explicitly specify type parameters:
-impl GenericVal&lt;f32&gt; {} // Specify `f32`
-impl GenericVal&lt;S&gt; {} // Specify `S` as defined above
+// 타입 파라미터를 명시적으로 지정한 GenericVal의 구현:
+impl GenericVal&lt;f32&gt; {} // `f32` 지정
+impl GenericVal&lt;S&gt; {} // 위에서 정의한 `S` 지정
 
-// `&lt;T&gt;` Must precede the type to remain generic
+// 제네릭을 유지하려면 `&lt;T&gt;`가 타입 앞에 와야 합니다
 impl&lt;T&gt; GenericVal&lt;T&gt; {}
 <span class="boring">}</span></code></pre>
 <pre class="playground"><code class="language-rust editable edition2021">struct Val {
@@ -274,14 +277,14 @@ struct GenVal&lt;T&gt; {
     gen_val: T,
 }
 
-// impl of Val
+// Val 구현
 impl Val {
     fn value(&amp;self) -&gt; &amp;f64 {
         &amp;self.val
     }
 }
 
-// impl of GenVal for a generic type `T`
+// 제네릭 타입 `T`에 대한 GenVal 구현
 impl&lt;T&gt; GenVal&lt;T&gt; {
     fn value(&amp;self) -&gt; &amp;T {
         &amp;self.gen_val
@@ -294,8 +297,8 @@ fn main() {
 
     println!("{}, {}", x.value(), y.value());
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../scope/lifetime/fn.html">functions returning references</a>, <a href="../fn/methods.html"><code>impl</code></a>, and <a href="../custom_types/structs.html"><code>struct</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../scope/lifetime/fn.html">참조를 반환하는 함수</a>, <a href="../fn/methods.html"><code>impl</code></a>, 그리고 <a href="../custom_types/structs.html"><code>struct</code></a></p>
 
                     </main>
 

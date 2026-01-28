@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,34 +256,31 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="panic"><a class="header" href="#panic"><code>panic!</code></a></h1>
-<p>The <code>panic!</code> macro can be used to generate a panic and start unwinding
-its stack. While unwinding, the runtime will take care of freeing all the
-resources <em>owned</em> by the thread by calling the destructor of all its objects.</p>
-<p>Since we are dealing with programs with only one thread, <code>panic!</code> will cause the
-program to report the panic message and exit.</p>
-<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// Re-implementation of integer division (/)
+<p><code>panic!</code> 매크로는 패닉을 생성하고 스택 되감기(unwinding)를 시작하는 데 사용될 수 있습니다. 되감기를 하는 동안, 런타임은 모든 객체의 데스트럭터를 호출하여 해당 스레드가 소유한 모든 리소스를 해제합니다.</p>
+<p>우리는 단일 스레드 프로그램만 다루고 있으므로, <code>panic!</code>은 프로그램이 패닉 메시지를 보고하고 종료하게 만듭니다.</p>
+<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// 정수 나눗셈(/)의 재구현
 fn division(dividend: i32, divisor: i32) -&gt; i32 {
     if divisor == 0 {
-        // Division by zero triggers a panic
-        panic!("division by zero");
+        // 0으로 나누기는 패닉을 트리거합니다
+        panic!("0으로 나누기");
     } else {
         dividend / divisor
     }
 }
 
-// The `main` task
+// 메인 태스크
 fn main() {
-    // Heap allocated integer
+    // 힙 할당 정수
     let _x = Box::new(0i32);
 
-    // This operation will trigger a task failure
+    // 이 작업은 태스크 실패를 트리거합니다
     division(3, 0);
 
-    println!("This point won't be reached!");
+    println!("이 지점에는 도달하지 않습니다!");
 
-    // `_x` should get destroyed at this point
+    // 이 지점에서 `_x`가 파괴되어야 합니다
 }</code></pre>
-<p>Let’s check that <code>panic!</code> doesn’t leak memory.</p>
+<p><code>panic!</code>이 메모리를 누수하지 않는지 확인해 봅시다.</p>
 <!-- REUSE-IgnoreStart -->
 <!-- Prevent REUSE from parsing the copyright statement in the sample code -->
 <pre><code class="language-shell">$ rustc panic.rs &amp;&amp; valgrind ./panic

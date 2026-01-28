@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Partial moves - Rust By Example</title>
+        <title>부분 이동 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,16 +255,8 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="partial-moves"><a class="header" href="#partial-moves">Partial moves</a></h1>
-<p>Within the <a href="../../flow_control/match/destructuring.html">destructuring</a> of a single variable, both <code>by-move</code> and
-<code>by-reference</code> pattern bindings can be used at the same time. Doing
-this will result in a <em>partial move</em> of the variable, which means
-that parts of the variable will be moved while other parts stay. In
-such a case, the parent variable cannot be used afterwards as a
-whole, however the parts that are only referenced (and not moved)
-can still be used. Note that types that implement the
-<a href="../../trait/drop.html"><code>Drop</code> trait</a> cannot be partially moved from, because
-its <code>drop</code> method would use it afterwards as a whole.</p>
+                        <h1 id="부분-이동"><a class="header" href="#부분-이동">부분 이동</a></h1>
+<p>단일 변수의 <a href="../../flow_control/match/destructuring.html">구조 분해</a> 내에서 <code>이동에 의한(by-move)</code> 패턴 바인딩과 <code>참조에 의한(by-reference)</code> 패턴 바인딩을 동시에 사용할 수 있습니다. 이렇게 하면 변수의 _부분 이동(partial move)_이 발생하는데, 이는 변수의 일부는 이동하고 다른 부분은 남아있음을 의미합니다. 이런 경우 부모 변수는 전체로서 나중에 사용될 수 없지만, 참조만 되고 이동되지 않은 부분은 여전히 사용될 수 있습니다. <a href="../../trait/drop.html"><code>Drop</code> 트레이트</a>를 구현한 타입은 부분적으로 이동될 수 없다는 점에 유의하세요. 왜냐하면 해당 타입의 <code>drop</code> 메서드가 나중에 전체로서 사용될 것이기 때문입니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
     #[derive(Debug)]
     struct Person {
@@ -269,40 +264,35 @@ its <code>drop</code> method would use it afterwards as a whole.</p>
         age: Box&lt;u8&gt;,
     }
 
-    // Error! cannot move out of a type which implements the `Drop` trait
+    // 에러! `Drop` 트레이트를 구현한 타입에서는 이동해 나올 수 없습니다
     //impl Drop for Person {
     //    fn drop(&amp;mut self) {
-    //        println!("Dropping the person struct {:?}", self)
+    //        println!("Person 구조체를 드롭합니다 {:?}", self)
     //    }
     //}
-    // TODO ^ Try uncommenting these lines
+    // TODO ^ 이 줄들의 주석을 해제해 보세요
 
     let person = Person {
-        name: String::from("Alice"),
+        name: String::from("앨리스"),
         age: Box::new(20),
     };
 
-    // `name` is moved out of person, but `age` is referenced
+    // `name`은 person에서 밖으로 이동되지만, `age`는 참조됩니다
     let Person { name, ref age } = person;
 
-    println!("The person's age is {}", age);
+    println!("이 사람의 나이는 {}입니다", age);
 
-    println!("The person's name is {}", name);
+    println!("이 사람의 이름은 {}입니다", name);
 
-    // Error! borrow of partially moved value: `person` partial move occurs
-    //println!("The person struct is {:?}", person);
+    // 에러! 부분적으로 이동된 값의 빌림: `person`의 부분 이동이 발생했습니다
+    //println!("Person 구조체는 {:?}입니다", person);
 
-    // `person` cannot be used but `person.age` can be used as it is not moved
-    println!("The person's age from person struct is {}", person.age);
+    // `person`은 사용할 수 없지만 `person.age`는 이동되지 않았으므로 사용할 수 있습니다
+    println!("person 구조체에서 가져온 이 사람의 나이는 {}입니다", person.age);
 }</code></pre>
-<p>(In this example, we store the <code>age</code> variable on the heap to
-illustrate the partial move: deleting <code>ref</code> in the above code would
-give an error as the ownership of <code>person.age</code> would be moved to the
-variable <code>age</code>. If <code>Person.age</code> were stored on the stack, <code>ref</code> would
-not be required as the definition of <code>age</code> would copy the data from
-<code>person.age</code> without moving it.)</p>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../flow_control/match/destructuring.html">destructuring</a></p>
+<p>(이 예제에서는 부분 이동을 설명하기 위해 <code>age</code> 변수를 힙에 저장합니다. 위 코드에서 <code>ref</code>를 삭제하면 <code>person.age</code>의 소유권이 <code>age</code> 변수로 이동하기 때문에 에러가 발생합니다. <code>Person.age</code>가 스택에 저장되어 있었다면, <code>age</code>의 정의가 <code>person.age</code>에서 데이터를 이동 없이 복사하므로 <code>ref</code>가 필요하지 않았을 것입니다.)</p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../flow_control/match/destructuring.html">구조 분해</a></p>
 
                     </main>
 

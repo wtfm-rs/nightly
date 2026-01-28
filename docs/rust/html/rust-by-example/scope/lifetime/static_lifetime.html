@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,7 +110,7 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-8a7729ff.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../../toc-61902a00.js"></script>
@@ -313,16 +316,16 @@ live for the entire duration, but only from the leaking point onward.</p>
 <pre class="playground"><code class="language-rust editable compile_fail edition2021">extern crate rand;
 use rand::Fill;
 
-fn random_vec() -&gt; &amp;'static [usize; 100] {
-    let mut rng = rand::thread_rng();
+fn random_vec() -&gt; &amp;'static [u64; 100] {
+    let mut rng = rand::rng();
     let mut boxed = Box::new([0; 100]);
-    boxed.try_fill(&amp;mut rng).unwrap();
+    boxed.fill(&amp;mut rng);
     Box::leak(boxed)
 }
 
 fn main() {
-    let first: &amp;'static [usize; 100] = random_vec();
-    let second: &amp;'static [usize; 100] = random_vec();
+    let first: &amp;'static [u64; 100] = random_vec();
+    let second: &amp;'static [u64; 100] = random_vec();
     assert_ne!(first, second)
 }</code></pre>
 <h2 id="trait-bound"><a class="header" href="#trait-bound">Trait bound</a></h2>

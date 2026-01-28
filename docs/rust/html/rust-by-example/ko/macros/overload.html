@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Overload - Rust By Example</title>
+        <title>오버로드 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,21 +255,20 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="overload"><a class="header" href="#overload">Overload</a></h1>
-<p>Macros can be overloaded to accept different combinations of arguments.
-In that regard, <code>macro_rules!</code> can work similarly to a match block:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// `test!` will compare `$left` and `$right`
-// in different ways depending on how you invoke it:
+                        <h1 id="오버로드"><a class="header" href="#오버로드">오버로드</a></h1>
+<p>매크로는 서로 다른 인자 조합을 수용하도록 오버로딩될 수 있습니다. 그런 점에서는 <code>macro_rules!</code>는 <code>match</code> 블록과 비슷하게 작동할 수 있습니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// `test!`는 호출 방식에 따라 `$left`와 `$right`를
+// 서로 다른 방식으로 비교할 것입니다:
 macro_rules! test {
-    // Arguments don't need to be separated by a comma.
-    // Any template can be used!
+    // 인자들은 콤마로 구분될 필요가 없습니다.
+    // 어떤 템플릿이든 사용될 수 있습니다!
     ($left:expr; and $right:expr) =&gt; {
         println!("{:?} and {:?} is {:?}",
                  stringify!($left),
                  stringify!($right),
                  $left &amp;&amp; $right)
     };
-    // ^ each arm must end with a semicolon.
+    // ^ 각 팔(arm)은 세미콜론으로 끝나야 합니다.
     ($left:expr; or $right:expr) =&gt; {
         println!("{:?} or {:?} is {:?}",
                  stringify!($left),

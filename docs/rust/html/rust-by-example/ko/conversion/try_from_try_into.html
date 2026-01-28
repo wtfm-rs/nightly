@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>TryFrom and TryInto - Rust By Example</title>
+        <title>TryFrom과 TryInto - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,11 +255,8 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="tryfrom-and-tryinto"><a class="header" href="#tryfrom-and-tryinto"><code>TryFrom</code> and <code>TryInto</code></a></h1>
-<p>Similar to <a href="from_into.html"><code>From</code> and <code>Into</code></a>, <a href="https://doc.rust-lang.org/std/convert/trait.TryFrom.html"><code>TryFrom</code></a> and <a href="https://doc.rust-lang.org/std/convert/trait.TryInto.html"><code>TryInto</code></a> are
-generic traits for converting between types. Unlike <code>From</code>/<code>Into</code>, the
-<code>TryFrom</code>/<code>TryInto</code> traits are used for fallible conversions, and as such,
-return <a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a>s.</p>
+                        <h1 id="tryfrom과-tryinto"><a class="header" href="#tryfrom과-tryinto"><code>TryFrom</code>과 <code>TryInto</code></a></h1>
+<p><a href="from_into.html"><code>From</code>과 <code>Into</code></a>와 유사하게, <a href="https://doc.rust-lang.org/std/convert/trait.TryFrom.html"><code>TryFrom</code></a>과 <a href="https://doc.rust-lang.org/std/convert/trait.TryInto.html"><code>TryInto</code></a>는 타입 간 변환을 위한 제네릭 트레이트입니다. <code>From</code>/<code>Into</code>와 달리, <code>TryFrom</code>/<code>TryInto</code> 트레이트는 실패할 가능성이 있는 변환에 사용되며, 따라서 <a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a>를 반환합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::convert::TryFrom;
 use std::convert::TryInto;
 

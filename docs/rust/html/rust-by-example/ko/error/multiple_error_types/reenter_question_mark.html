@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Other uses of ? - Rust By Example</title>
+        <title>?의 다른 용도 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,26 +255,17 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="other-uses-of-"><a class="header" href="#other-uses-of-">Other uses of <code>?</code></a></h1>
-<p>Notice in the previous example that our immediate reaction to calling
-<code>parse</code> is to <code>map</code> the error from a library error into a boxed
-error:</p>
+                        <h1 id="의-다른-용도"><a class="header" href="#의-다른-용도"><code>?</code>의 다른 용도</a></h1>
+<p>이전 예제에서 <code>parse</code>를 호출했을 때 우리의 즉각적인 반응은 라이브러리 에러를 박싱된 에러로 <code>map</code>하는 것이었습니다:</p>
 <pre><code class="language-rust ignore">.and_then(|s| s.parse::&lt;i32&gt;())
     .map_err(|e| e.into())</code></pre>
-<p>Since this is a simple and common operation, it would be convenient if it
-could be elided. Alas, because <code>and_then</code> is not sufficiently flexible, it
-cannot. However, we can instead use <code>?</code>.</p>
-<p><code>?</code> was previously explained as either <code>unwrap</code> or <code>return Err(err)</code>.
-This is only mostly true. It actually means <code>unwrap</code> or
-<code>return Err(From::from(err))</code>. Since <code>From::from</code> is a conversion utility
-between different types, this means that if you <code>?</code> where the error is
-convertible to the return type, it will convert automatically.</p>
-<p>Here, we rewrite the previous example using <code>?</code>. As a result, the
-<code>map_err</code> will go away when <code>From::from</code> is implemented for our error type:</p>
+<p>이는 단순하고 흔한 작업이므로 생략할 수 있다면 편리할 것입니다. 아쉽게도 <code>and_then</code>은 충분히 유연하지 못해 생략할 수 없습니다. 하지만 대신 <code>?</code>를 사용할 수 있습니다.</p>
+<p><code>?</code>는 이전에 <code>unwrap</code> 또는 <code>return Err(err)</code>로 설명되었습니다. 이는 거의 맞지만 전부는 아닙니다. 실제로는 <code>unwrap</code> 또는 <code>return Err(From::from(err))</code>를 의미합니다. <code>From::from</code>은 서로 다른 타입 간의 변환 유틸리티이므로, 에러가 반환 타입으로 변환 가능한 곳에서 <code>?</code>를 사용하면 자동으로 변환됩니다.</p>
+<p>여기서는 이전 예제를 <code>?</code>를 사용하여 다시 작성합니다. 결과적으로, 우리의 에러 타입에 대해 <code>From::from</code>이 구현되면 <code>map_err</code>이 사라질 것입니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::error;
 use std::fmt;
 
-// Change the alias to use `Box&lt;dyn error::Error&gt;`.
+// 별칭이 `Box&lt;dyn error::Error&gt;`를 사용하도록 변경합니다.
 type Result&lt;T&gt; = std::result::Result&lt;T, Box&lt;dyn error::Error&gt;&gt;;
 
 #[derive(Debug)]
@@ -279,14 +273,14 @@ struct EmptyVec;
 
 impl fmt::Display for EmptyVec {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
-        write!(f, "invalid first item to double")
+        write!(f, "두 배로 만들 첫 번째 항목이 유효하지 않습니다")
     }
 }
 
 impl error::Error for EmptyVec {}
 
-// The same structure as before but rather than chain all `Results`
-// and `Options` along, we `?` to get the inner value out immediately.
+// 이전과 동일한 구조이지만 모든 `Result`와 `Option`을 체인으로 연결하는 대신,
+// `?`를 사용하여 즉시 내부 값을 꺼냅니다.
 fn double_first(vec: Vec&lt;&amp;str&gt;) -&gt; Result&lt;i32&gt; {
     let first = vec.first().ok_or(EmptyVec)?;
     let parsed = first.parse::&lt;i32&gt;()?;
@@ -295,26 +289,23 @@ fn double_first(vec: Vec&lt;&amp;str&gt;) -&gt; Result&lt;i32&gt; {
 
 fn print(result: Result&lt;i32&gt;) {
     match result {
-        Ok(n)  =&gt; println!("The first doubled is {}", n),
-        Err(e) =&gt; println!("Error: {}", e),
+        Ok(n)  =&gt; println!("두 배가 된 첫 번째 값은 {}입니다", n),
+        Err(e) =&gt; println!("에러: {}", e),
     }
 }
 
 fn main() {
     let numbers = vec!["42", "93", "18"];
     let empty = vec![];
-    let strings = vec!["tofu", "93", "18"];
+    let strings = vec!["두부", "93", "18"];
 
     print(double_first(numbers));
     print(double_first(empty));
     print(double_first(strings));
 }</code></pre>
-<p>This is actually fairly clean now. Compared with the original <code>panic</code>, it
-is very similar to replacing the <code>unwrap</code> calls with <code>?</code> except that the
-return types are <code>Result</code>. As a result, they must be destructured at the
-top level.</p>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From::from</code></a> and <a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator"><code>?</code></a></p>
+<p>이제 상당히 깔끔해졌습니다. 원본 <code>panic</code> 예제와 비교하면, 반환 타입이 <code>Result</code>라는 점을 제외하고는 <code>unwrap</code> 호출을 <code>?</code>로 대체한 것과 매우 유사합니다. 그 결과, 이들은 최상위 레벨에서 구조 분해(destructure)되어야 합니다.</p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From::from</code></a>과 <a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator"><code>?</code></a></p>
 
                     </main>
 

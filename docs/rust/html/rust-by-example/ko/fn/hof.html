@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Higher Order Functions - Rust By Example</title>
+        <title>고차 함수 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,47 +255,42 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="higher-order-functions"><a class="header" href="#higher-order-functions">Higher Order Functions</a></h1>
-<p>Rust provides Higher Order Functions (HOF). These are functions that
-take one or more functions and/or produce a more useful function. HOFs
-and lazy iterators give Rust its functional flavor.</p>
+                        <h1 id="고차-함수"><a class="header" href="#고차-함수">고차 함수</a></h1>
+<p>Rust는 고차 함수(Higher Order Functions, HOF)를 제공합니다. 이들은 하나 이상의 함수를 인자로 받거나 더 유용한 함수를 만들어내는 함수들입니다. HOF와 게으른(lazy) 이터레이터는 Rust에 함수형 프로그래밍의 풍미를 더해줍니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn is_odd(n: u32) -&gt; bool {
     n % 2 == 1
 }
 
 fn main() {
-    println!("Find the sum of all the numbers with odd squares under 1000");
+    println!("1000 미만의 홀수 제곱값들의 합 찾기");
     let upper = 1000;
 
-    // Imperative approach
-    // Declare accumulator variable
+    // 명령형 접근 방식
+// 누적 변수 선언
     let mut acc = 0;
-    // Iterate: 0, 1, 2, ... to infinity
+    // 반복: 0, 1, 2, ... 무한대까지
     for n in 0.. {
-        // Square the number
+        // 숫자를 제곱합니다
         let n_squared = n * n;
 
         if n_squared &gt;= upper {
-            // Break loop if exceeded the upper limit
+            // 상한을 초과하면 루프를 종료합니다
             break;
         } else if is_odd(n_squared) {
-            // Accumulate value, if it's odd
+            // 홀수라면 값을 누적합니다
             acc += n;
         }
     }
-    println!("imperative style: {}", acc);
+    println!("명령형 스타일: {}", acc);
 
-    // Functional approach
+    // 함수형 접근 방식
     let sum: u32 =
-        (0..).take_while(|&amp;n| n * n &lt; upper) // Below upper limit
-             .filter(|&amp;n| is_odd(n * n))     // That are odd
-             .sum();                         // Sum them
-    println!("functional style: {}", sum);
+        (0..).take_while(|&amp;n| n * n &lt; upper) // 상한 미만
+             .filter(|&amp;n| is_odd(n * n))     // 홀수인 것들
+             .sum();                         // 합계를 구함
+    println!("함수형 스타일: {}", sum);
 }</code></pre>
-<p><a href="https://doc.rust-lang.org/core/option/enum.Option.html">Option</a>
-and
-<a href="https://doc.rust-lang.org/core/iter/trait.Iterator.html">Iterator</a>
-implement their fair share of HOFs.</p>
+<p><a href="https://doc.rust-lang.org/core/option/enum.Option.html">Option</a>과 <a href="https://doc.rust-lang.org/core/iter/trait.Iterator.html">Iterator</a>는 상당수의 HOF를 구현하고 있습니다.</p>
 
                     </main>
 

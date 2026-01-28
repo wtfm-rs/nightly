@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,54 +256,48 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="rc"><a class="header" href="#rc"><code>Rc</code></a></h1>
-<p>When multiple ownership is needed, <code>Rc</code>(Reference Counting) can be used. <code>Rc</code>
-keeps track of the number of the references which means the number of owners of
-the value wrapped inside an <code>Rc</code>.</p>
-<p>Reference count of an <code>Rc</code> increases by 1 whenever an <code>Rc</code> is cloned, and
-decreases by 1 whenever one cloned <code>Rc</code> is dropped out of the scope. When an
-<code>Rc</code>’s reference count becomes zero (which means there are no remaining owners),
-both the <code>Rc</code> and the value are all dropped.</p>
-<p>Cloning an <code>Rc</code> never performs a deep copy. Cloning creates just another pointer
-to the wrapped value, and increments the count.</p>
+<p>다중 소유권이 필요한 경우, <code>Rc</code>(참조 횟수 계산, Reference Counting)를 사용할 수 있습니다. <code>Rc</code>는 참조의 개수를 추적하며, 이는 <code>Rc</code> 내부에 감싸진 값의 소유자 수를 의미합니다.</p>
+<p><code>Rc</code>의 참조 횟수는 <code>Rc</code>가 클론될 때마다 1씩 증가하고, 클론된 <code>Rc</code>가 스코프를 벗어날 때마다 1씩 감소합니다. <code>Rc</code>의 참조 횟수가 0이 되면 (즉, 남은 소유자가 없으면), <code>Rc</code>와 그 내부의 값 모두 해제됩니다.</p>
+<p><code>Rc</code>를 클론하는 것은 결코 깊은 복사(deep copy)를 수행하지 않습니다. 클론은 단지 감싸진 값을 가리키는 또 다른 포인터를 생성하고, 횟수를 증가시킬 뿐입니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::rc::Rc;
 
 fn main() {
-    let rc_examples = "Rc examples".to_string();
+    let rc_examples = "Rc 예제".to_string();
     {
-        println!("--- rc_a is created ---");
+        println!("--- rc_a가 생성됨 ---");
 
         let rc_a: Rc&lt;String&gt; = Rc::new(rc_examples);
-        println!("Reference Count of rc_a: {}", Rc::strong_count(&amp;rc_a));
+        println!("rc_a의 참조 횟수: {}", Rc::strong_count(&amp;rc_a));
 
         {
-            println!("--- rc_a is cloned to rc_b ---");
+            println!("--- rc_a가 rc_b로 클론됨 ---");
 
             let rc_b: Rc&lt;String&gt; = Rc::clone(&amp;rc_a);
-            println!("Reference Count of rc_b: {}", Rc::strong_count(&amp;rc_b));
-            println!("Reference Count of rc_a: {}", Rc::strong_count(&amp;rc_a));
+            println!("rc_b의 참조 횟수: {}", Rc::strong_count(&amp;rc_b));
+            println!("rc_a의 참조 횟수: {}", Rc::strong_count(&amp;rc_a));
 
-            // Two `Rc`s are equal if their inner values are equal
-            println!("rc_a and rc_b are equal: {}", rc_a.eq(&amp;rc_b));
+            // 두 `Rc`는 내부 값이 같으면 같습니다
+            println!("rc_a와 rc_b는 같음: {}", rc_a.eq(&amp;rc_b));
 
-            // We can use methods of a value directly
-            println!("Length of the value inside rc_a: {}", rc_a.len());
-            println!("Value of rc_b: {}", rc_b);
+            // 값의 메서드들을 직접 사용할 수 있습니다
+            println!("rc_a 내부 값의 길이: {}", rc_a.len());
+            println!("rc_b의 값: {}", rc_b);
 
-            println!("--- rc_b is dropped out of scope ---");
+            println!("--- rc_b가 스코프를 벗어나 해제됨 ---");
         }
 
-        println!("Reference Count of rc_a: {}", Rc::strong_count(&amp;rc_a));
+        println!("rc_a의 참조 횟수: {}", Rc::strong_count(&amp;rc_a));
 
-        println!("--- rc_a is dropped out of scope ---");
+        println!("--- rc_a가 스코프를 벗어나 해제됨 ---");
     }
 
-    // Error! `rc_examples` already moved into `rc_a`
-    // And when `rc_a` is dropped, `rc_examples` is dropped together
+    // 에러! `rc_examples`는 이미 `rc_a`로 이동되었습니다
+    // 그리고 `rc_a`가 해제될 때, `rc_examples`도 함께 해제됩니다
     // println!("rc_examples: {}", rc_examples);
-    // TODO ^ Try uncommenting this line
+    // TODO ^ 이 줄의 주석을 해제해 보세요
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/std/rc/index.html">std::rc</a> and <a href="https://doc.rust-lang.org/std/sync/struct.Arc.html">std::sync::arc</a>.</p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/std/rc/index.html">std::rc</a>와 <a href="https://doc.rust-lang.org/std/sync/struct.Arc.html">std::sync::arc</a>.</p>
 
                     </main>
 

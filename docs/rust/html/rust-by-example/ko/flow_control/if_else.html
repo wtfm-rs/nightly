@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,35 +256,32 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="ifelse"><a class="header" href="#ifelse">if/else</a></h1>
-<p>Branching with <code>if</code>-<code>else</code> is similar to other languages. Unlike many of them,
-the boolean condition doesn’t need to be surrounded by parentheses, and each
-condition is followed by a block. <code>if</code>-<code>else</code> conditionals are expressions,
-and, all branches must return the same type.</p>
+<p><code>if</code>-<code>else</code>를 사용한 분기는 다른 언어와 유사합니다. 많은 언어와 달리 불리언 조건은 괄호로 둘러쌀 필요가 없으며, 각 조건 뒤에는 블록이 옵니다. <code>if</code>-<code>else</code> 조건문은 표현식이며, 모든 분기는 동일한 타입을 반환해야 합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
     let n = 5;
 
     if n &lt; 0 {
-        print!("{} is negative", n);
+        print!("{}은(는) 음수입니다", n);
     } else if n &gt; 0 {
-        print!("{} is positive", n);
+        print!("{}은(는) 양수입니다", n);
     } else {
-        print!("{} is zero", n);
+        print!("{}은(는) 0입니다", n);
     }
 
     let big_n =
         if n &lt; 10 &amp;&amp; n &gt; -10 {
-            println!(", and is a small number, increase ten-fold");
+            println!(", 그리고 작은 수이므로 10배 증가시킵니다");
 
-            // This expression returns an `i32`.
+            // 이 표현식은 `i32`를 반환합니다.
             10 * n
         } else {
-            println!(", and is a big number, halve the number");
+            println!(", 그리고 큰 수이므로 반으로 나눕니다");
 
-            // This expression must return an `i32` as well.
+            // 이 표현식 또한 `i32`를 반환해야 합니다.
             n / 2
-            // TODO ^ Try suppressing this expression with a semicolon.
+            // TODO ^ 세미콜론을 사용하여 이 표현식을 억제해 보세요.
         };
-    //   ^ Don't forget to put a semicolon here! All `let` bindings need it.
+    //   ^ 여기에 세미콜론을 넣는 것을 잊지 마세요! 모든 `let` 바인딩에 필요합니다.
 
     println!("{} -&gt; {}", n, big_n);
 }</code></pre>

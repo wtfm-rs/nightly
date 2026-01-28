@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Combinators: map - Rust By Example</title>
+        <title>콤비네이터: map - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,16 +255,10 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="combinators-map"><a class="header" href="#combinators-map">Combinators: <code>map</code></a></h1>
-<p><code>match</code> is a valid method for handling <code>Option</code>s. However, you may
-eventually find heavy usage tedious, especially with operations only valid
-with an input. In these cases, <a href="https://doc.rust-lang.org/reference/glossary.html#combinator">combinators</a> can be used to
-manage control flow in a modular fashion.</p>
-<p><code>Option</code> has a built in method called <code>map()</code>, a combinator for the simple
-mapping of <code>Some -&gt; Some</code> and <code>None -&gt; None</code>. Multiple <code>map()</code> calls can be
-chained together for even more flexibility.</p>
-<p>In the following example, <code>process()</code> replaces all functions previous
-to it while staying compact.</p>
+                        <h1 id="콤비네이터-map"><a class="header" href="#콤비네이터-map">콤비네이터: <code>map</code></a></h1>
+<p><code>match</code>는 <code>Option</code>을 처리하는 유효한 방법입니다. 하지만 특히 입력이 있을 때만 유효한 연산들의 경우, 과도한 사용은 지루할 수 있습니다. 이런 경우, <a href="https://doc.rust-lang.org/reference/glossary.html#combinator">콤비네이터(combinators)</a>를 사용하여 모듈식으로 제어 흐름을 관리할 수 있습니다.</p>
+<p><code>Option</code>에는 <code>Some -&gt; Some</code> 및 <code>None -&gt; None</code>의 단순 매핑을 위한 콤비네이터인 <code>map()</code> 메서드가 내장되어 있습니다. 여러 개의 <code>map()</code> 호출을 체인으로 연결하여 훨씬 더 유연하게 사용할 수 있습니다.</p>
+<p>다음 예제에서 <code>process()</code>는 간결함을 유지하면서 그 이전의 모든 함수들을 대체합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">#![allow(dead_code)]
 
 #[derive(Debug)] enum Food { Apple, Carrot, Potato }
@@ -270,8 +267,8 @@ to it while staying compact.</p>
 #[derive(Debug)] struct Chopped(Food);
 #[derive(Debug)] struct Cooked(Food);
 
-// Peeling food. If there isn't any, then return `None`.
-// Otherwise, return the peeled food.
+// 음식을 껍질 벗깁니다. 음식이 없다면 `None`을 반환합니다.
+// 그렇지 않으면 껍질을 벗긴 음식을 반환합니다.
 fn peel(food: Option&lt;Food&gt;) -&gt; Option&lt;Peeled&gt; {
     match food {
         Some(food) =&gt; Some(Peeled(food)),
@@ -279,8 +276,8 @@ fn peel(food: Option&lt;Food&gt;) -&gt; Option&lt;Peeled&gt; {
     }
 }
 
-// Chopping food. If there isn't any, then return `None`.
-// Otherwise, return the chopped food.
+// 음식을 썹니다. 음식이 없다면 `None`을 반환합니다.
+// 그렇지 않으면 썬 음식을 반환합니다.
 fn chop(peeled: Option&lt;Peeled&gt;) -&gt; Option&lt;Chopped&gt; {
     match peeled {
         Some(Peeled(food)) =&gt; Some(Chopped(food)),
@@ -288,24 +285,24 @@ fn chop(peeled: Option&lt;Peeled&gt;) -&gt; Option&lt;Chopped&gt; {
     }
 }
 
-// Cooking food. Here, we showcase `map()` instead of `match` for case handling.
+// 음식을 요리합니다. 여기서는 케이스 처리를 위해 `match` 대신 `map()`을 보여줍니다.
 fn cook(chopped: Option&lt;Chopped&gt;) -&gt; Option&lt;Cooked&gt; {
     chopped.map(|Chopped(food)| Cooked(food))
 }
 
-// A function to peel, chop, and cook food all in sequence.
-// We chain multiple uses of `map()` to simplify the code.
+// 음식을 순서대로 껍질 벗기고, 썰고, 요리하는 함수입니다.
+// 코드를 단순화하기 위해 `map()`을 여러 번 체인으로 연결합니다.
 fn process(food: Option&lt;Food&gt;) -&gt; Option&lt;Cooked&gt; {
     food.map(|f| Peeled(f))
         .map(|Peeled(f)| Chopped(f))
         .map(|Chopped(f)| Cooked(f))
 }
 
-// Check whether there's food or not before trying to eat it!
+// 먹기 전에 음식이 있는지 없는지 확인합니다!
 fn eat(food: Option&lt;Cooked&gt;) {
     match food {
-        Some(food) =&gt; println!("Mmm. I love {:?}", food),
-        None       =&gt; println!("Oh no! It wasn't edible."),
+        Some(food) =&gt; println!("음~ 전 {:?}가 정말 좋아요", food),
+        None       =&gt; println!("오 이런! 먹을 수 있는 게 아니었어요."),
     }
 }
 
@@ -316,15 +313,15 @@ fn main() {
 
     let cooked_apple = cook(chop(peel(apple)));
     let cooked_carrot = cook(chop(peel(carrot)));
-    // Let's try the simpler looking `process()` now.
+    // 이제 더 간단해 보이는 `process()`를 시도해 봅시다.
     let cooked_potato = process(potato);
 
     eat(cooked_apple);
     eat(cooked_carrot);
     eat(cooked_potato);
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../fn/closures.html">closures</a>, <a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a>, <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map"><code>Option::map()</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../fn/closures.html">클로저</a>, <a href="https://doc.rust-lang.org/std/option/enum.Option.html"><code>Option</code></a>, <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map"><code>Option::map()</code></a></p>
 
                     </main>
 

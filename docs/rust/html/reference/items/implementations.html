@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/reference-ce12791d.css">
+        <link rel="stylesheet" href="../theme/reference-bb0bdaf8.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-fb3845b4.js";
+            window.path_to_searchindex_js = "../searchindex-45a698e8.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-edc1c836.js"></script>
@@ -660,7 +660,7 @@ be instantiable with the same set of types for the input type parameters. --></p
 <p>The <em>orphan rule</em> states that a trait implementation is only allowed if either the trait or at least one of the types in the implementation is defined in the current crate. It prevents conflicting trait implementations across different crates and is key to ensuring coherence.</p>
 <p>An orphan implementation is one that implements a foreign trait for a foreign type. If these were freely allowed, two crates could implement the same trait for the same type in incompatible ways, creating a situation where adding or updating a dependency could break compilation due to conflicting implementations.</p>
 <p>The orphan rule enables library authors to add new implementations to their traits without fear that they’ll break downstream code. Without these restrictions, a library couldn’t add an implementation like <code>impl&lt;T: Display&gt; MyTrait for T</code> without potentially conflicting with downstream implementations.</p>
-<div class="rule" id="r-items.impl.trait.orphan-rule.general"><a class="rule-link" href="#r-items.impl.trait.orphan-rule.general" title="items.impl.trait.orphan-rule.general"><span>[items<wbr>.impl<wbr>.trait<wbr>.orphan-rule<wbr>.general]</span></a>
+<div class="rule" id="r-items.impl.trait.orphan-rule.def"><a class="rule-link" href="#r-items.impl.trait.orphan-rule.def" title="items.impl.trait.orphan-rule.def"><span>[items<wbr>.impl<wbr>.trait<wbr>.orphan-rule<wbr>.def]</span></a>
 </div>
 
 <p>Given <code>impl&lt;P1..=Pn&gt; Trait&lt;T1..=Tn&gt; for T0</code>, an <code>impl</code> is valid only if at

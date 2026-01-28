@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Boxing errors - Rust By Example</title>
+        <title>에러 Box하기 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,17 +255,13 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="boxing-errors"><a class="header" href="#boxing-errors"><code>Box</code>ing errors</a></h1>
-<p>A way to write simple code while preserving the original errors is to <a href="https://doc.rust-lang.org/std/boxed/struct.Box.html"><code>Box</code></a>
-them.  The drawback is that the underlying error type is only known at runtime and not
-<a href="https://doc.rust-lang.org/book/ch17-02-trait-objects.html#trait-objects-perform-dynamic-dispatch">statically determined</a>.</p>
-<p>The stdlib helps in boxing our errors by having <code>Box</code> implement conversion from
-any type that implements the <code>Error</code> trait into the trait object <code>Box&lt;Error&gt;</code>,
-via <a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From</code></a>.</p>
+                        <h1 id="에러-box하기"><a class="header" href="#에러-box하기">에러 <code>Box</code>하기</a></h1>
+<p>원본 에러를 보존하면서 단순한 코드를 작성하는 방법은 에러들을 <a href="https://doc.rust-lang.org/std/boxed/struct.Box.html"><code>Box</code></a>하는 것입니다. 단점은 기저 에러 타입을 런타임에만 알 수 있고 <a href="https://doc.rust-lang.org/book/ch17-02-trait-objects.html#trait-objects-perform-dynamic-dispatch">정적으로 결정</a>되지 않는다는 것입니다.</p>
+<p>표준 라이브러리는 <code>Box</code>가 <a href="https://doc.rust-lang.org/std/convert/trait.From.html"><code>From</code></a>을 통해 <code>Error</code> 트레이트를 구현하는 모든 타입으로부터 트레이트 객체 <code>Box&lt;Error&gt;</code>로의 변환을 구현하도록 함으로써 에러를 박싱하는 것을 돕습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::error;
 use std::fmt;
 
-// Change the alias to use `Box&lt;dyn error::Error&gt;`.
+// 별칭이 `Box&lt;dyn error::Error&gt;`를 사용하도록 변경합니다.
 type Result&lt;T&gt; = std::result::Result&lt;T, Box&lt;dyn error::Error&gt;&gt;;
 
 #[derive(Debug, Clone)]
@@ -270,7 +269,7 @@ struct EmptyVec;
 
 impl fmt::Display for EmptyVec {
     fn fmt(&amp;self, f: &amp;mut fmt::Formatter) -&gt; fmt::Result {
-        write!(f, "invalid first item to double")
+        write!(f, "두 배로 만들 첫 번째 항목이 유효하지 않습니다")
     }
 }
 
@@ -278,32 +277,32 @@ impl error::Error for EmptyVec {}
 
 fn double_first(vec: Vec&lt;&amp;str&gt;) -&gt; Result&lt;i32&gt; {
     vec.first()
-        .ok_or_else(|| EmptyVec.into()) // Converts to Box using Into trait.
+        .ok_or_else(|| EmptyVec.into()) // Into 트레이트를 사용하여 Box로 변환합니다.
         .and_then(|s| {
             s.parse::&lt;i32&gt;()
-                .map_err(From::from) // Converts to Box using From::from fn pointer.
+                .map_err(From::from) // From::from 함수 포인터를 사용하여 Box로 변환합니다.
                 .map(|i| 2 * i)
         })
 }
 
 fn print(result: Result&lt;i32&gt;) {
     match result {
-        Ok(n) =&gt; println!("The first doubled is {}", n),
-        Err(e) =&gt; println!("Error: {}", e),
+        Ok(n) =&gt; println!("두 배가 된 첫 번째 값은 {}입니다", n),
+        Err(e) =&gt; println!("에러: {}", e),
     }
 }
 
 fn main() {
     let numbers = vec!["42", "93", "18"];
     let empty = vec![];
-    let strings = vec!["tofu", "93", "18"];
+    let strings = vec!["두부", "93", "18"];
 
     print(double_first(numbers));
     print(double_first(empty));
     print(double_first(strings));
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/book/ch17-02-trait-objects.html#trait-objects-perform-dynamic-dispatch">Dynamic dispatch</a> and <a href="https://doc.rust-lang.org/std/error/trait.Error.html"><code>Error</code> trait</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/book/ch17-02-trait-objects.html#trait-objects-perform-dynamic-dispatch">동적 디스패치(Dynamic dispatch)</a>와 <a href="https://doc.rust-lang.org/std/error/trait.Error.html"><code>Error</code> 트레이트</a></p>
 
                     </main>
 

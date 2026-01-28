@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,41 +256,37 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="raii"><a class="header" href="#raii">RAII</a></h1>
-<p>Variables in Rust do more than just hold data in the stack: they also <em>own</em>
-resources, e.g. <code>Box&lt;T&gt;</code> owns memory in the heap. Rust enforces <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">RAII</a>
-(Resource Acquisition Is Initialization), so whenever an object goes out of
-scope, its destructor is called and its owned resources are freed.</p>
-<p>This behavior shields against <em>resource leak</em> bugs, so you’ll never have to
-manually free memory or worry about memory leaks again! Here’s a quick showcase:</p>
+<p>Rust의 변수는 스택에 데이터를 저장하는 것 이상의 일을 합니다. 예를 들어 <code>Box&lt;T&gt;</code>는 힙 메모리를 소유하는 것처럼 리소스를 _소유(own)_하기도 합니다. Rust는 <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">RAII</a> (자원의 획득은 초기화이다)를 강제하므로, 객체가 스코프를 벗어날 때마다 소멸자가 호출되어 소유한 리소스가 해제됩니다.</p>
+<p>이러한 동작은 <em>리소스 누수</em> 버그를 방지하므로, 수동으로 메모리를 해제하거나 메모리 누수에 대해 걱정할 필요가 없습니다! 간단한 예시를 보여드리겠습니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">// raii.rs
 fn create_box() {
-    // Allocate an integer on the heap
+    // 힙에 정수를 할당합니다
     let _box1 = Box::new(3i32);
 
-    // `_box1` is destroyed here, and memory gets freed
+    // `_box1`은 여기서 파괴되고, 메모리가 해제됩니다
 }
 
 fn main() {
-    // Allocate an integer on the heap
+    // 힙에 정수를 할당합니다
     let _box2 = Box::new(5i32);
 
-    // A nested scope:
+    // 중첩된 스코프:
     {
-        // Allocate an integer on the heap
+        // 힙에 정수를 할당합니다
         let _box3 = Box::new(4i32);
 
-        // `_box3` is destroyed here, and memory gets freed
+        // `_box3`은 여기서 파괴되고, 메모리가 해제됩니다
     }
 
-    // Creating lots of boxes just for fun
-    // There's no need to manually free memory!
+    // 재미 삼아 많은 상자를 만듭니다
+    // 수동으로 메모리를 해제할 필요가 없습니다!
     for _ in 0u32..1_000 {
         create_box();
     }
 
-    // `_box2` is destroyed here, and memory gets freed
+    // `_box2`는 여기서 파괴되고, 메모리가 해제됩니다
 }</code></pre>
-<p>Of course, we can double check for memory errors using <a href="http://valgrind.org/info/"><code>valgrind</code></a>:</p>
+<p>물론 <a href="http://valgrind.org/info/"><code>valgrind</code></a>를 사용하여 메모리 에러를 다시 확인할 수 있습니다:</p>
 <!-- REUSE-IgnoreStart -->
 <!-- Prevent REUSE from parsing the copyright statement in the sample code -->
 <pre><code class="language-shell">$ rustc raii.rs &amp;&amp; valgrind ./raii
@@ -307,27 +306,23 @@ fn main() {
 ==26873== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 2)
 </code></pre>
 <!-- REUSE-IgnoreEnd -->
-<p>No leaks here!</p>
-<h2 id="destructor"><a class="header" href="#destructor">Destructor</a></h2>
-<p>The notion of a destructor in Rust is provided through the <a href="https://doc.rust-lang.org/std/ops/trait.Drop.html"><code>Drop</code></a> trait. The
-destructor is called when the resource goes out of scope. This trait is not
-required to be implemented for every type, only implement it for your type if
-you require its own destructor logic.</p>
-<p>Run the below example to see how the <a href="https://doc.rust-lang.org/std/ops/trait.Drop.html"><code>Drop</code></a> trait works. When the variable in
-the <code>main</code> function goes out of scope the custom destructor will be invoked.</p>
+<p>누수가 없습니다!</p>
+<h2 id="소멸자"><a class="header" href="#소멸자">소멸자</a></h2>
+<p>Rust에서 소멸자의 개념은 <a href="https://doc.rust-lang.org/std/ops/trait.Drop.html"><code>Drop</code></a> 트레이트를 통해 제공됩니다. 소멸자는 리소스가 스코프를 벗어날 때 호출됩니다. 모든 타입에 대해 이 트레이트를 구현할 필요는 없으며, 자체적인 소멸자 로직이 필요한 경우에만 구현하면 됩니다.</p>
+<p>아래 예제를 실행하여 <a href="https://doc.rust-lang.org/std/ops/trait.Drop.html"><code>Drop</code></a> 트레이트가 어떻게 작동하는지 확인해 보세요. <code>main</code> 함수의 변수가 스코프를 벗어나면 사용자 정의 소멸자가 호출될 것입니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">struct ToDrop;
 
 impl Drop for ToDrop {
     fn drop(&amp;mut self) {
-        println!("ToDrop is being dropped");
+        println!("ToDrop이 드롭되고 있습니다");
     }
 }
 
 fn main() {
     let x = ToDrop;
-    println!("Made a ToDrop!");
+    println!("ToDrop을 만들었습니다!");
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
 <p><a href="../std/box.html">Box</a></p>
 
                     </main>

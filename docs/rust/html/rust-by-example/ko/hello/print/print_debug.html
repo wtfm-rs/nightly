@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Debug - Rust By Example</title>
+        <title>디버그 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,53 +255,46 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="debug"><a class="header" href="#debug">Debug</a></h1>
-<p>All types which want to use <code>std::fmt</code> formatting <code>traits</code> require an
-implementation to be printable. Automatic implementations are only provided
-for types such as in the <code>std</code> library. All others <em>must</em> be manually
-implemented somehow.</p>
-<p>The <code>fmt::Debug</code> <code>trait</code> makes this very straightforward. <em>All</em> types can
-<code>derive</code> (automatically create) the <code>fmt::Debug</code> implementation. This is
-not true for <code>fmt::Display</code> which must be manually implemented.</p>
+                        <h1 id="디버그"><a class="header" href="#디버그">디버그</a></h1>
+<p><code>std::fmt</code> 형식화 <code>트레이트</code>를 사용하려는 모든 타입은 출력 가능하도록 구현이 필요합니다. 자동 구현은 <code>std</code> 라이브러리와 같은 타입들에 대해서만 제공됩니다. 그 외의 모든 타입은 어떻게든 수동으로 구현_해야만_ 합니다.</p>
+<p><code>fmt::Debug</code> <code>트레이트</code>는 이를 매우 간단하게 만들어 줍니다. <em>모든</em> 타입은 <code>fmt::Debug</code> 구현을 <code>derive</code>(자동 생성)할 수 있습니다. 하지만 <code>fmt::Display</code>는 그렇지 않으며 수동으로 구현해야 합니다.</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>// This structure cannot be printed either with `fmt::Display` or
-// with `fmt::Debug`.
+</span>// 이 구조체는 `fmt::Display`나 `fmt::Debug` 중 어느 것으로도
+// 출력할 수 없습니다.
 struct UnPrintable(i32);
 
-// The `derive` attribute automatically creates the implementation
-// required to make this `struct` printable with `fmt::Debug`.
+// `derive` 속성은 이 `구조체`를 `fmt::Debug`로 출력 가능하게 만드는 데
+// 필요한 구현을 자동으로 생성합니다.
 #[derive(Debug)]
 struct DebugPrintable(i32);
 <span class="boring">}</span></code></pre>
-<p>All <code>std</code> library types are automatically printable with <code>{:?}</code> too:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// Derive the `fmt::Debug` implementation for `Structure`. `Structure`
-// is a structure which contains a single `i32`.
+<p>모든 <code>std</code> 라이브러리 타입들도 <code>{:?}</code>로 자동 출력이 가능합니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// `Structure`에 대해 `fmt::Debug` 구현을 유도(derive)합니다. `Structure`는
+// 단일 `i32`를 포함하는 구조체입니다.
 #[derive(Debug)]
 struct Structure(i32);
 
-// Put a `Structure` inside of the structure `Deep`. Make it printable
-// also.
+// `Deep` 구조체 안에 `Structure`를 넣으세요. 그리고 역시 출력 가능하게 만드세요.
 #[derive(Debug)]
 struct Deep(Structure);
 
 fn main() {
-    // Printing with `{:?}` is similar to with `{}`.
-    println!("{:?} months in a year.", 12);
-    println!("{1:?} {0:?} is the {actor:?} name.",
-             "Slater",
-             "Christian",
-             actor="actor's");
+    // `{:?}`를 이용한 출력은 `{}`와 유사합니다.
+    println!("1년은 {:?}개월입니다.", 12);
+    println!("{1:?} {0:?}은 {actor:?}의 이름입니다.",
+             "슬레이터",
+             "크리스찬",
+             actor="배우의");
 
-    // `Structure` is printable!
-    println!("Now {:?} will print!", Structure(3));
+    // `Structure`는 출력 가능합니다!
+    println!("이제 {:?}가 출력될 것입니다!", Structure(3));
 
-    // The problem with `derive` is there is no control over how
-    // the results look. What if I want this to just show a `7`?
-    println!("Now {:?} will print!", Deep(Structure(7)));
+    // `derive`의 문제점은 결과가 어떻게 보일지 제어할 수 없다는 것입니다.
+    // 만약 이것을 단지 `7`로 보여주고 싶다면 어떡하죠?
+    println!("이제 {:?}가 출력될 것입니다!", Deep(Structure(7)));
 }</code></pre>
-<p>So <code>fmt::Debug</code> definitely makes this printable but sacrifices some elegance.
-Rust also provides “pretty printing” with <code>{:#?}</code>.</p>
+<p>따라서 <code>fmt::Debug</code>는 확실히 출력을 가능하게 하지만 우아함을 어느 정도 희생합니다. Rust는 <code>{:#?}</code>를 사용한 “예쁘게 출력하기(pretty printing)“도 제공합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">#[derive(Debug)]
 struct Person&lt;'a&gt; {
     name: &amp;'a str,
@@ -306,17 +302,16 @@ struct Person&lt;'a&gt; {
 }
 
 fn main() {
-    let name = "Peter";
+    let name = "피터";
     let age = 27;
     let peter = Person { name, age };
 
-    // Pretty print
+    // 예쁘게 출력하기
     println!("{:#?}", peter);
 }</code></pre>
-<p>One can manually implement <code>fmt::Display</code> to control the display.</p>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/reference/attributes.html"><code>attributes</code></a>, <a href="../../trait/derive.html"><code>derive</code></a>, <a href="https://doc.rust-lang.org/std/fmt/"><code>std::fmt</code></a>,
-and <a href="../../custom_types/structs.html"><code>struct</code></a></p>
+<p><code>fmt::Display</code>를 수동으로 구현하여 출력을 제어할 수 있습니다.</p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/reference/attributes.html"><code>속성</code></a>, <a href="../../trait/derive.html"><code>derive</code></a>, <a href="https://doc.rust-lang.org/std/fmt/"><code>std::fmt</code></a>, 그리고 <a href="../../custom_types/structs.html"><code>구조체</code></a></p>
 
                     </main>
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Diverging functions - Rust By Example</title>
+        <title>발산 함수 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,60 +255,53 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="diverging-functions"><a class="header" href="#diverging-functions">Diverging functions</a></h1>
-<p>Diverging functions never return. They are marked using <code>!</code>, which is an empty type.</p>
+                        <h1 id="발산-함수"><a class="header" href="#발산-함수">발산 함수</a></h1>
+<p>발산 함수(Diverging functions)는 절대 반환되지 않습니다. 이들은 빈 타입인 <code>!</code>를 사용하여 표시됩니다.</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn foo() -&gt; ! {
-    panic!("This call never returns.");
+    panic!("이 호출은 절대 반환되지 않습니다.");
 }
 <span class="boring">}</span></code></pre>
-<p>As opposed to all the other types, this one cannot be instantiated, because the
-set of all possible values this type can have is empty. Note that, it is
-different from the <code>()</code> type, which has exactly one possible value.</p>
-<p>For example, this function returns as usual, although there is no information
-in the return value.</p>
+<p>다른 모든 타입들과 달리, 이 타입은 인스턴스화할 수 없습니다. 이 타입이 가질 수 있는 모든 가능한 값의 집합이 비어 있기 때문입니다. 이는 정확히 하나의 가능한 값을 갖는 <code>()</code> 타입과는 다르다는 점에 유의하세요.</p>
+<p>예를 들어, 이 함수는 반환 값에 정보가 없더라도 평소와 같이 반환됩니다.</p>
 <pre class="playground"><code class="language-rust edition2021">fn some_fn() {
     ()
 }
 
 fn main() {
     let _a: () = some_fn();
-    println!("This function returns and you can see this line.");
+    println!("이 함수는 반환되며 당신은 이 줄을 볼 수 있습니다.");
 }</code></pre>
-<p>As opposed to this function, which will never return the control back to the caller.</p>
+<p>반면 이 함수는 호출자에게 제어권을 절대 반환하지 않습니다.</p>
 <pre><code class="language-rust ignore">#![feature(never_type)]
 
 fn main() {
-    let x: ! = panic!("This call never returns.");
-    println!("You will never see this line!");
+    let x: ! = panic!("이 호출은 절대 반환되지 않습니다.");
+    println!("당신은 결코 이 줄을 볼 수 없을 것입니다!");
 }</code></pre>
-<p>Although this might seem like an abstract concept, it is actually very useful and
-often handy. The main advantage of this type is that it can be cast to any other
-type, making it versatile in situations where an exact type is required, such as
-in match branches. This flexibility allows us to write code like this:</p>
+<p>이것이 추상적인 개념처럼 보일 수 있지만, 실제로는 매우 유용하며 종종 편리하게 사용됩니다. 이 타입의 주요 장점은 다른 어떤 타입으로도 형변환될 수 있다는 것이며, 이는 match 분기와 같이 정확한 타입이 요구되는 상황에서 다재다능하게 만들어줍니다. 이러한 유연성 덕분에 다음과 같은 코드를 작성할 수 있습니다:</p>
 <pre class="playground"><code class="language-rust edition2021">fn main() {
     fn sum_odd_numbers(up_to: u32) -&gt; u32 {
         let mut acc = 0;
         for i in 0..up_to {
-            // Notice that the return type of this match expression must be u32
-            // because of the type of the "addition" variable.
+            // 이 match 표현식의 반환 타입은 "addition" 변수의 타입 때문에
+// 반드시 u32여야 함에 주목하세요.
             let addition: u32 = match i%2 == 1 {
-                // The "i" variable is of type u32, which is perfectly fine.
+                // "i" 변수는 u32 타입이며, 이는 완벽하게 괜찮습니다.
                 true =&gt; i,
-                // On the other hand, the "continue" expression does not return
-                // u32, but it is still fine, because it never returns and therefore
-                // does not violate the type requirements of the match expression.
+                // 반면에 "continue" 표현식은 u32를 반환하지 않지만,
+// 결코 반환되지 않으므로 match 표현식의 타입 요구 사항을
+// 위반하지 않으며 여전히 괜찮습니다.
                 false =&gt; continue,
             };
             acc += addition;
         }
         acc
     }
-    println!("Sum of odd numbers up to 9 (excluding): {}", sum_odd_numbers(9));
+    println!("9 미만의 홀수들의 합: {}", sum_odd_numbers(9));
 }</code></pre>
-<p>It is also the return type of functions that loop forever (e.g. <code>loop {}</code>) like
-network servers or functions that terminate the process (e.g. <code>exit()</code>).</p>
+<p>또한 네트워크 서버처럼 영원히 루프를 도는 함수(예: <code>loop {}</code>)나 프로세스를 종료하는 함수(예: <code>exit()</code>)의 반환 타입이기도 합니다.</p>
 
                     </main>
 

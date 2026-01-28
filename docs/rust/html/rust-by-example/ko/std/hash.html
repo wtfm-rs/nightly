@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>HashMap - Rust By Example</title>
+        <title>해시맵 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,62 +255,53 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="hashmap"><a class="header" href="#hashmap">HashMap</a></h1>
-<p>Where vectors store values by an integer index, <code>HashMap</code>s store values by key.
-<code>HashMap</code> keys can be booleans, integers, strings,
-or any other type that implements the <code>Eq</code> and <code>Hash</code> traits.
-More on this in the next section.</p>
-<p>Like vectors, <code>HashMap</code>s are growable, but HashMaps can also shrink themselves
-when they have excess space.
-You can create a HashMap with a certain starting capacity using
-<code>HashMap::with_capacity(uint)</code>, or use <code>HashMap::new()</code> to get a HashMap
-with a default initial capacity (recommended).</p>
+                        <h1 id="해시맵"><a class="header" href="#해시맵">해시맵</a></h1>
+<p>벡터가 정수 인덱스로 값을 저장하는 반면, <code>HashMap</code>은 키(key)로 값을 저장합니다. <code>HashMap</code>의 키는 불리언, 정수, 문자열 또는 <code>Eq</code>와 <code>Hash</code> 트레이트를 구현하는 임의의 다른 타입이 될 수 있습니다. 이에 대해서는 다음 섹션에서 자세히 다룹니다.</p>
+<p>벡터와 마찬가지로 <code>HashMap</code>은 늘어날 수 있지만, 공간이 남을 때는 스스로 줄어들 수도 있습니다. <code>HashMap::with_capacity(uint)</code>를 사용하여 특정 시작 용량으로 HashMap을 생성하거나, <code>HashMap::new()</code>를 사용하여 기본 초기 용량을 가진 HashMap을 얻을 수 있습니다(권장됨).</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::collections::HashMap;
 
 fn call(number: &amp;str) -&gt; &amp;str {
     match number {
-        "798-1364" =&gt; "We're sorry, the call cannot be completed as dialed.
-            Please hang up and try again.",
-        "645-7689" =&gt; "Hello, this is Mr. Awesome's Pizza. My name is Fred.
-            What can I get for you today?",
-        _ =&gt; "Hi! Who is this again?"
+        "798-1364" =&gt; "죄송합니다, 전화 연결을 할 수 없습니다.
+            전화를 끊고 다시 시도해 주세요.",
+        "645-7689" =&gt; "안녕하세요, 어썸 피자입니다. 저는 프레드라고 합니다.
+            오늘 무엇을 도와드릴까요?",
+        _ =&gt; "안녕! 누구시더라?"
     }
 }
 
 fn main() {
     let mut contacts = HashMap::new();
 
-    contacts.insert("Daniel", "798-1364");
-    contacts.insert("Ashley", "645-7689");
-    contacts.insert("Katie", "435-8291");
-    contacts.insert("Robert", "956-1745");
+    contacts.insert("다니엘", "798-1364");
+    contacts.insert("애슐리", "645-7689");
+    contacts.insert("케이티", "435-8291");
+    contacts.insert("로버트", "956-1745");
 
-    // Takes a reference and returns Option&lt;&amp;V&gt;
-    match contacts.get(&amp;"Daniel") {
-        Some(&amp;number) =&gt; println!("Calling Daniel: {}", call(number)),
-        _ =&gt; println!("Don't have Daniel's number."),
+    // 참조를 인자로 받아 `Option&lt;&amp;V&gt;`를 반환합니다
+    match contacts.get(&amp;"다니엘") {
+        Some(&amp;number) =&gt; println!("다니엘에게 전화 거는 중: {}", call(number)),
+        _ =&gt; println!("다니엘의 번호가 없습니다."),
     }
 
-    // `HashMap::insert()` returns `None`
-    // if the inserted value is new, `Some(value)` otherwise
-    contacts.insert("Daniel", "164-6743");
+    // `HashMap::insert()`는 삽입된 값이 새로운 것이면 `None`을,
+    // 그렇지 않으면 `Some(value)`를 반환합니다
+    contacts.insert("다니엘", "164-6743");
 
-    match contacts.get(&amp;"Ashley") {
-        Some(&amp;number) =&gt; println!("Calling Ashley: {}", call(number)),
-        _ =&gt; println!("Don't have Ashley's number."),
+    match contacts.get(&amp;"애슐리") {
+        Some(&amp;number) =&gt; println!("애슐리에게 전화 거는 중: {}", call(number)),
+        _ =&gt; println!("애슐리의 번호가 없습니다."),
     }
 
-    contacts.remove(&amp;"Ashley");
+    contacts.remove(&amp;"애슐리");
 
-    // `HashMap::iter()` returns an iterator that yields
-    // (&amp;'a key, &amp;'a value) pairs in arbitrary order.
+    // `HashMap::iter()`는 (&amp;'a key, &amp;'a value) 쌍을
+    // 임의의 순서로 내놓는 이터레이터를 반환합니다.
     for (contact, &amp;number) in contacts.iter() {
-        println!("Calling {}: {}", contact, call(number));
+        println!("{}에게 전화 거는 중: {}", contact, call(number));
     }
 }</code></pre>
-<p>For more information on how hashing and hash maps
-(sometimes called hash tables) work, have a look at
-<a href="https://en.wikipedia.org/wiki/Hash_table">Hash Table Wikipedia</a></p>
+<p>해싱과 해시 맵(때때로 해시 테이블이라고도 불림)이 어떻게 작동하는지에 대한 더 자세한 정보는 <a href="https://en.wikipedia.org/wiki/Hash_table">Wikipedia의 해시 테이블</a>을 참조하세요.</p>
 
                     </main>
 

@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/reference-ce12791d.css">
+        <link rel="stylesheet" href="theme/reference-bb0bdaf8.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-fb3845b4.js";
+            window.path_to_searchindex_js = "searchindex-45a698e8.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-edc1c836.js"></script>
@@ -185,7 +185,7 @@
 </div>
 
 <h1 id="behavior-considered-undefined"><a class="header" href="#behavior-considered-undefined">Behavior considered undefined</a></h1>
-<div class="rule" id="r-undefined.general"><a class="rule-link" href="#r-undefined.general" title="undefined.general"><span>[undefined<wbr>.general]</span></a>
+<div class="rule" id="r-undefined.intro"><a class="rule-link" href="#r-undefined.intro" title="undefined.intro"><span>[undefined<wbr>.intro]</span></a>
 </div>
 
 <p>Rust code is incorrect if it exhibits any of the behaviors in the following
@@ -327,7 +327,7 @@ follow when writing code that uses inline assembly.</li>
 </div>
 
 <h2 id="places-based-on-misaligned-pointers"><a class="header" href="#places-based-on-misaligned-pointers">Places based on misaligned pointers</a></h2>
-<div class="rule" id="r-undefined.misaligned.general"><a class="rule-link" href="#r-undefined.misaligned.general" title="undefined.misaligned.general"><span>[undefined<wbr>.misaligned<wbr>.general]</span></a>
+<div class="rule" id="r-undefined.misaligned.ptr"><a class="rule-link" href="#r-undefined.misaligned.ptr" title="undefined.misaligned.ptr"><span>[undefined<wbr>.misaligned<wbr>.ptr]</span></a>
 </div>
 
 <p>A place is said to be “based on a misaligned pointer” if the last <code>*</code> projection
@@ -371,7 +371,7 @@ new reference is aligned, but it is not always necessary.</p>
 </div>
 
 <h2 id="dangling-pointers"><a class="header" href="#dangling-pointers">Dangling pointers</a></h2>
-<div class="rule" id="r-undefined.dangling.general"><a class="rule-link" href="#r-undefined.dangling.general" title="undefined.dangling.general"><span>[undefined<wbr>.dangling<wbr>.general]</span></a>
+<div class="rule" id="r-undefined.dangling.def"><a class="rule-link" href="#r-undefined.dangling.def" title="undefined.dangling.def"><span>[undefined<wbr>.dangling<wbr>.def]</span></a>
 </div>
 
 <p>A reference/pointer is “dangling” if not all of the bytes it
@@ -397,7 +397,7 @@ to be larger than <code>isize::MAX</code>.</p>
 </div>
 
 <h2 id="invalid-values"><a class="header" href="#invalid-values">Invalid values</a></h2>
-<div class="rule" id="r-undefined.validity.general"><a class="rule-link" href="#r-undefined.validity.general" title="undefined.validity.general"><span>[undefined<wbr>.validity<wbr>.general]</span></a>
+<div class="rule" id="r-undefined.validity.def"><a class="rule-link" href="#r-undefined.validity.def" title="undefined.validity.def"><span>[undefined<wbr>.validity<wbr>.def]</span></a>
 </div>
 
 <p>The Rust compiler assumes that all values produced during program execution are

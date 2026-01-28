@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The use declaration - Rust By Example</title>
+        <title>use 선언 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,9 +255,8 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="the-use-declaration"><a class="header" href="#the-use-declaration">The <code>use</code> declaration</a></h1>
-<p>The <code>use</code> declaration can be used to bind a full path to a new name, for easier
-access. It is often used like this:</p>
+                        <h1 id="use-선언"><a class="header" href="#use-선언"><code>use</code> 선언</a></h1>
+<p><code>use</code> 선언을 사용하여 전체 경로를 새로운 이름에 바인딩하여 더 쉽게 접근할 수 있습니다. 다음과 같이 자주 사용됩니다:</p>
 <pre><code class="language-rust editable ignore">use crate::deeply::nested::{
     my_first_function,
     my_second_function,
@@ -264,37 +266,37 @@ access. It is often used like this:</p>
 fn main() {
     my_first_function();
 }</code></pre>
-<p>You can use the <code>as</code> keyword to bind imports to a different name:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// Bind the `deeply::nested::function` path to `other_function`.
+<p><code>as</code> 키워드를 사용하여 임포트(imports)를 다른 이름에 바인딩할 수 있습니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// `deeply::nested::function` 경로를 `other_function`에 바인딩합니다.
 use deeply::nested::function as other_function;
 
 fn function() {
-    println!("called `function()`");
+    println!("`function()` 호출됨");
 }
 
 mod deeply {
     pub mod nested {
         pub fn function() {
-            println!("called `deeply::nested::function()`");
+            println!("`deeply::nested::function()` 호출됨");
         }
     }
 }
 
 fn main() {
-    // Easier access to `deeply::nested::function`
+    // `deeply::nested::function`에 더 쉽게 접근
     other_function();
 
-    println!("Entering block");
+    println!("블록 진입");
     {
-        // This is equivalent to `use deeply::nested::function as function`.
-        // This `function()` will shadow the outer one.
+        // 이는 `use deeply::nested::function as function`과 동일합니다.
+// 이 `function()`은 외부의 것을 섀도잉합니다.
         use crate::deeply::nested::function;
 
-        // `use` bindings have a local scope. In this case, the
-        // shadowing of `function()` is only in this block.
+        // `use` 바인딩은 지역 스코프를 가집니다. 이 경우
+// `function()`의 섀도잉은 이 블록 내에서만 유효합니다.
         function();
 
-        println!("Leaving block");
+        println!("블록 나감");
     }
 
     function();

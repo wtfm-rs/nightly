@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>map for Result - Rust By Example</title>
+        <title>Result에서의 map - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,19 +255,13 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="map-for-result"><a class="header" href="#map-for-result"><code>map</code> for <code>Result</code></a></h1>
-<p>Panicking in the previous example’s <code>multiply</code> does not make for robust code.
-Generally, we want to return the error to the caller so it can decide what is
-the right way to respond to errors.</p>
-<p>We first need to know what kind of error type we are dealing with. To determine
-the <code>Err</code> type, we look to <a href="https://doc.rust-lang.org/std/primitive.str.html#method.parse"><code>parse()</code></a>, which is implemented with the
-<a href="https://doc.rust-lang.org/std/str/trait.FromStr.html"><code>FromStr</code></a> trait for <a href="https://doc.rust-lang.org/std/primitive.i32.html"><code>i32</code></a>. As a result, the <code>Err</code> type is
-specified as <a href="https://doc.rust-lang.org/std/num/struct.ParseIntError.html"><code>ParseIntError</code></a>.</p>
-<p>In the example below, the straightforward <code>match</code> statement leads to code
-that is overall more cumbersome.</p>
+                        <h1 id="result에서의-map"><a class="header" href="#result에서의-map"><code>Result</code>에서의 <code>map</code></a></h1>
+<p>이전 예제의 <code>multiply</code>에서 패닉을 일으키는 것은 견고한 코드가 아닙니다. 일반적으로 우리는 호출자가 에러에 대응하는 올바른 방법을 결정할 수 있도록 에러를 호출자에게 반환하기를 원합니다.</p>
+<p>먼저 우리가 어떤 종류의 에러 타입을 다루고 있는지 알아야 합니다. <code>Err</code> 타입을 결정하기 위해, <a href="https://doc.rust-lang.org/std/primitive.i32.html"><code>i32</code></a>에 대해 <a href="https://doc.rust-lang.org/std/str/trait.FromStr.html"><code>FromStr</code></a> 트레이트로 구현된 <a href="https://doc.rust-lang.org/std/primitive.str.html#method.parse"><code>parse()</code></a>를 살펴봅니다. 그 결과, <code>Err</code> 타입은 <a href="https://doc.rust-lang.org/std/num/struct.ParseIntError.html"><code>ParseIntError</code></a>로 지정됩니다.</p>
+<p>아래 예제에서, 단순한 <code>match</code> 문은 전체적으로 더 번거로운 코드로 이어집니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::num::ParseIntError;
 
-// With the return type rewritten, we use pattern matching without `unwrap()`.
+// 반환 타입을 다시 작성했으므로, `unwrap()` 없이 패턴 매칭을 사용합니다.
 fn multiply(first_number_str: &amp;str, second_number_str: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
     match first_number_str.parse::&lt;i32&gt;() {
         Ok(first_number)  =&gt; {
@@ -281,27 +278,26 @@ fn multiply(first_number_str: &amp;str, second_number_str: &amp;str) -&gt; Resul
 
 fn print(result: Result&lt;i32, ParseIntError&gt;) {
     match result {
-        Ok(n)  =&gt; println!("n is {}", n),
-        Err(e) =&gt; println!("Error: {}", e),
+        Ok(n)  =&gt; println!("n은 {}입니다", n),
+        Err(e) =&gt; println!("에러: {}", e),
     }
 }
 
 fn main() {
-    // This still presents a reasonable answer.
+    // 이는 여전히 합리적인 답을 제시합니다.
     let twenty = multiply("10", "2");
     print(twenty);
 
-    // The following now provides a much more helpful error message.
+    // 다음은 이제 훨씬 더 도움이 되는 에러 메시지를 제공합니다.
     let tt = multiply("t", "2");
     print(tt);
 }</code></pre>
-<p>Luckily, <code>Option</code>’s <code>map</code>, <code>and_then</code>, and many other combinators are also
-implemented for <code>Result</code>. <a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a> contains a complete listing.</p>
+<p>다행히도 <code>Option</code>의 <code>map</code>, <code>and_then</code> 및 다른 많은 콤비네이터들이 <code>Result</code>에 대해서도 구현되어 있습니다. <a href="https://doc.rust-lang.org/std/result/enum.Result.html"><code>Result</code></a> 문서에 전체 목록이 나와 있습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::num::ParseIntError;
 
-// As with `Option`, we can use combinators such as `map()`.
-// This function is otherwise identical to the one above and reads:
-// Multiply if both values can be parsed from str, otherwise pass on the error.
+// `Option`과 마찬가지로 `map()`과 같은 콤비네이터를 사용할 수 있습니다.
+// 이 함수는 위와 동일하며 다음과 같이 읽힙니다:
+// 두 값 모두 문자열에서 파싱될 수 있으면 곱하고, 그렇지 않으면 에러를 넘깁니다.
 fn multiply(first_number_str: &amp;str, second_number_str: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
     first_number_str.parse::&lt;i32&gt;().and_then(|first_number| {
         second_number_str.parse::&lt;i32&gt;().map(|second_number| first_number * second_number)
@@ -310,17 +306,17 @@ fn multiply(first_number_str: &amp;str, second_number_str: &amp;str) -&gt; Resul
 
 fn print(result: Result&lt;i32, ParseIntError&gt;) {
     match result {
-        Ok(n)  =&gt; println!("n is {}", n),
-        Err(e) =&gt; println!("Error: {}", e),
+        Ok(n)  =&gt; println!("n은 {}입니다", n),
+        Err(e) =&gt; println!("에러: {}", e),
     }
 }
 
 fn main() {
-    // This still presents a reasonable answer.
+    // 이는 여전히 합리적인 답을 제시합니다.
     let twenty = multiply("10", "2");
     print(twenty);
 
-    // The following now provides a much more helpful error message.
+    // 다음은 이제 훨씬 더 도움이 되는 에러 메시지를 제공합니다.
     let tt = multiply("t", "2");
     print(tt);
 }</code></pre>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Introducing ? - Rust By Example</title>
+        <title>? 소개 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,18 +255,14 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="introducing-"><a class="header" href="#introducing-">Introducing <code>?</code></a></h1>
-<p>Sometimes we just want the simplicity of <code>unwrap</code> without the possibility of
-a <code>panic</code>. Until now, <code>unwrap</code> has forced us to nest deeper and deeper when
-what we really wanted was to get the variable <em>out</em>. This is exactly the purpose of <code>?</code>.</p>
-<p>Upon finding an <code>Err</code>, there are two valid actions to take:</p>
+                        <h1 id="-소개"><a class="header" href="#-소개"><code>?</code> 소개</a></h1>
+<p>때로는 <code>panic</code>의 가능성 없이 <code>unwrap</code>의 단순함만을 원할 때가 있습니다. 지금까지 <code>unwrap</code>은 우리가 정말 원했던 것이 변수를 꺼내는 것임에도 불구하고 점점 더 깊게 중첩하도록 강제해 왔습니다. 이것이 바로 <code>?</code>의 목적입니다.</p>
+<p><code>Err</code>을 발견했을 때 취할 수 있는 유효한 조치는 두 가지입니다:</p>
 <ol>
-<li><code>panic!</code> which we already decided to try to avoid if possible</li>
-<li><code>return</code> because an <code>Err</code> means it cannot be handled</li>
+<li>가능하다면 피하기로 이미 결정한 <code>panic!</code></li>
+<li><code>Err</code>은 처리될 수 없음을 의미하므로 <code>return</code></li>
 </ol>
-<p><code>?</code> is <em>almost</em><sup class="footnote-reference" id="fr-†-1"><a href="#footnote-†">1</a></sup> exactly equivalent to an <code>unwrap</code> which <code>return</code>s
-instead of <code>panic</code>king on <code>Err</code>s. Let’s see how we can simplify the earlier
-example that used combinators:</p>
+<p><code>?</code>는 <code>Err</code>에 대해 <code>panic</code>을 일으키는 대신 <code>return</code>하는 <code>unwrap</code>과 거의<sup class="footnote-reference" id="fr-†-1"><a href="#footnote-†">1</a></sup> 정확히 동일합니다. 콤비네이터를 사용했던 이전 예제를 어떻게 단순화할 수 있는지 봅시다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::num::ParseIntError;
 
 fn multiply(first_number_str: &amp;str, second_number_str: &amp;str) -&gt; Result&lt;i32, ParseIntError&gt; {
@@ -275,8 +274,8 @@ fn multiply(first_number_str: &amp;str, second_number_str: &amp;str) -&gt; Resul
 
 fn print(result: Result&lt;i32, ParseIntError&gt;) {
     match result {
-        Ok(n)  =&gt; println!("n is {}", n),
-        Err(e) =&gt; println!("Error: {}", e),
+        Ok(n)  =&gt; println!("n은 {}입니다", n),
+        Err(e) =&gt; println!("에러: {}", e),
     }
 }
 
@@ -284,13 +283,10 @@ fn main() {
     print(multiply("10", "2"));
     print(multiply("t", "2"));
 }</code></pre>
-<h2 id="the-try-macro"><a class="header" href="#the-try-macro">The <code>try!</code> macro</a></h2>
-<p>Before there was <code>?</code>, the same functionality was achieved with the <code>try!</code> macro.
-The <code>?</code> operator is now recommended, but you may still find <code>try!</code> when looking
-at older code. The same <code>multiply</code> function from the previous example
-would look like this using <code>try!</code>:</p>
-<pre class="playground"><code class="language-rust editable edition2015">// To compile and run this example without errors, while using Cargo, change the value
-// of the `edition` field, in the `[package]` section of the `Cargo.toml` file, to "2015".
+<h2 id="try-매크로"><a class="header" href="#try-매크로"><code>try!</code> 매크로</a></h2>
+<p><code>?</code>가 나오기 전에는 동일한 기능을 <code>try!</code> 매크로로 구현했습니다. 현재는 <code>?</code> 연산자가 권장되지만, 오래된 코드를 볼 때 여전히 <code>try!</code>를 발견할 수도 있습니다. 이전 예제의 동일한 <code>multiply</code> 함수는 <code>try!</code>를 사용하면 다음과 같습니다:</p>
+<pre class="playground"><code class="language-rust editable edition2015">// Cargo를 사용하면서 이 예제를 에러 없이 컴파일하고 실행하려면,
+// `Cargo.toml` 파일의 `[package]` 섹션에 있는 `edition` 필드 값을 "2015"로 변경하세요.
 
 use std::num::ParseIntError;
 
@@ -303,8 +299,8 @@ fn multiply(first_number_str: &amp;str, second_number_str: &amp;str) -&gt; Resul
 
 fn print(result: Result&lt;i32, ParseIntError&gt;) {
     match result {
-        Ok(n)  =&gt; println!("n is {}", n),
-        Err(e) =&gt; println!("Error: {}", e),
+        Ok(n)  =&gt; println!("n은 {}입니다", n),
+        Err(e) =&gt; println!("에러: {}", e),
     }
 }
 
@@ -315,7 +311,7 @@ fn main() {
 <hr>
 <ol class="footnote-definition">
 <li id="footnote-†">
-<p>See <a href="../multiple_error_types/reenter_question_mark.html">re-enter ?</a> for more details. <a href="#fr-†-1">↩</a></p>
+<p>자세한 내용은 <a href="../multiple_error_types/reenter_question_mark.html">? 다시 보기</a>를 참조하세요. <a href="#fr-†-1">↩</a></p>
 </li>
 </ol>
 

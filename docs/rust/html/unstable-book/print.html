@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-dcbce744.js";
+            window.path_to_searchindex_js = "searchindex-a8b6a32e.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-6746af44.js"></script>
@@ -3234,7 +3234,6 @@ fn main() {
 <p>This feature tracks <code>asm!</code> and <code>global_asm!</code> support for the following architectures:</p>
 <ul>
 <li>NVPTX</li>
-<li>PowerPC</li>
 <li>Hexagon</li>
 <li>MIPS32r2 and MIPS64r2</li>
 <li>wasm32</li>
@@ -3260,16 +3259,6 @@ fn main() {
 <tr><td>NVPTX</td><td><code>reg64</code></td><td>None*</td><td><code>l</code></td></tr>
 <tr><td>Hexagon</td><td><code>reg</code></td><td><code>r[0-28]</code></td><td><code>r</code></td></tr>
 <tr><td>Hexagon</td><td><code>preg</code></td><td><code>p[0-3]</code></td><td>Only clobbers</td></tr>
-<tr><td>PowerPC</td><td><code>reg</code></td><td><code>r0</code>, <code>r[3-12]</code>, <code>r[14-29]</code>*</td><td><code>r</code></td></tr>
-<tr><td>PowerPC</td><td><code>reg_nonzero</code></td><td><code>r[3-12]</code>, <code>r[14-29]</code>*</td><td><code>b</code></td></tr>
-<tr><td>PowerPC</td><td><code>freg</code></td><td><code>f[0-31]</code></td><td><code>f</code></td></tr>
-<tr><td>PowerPC</td><td><code>vreg</code></td><td><code>v[0-31]</code></td><td><code>v</code></td></tr>
-<tr><td>PowerPC</td><td>`vsreg</td><td><code>vs[0-63]</code></td><td><code>wa</code></td></tr>
-<tr><td>PowerPC</td><td><code>cr</code></td><td><code>cr[0-7]</code>, <code>cr</code></td><td>Only clobbers</td></tr>
-<tr><td>PowerPC</td><td><code>ctr</code></td><td><code>ctr</code></td><td>Only clobbers</td></tr>
-<tr><td>PowerPC</td><td><code>lr</code></td><td><code>lr</code></td><td>Only clobbers</td></tr>
-<tr><td>PowerPC</td><td><code>xer</code></td><td><code>xer</code></td><td>Only clobbers</td></tr>
-<tr><td>PowerPC</td><td><code>spe_acc</code></td><td><code>spe_acc</code></td><td>Only clobbers</td></tr>
 <tr><td>wasm32</td><td><code>local</code></td><td>None*</td><td><code>r</code></td></tr>
 <tr><td>BPF</td><td><code>reg</code></td><td><code>r[0-10]</code></td><td><code>r</code></td></tr>
 <tr><td>BPF</td><td><code>wreg</code></td><td><code>w[0-10]</code></td><td><code>w</code></td></tr>
@@ -3298,12 +3287,6 @@ fn main() {
 <li>
 <p>WebAssembly doesn’t have registers, so named registers are not supported.</p>
 </li>
-<li>
-<p>r29 is reserved only on 32 bit PowerPC targets.</p>
-</li>
-<li>
-<p>spe_acc is only available on PowerPC SPE targets.</p>
-</li>
 </ul>
 </blockquote>
 <h1 id="register-class-supported-types"><a class="header" href="#register-class-supported-types">Register class supported types</a></h1>
@@ -3322,17 +3305,6 @@ fn main() {
 <tr><td>NVPTX</td><td><code>reg64</code></td><td>None</td><td><code>i8</code>, <code>i16</code>, <code>i32</code>, <code>f32</code>, <code>i64</code>, <code>f64</code></td></tr>
 <tr><td>Hexagon</td><td><code>reg</code></td><td>None</td><td><code>i8</code>, <code>i16</code>, <code>i32</code>, <code>f32</code></td></tr>
 <tr><td>Hexagon</td><td><code>preg</code></td><td>N/A</td><td>Only clobbers</td></tr>
-<tr><td>PowerPC</td><td><code>reg</code></td><td>None</td><td><code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code> (powerpc64 only)</td></tr>
-<tr><td>PowerPC</td><td><code>reg_nonzero</code></td><td>None</td><td><code>i8</code>, <code>i16</code>, <code>i32</code>, <code>i64</code> (powerpc64 only)</td></tr>
-<tr><td>PowerPC</td><td><code>freg</code></td><td>None</td><td><code>f32</code>, <code>f64</code></td></tr>
-<tr><td>PowerPC</td><td><code>vreg</code></td><td><code>altivec</code></td><td><code>i8x16</code>, <code>i16x8</code>, <code>i32x4</code>, <code>f32x4</code></td></tr>
-<tr><td>PowerPC</td><td><code>vreg</code></td><td><code>vsx</code></td><td><code>f32</code>, <code>f64</code>, <code>i64x2</code>, <code>f64x2</code></td></tr>
-<tr><td>PowerPC</td><td><code>vsreg</code></td><td><code>vsx</code></td><td>The union of vsx and altivec vreg types</td></tr>
-<tr><td>PowerPC</td><td><code>cr</code></td><td>N/A</td><td>Only clobbers</td></tr>
-<tr><td>PowerPC</td><td><code>ctr</code></td><td>N/A</td><td>Only clobbers</td></tr>
-<tr><td>PowerPC</td><td><code>lr</code></td><td>N/A</td><td>Only clobbers</td></tr>
-<tr><td>PowerPC</td><td><code>xer</code></td><td>N/A</td><td>Only clobbers</td></tr>
-<tr><td>PowerPC</td><td><code>spe_acc</code></td><td>N/A</td><td>Only clobbers</td></tr>
 <tr><td>wasm32</td><td><code>local</code></td><td>None</td><td><code>i8</code> <code>i16</code> <code>i32</code> <code>i64</code> <code>f32</code> <code>f64</code></td></tr>
 <tr><td>BPF</td><td><code>reg</code></td><td>None</td><td><code>i8</code> <code>i16</code> <code>i32</code> <code>i64</code></td></tr>
 <tr><td>BPF</td><td><code>wreg</code></td><td><code>alu32</code></td><td><code>i8</code> <code>i16</code> <code>i32</code></td></tr>
@@ -3358,10 +3330,6 @@ fn main() {
 <tr><td>Hexagon</td><td><code>r29</code></td><td><code>sp</code></td></tr>
 <tr><td>Hexagon</td><td><code>r30</code></td><td><code>fr</code></td></tr>
 <tr><td>Hexagon</td><td><code>r31</code></td><td><code>lr</code></td></tr>
-<tr><td>PowerPC</td><td><code>r1</code></td><td><code>sp</code></td></tr>
-<tr><td>PowerPC</td><td><code>r31</code></td><td><code>fp</code></td></tr>
-<tr><td>PowerPC</td><td><code>r[0-31]</code></td><td><code>[0-31]</code></td></tr>
-<tr><td>PowerPC</td><td><code>f[0-31]</code></td><td><code>fr[0-31]</code></td></tr>
 <tr><td>BPF</td><td><code>r[0-10]</code></td><td><code>w[0-10]</code></td></tr>
 <tr><td>AVR</td><td><code>XH</code></td><td><code>r27</code></td></tr>
 <tr><td>AVR</td><td><code>XL</code></td><td><code>r26</code></td></tr>
@@ -3408,16 +3376,14 @@ to use one; LLVM uses <code>r4</code>.</li>
 </thead>
 <tbody>
 <tr><td>All</td><td><code>sp</code>, <code>r14</code>/<code>o6</code> (SPARC)</td><td>The stack pointer must be restored to its original value at the end of an asm code block.</td></tr>
-<tr><td>All</td><td><code>fr</code> (Hexagon), <code>fp</code> (PowerPC), <code>$fp</code> (MIPS), <code>Y</code> (AVR), <code>r4</code> (MSP430), <code>a6</code> (M68k), <code>r30</code>/<code>i6</code> (SPARC)</td><td>The frame pointer cannot be used as an input or output.</td></tr>
-<tr><td>All</td><td><code>r19</code> (Hexagon), <code>r29</code> (PowerPC 32 bit only), <code>r30</code> (PowerPC)</td><td>These are used internally by LLVM as “base pointer” for functions with complex stack frames.</td></tr>
+<tr><td>All</td><td><code>fr</code> (Hexagon) <code>$fp</code> (MIPS), <code>Y</code> (AVR), <code>r4</code> (MSP430), <code>a6</code> (M68k), <code>r30</code>/<code>i6</code> (SPARC)</td><td>The frame pointer cannot be used as an input or output.</td></tr>
+<tr><td>All</td><td><code>r19</code> (Hexagon)</td><td>These are used internally by LLVM as “base pointer” for functions with complex stack frames.</td></tr>
 <tr><td>MIPS</td><td><code>$0</code> or <code>$zero</code></td><td>This is a constant zero register which can’t be modified.</td></tr>
 <tr><td>MIPS</td><td><code>$1</code> or <code>$at</code></td><td>Reserved for assembler.</td></tr>
 <tr><td>MIPS</td><td><code>$26</code>/<code>$k0</code>, <code>$27</code>/<code>$k1</code></td><td>OS-reserved registers.</td></tr>
 <tr><td>MIPS</td><td><code>$28</code>/<code>$gp</code></td><td>Global pointer cannot be used as inputs or outputs.</td></tr>
 <tr><td>MIPS</td><td><code>$ra</code></td><td>Return address cannot be used as inputs or outputs.</td></tr>
 <tr><td>Hexagon</td><td><code>lr</code></td><td>This is the link register which cannot be used as an input or output.</td></tr>
-<tr><td>PowerPC</td><td><code>r2</code>, <code>r13</code></td><td>These are system reserved registers.</td></tr>
-<tr><td>PowerPC</td><td><code>vrsave</code></td><td>The vrsave register cannot be used as an input or output.</td></tr>
 <tr><td>AVR</td><td><code>r0</code>, <code>r1</code>, <code>r1r0</code></td><td>Due to an issue in LLVM, the <code>r0</code> and <code>r1</code> registers cannot be used as inputs or outputs.  If modified, they must be restored to their original values before the end of the block.</td></tr>
 <tr><td>MSP430</td><td><code>r0</code>, <code>r2</code>, <code>r3</code></td><td>These are the program counter, status register, and constant generator respectively. Neither the status register nor constant generator can be written to.</td></tr>
 <tr><td>M68k</td><td><code>a4</code>, <code>a5</code></td><td>Used internally by LLVM for the base pointer and global base pointer.</td></tr>
@@ -3448,11 +3414,6 @@ to use one; LLVM uses <code>r4</code>.</li>
 <tr><td>NVPTX</td><td><code>reg32</code></td><td>None</td><td><code>r0</code></td><td>None</td></tr>
 <tr><td>NVPTX</td><td><code>reg64</code></td><td>None</td><td><code>rd0</code></td><td>None</td></tr>
 <tr><td>Hexagon</td><td><code>reg</code></td><td>None</td><td><code>r0</code></td><td>None</td></tr>
-<tr><td>PowerPC</td><td><code>reg</code></td><td>None</td><td><code>0</code></td><td>None</td></tr>
-<tr><td>PowerPC</td><td><code>reg_nonzero</code></td><td>None</td><td><code>3</code></td><td>None</td></tr>
-<tr><td>PowerPC</td><td><code>freg</code></td><td>None</td><td><code>0</code></td><td>None</td></tr>
-<tr><td>PowerPC</td><td><code>vreg</code></td><td>None</td><td><code>0</code></td><td>None</td></tr>
-<tr><td>PowerPC</td><td><code>vsreg</code></td><td>None</td><td><code>0</code></td><td>None</td></tr>
 <tr><td>SPARC</td><td><code>reg</code></td><td>None</td><td><code>%o0</code></td><td>None</td></tr>
 <tr><td>CSKY</td><td><code>reg</code></td><td>None</td><td><code>r0</code></td><td>None</td></tr>
 <tr><td>CSKY</td><td><code>freg</code></td><td>None</td><td><code>f0</code></td><td>None</td></tr>
@@ -6966,7 +6927,7 @@ fn main() {
 <p>This feature is internal to the Rust compiler and is not intended for general use.</p>
 <hr><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="likely_unlikely"><a class="header" href="#likely_unlikely"><code>likely_unlikely</code></a></h1>
-<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/136873">#136873</a></p>
+<p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/151619">#151619</a></p>
 <hr><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="linked_list_cursors"><a class="header" href="#linked_list_cursors"><code>linked_list_cursors</code></a></h1>
 <p>The tracking issue for this feature is: <a href="https://github.com/rust-lang/rust/issues/58533">#58533</a></p>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Expressions - Rust By Example</title>
+        <title>표현식 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-61902a00.js"></script>
+        <script src="toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,28 +255,24 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="expressions"><a class="header" href="#expressions">Expressions</a></h1>
-<p>A Rust program is (mostly) made up of a series of statements:</p>
+                        <h1 id="표현식"><a class="header" href="#표현식">표현식</a></h1>
+<p>Rust 프로그램은 (대부분) 일련의 문장(statements)으로 구성됩니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
-    // statement
-    // statement
-    // statement
+    // 문장
+    // 문장
+    // 문장
 }</code></pre>
-<p>There are a few kinds of statements in Rust. The most common two are declaring
-a variable binding, and using a <code>;</code> with an expression:</p>
+<p>Rust에는 몇 가지 종류의 문장이 있습니다. 가장 흔한 두 가지는 변수 바인딩을 선언하는 것과 표현식에 <code>;</code>를 사용하는 것입니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
-    // variable binding
+    // 변수 바인딩
     let x = 5;
 
-    // expression;
+    // 표현식;
     x;
     x + 1;
     15;
 }</code></pre>
-<p>Blocks are expressions too, so they can be used as values in
-assignments. The last expression in the block will be assigned to the
-place expression such as a local variable. However, if the last expression of the block ends with a
-semicolon, the return value will be <code>()</code>.</p>
+<p>블록도 표현식이므로 할당 시 값으로 사용될 수 있습니다. 블록의 마지막 표현식은 로컬 변수와 같은 장소 표현식(place expression)에 할당됩니다. 하지만 블록의 마지막 표현식이 세미콜론으로 끝나면 반환 값은 <code>()</code>가 됩니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
     let x = 5u32;
 
@@ -281,18 +280,18 @@ semicolon, the return value will be <code>()</code>.</p>
         let x_squared = x * x;
         let x_cube = x_squared * x;
 
-        // This expression will be assigned to `y`
+        // 이 표현식은 `y`에 할당됩니다
         x_cube + x_squared + x
     };
 
     let z = {
-        // The semicolon suppresses this expression and `()` is assigned to `z`
+        // 세미콜론이 이 표현식을 억제하여 `z`에는 `()`가 할당됩니다
         2 * x;
     };
 
-    println!("x is {:?}", x);
-    println!("y is {:?}", y);
-    println!("z is {:?}", z);
+    println!("x는 {:?}입니다", x);
+    println!("y는 {:?}입니다", y);
+    println!("z는 {:?}입니다", z);
 }</code></pre>
 
                     </main>

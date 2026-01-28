@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Attributes - Rust By Example</title>
+        <title>속성 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-61902a00.js"></script>
+        <script src="toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,29 +255,23 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="attributes"><a class="header" href="#attributes">Attributes</a></h1>
-<p>An attribute is metadata applied to some module, crate or item. This metadata
-can be used to/for:</p>
+                        <h1 id="속성"><a class="header" href="#속성">속성</a></h1>
+<p>속성(attribute)은 모듈, 크레이트 또는 아이템에 적용되는 메타데이터입니다. 이 메타데이터는 다음과 같은 용도로 사용될 수 있습니다:</p>
 <!-- TODO: Link these to their respective examples -->
 <ul>
-<li><a href="attribute/cfg.html">conditional compilation of code</a></li>
-<li><a href="attribute/crate.html">set crate name, version and type (binary or library)</a></li>
-<li>disable <a href="https://en.wikipedia.org/wiki/Lint_%28software%29">lints</a> (warnings)</li>
-<li>enable compiler features (macros, glob imports, etc.)</li>
-<li>link to a foreign library</li>
-<li>mark functions as unit tests</li>
-<li>mark functions that will be part of a benchmark</li>
-<li><a href="https://doc.rust-lang.org/book/ch19-06-macros.html#attribute-like-macros">attribute like macros</a></li>
+<li>코드의 <a href="attribute/cfg.html">조건부 컴파일</a></li>
+<li><a href="attribute/crate.html">크레이트 이름, 버전 및 유형(바이너리 또는 라이브러리) 설정</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Lint_%28software%29">린트(lints)</a> (경고) 비활성화</li>
+<li>컴파일러 기능(매크로, glob 임포트 등) 활성화</li>
+<li>외부 라이브러리 링크</li>
+<li>함수를 유닛 테스트로 표시</li>
+<li>벤치마크의 일부가 될 함수 표시</li>
+<li><a href="https://doc.rust-lang.org/book/ch19-06-macros.html#attribute-like-macros">속성형 매크로</a></li>
 </ul>
-<p>Attributes look like <code>#[outer_attribute]</code> or <code>#![inner_attribute]</code>,
-with the difference between them being where they apply.</p>
+<p>속성은 <code>#[outer_attribute]</code> 또는 <code>#![inner_attribute]</code>와 같은 형태를 띠며, 이 둘의 차이점은 적용되는 위치에 있습니다.</p>
 <ul>
 <li>
-<p><code>#[outer_attribute]</code> applies to the <a href="https://doc.rust-lang.org/stable/reference/items.html">item</a> immediately
-following it. Some examples of items are: a function, a module
-declaration, a constant, a structure, an enum. Here is an example
-where attribute <code>#[derive(Debug)]</code> applies to the struct
-<code>Rectangle</code>:</p>
+<p><code>#[outer_attribute]</code>는 바로 뒤에 오는 <a href="https://doc.rust-lang.org/stable/reference/items.html">아이템</a>에 적용됩니다. 아이템의 예로는 함수, 모듈 선언, 상수, 구조체, 열거형 등이 있습니다. 다음은 <code>#[derive(Debug)]</code> 속성이 <code>Rectangle</code> 구조체에 적용된 예시입니다:</p>
 <pre class="playground"><code class="language-rust edition2021"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug)]
@@ -285,25 +282,21 @@ struct Rectangle {
 <span class="boring">}</span></code></pre>
 </li>
 <li>
-<p><code>#![inner_attribute]</code> applies to the enclosing <a href="https://doc.rust-lang.org/stable/reference/items.html">item</a> (typically a
-module or a crate). In other words, this attribute is interpreted as
-applying to the entire scope in which it’s placed. Here is an example
-where <code>#![allow(unused_variables)]</code> applies to the whole crate (if
-placed in <code>main.rs</code>):</p>
+<p><code>#![inner_attribute]</code>는 자신을 감싸고 있는 <a href="https://doc.rust-lang.org/stable/reference/items.html">아이템</a> (주로 모듈이나 크레이트)에 적용됩니다. 다시 말해, 이 속성은 자신이 위치한 전체 스코프에 적용되는 것으로 해석됩니다. 다음은 <code>#![allow(unused_variables)]</code>가 (<code>main.rs</code>에 위치할 경우) 전체 크레이트에 적용되는 예시입니다:</p>
 <pre class="playground"><code class="language-rust edition2021">#![allow(unused_variables)]
 
 fn main() {
-    let x = 3; // This would normally warn about an unused variable.
+    let x = 3; // 이것은 보통 사용되지 않는 변수에 대해 경고합니다.
 }</code></pre>
 </li>
 </ul>
-<p>Attributes can take arguments with different syntaxes:</p>
+<p>속성은 다양한 문법으로 인자를 받을 수 있습니다:</p>
 <ul>
 <li><code>#[attribute = "value"]</code></li>
 <li><code>#[attribute(key = "value")]</code></li>
 <li><code>#[attribute(value)]</code></li>
 </ul>
-<p>Attributes can have multiple values and can be separated over multiple lines, too:</p>
+<p>속성은 여러 값을 가질 수 있으며 여러 줄에 걸쳐 분리될 수도 있습니다:</p>
 <pre><code class="language-rust ignore">#[attribute(value, value2)]
 
 

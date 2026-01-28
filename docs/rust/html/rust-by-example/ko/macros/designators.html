@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Designators - Rust By Example</title>
+        <title>지시자 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,32 +255,31 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="designators"><a class="header" href="#designators">Designators</a></h1>
-<p>The arguments of a macro are prefixed by a dollar sign <code>$</code> and type annotated
-with a <em>designator</em>:</p>
+                        <h1 id="지시자"><a class="header" href="#지시자">지시자</a></h1>
+<p>매크로의 인자는 달러 기호 <code>$</code>가 접두사로 붙으며, 지시자(designator)로 타입이 어노테이션됩니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">macro_rules! create_function {
-    // This macro takes an argument of designator `ident` and
-    // creates a function named `$func_name`.
-    // The `ident` designator is used for variable/function names.
+    // 이 매크로는 지시자 `ident` 인자를 취하여
+    // `$func_name`이라는 이름의 함수를 생성합니다.
+    // `ident` 지시자는 변수/함수 이름에 사용됩니다.
     ($func_name:ident) =&gt; {
         fn $func_name() {
-            // The `stringify!` macro converts an `ident` into a string.
-            println!("You called {:?}()",
+            // `stringify!` 매크로는 `ident`를 문자열로 변환합니다.
+            println!("당신은 {:?}()를 호출했습니다",
                      stringify!($func_name));
         }
     };
 }
 
-// Create functions named `foo` and `bar` with the above macro.
+// 위의 매크로를 사용하여 `foo`와 `bar`라는 이름의 함수를 생성합니다.
 create_function!(foo);
 create_function!(bar);
 
 macro_rules! print_result {
-    // This macro takes an expression of type `expr` and prints
-    // it as a string along with its result.
-    // The `expr` designator is used for expressions.
+    // 이 매크로는 `expr` 타입의 표현식을 취하여
+    // 결과와 함께 문자열로 출력합니다.
+    // `expr` 지시자는 표현식에 사용됩니다.
     ($expression:expr) =&gt; {
-        // `stringify!` will convert the expression *as it is* into a string.
+        // `stringify!`는 표현식을 *있는 그대로* 문자열로 변환합니다.
         println!("{:?} = {:?}",
                  stringify!($expression),
                  $expression);
@@ -290,28 +292,28 @@ fn main() {
 
     print_result!(1u32 + 1);
 
-    // Recall that blocks are expressions too!
+    // 블록도 표현식이라는 점을 기억하세요!
     print_result!({
         let x = 1u32;
 
         x * x + 2 * x - 1
     });
 }</code></pre>
-<p>These are some of the available designators:</p>
+<p>사용 가능한 지시자들의 일부는 다음과 같습니다:</p>
 <ul>
 <li><code>block</code></li>
-<li><code>expr</code> is used for expressions</li>
-<li><code>ident</code> is used for variable/function names</li>
+<li><code>expr</code>은 표현식에 사용됩니다</li>
+<li><code>ident</code>는 변수/함수 이름에 사용됩니다</li>
 <li><code>item</code></li>
-<li><code>literal</code> is used for literal constants</li>
-<li><code>pat</code> (<em>pattern</em>)</li>
+<li><code>literal</code>은 리터럴 상수에 사용됩니다</li>
+<li><code>pat</code> (패턴)</li>
 <li><code>path</code></li>
-<li><code>stmt</code> (<em>statement</em>)</li>
-<li><code>tt</code> (<em>token tree</em>)</li>
-<li><code>ty</code> (<em>type</em>)</li>
-<li><code>vis</code> (<em>visibility qualifier</em>)</li>
+<li><code>stmt</code> (문장)</li>
+<li><code>tt</code> (토큰 트리)</li>
+<li><code>ty</code> (타입)</li>
+<li><code>vis</code> (가시성 한정자)</li>
 </ul>
-<p>For a complete list, see the <a href="https://doc.rust-lang.org/reference/macros-by-example.html">Rust Reference</a>.</p>
+<p>전체 목록은 <a href="https://doc.rust-lang.org/reference/macros-by-example.html">Rust 레퍼런스</a>를 참조하세요.</p>
 
                     </main>
 

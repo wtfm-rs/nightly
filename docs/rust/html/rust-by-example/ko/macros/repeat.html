@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Repeat - Rust By Example</title>
+        <title>반복 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,20 +255,16 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="repeat"><a class="header" href="#repeat">Repeat</a></h1>
-<p>Macros can use <code>+</code> in the argument list to indicate that an argument may
-repeat at least once, or <code>*</code>, to indicate that the argument may repeat zero or
-more times.</p>
-<p>In the following example, surrounding the matcher with <code>$(...),+</code> will
-match one or more expression, separated by commas.
-Also note that the semicolon is optional on the last case.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// `find_min!` will calculate the minimum of any number of arguments.
+                        <h1 id="반복"><a class="header" href="#반복">반복</a></h1>
+<p>매크로는 인자 목록에서 <code>+</code>를 사용하여 인자가 한 번 이상 반복될 수 있음을 나타내거나, <code>*</code>를 사용하여 인자가 0번 이상 반복될 수 있음을 나타낼 수 있습니다.</p>
+<p>다음 예제에서, 매처(matcher)를 <code>$(...),+</code>로 감싸면 콤마로 구분된 하나 이상의 표현식과 매치됩니다. 또한 마지막 케이스에서는 세미콜론이 선택사항임에 유의하세요.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// `find_min!`은 임의 개수의 인자들 중 최솟값을 계산합니다.
 macro_rules! find_min {
-    // Base case:
+    // 기본 케이스:
     ($x:expr) =&gt; ($x);
-    // `$x` followed by at least one `$y,`
+    // `$x` 뒤에 최소 하나의 `$y,`가 오는 경우
     ($x:expr, $($y:expr),+) =&gt; (
-        // Call `find_min!` on the tail `$y`
+        // 나머지 `$y`들에 대해 `find_min!`을 호출합니다.
         std::cmp::min($x, find_min!($($y),+))
     )
 }

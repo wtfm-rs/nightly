@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Disambiguating overlapping traits - Rust By Example</title>
+        <title>중복 트레이트 명확화 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,25 +255,21 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="disambiguating-overlapping-traits"><a class="header" href="#disambiguating-overlapping-traits">Disambiguating overlapping traits</a></h1>
-<p>A type can implement many different traits. What if two traits both require
-the same name for a function? For example, many traits might have a method
-named <code>get()</code>. They might even have different return types!</p>
-<p>Good news: because each trait implementation gets its own <code>impl</code> block, it’s
-clear which trait’s <code>get</code> method you’re implementing.</p>
-<p>What about when it comes time to <em>call</em> those methods? To disambiguate between
-them, we have to use Fully Qualified Syntax.</p>
+                        <h1 id="중복-트레이트-명확화"><a class="header" href="#중복-트레이트-명확화">중복 트레이트 명확화</a></h1>
+<p>하나의 타입은 여러 개의 서로 다른 트레이트를 구현할 수 있습니다. 만약 두 트레이트가 함수에 대해 동일한 이름을 요구한다면 어떨까요? 예를 들어, 많은 트레이트가 <code>get()</code>이라는 이름의 메서드를 가질 수 있습니다. 심지어 반환 타입이 다를 수도 있습니다!</p>
+<p>좋은 소식은, 각 트레이트 구현이 자신만의 <code>impl</code> 블록을 가지기 때문에, 어떤 트레이트의 <code>get</code> 메서드를 구현하고 있는지 명확하다는 것입니다.</p>
+<p>그럼 그 메서드들을 _호출_해야 할 때는 어떨까요? 이들 사이의 모호함을 없애기 위해, 우리는 ’완전한 정규화 구문(Fully Qualified Syntax)’을 사용해야 합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">trait UsernameWidget {
-    // Get the selected username out of this widget
+    // 이 위젯에서 선택된 사용자 이름을 가져옵니다
     fn get(&amp;self) -&gt; String;
 }
 
 trait AgeWidget {
-    // Get the selected age out of this widget
+    // 이 위젯에서 선택된 나이를 가져옵니다
     fn get(&amp;self) -&gt; u8;
 }
 
-// A form with both a UsernameWidget and an AgeWidget
+// UsernameWidget과 AgeWidget을 모두 포함하는 폼
 struct Form {
     username: String,
     age: u8,
@@ -290,22 +289,21 @@ impl AgeWidget for Form {
 
 fn main() {
     let form = Form {
-        username: "rustacean".to_owned(),
+        username: "러스타시안(rustacean)".to_owned(),
         age: 28,
     };
 
-    // If you uncomment this line, you'll get an error saying
-    // "multiple `get` found". Because, after all, there are multiple methods
-    // named `get`.
+    // 이 줄의 주석을 해제하면 "multiple `get` found"라는 에러가 발생합니다.
+    // 결국 `get`이라는 이름의 메서드가 여러 개 있기 때문입니다.
     // println!("{}", form.get());
 
     let username = &lt;Form as UsernameWidget&gt;::get(&amp;form);
-    assert_eq!("rustacean".to_owned(), username);
+    assert_eq!("러스타시안(rustacean)".to_owned(), username);
     let age = &lt;Form as AgeWidget&gt;::get(&amp;form);
     assert_eq!(28, age);
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#fully-qualified-syntax-for-disambiguation-calling-methods-with-the-same-name">The Rust Programming Language chapter on Fully Qualified syntax</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#fully-qualified-syntax-for-disambiguation-calling-methods-with-the-same-name">러스트 프로그래밍 언어의 완전한 정규화 구문 장</a></p>
 
                     </main>
 

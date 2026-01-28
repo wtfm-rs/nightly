@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Testcase: unit clarification - Rust By Example</title>
+        <title>테스트케이스: 단위 명확화 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,74 +255,72 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="testcase-unit-clarification"><a class="header" href="#testcase-unit-clarification">Testcase: unit clarification</a></h1>
-<p>A useful method of unit conversions can be examined by implementing <code>Add</code>
-with a phantom type parameter. The <code>Add</code> <code>trait</code> is examined below:</p>
-<pre><code class="language-rust ignore">// This construction would impose: `Self + RHS = Output`
-// where RHS defaults to Self if not specified in the implementation.
+                        <h1 id="테스트케이스-단위-명확화"><a class="header" href="#테스트케이스-단위-명확화">테스트케이스: 단위 명확화</a></h1>
+<p>팬텀 타입 파라미터로 <code>Add</code>를 구현하여 유용한 단위 변환 방법을 살펴볼 수 있습니다. <code>Add</code> <code>트레이트</code>는 아래에서 살펴봅니다:</p>
+<pre><code class="language-rust ignore">// 이 구조는 다음을 부과합니다: `Self + RHS = Output`
+// 구현에서 지정되지 않은 경우 RHS는 기본적으로 Self입니다.
 pub trait Add&lt;RHS = Self&gt; {
     type Output;
 
     fn add(self, rhs: RHS) -&gt; Self::Output;
 }
 
-// `Output` must be `T&lt;U&gt;` so that `T&lt;U&gt; + T&lt;U&gt; = T&lt;U&gt;`.
+// `Output`은 `T&lt;U&gt; + T&lt;U&gt; = T&lt;U&gt;`가 되도록 반드시 `T&lt;U&gt;`여야 합니다.
 impl&lt;U&gt; Add for T&lt;U&gt; {
     type Output = T&lt;U&gt;;
     ...
 }</code></pre>
-<p>The whole implementation:</p>
+<p>전체 구현:</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::ops::Add;
 use std::marker::PhantomData;
 
-/// Create void enumerations to define unit types.
+/// 단위 타입을 정의하기 위해 빈 열거형을 생성합니다.
 #[derive(Debug, Clone, Copy)]
 enum Inch {}
 #[derive(Debug, Clone, Copy)]
 enum Mm {}
 
-/// `Length` is a type with phantom type parameter `Unit`,
-/// and is not generic over the length type (that is `f64`).
+/// `Length`는 팬텀 타입 파라미터 `Unit`을 가지는 타입이며,
+/// 길이 타입(`f64`)에 대해서는 제네릭이 아닙니다.
 ///
-/// `f64` already implements the `Clone` and `Copy` traits.
+/// `f64`는 이미 `Clone`과 `Copy` 트레이트를 구현하고 있습니다.
 #[derive(Debug, Clone, Copy)]
 struct Length&lt;Unit&gt;(f64, PhantomData&lt;Unit&gt;);
 
-/// The `Add` trait defines the behavior of the `+` operator.
+/// `Add` 트레이트는 `+` 연산자의 동작을 정의합니다.
 impl&lt;Unit&gt; Add for Length&lt;Unit&gt; {
     type Output = Length&lt;Unit&gt;;
 
-    // add() returns a new `Length` struct containing the sum.
+    // add()는 합계를 포함하는 새로운 `Length` 구조체를 반환합니다.
     fn add(self, rhs: Length&lt;Unit&gt;) -&gt; Length&lt;Unit&gt; {
-        // `+` calls the `Add` implementation for `f64`.
+        // `+`는 `f64`에 대한 `Add` 구현을 호출합니다.
         Length(self.0 + rhs.0, PhantomData)
     }
 }
 
 fn main() {
-    // Specifies `one_foot` to have phantom type parameter `Inch`.
+    // `one_foot`가 팬텀 타입 파라미터 `Inch`를 가지도록 지정합니다.
     let one_foot:  Length&lt;Inch&gt; = Length(12.0, PhantomData);
-    // `one_meter` has phantom type parameter `Mm`.
+    // `one_meter`는 팬텀 타입 파라미터 `Mm`을 가집니다.
     let one_meter: Length&lt;Mm&gt;   = Length(1000.0, PhantomData);
 
-    // `+` calls the `add()` method we implemented for `Length&lt;Unit&gt;`.
-    //
-    // Since `Length` implements `Copy`, `add()` does not consume
-    // `one_foot` and `one_meter` but copies them into `self` and `rhs`.
+    // `+`는 우리가 `Length&lt;Unit&gt;`에 대해 구현한 `add()` 메서드를 호출합니다.
+//
+// `Length`가 `Copy`를 구현하므로, `add()`는 `one_foot`과 `one_meter`를
+// 소비(consume)하지 않고 `self`와 `rhs`로 복사합니다.
     let two_feet = one_foot + one_foot;
     let two_meters = one_meter + one_meter;
 
-    // Addition works.
-    println!("one foot + one_foot = {:?} in", two_feet.0);
-    println!("one meter + one_meter = {:?} mm", two_meters.0);
+    // 덧셈이 작동합니다.
+    println!("1피트 + 1피트 = {:?} 인치", two_feet.0);
+    println!("1미터 + 1미터 = {:?} mm", two_meters.0);
 
-    // Nonsensical operations fail as they should:
-    // Compile-time Error: type mismatch.
-    //let one_feter = one_foot + one_meter;
+    // 말도 안 되는 연산은 실패합니다:
+// 컴파일 타임 에러: 타입 불일치.
+// let one_feter = one_foot + one_meter;
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../scope/borrow.html">Borrowing (<code>&amp;</code>)</a>, <a href="../../generics/bounds.html">Bounds (<code>X: Y</code>)</a>, <a href="../../custom_types/enum.html">enum</a>, <a href="../../fn/methods.html">impl &amp; self</a>,
-<a href="../../trait/ops.html">Overloading</a>, <a href="../../scope/borrow/ref.html">ref</a>, <a href="../../trait.html">Traits (<code>X for Y</code>)</a>, and <a href="../../custom_types/structs.html">TupleStructs</a>.</p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../scope/borrow.html">빌림(Borrowing) (<code>&amp;</code>)</a>, <a href="../../generics/bounds.html">바운드(Bounds) (<code>X: Y</code>)</a>, <a href="../../custom_types/enum.html">열거형(enum)</a>, <a href="../../fn/methods.html">impl &amp; self</a>, <a href="../../trait/ops.html">오버로딩(Overloading)</a>, <a href="../../scope/borrow/ref.html">ref</a>, <a href="../../trait.html">트레이트(Traits) (<code>X for Y</code>)</a>, 그리고 <a href="../../custom_types/structs.html">튜플 구조체(TupleStructs)</a>.</p>
 
                     </main>
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Traits - Rust By Example</title>
+        <title>트레이트 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-61902a00.js"></script>
+        <script src="toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,26 +255,22 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="traits"><a class="header" href="#traits">Traits</a></h1>
-<p>A <code>trait</code> is a collection of methods defined for an unknown type:
-<code>Self</code>. They can access other methods declared in the same trait.</p>
-<p>Traits can be implemented for any data type. In the example below,
-we define <code>Animal</code>, a group of methods. The <code>Animal</code> <code>trait</code> is
-then implemented for the <code>Sheep</code> data type, allowing the use of
-methods from <code>Animal</code> with a <code>Sheep</code>.</p>
+                        <h1 id="트레이트"><a class="header" href="#트레이트">트레이트</a></h1>
+<p><code>trait</code>는 알 수 없는 타입 <code>Self</code>에 대해 정의된 메서드들의 모음입니다. 이들은 동일한 트레이트 내에 선언된 다른 메서드에 접근할 수 있습니다.</p>
+<p>트레이트는 모든 데이터 타입에 대해 구현될 수 있습니다. 아래 예제에서는 메서드 그룹인 <code>Animal</code>을 정의합니다. 그런 다음 <code>Animal</code> <code>trait</code>를 <code>Sheep</code> 데이터 타입에 대해 구현하여 <code>Sheep</code>으로 <code>Animal</code>의 메서드를 사용할 수 있게 합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">struct Sheep { naked: bool, name: &amp;'static str }
 
 trait Animal {
-    // Associated function signature; `Self` refers to the implementor type.
+    // 연관 함수 시그니처; `Self`는 구현하는 타입을 가리킵니다.
     fn new(name: &amp;'static str) -&gt; Self;
 
-    // Method signatures; these will return a string.
+    // 메서드 시그니처; 이들은 문자열을 반환할 것입니다.
     fn name(&amp;self) -&gt; &amp;'static str;
     fn noise(&amp;self) -&gt; &amp;'static str;
 
-    // Traits can provide default method definitions.
+    // 트레이트는 기본 메서드 정의를 제공할 수 있습니다.
     fn talk(&amp;self) {
-        println!("{} says {}", self.name(), self.noise());
+        println!("{}가 말하길 {}", self.name(), self.noise());
     }
 }
 
@@ -282,19 +281,19 @@ impl Sheep {
 
     fn shear(&amp;mut self) {
         if self.is_naked() {
-            // Implementor methods can use the implementor's trait methods.
-            println!("{} is already naked...", self.name());
+            // 구현자의 메서드는 구현자의 트레이트 메서드를 사용할 수 있습니다.
+            println!("{}는 이미 벌거벗었습니다...", self.name());
         } else {
-            println!("{} gets a haircut!", self.name);
+            println!("{}가 털을 깎습니다!", self.name);
 
             self.naked = true;
         }
     }
 }
 
-// Implement the `Animal` trait for `Sheep`.
+// `Sheep`에 대해 `Animal` 트레이트를 구현합니다.
 impl Animal for Sheep {
-    // `Self` is the implementor type: `Sheep`.
+    // `Self`는 구현하는 타입인 `Sheep`입니다.
     fn new(name: &amp;'static str) -&gt; Sheep {
         Sheep { name: name, naked: false }
     }
@@ -305,23 +304,23 @@ impl Animal for Sheep {
 
     fn noise(&amp;self) -&gt; &amp;'static str {
         if self.is_naked() {
-            "baaaaah?"
+            "메에에에?"
         } else {
-            "baaaaah!"
+            "메에에에!"
         }
     }
 
-    // Default trait methods can be overridden.
+    // 기본 트레이트 메서드는 재정의(오버라이드)될 수 있습니다.
     fn talk(&amp;self) {
-        // For example, we can add some quiet contemplation.
-        println!("{} pauses briefly... {}", self.name, self.noise());
+        // 예를 들어, 조용한 사색을 추가할 수 있습니다.
+        println!("{}가 잠시 멈춥니다... {}", self.name, self.noise());
     }
 }
 
 fn main() {
-    // Type annotation is necessary in this case.
-    let mut dolly: Sheep = Animal::new("Dolly");
-    // TODO ^ Try removing the type annotations.
+    // 이 경우에는 타입 어노테이션이 필요합니다.
+    let mut dolly: Sheep = Animal::new("돌리");
+    // TODO ^ 타입 어노테이션을 제거해 보세요.
 
     dolly.talk();
     dolly.shear();

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Box, stack and heap - Rust By Example</title>
+        <title>Box, 스택과 힙 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,13 +255,9 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="box-stack-and-heap"><a class="header" href="#box-stack-and-heap">Box, stack and heap</a></h1>
-<p>All values in Rust are stack allocated by default. Values can be <em>boxed</em>
-(allocated on the heap) by creating a <code>Box&lt;T&gt;</code>. A box is a smart pointer to a
-heap allocated value of type <code>T</code>. When a box goes out of scope, its destructor
-is called, the inner object is destroyed, and the memory on the heap is freed.</p>
-<p>Boxed values can be dereferenced using the <code>*</code> operator; this removes one layer
-of indirection.</p>
+                        <h1 id="box-스택과-힙"><a class="header" href="#box-스택과-힙">Box, 스택과 힙</a></h1>
+<p>Rust의 모든 값은 기본적으로 스택에 할당됩니다. <code>Box&lt;T&gt;</code>를 생성함으로써 값을 <em>박싱</em>(힙에 할당)할 수 있습니다. 박스는 힙에 할당된 <code>T</code> 타입 값을 가리키는 스마트 포인터입니다. 박스가 스코프를 벗어나면 데스트럭터가 호출되어 내부 객체가 파괴되고 힙 메모리가 해제됩니다.</p>
+<p>박싱된 값은 <code>*</code> 연산자를 사용하여 역참조할 수 있습니다. 이는 한 단계의 간접 참조를 제거합니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::mem;
 
 #[allow(dead_code)]
@@ -268,8 +267,8 @@ struct Point {
     y: f64,
 }
 
-// A Rectangle can be specified by where its top left and bottom right
-// corners are in space
+// 사각형은 공간상에서의 왼쪽 상단과 오른쪽 하단
+// 꼭짓점 위치로 지정될 수 있습니다
 #[allow(dead_code)]
 struct Rectangle {
     top_left: Point,
@@ -281,47 +280,47 @@ fn origin() -&gt; Point {
 }
 
 fn boxed_origin() -&gt; Box&lt;Point&gt; {
-    // Allocate this point on the heap, and return a pointer to it
+    // 이 점을 힙에 할당하고, 그에 대한 포인터를 반환합니다
     Box::new(Point { x: 0.0, y: 0.0 })
 }
 
 fn main() {
-    // (all the type annotations are superfluous)
-    // Stack allocated variables
+    // (모든 타입 어노테이션은 불필요합니다)
+    // 스택에 할당된 변수들
     let point: Point = origin();
     let rectangle: Rectangle = Rectangle {
         top_left: origin(),
         bottom_right: Point { x: 3.0, y: -4.0 }
     };
 
-    // Heap allocated rectangle
+    // 힙에 할당된 사각형
     let boxed_rectangle: Box&lt;Rectangle&gt; = Box::new(Rectangle {
         top_left: origin(),
         bottom_right: Point { x: 3.0, y: -4.0 },
     });
 
-    // The output of functions can be boxed
+    // 함수의 출력은 박싱될 수 있습니다
     let boxed_point: Box&lt;Point&gt; = Box::new(origin());
 
-    // Double indirection
+    // 이중 간접 참조
     let box_in_a_box: Box&lt;Box&lt;Point&gt;&gt; = Box::new(boxed_origin());
 
-    println!("Point occupies {} bytes on the stack",
+    println!("Point는 스택에서 {} 바이트를 차지합니다",
              mem::size_of_val(&amp;point));
-    println!("Rectangle occupies {} bytes on the stack",
+    println!("Rectangle은 스택에서 {} 바이트를 차지합니다",
              mem::size_of_val(&amp;rectangle));
 
-    // box size == pointer size
-    println!("Boxed point occupies {} bytes on the stack",
+    // 박스 크기 == 포인터 크기
+    println!("박싱된 point는 스택에서 {} 바이트를 차지합니다",
              mem::size_of_val(&amp;boxed_point));
-    println!("Boxed rectangle occupies {} bytes on the stack",
+    println!("박싱된 rectangle은 스택에서 {} 바이트를 차지합니다",
              mem::size_of_val(&amp;boxed_rectangle));
-    println!("Boxed box occupies {} bytes on the stack",
+    println!("박싱된 박스는 스택에서 {} 바이트를 차지합니다",
              mem::size_of_val(&amp;box_in_a_box));
 
-    // Copy the data contained in `boxed_point` into `unboxed_point`
+    // `boxed_point`에 담긴 데이터를 `unboxed_point`로 복사합니다
     let unboxed_point: Point = *boxed_point;
-    println!("Unboxed point occupies {} bytes on the stack",
+    println!("박싱 해제된 point는 스택에서 {} 바이트를 차지합니다",
              mem::size_of_val(&amp;unboxed_point));
 }</code></pre>
 

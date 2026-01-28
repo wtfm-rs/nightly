@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/reference-ce12791d.css">
+        <link rel="stylesheet" href="theme/reference-bb0bdaf8.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-fb3845b4.js";
+            window.path_to_searchindex_js = "searchindex-45a698e8.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-edc1c836.js"></script>
@@ -257,59 +257,35 @@ Item</text>
 <div class="rule" id="r-crate.compile-time"><a class="rule-link" href="#r-crate.compile-time" title="crate.compile-time"><span>[crate<wbr>.compile-time]</span></a>
 </div>
 
-<p>Rust’s semantics obey a <em>phase distinction</em> between compile-time and
-run-time.<sup class="footnote-reference" id="fr-phase-distinction-1"><a href="#footnote-phase-distinction">1</a></sup> Semantic rules that have a <em>static
-interpretation</em> govern the success or failure of compilation, while
-semantic rules that have a <em>dynamic interpretation</em> govern the behavior of the
-program at run-time.</p>
+<p>Rust’s semantics obey a <em>phase distinction</em> between compile-time and run-time.<sup class="footnote-reference" id="fr-phase-distinction-1"><a href="#footnote-phase-distinction">1</a></sup> Semantic rules that have a <em>static interpretation</em> govern the success or failure of compilation, while semantic rules that have a <em>dynamic interpretation</em> govern the behavior of the program at run-time.</p>
 <div class="rule" id="r-crate.unit"><a class="rule-link" href="#r-crate.unit" title="crate.unit"><span>[crate<wbr>.unit]</span></a>
 </div>
 
-<p>The compilation model centers on artifacts called <em>crates</em>. Each compilation
-processes a single crate in source form, and if successful, produces a single
-crate in binary form: either an executable or some sort of
-library.<sup class="footnote-reference" id="fr-cratesourcefile-1"><a href="#footnote-cratesourcefile">2</a></sup></p>
+<p>The compilation model centers on artifacts called <em>crates</em>. Each compilation processes a single crate in source form, and if successful, produces a single crate in binary form: either an executable or some sort of library.<sup class="footnote-reference" id="fr-cratesourcefile-1"><a href="#footnote-cratesourcefile">2</a></sup></p>
 <div class="rule" id="r-crate.module"><a class="rule-link" href="#r-crate.module" title="crate.module"><span>[crate<wbr>.module]</span></a>
 </div>
 
-<p>A <em>crate</em> is a unit of compilation and linking, as well as versioning,
-distribution, and runtime loading. A crate contains a <em>tree</em> of nested
-<a href="items/modules.html">module</a> scopes. The top level of this tree is a module that is
-anonymous (from the point of view of paths within the module) and any item
-within a crate has a canonical <a href="paths.html">module path</a> denoting its location
-within the crate’s module tree.</p>
+<p>A <em>crate</em> is a unit of compilation and linking, as well as versioning, distribution, and runtime loading. A crate contains a <em>tree</em> of nested <a href="items/modules.html">module</a> scopes. The top level of this tree is a module that is anonymous (from the point of view of paths within the module) and any item within a crate has a canonical <a href="paths.html">module path</a> denoting its location within the crate’s module tree.</p>
 <div class="rule" id="r-crate.input-source"><a class="rule-link" href="#r-crate.input-source" title="crate.input-source"><span>[crate<wbr>.input-source]</span></a>
 </div>
 
-<p>The Rust compiler is always invoked with a single source file as input, and
-always produces a single output crate. The processing of that source file may
-result in other source files being loaded as modules. Source files have the
-extension <code>.rs</code>.</p>
+<p>The Rust compiler is always invoked with a single source file as input, and always produces a single output crate. The processing of that source file may result in other source files being loaded as modules. Source files have the extension <code>.rs</code>.</p>
 <div class="rule" id="r-crate.module-def"><a class="rule-link" href="#r-crate.module-def" title="crate.module-def"><span>[crate<wbr>.module-def]</span></a>
 </div>
 
-<p>A Rust source file describes a module, the name and location of which —
-in the module tree of the current crate — are defined from outside the
-source file: either by an explicit <a href="items/modules.html#grammar-Module">Module</a> item in a referencing
-source file, or by the name of the crate itself.</p>
+<p>A Rust source file describes a module, the name and location of which — in the module tree of the current crate — are defined from outside the source file: either by an explicit <a href="items/modules.html#grammar-Module">Module</a> item in a referencing source file, or by the name of the crate itself.</p>
 <div class="rule" id="r-crate.inline-module"><a class="rule-link" href="#r-crate.inline-module" title="crate.inline-module"><span>[crate<wbr>.inline-module]</span></a>
 </div>
 
-<p>Every source file is a
-module, but not every module needs its own source file: <a href="items/modules.html">module
-definitions</a> can be nested within one file.</p>
+<p>Every source file is a module, but not every module needs its own source file: <a href="items/modules.html">module definitions</a> can be nested within one file.</p>
 <div class="rule" id="r-crate.items"><a class="rule-link" href="#r-crate.items" title="crate.items"><span>[crate<wbr>.items]</span></a>
 </div>
 
-<p>Each source file contains a sequence of zero or more <a href="items.html#grammar-Item">Item</a> definitions, and
-may optionally begin with any number of <a href="attributes.html">attributes</a>
-that apply to the containing module, most of which influence the behavior of
-the compiler.</p>
+<p>Each source file contains a sequence of zero or more <a href="items.html#grammar-Item">Item</a> definitions, and may optionally begin with any number of <a href="attributes.html">attributes</a> that apply to the containing module, most of which influence the behavior of the compiler.</p>
 <div class="rule" id="r-crate.attributes"><a class="rule-link" href="#r-crate.attributes" title="crate.attributes"><span>[crate<wbr>.attributes]</span></a>
 </div>
 
-<p>The anonymous crate module can have additional attributes that
-apply to the crate as a whole.</p>
+<p>The anonymous crate module can have additional attributes that apply to the crate as a whole.</p>
 <div class="alert alert-note">
 <blockquote>
 <p class="alert-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
@@ -334,16 +310,14 @@ apply to the crate as a whole.</p>
 </div>
 
 <h2 id="main-functions"><a class="header" href="#main-functions">Main functions</a></h2>
-<div class="rule" id="r-crate.main.general"><a class="rule-link" href="#r-crate.main.general" title="crate.main.general"><span>[crate<wbr>.main<wbr>.general]</span></a>
+<div class="rule" id="r-crate.main.executable"><a class="rule-link" href="#r-crate.main.executable" title="crate.main.executable"><span>[crate<wbr>.main<wbr>.executable]</span></a>
 </div>
 
 <p>A crate that contains a <code>main</code> <a href="items/functions.html">function</a> can be compiled to an executable.</p>
 <div class="rule" id="r-crate.main.restriction"><a class="rule-link" href="#r-crate.main.restriction" title="crate.main.restriction"><span>[crate<wbr>.main<wbr>.restriction]</span></a>
 </div>
 
-<p>If a <code>main</code> function is present, it must take no arguments, must not declare any
-<a href="trait-bounds.html">trait or lifetime bounds</a>, must not have any <a href="items/generics.html#where-clauses">where clauses</a>, and its return
-type must implement the <a href="../std/process/trait.Termination.html"><code>Termination</code></a> trait.</p>
+<p>If a <code>main</code> function is present, it must take no arguments, must not declare any <a href="trait-bounds.html">trait or lifetime bounds</a>, must not have any <a href="items/generics.html#where-clauses">where clauses</a>, and its return type must implement the <a href="../std/process/trait.Termination.html"><code>Termination</code></a> trait.</p>
 <pre class="playground"><code class="language-rust edition2024">fn main() {}</code></pre>
 <pre class="playground"><code class="language-rust edition2024">fn main() -&gt; ! {
     std::process::exit(0);
@@ -399,8 +373,7 @@ use foo::bar as main;
 <div class="rule" id="r-crate.crate_name.general"><a class="rule-link" href="#r-crate.crate_name.general" title="crate.crate_name.general"><span>[crate<wbr>.crate_name<wbr>.general]</span></a>
 </div>
 
-<p>The <em><code>crate_name</code> <a href="attributes.html">attribute</a></em> may be applied at the crate level to specify the
-name of the crate with the <a href="attributes.html#grammar-MetaNameValueStr">MetaNameValueStr</a> syntax.</p>
+<p>The <em><code>crate_name</code> <a href="attributes.html">attribute</a></em> may be applied at the crate level to specify the name of the crate with the <a href="attributes.html#grammar-MetaNameValueStr">MetaNameValueStr</a> syntax.</p>
 <pre class="playground"><code class="language-rust edition2024"><span class="boring">#![allow(unused)]
 </span>#![crate_name = "mycrate"]
 <span class="boring">fn main() {
@@ -408,19 +381,14 @@ name of the crate with the <a href="attributes.html#grammar-MetaNameValueStr">Me
 <div class="rule" id="r-crate.crate_name.restriction"><a class="rule-link" href="#r-crate.crate_name.restriction" title="crate.crate_name.restriction"><span>[crate<wbr>.crate_name<wbr>.restriction]</span></a>
 </div>
 
-<p>The crate name must not be empty, and must only contain <a href="../std/primitive.char.html#method.is_alphanumeric">Unicode alphanumeric</a>
-or <code>_</code> (U+005F) characters.</p>
+<p>The crate name must not be empty, and must only contain <a href="../std/primitive.char.html#method.is_alphanumeric">Unicode alphanumeric</a> or <code>_</code> (U+005F) characters.</p>
 <hr>
 <ol class="footnote-definition">
 <li id="footnote-phase-distinction">
-<p>This distinction would also exist in an interpreter.
-Static checks like syntactic analysis, type checking, and lints should
-happen before the program is executed regardless of when it is executed. <a href="#fr-phase-distinction-1">↩</a></p>
+<p>This distinction would also exist in an interpreter. Static checks like syntactic analysis, type checking, and lints should happen before the program is executed regardless of when it is executed. <a href="#fr-phase-distinction-1">↩</a></p>
 </li>
 <li id="footnote-cratesourcefile">
-<p>A crate is somewhat analogous to an <em>assembly</em> in the
-ECMA-335 CLI model, a <em>library</em> in the SML/NJ Compilation Manager, a <em>unit</em>
-in the Owens and Flatt module system, or a <em>configuration</em> in Mesa. <a href="#fr-cratesourcefile-1">↩</a></p>
+<p>A crate is somewhat analogous to an <em>assembly</em> in the ECMA-335 CLI model, a <em>library</em> in the SML/NJ Compilation Manager, a <em>unit</em> in the Owens and Flatt module system, or a <em>configuration</em> in Mesa. <a href="#fr-cratesourcefile-1">↩</a></p>
 </li>
 </ol>
 

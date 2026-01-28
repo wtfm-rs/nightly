@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Threads - Rust By Example</title>
+        <title>스레드 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,31 +255,30 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="threads"><a class="header" href="#threads">Threads</a></h1>
-<p>Rust provides a mechanism for spawning native OS threads via the <code>spawn</code>
-function, the argument of this function is a moving closure.</p>
+                        <h1 id="스레드"><a class="header" href="#스레드">스레드</a></h1>
+<p>Rust는 <code>spawn</code> 함수를 통해 네이티브 OS 스레드를 생성하는 메커니즘을 제공합니다. 이 함수의 인자는 이동(moving) 클로저입니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::thread;
 
 const NTHREADS: u32 = 10;
 
-// This is the `main` thread
+// 메인 스레드입니다
 fn main() {
-    // Make a vector to hold the children which are spawned.
+    // 생성된 자식 스레드들을 담을 벡터를 만듭니다.
     let mut children = vec![];
 
     for i in 0..NTHREADS {
-        // Spin up another thread
+        // 또 다른 스레드를 생성합니다
         children.push(thread::spawn(move || {
-            println!("this is thread number {}", i);
+            println!("이것은 {}번 스레드입니다", i);
         }));
     }
 
     for child in children {
-        // Wait for the thread to finish. Returns a result.
+        // 스레드가 종료될 때까지 기다립니다. 결과를 반환합니다.
         let _ = child.join();
     }
 }</code></pre>
-<p>These threads will be scheduled by the OS.</p>
+<p>이러한 스레드들은 OS에 의해 스케줄링됩니다.</p>
 
                     </main>
 

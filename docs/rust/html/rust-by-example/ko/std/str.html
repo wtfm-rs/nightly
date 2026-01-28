@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Strings - Rust By Example</title>
+        <title>문자열 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,143 +255,128 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="strings"><a class="header" href="#strings">Strings</a></h1>
-<p>The two most used string types in Rust are <code>String</code> and <code>&amp;str</code>.</p>
-<p>A <code>String</code> is stored as a vector of bytes (<code>Vec&lt;u8&gt;</code>), but guaranteed to
-always be a valid UTF-8 sequence. <code>String</code> is heap allocated, growable and not
-null terminated.</p>
-<p><code>&amp;str</code> is a slice (<code>&amp;[u8]</code>) that always points to a valid UTF-8 sequence, and
-can be used to view into a <code>String</code>, just like <code>&amp;[T]</code> is a view into <code>Vec&lt;T&gt;</code>.</p>
+                        <h1 id="문자열"><a class="header" href="#문자열">문자열</a></h1>
+<p>Rust에서 가장 많이 사용되는 두 가지 문자열 타입은 <code>String</code>과 <code>&amp;str</code>입니다.</p>
+<p><code>String</code>은 바이트 벡터(<code>Vec&lt;u8&gt;</code>)로 저장되지만, 항상 유효한 UTF-8 시퀀스임이 보장됩니다. <code>String</code>은 힙에 할당되며, 크기 조절이 가능하고 널 종료(null terminated)되지 않습니다.</p>
+<p><code>&amp;str</code>은 항상 유효한 UTF-8 시퀀스를 가리키는 슬라이스(<code>&amp;[u8]</code>)이며, <code>&amp;[T]</code>가 <code>Vec&lt;T&gt;</code>를 들여다보는 창(view)인 것과 마찬가지로 <code>String</code>을 들여다보는 데 사용될 수 있습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
-    // (all the type annotations are superfluous)
-    // A reference to a string allocated in read only memory
+    // (모든 타입 어노테이션은 불필요합니다)
+    // 읽기 전용 메모리에 할당된 문자열에 대한 참조
     let pangram: &amp;'static str = "the quick brown fox jumps over the lazy dog";
-    println!("Pangram: {}", pangram);
+    println!("팬그램(Pangram): {}", pangram);
 
-    // Iterate over words in reverse, no new string is allocated
-    println!("Words in reverse");
+    // 단어들을 역순으로 순회합니다. 새로운 문자열은 할당되지 않습니다
+    println!("역순 단어들");
     for word in pangram.split_whitespace().rev() {
         println!("&gt; {}", word);
     }
 
-    // Copy chars into a vector, sort and remove duplicates
+    // 문자들을 벡터로 복사하고, 정렬한 뒤 중복을 제거합니다
     let mut chars: Vec&lt;char&gt; = pangram.chars().collect();
     chars.sort();
     chars.dedup();
 
-    // Create an empty and growable `String`
+    // 비어 있고 크기 조절 가능한 `String`을 생성합니다
     let mut string = String::new();
     for c in chars {
-        // Insert a char at the end of string
+        // 문자열 끝에 문자를 삽입합니다
         string.push(c);
-        // Insert a string at the end of string
+        // 문자열 끝에 문자열을 삽입합니다
         string.push_str(", ");
     }
 
-    // The trimmed string is a slice to the original string, hence no new
-    // allocation is performed
+    // 트림된 문자열은 원본 문자열에 대한 슬라이스이므로,
+// 새로운 할당이 수행되지 않습니다
     let chars_to_trim: &amp;[char] = &amp;[' ', ','];
     let trimmed_str: &amp;str = string.trim_matches(chars_to_trim);
-    println!("Used characters: {}", trimmed_str);
+    println!("사용된 문자들: {}", trimmed_str);
 
-    // Heap allocate a string
+    // 문자열을 힙에 할당합니다
     let alice = String::from("I like dogs");
-    // Allocate new memory and store the modified string there
+    // 새로운 메모리를 할당하고 수정된 문자열을 그곳에 저장합니다
     let bob: String = alice.replace("dog", "cat");
 
-    println!("Alice says: {}", alice);
-    println!("Bob says: {}", bob);
+    println!("앨리스가 말합니다: {}", alice);
+    println!("밥이 말합니다: {}", bob);
 }</code></pre>
-<p>More <code>str</code>/<code>String</code> methods can be found under the
-<a href="https://doc.rust-lang.org/std/str/">std::str</a> and
-<a href="https://doc.rust-lang.org/std/string/">std::string</a>
-modules</p>
-<h2 id="literals-and-escapes"><a class="header" href="#literals-and-escapes">Literals and escapes</a></h2>
-<p>There are multiple ways to write string literals with special characters in them.
-All result in a similar <code>&amp;str</code> so it’s best to use the form that is the most
-convenient to write. Similarly there are multiple ways to write byte string literals,
-which all result in <code>&amp;[u8; N]</code>.</p>
-<p>Generally special characters are escaped with a backslash character: <code>\</code>.
-This way you can add any character to your string, even unprintable ones
-and ones that you don’t know how to type. If you want a literal backslash,
-escape it with another one: <code>\\</code></p>
-<p>String or character literal delimiters occurring within a literal must be escaped: <code>"\""</code>, <code>'\''</code>.</p>
+<p>더 많은 <code>str</code>/<code>String</code> 메서드는 <a href="https://doc.rust-lang.org/std/str/">std::str</a> 및 <a href="https://doc.rust-lang.org/std/string/">std::string</a> 모듈에서 찾을 수 있습니다</p>
+<h2 id="리터럴과-이스케이프"><a class="header" href="#리터럴과-이스케이프">리터럴과 이스케이프</a></h2>
+<p>특수 문자가 포함된 문자열 리터럴을 작성하는 방법은 여러 가지가 있습니다. 모두 비슷한 <code>&amp;str</code>을 결과로 내므로 가장 작성하기 편리한 형식을 사용하는 것이 좋습니다. 마찬가지로 바이트 문자열 리터럴을 작성하는 방법도 여러 가지가 있으며, 모두 <code>&amp;[u8; N]</code> 결과를 냅니다.</p>
+<p>일반적으로 특수 문자는 백슬래시 문자 <code>\</code>로 이스케이프됩니다. 이 방법을 통해 출력 불가능한 문자나 입력 방법을 모르는 문자 등 어떤 문자든 문자열에 추가할 수 있습니다. 백슬래시 자체를 리터럴로 원한다면 백슬래시 하나를 더 붙여 <code>\\</code>와 같이 이스케이프하세요.</p>
+<p>리터럴 내에 나타나는 문자열 또는 문자 리터럴 구분자는 반드시 이스케이프해야 합니다: <code>"\""</code>, <code>'\''</code>.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
-    // You can use escapes to write bytes by their hexadecimal values...
+    // 16진수 값을 사용하여 바이트를 작성하기 위해 이스케이프를 사용할 수 있습니다...
     let byte_escape = "I'm writing \x52\x75\x73\x74!";
-    println!("What are you doing\x3F (\\x3F means ?) {}", byte_escape);
+    println!("What are you doing\x3F (\\x3F는 ?를 의미합니다) {}", byte_escape);
 
-    // ...or Unicode code points.
+    // ...또는 유니코드 코드 포인트.
     let unicode_codepoint = "\u{211D}";
     let character_name = "\"DOUBLE-STRUCK CAPITAL R\"";
 
-    println!("Unicode character {} (U+211D) is called {}",
+    println!("유니코드 문자 {} (U+211D)는 {}라고 불립니다",
                 unicode_codepoint, character_name );
 
 
-    let long_string = "String literals
-                        can span multiple lines.
-                        The linebreak and indentation here -&gt;\
-                        &lt;- can be escaped too!";
+    let long_string = "문자열 리터럴은
+                        여러 줄에 걸쳐 있을 수 있습니다.
+                        여기서의 줄바꿈과 들여쓰기 -&gt;\
+                        &lt;- 역시 이스케이프될 수 있습니다!";
     println!("{}", long_string);
 }</code></pre>
-<p>Sometimes there are just too many characters that need to be escaped or it’s just
-much more convenient to write a string out as-is. This is where raw string literals come into play.</p>
+<p>때때로 이스케이프해야 할 문자가 너무 많거나 문자열을 있는 그대로 작성하는 것이 훨씬 더 편리할 때가 있습니다. 이때 로우(raw) 문자열 리터럴이 사용됩니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
-    let raw_str = r"Escapes don't work here: \x3F \u{211D}";
+    let raw_str = r"이스케이프가 여기선 작동하지 않습니다: \x3F \u{211D}";
     println!("{}", raw_str);
 
-    // If you need quotes in a raw string, add a pair of #s
+    // 로우 문자열에서 따옴표가 필요하다면, # 쌍을 추가하세요
     let quotes = r#"And then I said: "There is no escape!""#;
     println!("{}", quotes);
 
-    // If you need "# in your string, just use more #s in the delimiter.
-    // You can use up to 255 #s.
+    // 문자열 내에 "#가 필요하다면, 구분자에 더 많은 #를 사용하세요.
+    // 최대 255개의 #를 사용할 수 있습니다.
     let longer_delimiter = r###"A string with "# in it. And even "##!"###;
     println!("{}", longer_delimiter);
 }</code></pre>
-<p>Want a string that’s not UTF-8? (Remember, <code>str</code> and <code>String</code> must be valid UTF-8).
-Or maybe you want an array of bytes that’s mostly text? Byte strings to the rescue!</p>
+<p>UTF-8이 아닌 문자열을 원하시나요? (<code>str</code>과 <code>String</code>은 반드시 유효한 UTF-8이어야 함을 기억하세요). 아니면 대부분이 텍스트인 바이트 배열을 원하시나요? 바이트 문자열이 해결해 드립니다!</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::str;
 
 fn main() {
-    // Note that this is not actually a `&amp;str`
+    // 이는 실제로 `&amp;str`이 아님에 유의하세요
     let bytestring: &amp;[u8; 21] = b"this is a byte string";
 
-    // Byte arrays don't have the `Display` trait, so printing them is a bit limited
-    println!("A byte string: {:?}", bytestring);
+    // 바이트 배열은 `Display` 트레이트를 가지고 있지 않으므로, 출력에 다소 제한이 있습니다
+    println!("바이트 문자열: {:?}", bytestring);
 
-    // Byte strings can have byte escapes...
+    // 바이트 문자열은 바이트 이스케이프를 가질 수 있습니다...
     let escaped = b"\x52\x75\x73\x74 as bytes";
-    // ...but no unicode escapes
+    // ...하지만 유니코드 이스케이프는 허용되지 않습니다
     // let escaped = b"\u{211D} is not allowed";
-    println!("Some escaped bytes: {:?}", escaped);
+    println!("일부 이스케이프된 바이트: {:?}", escaped);
 
 
-    // Raw byte strings work just like raw strings
+    // 로우 바이트 문자열은 로우 문자열과 똑같이 작동합니다
     let raw_bytestring = br"\u{211D} is not escaped here";
     println!("{:?}", raw_bytestring);
 
-    // Converting a byte array to `str` can fail
+    // 바이트 배열을 `str`로 변환하는 것은 실패할 수 있습니다
     if let Ok(my_str) = str::from_utf8(raw_bytestring) {
-        println!("And the same as text: '{}'", my_str);
+        println!("그리고 텍스트로 변환하면: '{}'", my_str);
     }
 
-    let _quotes = br#"You can also use "fancier" formatting, \
-                    like with normal raw strings"#;
+    let _quotes = br#"일반 로우 문자열처럼, \
+                    더 "화려한" 포맷팅을 사용할 수도 있습니다"#;
 
-    // Byte strings don't have to be UTF-8
-    let shift_jis = b"\x82\xe6\x82\xa8\x82\xb1\x82\xbb"; // "ようこそ" in SHIFT-JIS
+    // 바이트 문자열은 UTF-8일 필요가 없습니다
+    let shift_jis = b"\x82\xe6\x82\xa8\x82\xb1\x82\xbb"; // SHIFT-JIS 인코딩의 "ようこそ"(환영합니다)
 
-    // But then they can't always be converted to `str`
+    // 그런 경우에는 항상 `str`로 변환될 수는 없습니다
     match str::from_utf8(shift_jis) {
-        Ok(my_str) =&gt; println!("Conversion successful: '{}'", my_str),
-        Err(e) =&gt; println!("Conversion failed: {:?}", e),
+        Ok(my_str) =&gt; println!("변환 성공: '{}'", my_str),
+        Err(e) =&gt; println!("변환 실패: {:?}", e),
     };
 }</code></pre>
-<p>For conversions between character encodings check out the <a href="https://crates.io/crates/encoding">encoding</a> crate.</p>
-<p>A more detailed listing of the ways to write string literals and escape characters
-is given in the <a href="https://doc.rust-lang.org/reference/tokens.html">‘Tokens’ chapter</a> of the Rust Reference.</p>
+<p>문자 인코딩 간의 변환에 대해서는 <a href="https://crates.io/crates/encoding">encoding</a> 크레이트를 확인해 보세요.</p>
+<p>문자열 리터럴을 작성하고 문자를 이스케이프하는 방법에 대한 더 자세한 목록은 Rust 레퍼런스의 <a href="https://doc.rust-lang.org/reference/tokens.html">‘Tokens’ 장</a>에 나와 있습니다.</p>
 
                     </main>
 

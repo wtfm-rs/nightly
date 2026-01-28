@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,18 +256,18 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="c-like"><a class="header" href="#c-like">C-like</a></h1>
-<p><code>enum</code> can also be used as C-like enums.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// An attribute to hide warnings for unused code.
+<p><code>enum</code>은 C 스타일의 열거형으로도 사용될 수 있습니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 사용되지 않는 코드에 대한 경고를 숨기기 위한 속성입니다.
 #![allow(dead_code)]
 
-// enum with implicit discriminator (starts at 0)
+// 암시적 식별자(0부터 시작)를 가진 열거형
 enum Number {
     Zero,
     One,
     Two,
 }
 
-// enum with explicit discriminator
+// 명시적 식별자를 가진 열거형
 enum Color {
     Red = 0xff0000,
     Green = 0x00ff00,
@@ -272,15 +275,15 @@ enum Color {
 }
 
 fn main() {
-    // `enums` can be cast as integers.
-    println!("zero is {}", Number::Zero as i32);
-    println!("one is {}", Number::One as i32);
+    // `enum`은 정수로 형변환(cast)될 수 있습니다.
+    println!("0은 {}입니다", Number::Zero as i32);
+    println!("1은 {}입니다", Number::One as i32);
 
-    println!("roses are #{:06x}", Color::Red as u32);
-    println!("violets are #{:06x}", Color::Blue as u32);
+    println!("장미는 #{:06x}색입니다", Color::Red as u32);
+    println!("제비꽃은 #{:06x}색입니다", Color::Blue as u32);
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../types/cast.html">casting</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../types/cast.html">형변환</a></p>
 
                     </main>
 

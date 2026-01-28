@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Ownership and moves - Rust By Example</title>
+        <title>소유권과 이동 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,57 +255,50 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="ownership-and-moves"><a class="header" href="#ownership-and-moves">Ownership and moves</a></h1>
-<p>Because variables are in charge of freeing their own resources,
-<strong>resources can only have one owner</strong>. This prevents resources
-from being freed more than once. Note that not all variables own
-resources (e.g. <a href="../flow_control/match/destructuring/destructure_pointers.html">references</a>).</p>
-<p>When doing assignments (<code>let x = y</code>) or passing function arguments by value
-(<code>foo(x)</code>), the <em>ownership</em> of the resources is transferred. In Rust-speak,
-this is known as a <em>move</em>.</p>
-<p>After moving resources, the previous owner can no longer be used. This avoids
-creating dangling pointers.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// This function takes ownership of the heap allocated memory
+                        <h1 id="소유권과-이동"><a class="header" href="#소유권과-이동">소유권과 이동</a></h1>
+<p>변수는 자신의 리소스를 해제할 책임이 있으므로, <strong>리소스는 오직 하나의 소유자만 가질 수 있습니다</strong>. 이는 리소스가 한 번 이상 해제되는 것을 방지합니다. 모든 변수가 리소스를 소유하는 것은 아닙니다(예: <a href="../flow_control/match/destructuring/destructure_pointers.html">참조</a>).</p>
+<p>할당(<code>let x = y</code>)을 하거나 함수 인자를 값으로 전달(<code>foo(x)</code>)할 때, 리소스의 _소유권_이 이전됩니다. Rust 용어로는 이를 _이동(move)_이라고 합니다.</p>
+<p>리소스를 이동한 후에는 이전 소유자를 더 이상 사용할 수 없습니다. 이는 댕글링 포인터(dangling pointers) 생성을 방지합니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 이 함수는 힙에 할당된 메모리의 소유권을 가져갑니다
 fn destroy_box(c: Box&lt;i32&gt;) {
-    println!("Destroying a box that contains {}", c);
+    println!("{}를 포함하는 상자를 파괴 중", c);
 
-    // `c` is destroyed and the memory freed
+    // `c`가 파괴되고 메모리가 해제됩니다
 }
 
 fn main() {
-    // _Stack_ allocated integer
+    // _스택_에 할당된 정수
     let x = 5u32;
 
-    // *Copy* `x` into `y` - no resources are moved
+    // `x`를 `y`로 *복사* - 리소스가 이동되지 않음
     let y = x;
 
-    // Both values can be independently used
-    println!("x is {}, and y is {}", x, y);
+    // 두 값 모두 독립적으로 사용될 수 있음
+    println!("x는 {}이고, y는 {}입니다", x, y);
 
-    // `a` is a pointer to a _heap_ allocated integer
+    // `a`는 _힙_에 할당된 정수에 대한 포인터입니다
     let a = Box::new(5i32);
 
-    println!("a contains: {}", a);
+    println!("a가 포함하는 것: {}", a);
 
-    // *Move* `a` into `b`
+    // `a`를 `b`로 *이동*
     let b = a;
-    // The pointer address of `a` is copied (not the data) into `b`.
-    // Both are now pointers to the same heap allocated data, but
-    // `b` now owns it.
+    // `a`의 포인터 주소가 (데이터가 아니라) `b`로 복사됩니다.
+// 둘 다 이제 동일한 힙 할당 데이터를 가리키지만,
+// 이제 `b`가 소유권을 가집니다.
 
-    // Error! `a` can no longer access the data, because it no longer owns the
-    // heap memory
-    //println!("a contains: {}", a);
-    // TODO ^ Try uncommenting this line
+    // 에러! `a`는 더 이상 데이터를 소유하고 있지 않으므로 접근할 수 없습니다.
+//println!("a가 포함하는 것: {}", a);
+// TODO ^ 이 줄의 주석을 해제해 보세요
 
-    // This function takes ownership of the heap allocated memory from `b`
+    // 이 함수는 `b`로부터 힙에 할당된 메모리의 소유권을 가져갑니다
     destroy_box(b);
 
-    // Since the heap memory has been freed at this point, this action would
-    // result in dereferencing freed memory, but it's forbidden by the compiler
-    // Error! Same reason as the previous Error
-    //println!("b contains: {}", b);
-    // TODO ^ Try uncommenting this line
+    // 이 시점에서 힙 메모리가 해제되었으므로, 이 동작은
+    // 해제된 메모리를 역참조하는 결과를 낳겠지만, 컴파일러에 의해 금지됩니다.
+    // 에러! 이전 에러와 같은 이유입니다.
+    //println!("b가 포함하는 것: {}", b);
+    // TODO ^ 이 줄의 주석을 해제해 보세요
 }</code></pre>
 
                     </main>

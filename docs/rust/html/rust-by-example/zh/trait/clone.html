@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,7 +110,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-2d8644ed.js";
+            window.path_to_searchindex_js = "../searchindex-7fd5e44a.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-0112fd84.js"></script>
@@ -252,21 +255,32 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="克隆"><a class="header" href="#克隆">克隆</a></h1>
+                        <h1 id="clone-and-copy"><a class="header" href="#clone-and-copy">Clone and Copy</a></h1>
 <p>在处理资源时，默认行为是在赋值或函数调用期间转移它们。然而，有时我们也需要复制资源。</p>
 <p><a href="https://doc.rust-lang.org/std/clone/trait.Clone.html"><code>Clone</code></a> trait 帮助我们实现这一点。最常见的是，我们可以使用 <code>Clone</code> trait 定义的 <code>.clone()</code> 方法。</p>
-<pre class="playground"><code class="language-rust editable edition2021">// 一个不包含资源的单元结构体
+<h2 id="copy-implicit-cloning"><a class="header" href="#copy-implicit-cloning">Copy: Implicit Cloning</a></h2>
+<p>The <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html"><code>Copy</code></a> trait allows a type to be duplicated simply by copying bits, with no additional logic required. When a type implements <code>Copy</code>, assignments and function calls will implicitly copy the value instead of moving it.</p>
+<p><strong>Important:</strong> <code>Copy</code> requires <code>Clone</code> - any type that implements <code>Copy</code> must also implement <code>Clone</code>. This is because <code>Copy</code> is defined as a subtrait: <code>trait Copy: Clone {}</code>. The <code>Clone</code> implementation for <code>Copy</code> types simply copies the bits.</p>
+<p>Not all types can implement <code>Copy</code>. A type can only be <code>Copy</code> if:</p>
+<ul>
+<li>All of its components are <code>Copy</code></li>
+<li>It doesn’t manage external resources (like heap memory, file handles, etc.)</li>
+</ul>
+<pre class="playground"><code class="language-rust editable edition2021">// A unit struct without resources
+// Note: Copy requires Clone, so we must derive both
 #[derive(Debug, Clone, Copy)]
 struct Unit;
 
-// 一个包含资源并实现了 `Clone` trait 的元组结构体
+// A tuple struct with resources that implements the `Clone` trait
+// This CANNOT be Copy because Box&lt;T&gt; is not Copy
 #[derive(Clone, Debug)]
 struct Pair(Box&lt;i32&gt;, Box&lt;i32&gt;);
 
 fn main() {
     // 实例化 `Unit`
     let unit = Unit;
-    // 复制 `Unit`，没有资源需要移动
+    // Copy `Unit` - this is an implicit copy, not a move!
+    // Because Unit implements Copy, the value is duplicated automatically
     let copied_unit = unit;
 
     // 两个 `Unit` 可以独立使用
@@ -277,7 +291,8 @@ fn main() {
     let pair = Pair(Box::new(1), Box::new(2));
     println!("原始: {:?}", pair);
 
-    // 将 `pair` 移动到 `moved_pair`，资源也随之移动
+    // Move `pair` into `moved_pair`, moves resources
+    // Pair does not implement Copy, so this is a move
     let moved_pair = pair;
     println!("已移动: {:?}", moved_pair);
 
@@ -285,7 +300,8 @@ fn main() {
     //println!("原始: {:?}", pair);
     // TODO ^ 尝试取消注释此行
 
-    // 将 `moved_pair` 克隆到 `cloned_pair`（包括资源）
+    // Clone `moved_pair` into `cloned_pair` (resources are included)
+    // Unlike Copy, Clone is explicit - we must call .clone()
     let cloned_pair = moved_pair.clone();
     // 使用 std::mem::drop 丢弃已移动的原始对
     drop(moved_pair);

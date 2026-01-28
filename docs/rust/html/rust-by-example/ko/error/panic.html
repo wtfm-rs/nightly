@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,22 +256,20 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="panic"><a class="header" href="#panic"><code>panic</code></a></h1>
-<p>The simplest error handling mechanism we will see is <code>panic</code>. It prints an
-error message, starts unwinding the stack, and usually exits the program.
-Here, we explicitly call <code>panic</code> on our error condition:</p>
+<p>우리가 살펴볼 가장 단순한 에러 핸들링 메커니즘은 <code>panic</code>입니다. 이것은 에러 메시지를 출력하고, 스택을 되감기(unwind) 시작하며, 보통 프로그램을 종료합니다. 여기서는 에러 조건에 대해 명시적으로 <code>panic</code>을 호출합니다:</p>
 <pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">fn drink(beverage: &amp;str) {
-    // You shouldn't drink too many sugary beverages.
-    if beverage == "lemonade" { panic!("AAAaaaaa!!!!"); }
+    // 설탕이 든 음료를 너무 많이 마시면 안 됩니다.
+    if beverage == "레모네이드" { panic!("으아아아아!!!!"); }
 
-    println!("Some refreshing {} is all I need.", beverage);
+    println!("상쾌한 {}만 있으면 돼요.", beverage);
 }
 
 fn main() {
-    drink("water");
-    drink("lemonade");
-    drink("still water");
+    drink("물");
+    drink("레모네이드");
+    drink("생수");
 }</code></pre>
-<p>The first call to <code>drink</code> works. The second panics and thus the third is never called.</p>
+<p>첫 번째 <code>drink</code> 호출은 작동합니다. 두 번째는 패닉을 일으키며, 따라서 세 번째는 결코 호출되지 않습니다.</p>
 
                     </main>
 

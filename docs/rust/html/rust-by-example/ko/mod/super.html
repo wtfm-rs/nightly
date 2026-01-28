@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>super and self - Rust By Example</title>
+        <title>super와 self - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,48 +255,47 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="super-and-self"><a class="header" href="#super-and-self"><code>super</code> and <code>self</code></a></h1>
-<p>The <code>super</code> and <code>self</code> keywords can be used in the path to remove ambiguity
-when accessing items and to prevent unnecessary hardcoding of paths.</p>
+                        <h1 id="super와-self"><a class="header" href="#super와-self"><code>super</code>와 <code>self</code></a></h1>
+<p><code>super</code>와 <code>self</code> 키워드는 아이템에 접근할 때 모호함을 제거하고 경로의 불필요한 하드코딩을 방지하기 위해 경로 내에서 사용될 수 있습니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn function() {
-    println!("called `function()`");
+    println!("`function()` 호출됨");
 }
 
 mod cool {
     pub fn function() {
-        println!("called `cool::function()`");
+        println!("`cool::function()` 호출됨");
     }
 }
 
 mod my {
     fn function() {
-        println!("called `my::function()`");
+        println!("`my::function()` 호출됨");
     }
 
     mod cool {
         pub fn function() {
-            println!("called `my::cool::function()`");
+            println!("`my::cool::function()` 호출됨");
         }
     }
 
     pub fn indirect_call() {
-        // Let's access all the functions named `function` from this scope!
-        print!("called `my::indirect_call()`, that\n&gt; ");
+        // 이 스코프에서 `function`이라는 이름의 모든 함수에 접근해 봅시다!
+        print!("`my::indirect_call()` 호출됨, 결과는\n&gt; ");
 
-        // The `self` keyword refers to the current module scope - in this case `my`.
-        // Calling `self::function()` and calling `function()` directly both give
-        // the same result, because they refer to the same function.
+        // `self` 키워드는 현재 모듈 스코프를 가리킵니다. 이 경우 `my`입니다.
+// `self::function()`을 호출하는 것과 `function()`을 직접 호출하는 것은
+// 동일한 함수를 가리키기 때문에 같은 결과를 냅니다.
         self::function();
         function();
 
-        // We can also use `self` to access another module inside `my`:
+        // `self`를 사용하여 `my` 내부의 다른 모듈에 접근할 수도 있습니다:
         self::cool::function();
 
-        // The `super` keyword refers to the parent scope (outside the `my` module).
+        // `super` 키워드는 부모 스코프(`my` 모듈 외부)를 가리킵니다.
         super::function();
 
-        // This will bind to the `cool::function` in the *crate* scope.
-        // In this case the crate scope is the outermost scope.
+        // 이는 *크레이트* 스코프에 있는 `cool::function`에 바인딩됩니다.
+// 이 경우 크레이트 스코프는 가장 바깥쪽 스코프입니다.
         {
             use crate::cool::function as root_function;
             root_function();

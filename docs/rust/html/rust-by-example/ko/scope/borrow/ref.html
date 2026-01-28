@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The ref pattern - Rust By Example</title>
+        <title>ref 패턴 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,58 +255,56 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="the-ref-pattern"><a class="header" href="#the-ref-pattern">The ref pattern</a></h1>
-<p>When doing pattern matching or destructuring via the <code>let</code> binding, the <code>ref</code>
-keyword can be used to take references to the fields of a struct/tuple. The
-example below shows a few instances where this can be useful:</p>
+                        <h1 id="ref-패턴"><a class="header" href="#ref-패턴">ref 패턴</a></h1>
+<p><code>let</code> 바인딩을 통해 패턴 매칭이나 구조 분해를 수행할 때, <code>ref</code> 키워드를 사용하여 구조체/튜플 필드에 대한 참조를 가져올 수 있습니다. 아래 예제는 이것이 유용할 수 있는 몇 가지 사례를 보여줍니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">#[derive(Clone, Copy)]
 struct Point { x: i32, y: i32 }
 
 fn main() {
     let c = 'Q';
 
-    // A `ref` borrow on the left side of an assignment is equivalent to
-    // an `&amp;` borrow on the right side.
+    // 할당의 왼쪽 편에 있는 `ref` 빌림은
+// 오른쪽 편에 있는 `&amp;` 빌림과 동일합니다.
     let ref ref_c1 = c;
     let ref_c2 = &amp;c;
 
-    println!("ref_c1 equals ref_c2: {}", *ref_c1 == *ref_c2);
+    println!("ref_c1은 ref_c2와 같습니다: {}", *ref_c1 == *ref_c2);
 
     let point = Point { x: 0, y: 0 };
 
-    // `ref` is also valid when destructuring a struct.
+    // `ref`는 구조체를 구조 분해할 때도 유효합니다.
     let _copy_of_x = {
-        // `ref_to_x` is a reference to the `x` field of `point`.
+        // `ref_to_x`는 `point`의 `x` 필드에 대한 참조입니다.
         let Point { x: ref ref_to_x, y: _ } = point;
 
-        // Return a copy of the `x` field of `point`.
+        // `point`의 `x` 필드 복사본을 반환합니다.
         *ref_to_x
     };
 
-    // A mutable copy of `point`
+    // `point`의 가변 복사본
     let mut mutable_point = point;
 
     {
-        // `ref` can be paired with `mut` to take mutable references.
+        // `ref`는 `mut`와 짝을 이루어 가변 참조를 가져올 수 있습니다.
         let Point { x: _, y: ref mut mut_ref_to_y } = mutable_point;
 
-        // Mutate the `y` field of `mutable_point` via a mutable reference.
+        // 가변 참조를 통해 `mutable_point`의 `y` 필드를 변경합니다.
         *mut_ref_to_y = 1;
     }
 
-    println!("point is ({}, {})", point.x, point.y);
-    println!("mutable_point is ({}, {})", mutable_point.x, mutable_point.y);
+    println!("point는 ({}, {})입니다", point.x, point.y);
+    println!("mutable_point는 ({}, {})입니다", mutable_point.x, mutable_point.y);
 
-    // A mutable tuple that includes a pointer
+    // 포인터를 포함하는 가변 튜플
     let mut mutable_tuple = (Box::new(5u32), 3u32);
 
     {
-        // Destructure `mutable_tuple` to change the value of `last`.
+        // `mutable_tuple`을 구조 분해하여 `last` 값을 변경합니다.
         let (_, ref mut last) = mutable_tuple;
         *last = 2u32;
     }
 
-    println!("tuple is {:?}", mutable_tuple);
+    println!("튜플은 {:?}입니다", mutable_tuple);
 }</code></pre>
 
                     </main>

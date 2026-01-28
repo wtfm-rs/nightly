@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Functions - Rust By Example</title>
+        <title>함수 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,43 +255,40 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
-<p>Ignoring <a href="elision.html">elision</a>, function signatures with lifetimes have a few constraints:</p>
+                        <h1 id="함수"><a class="header" href="#함수">함수</a></h1>
+<p><a href="elision.html">생략</a>을 무시하고, 라이프타임을 가진 함수 시그니처에는 몇 가지 제약 사항이 있습니다:</p>
 <ul>
-<li>any reference <em>must</em> have an annotated lifetime.</li>
-<li>any reference being returned <em>must</em> have the same lifetime as an input or
-be <code>static</code>.</li>
+<li>모든 참조는 <em>반드시</em> 어노테이션된 라이프타임을 가져야 합니다.</li>
+<li>반환되는 모든 참조는 입력과 동일한 라이프타임을 가지거나 <code>static</code>이어야 <em>합니다</em>.</li>
 </ul>
-<p>Additionally, note that returning references without input is banned if it
-would result in returning references to invalid data. The following example shows
-off some valid forms of functions with lifetimes:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// One input reference with lifetime `'a` which must live
-// at least as long as the function.
+<p>또한, 입력 없이 참조를 반환하는 것이 유효하지 않은 데이터에 대한 참조를 반환하는 결과를 낳는다면 금지된다는 점에 유의하세요. 다음 예제는 라이프타임이 있는 유효한 함수 형태를 보여줍니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 라이프타임 `'a`를 가진 하나의 입력 참조입니다.
+// 이 참조는 적어도 함수만큼 오래 살아야 합니다.
 fn print_one&lt;'a&gt;(x: &amp;'a i32) {
-    println!("`print_one`: x is {}", x);
+    println!("`print_one`: x는 {}입니다", x);
 }
 
-// Mutable references are possible with lifetimes as well.
+// 가변 참조도 라이프타임과 함께 사용할 수 있습니다.
 fn add_one&lt;'a&gt;(x: &amp;'a mut i32) {
     *x += 1;
 }
 
-// Multiple elements with different lifetimes. In this case, it
-// would be fine for both to have the same lifetime `'a`, but
-// in more complex cases, different lifetimes may be required.
+// 서로 다른 라이프타임을 가진 여러 요소들입니다. 이 경우,
+// 둘 다 동일한 라이프타임 `'a`를 가져도 괜찮지만,
+// 더 복잡한 경우에는 서로 다른 라이프타임이 필요할 수 있습니다.
 fn print_multi&lt;'a, 'b&gt;(x: &amp;'a i32, y: &amp;'b i32) {
-    println!("`print_multi`: x is {}, y is {}", x, y);
+    println!("`print_multi`: x는 {}, y는 {}입니다", x, y);
 }
 
-// Returning references that have been passed in is acceptable.
-// However, the correct lifetime must be returned.
+// 전달된 참조를 반환하는 것은 허용됩니다.
+// 하지만, 올바른 라이프타임이 반환되어야 합니다.
 fn pass_x&lt;'a, 'b&gt;(x: &amp;'a i32, _: &amp;'b i32) -&gt; &amp;'a i32 { x }
 
 //fn invalid_output&lt;'a&gt;() -&gt; &amp;'a String { &amp;String::from("foo") }
-// The above is invalid: `'a` must live longer than the function.
-// Here, `&amp;String::from("foo")` would create a `String`, followed by a
-// reference. Then the data is dropped upon exiting the scope, leaving
-// a reference to invalid data to be returned.
+// 위 코드는 유효하지 않습니다: `'a`는 함수보다 오래 살아야 합니다.
+// 여기서 `&amp;String::from("foo")`는 `String`을 생성한 후 참조를 생성합니다.
+// 그런 다음 스코프를 벗어날 때 데이터가 드롭되어,
+// 유효하지 않은 데이터에 대한 참조가 반환됩니다.
 
 fn main() {
     let x = 7;
@@ -304,8 +304,8 @@ fn main() {
     add_one(&amp;mut t);
     print_one(&amp;t);
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../fn.html">Functions</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../fn.html">함수</a></p>
 
                     </main>
 

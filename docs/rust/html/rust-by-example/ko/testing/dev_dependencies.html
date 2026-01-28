@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Dev-dependencies - Rust By Example</title>
+        <title>개발 의존성 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,18 +255,14 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="development-dependencies"><a class="header" href="#development-dependencies">Development dependencies</a></h1>
-<p>Sometimes there is a need to have dependencies for tests (or examples,
-or benchmarks) only. Such dependencies are added to <code>Cargo.toml</code> in the
-<code>[dev-dependencies]</code> section. These dependencies are not propagated to other
-packages which depend on this package.</p>
-<p>One such example is <a href="https://docs.rs/pretty_assertions/1.0.0/pretty_assertions/index.html"><code>pretty_assertions</code></a>, which extends standard <code>assert_eq!</code> and <code>assert_ne!</code> macros, to provide colorful diff.
-File <code>Cargo.toml</code>:</p>
-<pre><code class="language-toml"># standard crate data is left out
+                        <h1 id="개발-의존성"><a class="header" href="#개발-의존성">개발 의존성</a></h1>
+<p>가끔 테스트(또는 예제, 벤치마크)만을 위한 의존성이 필요할 때가 있습니다. 이러한 의존성은 <code>Cargo.toml</code>의 <code>[dev-dependencies]</code> 섹션에 추가됩니다. 이 의존성들은 이 패키지에 의존하는 다른 패키지들로는 전파되지 않습니다.</p>
+<p>그러한 예 중 하나로 표준 <code>assert_eq!</code> 및 <code>assert_ne!</code> 매크로를 확장하여 색상화된 diff를 제공하는 <a href="https://docs.rs/pretty_assertions/1.0.0/pretty_assertions/index.html"><code>pretty_assertions</code></a>가 있습니다. <code>Cargo.toml</code> 파일:</p>
+<pre><code class="language-toml"># 표준 크레이트 데이터는 생략되었습니다
 [dev-dependencies]
 pretty_assertions = "1"
 </code></pre>
-<p>File <code>src/lib.rs</code>:</p>
+<p><code>src/lib.rs</code> 파일:</p>
 <pre><code class="language-rust ignore">pub fn add(a: i32, b: i32) -&gt; i32 {
     a + b
 }
@@ -271,15 +270,15 @@ pretty_assertions = "1"
 #[cfg(test)]
 mod tests {
     use super::*;
-    use pretty_assertions::assert_eq; // crate for test-only use. Cannot be used in non-test code.
+    use pretty_assertions::assert_eq; // 테스트 전용으로만 사용되는 크레이트입니다. 테스트가 아닌 코드에서는 사용할 수 없습니다.
 
     #[test]
     fn test_add() {
         assert_eq!(add(2, 3), 5);
     }
 }</code></pre>
-<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
-<p><a href="http://doc.crates.io/specifying-dependencies.html">Cargo</a> docs on specifying dependencies.</p>
+<h2 id="참고"><a class="header" href="#참고">참고</a></h2>
+<p>의존성 지정에 관한 <a href="http://doc.crates.io/specifying-dependencies.html">Cargo</a> 문서.</p>
 
                     </main>
 

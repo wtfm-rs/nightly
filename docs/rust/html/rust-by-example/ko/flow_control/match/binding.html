@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Binding - Rust By Example</title>
+        <title>바인딩 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,61 +255,56 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="binding"><a class="header" href="#binding">Binding</a></h1>
-<p>Indirectly accessing a variable makes it impossible to branch and use that
-variable without re-binding. <code>match</code> provides the <code>@</code> sigil for binding values to
-names:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// A function `age` which returns a `u32`.
+                        <h1 id="바인딩"><a class="header" href="#바인딩">바인딩</a></h1>
+<p>변수에 간접적으로 접근하면 재바인딩 없이 해당 변수를 분기하고 사용하는 것이 불가능합니다. <code>match</code>는 값을 이름에 바인딩하기 위한 <code>@</code> 기호를 제공합니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// `u32`를 반환하는 `age` 함수.
 fn age() -&gt; u32 {
     15
 }
 
 fn main() {
-    println!("Tell me what type of person you are");
+    println!("당신이 어떤 종류의 사람인지 말해주세요");
 
     match age() {
-        0             =&gt; println!("I haven't celebrated my first birthday yet"),
-        // Could `match` 1 ..= 12 directly but then what age
-        // would the child be?
-        // Could `match` n and use an `if` guard, but would
-        // not contribute to exhaustiveness checks.
-        // (Although in this case that would not matter since
-        // a "catch-all" pattern is present at the bottom)
-        // Instead, bind to `n` for the sequence of 1 ..= 12.
-        // Now the age can be reported.
-        n @ 1  ..= 12 =&gt; println!("I'm a child of age {:?}", n),
-        n @ 13 ..= 19 =&gt; println!("I'm a teen of age {:?}", n),
-        // A similar binding can be done when matching several values.
-        n @ (1 | 7 | 15 | 13) =&gt; println!("I'm a teen of age {:?}", n),
-        // Nothing bound. Return the result.
-        n             =&gt; println!("I'm an old person of age {:?}", n),
+        0             =&gt; println!("아직 첫 번째 생일을 맞이하지 않았습니다"),
+        // 1 ..= 12를 직접 `match`할 수 있지만, 그러면
+// 아이의 나이가 몇 살인지 알 수 있을까요?
+// n을 `match`하고 `if` 가드를 사용할 수 있지만,
+// 이는 철저함(exhaustiveness) 검사에 기여하지 않습니다.
+// (비록 이 경우에는 하단에 "catch-all" 패턴이 있어 상관없지만요)
+// 대신, 1 ..= 12 시퀀스에 대해 `n`에 바인딩합니다.
+// 이제 나이를 보고할 수 있습니다.
+        n @ 1  ..= 12 =&gt; println!("저는 {:?}살인 어린이입니다", n),
+        n @ 13 ..= 19 =&gt; println!("저는 {:?}살인 청소년입니다", n),
+        // 여러 값을 매칭할 때도 유사한 바인딩을 수행할 수 있습니다.
+        n @ (1 | 7 | 15 | 13) =&gt; println!("저는 {:?}살인 청소년입니다", n),
+        // 바인딩된 것이 없습니다. 결과를 반환합니다.
+        n             =&gt; println!("저는 {:?}살인 어르신입니다", n),
     }
 }</code></pre>
-<p>You can also use binding to “destructure” <code>enum</code> variants, such as <code>Option</code>:</p>
+<p>또한 <code>Option</code>과 같은 <code>enum</code> 변체를 “구조 분해“하기 위해 바인딩을 사용할 수 있습니다:</p>
 <pre class="playground"><code class="language-rust editable edition2021">fn some_number() -&gt; Option&lt;u32&gt; {
     Some(42)
 }
 
 fn main() {
     match some_number() {
-        // Got `Some` variant, match if its value, bound to `n`,
-        // is equal to 42.
-        // Could also use `Some(42)` and print `"The Answer: 42!"`
-        // but that would require changing `42` in 2 spots should
-        // you ever wish to change it.
-        // Could also use `Some(n) if n == 42` and print `"The Answer: {n}!"`
-        // but that would not contribute to exhaustiveness checks.
-        // (Although in this case that would not matter since
-        // the next arm is a "catch-all" pattern)
-        Some(n @ 42) =&gt; println!("The Answer: {}!", n),
-        // Match any other number.
-        Some(n)      =&gt; println!("Not interesting... {}", n),
-        // Match anything else (`None` variant).
+        // `Some` 변체를 얻었을 때, `n`에 바인딩된 그 값이
+// 42와 같은지 매칭합니다.
+// `Some(42)`를 사용하여 `"정답: 42!"`를 출력할 수도 있지만,
+// 그러면 나중에 값을 바꾸고 싶을 때 두 군데를 수정해야 합니다.
+// `Some(n) if n == 42`를 사용하여 `"정답: {n}!"`를 출력할 수도 있지만,
+// 이는 철저함 검사에 기여하지 않습니다.
+// (비록 이 경우에는 다음 팔이 "catch-all" 패턴이라 상관없지만요)
+        Some(n @ 42) =&gt; println!("정답: {}!", n),
+        // 다른 모든 숫자 매칭.
+        Some(n)      =&gt; println!("흥미롭지 않네요... {}", n),
+        // 그 외의 모든 경우(`None` 변체) 매칭.
         _            =&gt; (),
     }
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../fn.html"><code>functions</code></a>, <a href="../../custom_types/enum.html"><code>enums</code></a> and <a href="../../std/option.html"><code>Option</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../fn.html"><code>함수</code></a>, <a href="../../custom_types/enum.html"><code>열거형</code></a> 그리고 <a href="../../std/option.html"><code>Option</code></a></p>
 
                     </main>
 

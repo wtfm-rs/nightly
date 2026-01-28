@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Closures - Rust By Example</title>
+        <title>클로저 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,47 +255,43 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="closures"><a class="header" href="#closures">Closures</a></h1>
-<p>Closures are functions that can capture the enclosing environment. For
-example, a closure that captures the <code>x</code> variable:</p>
+                        <h1 id="클로저"><a class="header" href="#클로저">클로저</a></h1>
+<p>클로저는 감싸고 있는 환경을 캡처할 수 있는 함수입니다. 예를 들어, <code>x</code> 변수를 캡처하는 클로저는 다음과 같습니다:</p>
 <pre><code class="language-Rust">|val| val + x
 </code></pre>
-<p>The syntax and capabilities of closures make them very convenient for
-on the fly usage. Calling a closure is exactly like calling a function.
-However, both input and return types <em>can</em> be inferred and input
-variable names <em>must</em> be specified.</p>
-<p>Other characteristics of closures include:</p>
+<p>클로저의 구문과 기능은 즉석에서 사용하기에 매우 편리합니다. 클로저를 호출하는 것은 함수를 호출하는 것과 똑같습니다. 하지만 입력 및 반환 타입은 추론될 수 있으며, 입력 변수 이름은 반드시 지정되어야 합니다.</p>
+<p>클로저의 다른 특징들은 다음과 같습니다:</p>
 <ul>
-<li>using <code>||</code> instead of <code>()</code> around input variables.</li>
-<li>optional body delimitation (<code>{}</code>) for a single line expression (mandatory otherwise).</li>
-<li>the ability to capture the outer environment variables.</li>
+<li>입력 변수 주위에 <code>()</code> 대신 <code>||</code>를 사용합니다.</li>
+<li>한 줄 표현식의 경우 본문 구분 기호(<code>{}</code>)는 선택 사항입니다 (그 외의 경우는 필수).</li>
+<li>외부 환경 변수를 캡처하는 능력.</li>
 </ul>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
     let outer_var = 42;
 
-    // A regular function can't refer to variables in the enclosing environment
-    //fn function(i: i32) -&gt; i32 { i + outer_var }
-    // TODO: uncomment the line above and see the compiler error. The compiler
-    // suggests that we define a closure instead.
+    // 일반 함수는 자신을 감싸고 있는 환경의 변수를 참조할 수 없습니다
+// fn function(i: i32) -&gt; i32 { i + outer_var }
+// TODO: 위의 줄의 주석을 해제하고 컴파일 에러를 확인해 보세요. 컴파일러는
+// 대신 클로저를 정의할 것을 제안합니다.
 
-    // Closures are anonymous, here we are binding them to references.
-    // Annotation is identical to function annotation but is optional
-    // as are the `{}` wrapping the body. These nameless functions
-    // are assigned to appropriately named variables.
+    // 클로저는 익명이며, 여기서는 참조에 바인딩하고 있습니다.
+// 어노테이션은 함수의 어노테이션과 동일하지만 선택 사항이며,
+// 본문을 감싸는 `{}` 역시 선택 사항입니다. 이 이름 없는 함수들은
+// 적절하게 이름 붙여진 변수들에 할당됩니다.
     let closure_annotated = |i: i32| -&gt; i32 { i + outer_var };
     let closure_inferred  = |i     |          i + outer_var  ;
 
-    // Call the closures.
-    println!("closure_annotated: {}", closure_annotated(1));
-    println!("closure_inferred: {}", closure_inferred(1));
-    // Once closure's type has been inferred, it cannot be inferred again with another type.
-    //println!("cannot reuse closure_inferred with another type: {}", closure_inferred(42i64));
-    // TODO: uncomment the line above and see the compiler error.
+    // 클로저를 호출합니다.
+    println!("어노테이션된 클로저: {}", closure_annotated(1));
+    println!("추론된 클로저: {}", closure_inferred(1));
+    // 클로저의 타입이 한 번 추론되면, 다른 타입으로 다시 추론될 수 없습니다.
+// println!("다른 타입으로 closure_inferred를 재사용할 수 없습니다: {}", closure_inferred(42i64));
+// TODO: 위의 줄의 주석을 해제하고 컴파일 에러를 확인해 보세요.
 
-    // A closure taking no arguments which returns an `i32`.
-    // The return type is inferred.
+    // 인자를 받지 않고 `i32`를 반환하는 클로저입니다.
+// 반환 타입은 추론됩니다.
     let one = || 1;
-    println!("closure returning one: {}", one());
+    println!("1을 반환하는 클로저: {}", one());
 
 }</code></pre>
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Traits - Rust By Example</title>
+        <title>트레이트 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,25 +255,24 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="traits"><a class="header" href="#traits">Traits</a></h1>
-<p>Of course <code>trait</code>s can also be generic. Here we define one which reimplements
-the <code>Drop</code> <code>trait</code> as a generic method to <code>drop</code> itself and an input.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// Non-copyable types.
+                        <h1 id="트레이트"><a class="header" href="#트레이트">트레이트</a></h1>
+<p>물론 <code>trait</code>도 제네릭일 수 있습니다. 여기서는 <code>Drop</code> <code>트레이트</code>를 자신과 입력을 <code>drop</code>하는 제네릭 메서드로 재구현한 것을 정의합니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 복사 불가능한 타입.
 struct Empty;
 struct Null;
 
-// A trait generic over `T`.
+// `T`에 대해 제네릭인 트레이트.
 trait DoubleDrop&lt;T&gt; {
-    // Define a method on the caller type which takes an
-    // additional single parameter `T` and does nothing with it.
+    // 호출자 타입에 대해 추가적인 단일 파라미터 `T`를 취하고
+// 아무것도 하지 않는 메서드를 정의합니다.
     fn double_drop(self, _: T);
 }
 
-// Implement `DoubleDrop&lt;T&gt;` for any generic parameter `T` and
-// caller `U`.
+// 임의의 제네릭 파라미터 `T`와 호출자 `U`에 대해
+// `DoubleDrop&lt;T&gt;`를 구현합니다.
 impl&lt;T, U&gt; DoubleDrop&lt;T&gt; for U {
-    // This method takes ownership of both passed arguments,
-    // deallocating both.
+    // 이 메서드는 전달된 두 인자의 소유권을 가져와
+// 둘 다 해제합니다.
     fn double_drop(self, _: T) {}
 }
 
@@ -278,15 +280,15 @@ fn main() {
     let empty = Empty;
     let null  = Null;
 
-    // Deallocate `empty` and `null`.
+    // `empty`와 `null`을 해제합니다.
     empty.double_drop(null);
 
     //empty;
     //null;
-    // ^ TODO: Try uncommenting these lines.
+    // ^ TODO: 이 줄들의 주석을 해제해 보세요.
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/std/ops/trait.Drop.html"><code>Drop</code></a>, <a href="../custom_types/structs.html"><code>struct</code></a>, and <a href="../trait.html"><code>trait</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/std/ops/trait.Drop.html"><code>Drop</code></a>, <a href="../custom_types/structs.html"><code>구조체</code></a>, 그리고 <a href="../trait.html"><code>트레이트</code></a></p>
 
                     </main>
 

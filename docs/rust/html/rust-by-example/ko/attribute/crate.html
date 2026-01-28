@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Crates - Rust By Example</title>
+        <title>크레이트 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,34 +255,28 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="crates"><a class="header" href="#crates">Crates</a></h1>
-<p>The <code>crate_type</code> attribute can be used to tell the compiler whether a crate is
-a binary or a library (and even which type of library), and the <code>crate_name</code>
-attribute can be used to set the name of the crate.</p>
-<p>However, it is important to note that both the <code>crate_type</code> and <code>crate_name</code>
-attributes have <strong>no</strong> effect whatsoever when using Cargo, the Rust package
-manager. Since Cargo is used for the majority of Rust projects, this means
-real-world uses of <code>crate_type</code> and <code>crate_name</code> are relatively limited.</p>
-<pre class="playground"><code class="language-rust editable edition2021">// This crate is a library
+                        <h1 id="크레이트"><a class="header" href="#크레이트">크레이트</a></h1>
+<p><code>crate_type</code> 속성은 크레이트가 바이너리인지 라이브러리인지(심지어 어떤 종류의 라이브러리인지) 컴파일러에게 알려주는 데 사용될 수 있으며, <code>crate_name</code> 속성은 크레이트의 이름을 설정하는 데 사용될 수 있습니다.</p>
+<p>하지만 Rust 패키지 관리자인 Cargo를 사용할 때는 <code>crate_type</code>과 <code>crate_name</code> 속성 모두 <strong>아무런</strong> 효과가 없다는 점에 유의해야 합니다. 대다수의 Rust 프로젝트가 Cargo를 사용하므로, <code>crate_type</code>과 <code>crate_name</code>의 실제 사용은 상대적으로 제한적입니다.</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 이 크레이트는 라이브러리입니다
 #![crate_type = "lib"]
-// The library is named "rary"
+// 라이브러리 이름은 "rary"입니다
 #![crate_name = "rary"]
 
 pub fn public_function() {
-    println!("called rary's `public_function()`");
+    println!(rary의 `public_function()` 호출됨);
 }
 
 fn private_function() {
-    println!("called rary's `private_function()`");
+    println!(rary의 `private_function()` 호출됨);
 }
 
 pub fn indirect_access() {
-    print!("called rary's `indirect_access()`, that\n&gt; ");
+    print!(rary의 `indirect_access()` 호출됨, 결과는\n&gt; ");
 
     private_function();
 }</code></pre>
-<p>When the <code>crate_type</code> attribute is used, we no longer need to pass the
-<code>--crate-type</code> flag to <code>rustc</code>.</p>
+<p><code>crate_type</code> 속성이 사용되면, 더 이상 <code>rustc</code>에 <code>--crate-type</code> 플래그를 전달할 필요가 없습니다.</p>
 <pre><code class="language-shell">$ rustc lib.rs
 $ ls lib*
 library.rlib

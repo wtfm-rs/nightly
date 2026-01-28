@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,32 +256,26 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="arc"><a class="header" href="#arc">Arc</a></h1>
-<p>When shared ownership between threads is needed, <code>Arc</code>(Atomically Reference
-Counted) can be used. This struct, via the <code>Clone</code> implementation can create
-a reference pointer for the location of a value in the memory heap while
-increasing the reference counter. As it shares ownership between threads, when
-the last reference pointer to a value is out of scope, the variable is dropped.</p>
+<p>스레드 간의 공유 소유권이 필요한 경우, <code>Arc</code>(원자적 참조 횟수 계산, Atomically Reference Counted)를 사용할 수 있습니다. 이 구조체는 <code>Clone</code> 구현을 통해 힙 메모리에 있는 값의 위치를 가리키는 참조 포인터를 생성하고 참조 횟수를 증가시킵니다. 스레드 간에 소유권을 공유하므로, 값에 대한 마지막 참조 포인터가 스코프를 벗어날 때 변수가 해제됩니다.</p>
 <pre class="playground"><code class="language-rust editable edition2021">use std::time::Duration;
 use std::sync::Arc;
 use std::thread;
 
 fn main() {
-    // This variable declaration is where its value is specified.
-    let apple = Arc::new("the same apple");
+    // 이 변수 선언에서 값이 지정됩니다.
+    let apple = Arc::new("같은 사과");
 
     for _ in 0..10 {
-        // Here there is no value specification as it is a pointer to a
-        // reference in the memory heap.
+        // 여기서는 힙 메모리의 참조를 가리키는 포인터이므로 별도의 값 지정이 없습니다.
         let apple = Arc::clone(&amp;apple);
 
         thread::spawn(move || {
-            // As Arc was used, threads can be spawned using the value allocated
-            // in the Arc variable pointer's location.
+            // `Arc`를 사용했으므로, `Arc` 변수 포인터 위치에 할당된 값을 사용하여 스레드를 생성할 수 있습니다.
             println!("{:?}", apple);
         });
     }
 
-    // Make sure all Arc instances are printed from spawned threads.
+    // 모든 `Arc` 인스턴스가 생성된 스레드에서 출력되도록 합니다.
     thread::sleep(Duration::from_secs(1));
 }</code></pre>
 

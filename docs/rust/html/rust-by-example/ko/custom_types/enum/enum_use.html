@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,8 +256,8 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="use"><a class="header" href="#use">use</a></h1>
-<p>The <code>use</code> declaration can be used to avoid typing the full module path to access a name:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// An attribute to hide warnings for unused code.
+<p><code>use</code> 선언을 사용하면 이름을 사용하기 위해 전체 모듈 경로를 입력하는 것을 피할 수 있습니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 사용되지 않는 코드에 대한 경고를 숨기기 위한 속성입니다.
 #![allow(dead_code)]
 
 enum Stage {
@@ -268,31 +271,31 @@ enum Role {
 }
 
 fn main() {
-    // Explicitly `use` each name so they are available without
-    // manual scoping.
+    // 각 이름을 명시적으로 `use`하여 수동으로 스코프를 지정하지 않고도
+    // 사용할 수 있게 합니다.
     use Stage::{Beginner, Advanced};
-    // Automatically `use` each name inside `Role`.
+    // `Role` 내부의 각 이름을 자동으로 `use`합니다.
     use Role::*;
 
-    // Equivalent to `Stage::Beginner`.
+    // `Stage::Beginner`와 동일합니다.
     let stage = Beginner;
-    // Equivalent to `Role::Student`.
+    // `Role::Student`와 동일합니다.
     let role = Student;
 
     match stage {
-        // Note the lack of scoping because of the explicit `use` above.
-        Beginner =&gt; println!("Beginners are starting their learning journey!"),
-        Advanced =&gt; println!("Advanced learners are mastering their subjects..."),
+        // 위의 명시적 `use` 덕분에 스코프 지정이 필요 없음에 주목하세요.
+        Beginner =&gt; println!("초보자들이 학습 여정을 시작합니다!"),
+        Advanced =&gt; println!("상급 학습자들이 주제를 마스터하고 있습니다..."),
     }
 
     match role {
-        // Note again the lack of scoping.
-        Student =&gt; println!("Students are acquiring knowledge!"),
-        Teacher =&gt; println!("Teachers are spreading knowledge!"),
+        // 다시 한번 스코프 지정이 없음에 주목하세요.
+        Student =&gt; println!("학생들이 지식을 습득하고 있습니다!"),
+        Teacher =&gt; println!("교사들이 지식을 전파하고 있습니다!"),
     }
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../flow_control/match.html"><code>match</code></a> and <a href="../../mod/use.html"><code>use</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../flow_control/match.html"><code>match</code></a>와 <a href="../../mod/use.html"><code>use</code></a></p>
 
                     </main>
 

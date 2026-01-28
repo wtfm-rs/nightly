@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Supertraits - Rust By Example</title>
+        <title>슈퍼트레이트 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,15 +255,14 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="supertraits"><a class="header" href="#supertraits">Supertraits</a></h1>
-<p>Rust doesn’t have “inheritance”, but you can define a trait as being a superset
-of another trait. For example:</p>
+                        <h1 id="슈퍼트레이트"><a class="header" href="#슈퍼트레이트">슈퍼트레이트</a></h1>
+<p>Rust에는 “상속“이 없지만, 한 트레이트를 다른 트레이트의 슈퍼셋(superset)으로 정의할 수 있습니다. 예를 들어:</p>
 <pre class="playground"><code class="language-rust editable edition2021">trait Person {
     fn name(&amp;self) -&gt; String;
 }
 
-// Person is a supertrait of Student.
-// Implementing Student requires you to also impl Person.
+// Person은 Student의 슈퍼트레이트입니다.
+// Student를 구현하려면 Person도 구현해야 합니다.
 trait Student: Person {
     fn university(&amp;self) -&gt; String;
 }
@@ -269,15 +271,15 @@ trait Programmer {
     fn fav_language(&amp;self) -&gt; String;
 }
 
-// CompSciStudent (computer science student) is a subtrait of both Programmer
-// and Student. Implementing CompSciStudent requires you to impl both supertraits.
+// CompSciStudent(컴퓨터 공학 학생)는 Programmer와 Student 모두의 서브트레이트입니다.
+// CompSciStudent를 구현하려면 두 슈퍼트레이트를 모두 구현해야 합니다.
 trait CompSciStudent: Programmer + Student {
     fn git_username(&amp;self) -&gt; String;
 }
 
 fn comp_sci_student_greeting(student: &amp;dyn CompSciStudent) -&gt; String {
     format!(
-        "My name is {} and I attend {}. My favorite language is {}. My Git username is {}",
+        "제 이름은 {}이고 {}에 다닙니다. 제가 가장 좋아하는 언어는 {}입니다. 제 Git 사용자 이름은 {}입니다.",
         student.name(),
         student.university(),
         student.fav_language(),
@@ -285,9 +287,50 @@ fn comp_sci_student_greeting(student: &amp;dyn CompSciStudent) -&gt; String {
     )
 }
 
-fn main() {}</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-supertraits-to-require-one-traits-functionality-within-another-trait">The Rust Programming Language chapter on supertraits</a></p>
+struct CSStudent {
+    name: String,
+    university: String,
+    fav_language: String,
+    git_username: String
+}
+
+impl Programmer for CSStudent {
+    fn fav_language(&amp;self) -&gt; String {
+        self.fav_language.clone()
+    }
+}
+
+impl Student for CSStudent {
+    fn university(&amp;self) -&gt; String {
+        self.university.clone()
+    }
+}
+
+impl Person for CSStudent {
+    fn name(&amp;self) -&gt; String {
+        self.name.clone()
+    }
+}
+
+impl CompSciStudent for CSStudent {
+    fn git_username(&amp;self) -&gt; String {
+        self.git_username.clone()
+    }
+}
+
+fn main() {
+    let student = CSStudent {
+        name: String::from("앨리스"),
+        university: String::from("MIT"),
+        fav_language: String::from("러스트"),
+        git_username: String::from("alice_codes"),
+    };
+
+    let greeting = comp_sci_student_greeting(&amp;student);
+    println!("{}", greeting);
+}</code></pre>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-supertraits-to-require-one-traits-functionality-within-another-trait">러스트 프로그래밍 언어의 슈퍼트레이트 장</a></p>
 
                     </main>
 

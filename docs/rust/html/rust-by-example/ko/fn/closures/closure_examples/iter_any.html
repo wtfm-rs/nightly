@@ -32,6 +32,9 @@
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
                       </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
+                      </button></li>
                     </ul>
                 `);
         
@@ -107,10 +110,10 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../../toc-61902a00.js"></script>
+        <script src="../../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -253,48 +256,45 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="iteratorany"><a class="header" href="#iteratorany">Iterator::any</a></h1>
-<p><code>Iterator::any</code> is a function which when passed an iterator, will return
-<code>true</code> if any element satisfies the predicate. Otherwise <code>false</code>. Its
-signature:</p>
+<p><code>Iterator::any</code>는 이터레이터가 주어졌을 때, 어떤 요소라도 서술어(predicate)를 만족하면 <code>true</code>를 반환하는 함수입니다. 그렇지 않으면 <code>false</code>를 반환합니다. 시그니처는 다음과 같습니다:</p>
 <pre><code class="language-rust ignore">pub trait Iterator {
-    // The type being iterated over.
+    // 반복되는 요소의 타입.
     type Item;
 
-    // `any` takes `&amp;mut self` meaning the caller may be borrowed
-    // and modified, but not consumed.
+    // `any`는 `&amp;mut self`를 취하므로 호출자는 빌려지거나
+// 수정될 수 있지만, 소비(consume)되지는 않습니다.
     fn any&lt;F&gt;(&amp;mut self, f: F) -&gt; bool where
-        // `FnMut` meaning any captured variable may at most be
-        // modified, not consumed. `Self::Item` is the closure parameter type,
-        // which is determined by the iterator (e.g., `&amp;T` for `.iter()`,
-        // `T` for `.into_iter()`).
+        // `FnMut`는 캡처된 변수가 최대 수정될 수 있지만 소비되지는 않음을 의미합니다.
+// `Self::Item`은 클로저 파라미터 타입으로, 이터레이터에 의해 결정됩니다
+// (예: `.iter()`의 경우 `&amp;T`, `.into_iter()`의 경우 `T`).
         F: FnMut(Self::Item) -&gt; bool;
 }</code></pre>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
     let vec1 = vec![1, 2, 3];
     let vec2 = vec![4, 5, 6];
 
-    // `iter()` for vecs yields `&amp;i32`. Destructure to `i32`.
-    println!("2 in vec1: {}", vec1.iter()     .any(|&amp;x| x == 2));
-    // `into_iter()` for vecs yields `i32`. No destructuring required.
-    println!("2 in vec2: {}", vec2.into_iter().any(|x| x == 2));
+    // 벡터에 대한 `iter()`는 `&amp;i32`를 생성합니다. `i32`로 구조 분해합니다.
+    println!("vec1에 2가 있음: {}", vec1.iter()     .any(|&amp;x| x == 2));
+    // 벡터에 대한 `into_iter()`는 `i32`를 생성합니다. 구조 분해가 필요 없습니다.
+    println!("vec2에 2가 있음: {}", vec2.into_iter().any(|x| x == 2));
 
-    // `iter()` only borrows `vec1` and its elements, so they can be used again
-    println!("vec1 len: {}", vec1.len());
-    println!("First element of vec1 is: {}", vec1[0]);
-    // `into_iter()` does move `vec2` and its elements, so they cannot be used again
-    // println!("First element of vec2 is: {}", vec2[0]);
-    // println!("vec2 len: {}", vec2.len());
-    // TODO: uncomment two lines above and see compiler errors.
+    // `iter()`는 오직 `vec1`과 그 요소들을 빌리기만 하므로, 다시 사용할 수 있습니다.
+    println!("vec1 길이: {}", vec1.len());
+    println!("vec1의 첫 번째 요소: {}", vec1[0]);
+    // `into_iter()`는 `vec2`와 그 요소들을 이동(move)시키므로, 다시 사용할 수 없습니다.
+// println!("vec2의 첫 번째 요소: {}", vec2[0]);
+// println!("vec2 길이: {}", vec2.len());
+// TODO: 위의 두 줄의 주석을 해제하고 컴파일 에러를 확인해 보세요.
 
     let array1 = [1, 2, 3];
     let array2 = [4, 5, 6];
 
-    // `iter()` for arrays yields `&amp;i32`.
-    println!("2 in array1: {}", array1.iter()     .any(|&amp;x| x == 2));
-    // `into_iter()` for arrays yields `i32`.
-    println!("2 in array2: {}", array2.into_iter().any(|x| x == 2));
+    // 배열에 대한 `iter()`는 `&amp;i32`를 생성합니다.
+    println!("array1에 2가 있음: {}", array1.iter()     .any(|&amp;x| x == 2));
+    // 배열에 대한 `into_iter()`는 `i32`를 생성합니다.
+    println!("array2에 2가 있음: {}", array2.into_iter().any(|x| x == 2));
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
 <p><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.any"><code>std::iter::Iterator::any</code></a></p>
 
                     </main>

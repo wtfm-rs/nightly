@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Explicit annotation - Rust By Example</title>
+        <title>명시적 어노테이션 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../toc-61902a00.js"></script>
+        <script src="../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,62 +255,55 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="explicit-annotation"><a class="header" href="#explicit-annotation">Explicit annotation</a></h1>
-<p>The borrow checker uses explicit lifetime annotations to determine
-how long references should be valid. In cases where lifetimes are not
-elided<sup class="footnote-reference" id="fr-1-1"><a href="#footnote-1">1</a></sup>, Rust requires explicit annotations to determine what the
-lifetime of a reference should be. The syntax for explicitly annotating
-a lifetime uses an apostrophe character as follows:</p>
+                        <h1 id="명시적-어노테이션"><a class="header" href="#명시적-어노테이션">명시적 어노테이션</a></h1>
+<p>빌림 검사기는 참조가 얼마나 오래 유효해야 하는지 결정하기 위해 명시적 라이프타임 어노테이션을 사용합니다. 라이프타임이 생략(elided)<sup class="footnote-reference" id="fr-1-1"><a href="#footnote-1">1</a></sup>되지 않는 경우, Rust는 참조의 라이프타임이 어떻게 되어야 하는지 결정하기 위해 명시적인 어노테이션을 요구합니다. 라이프타임을 명시적으로 어노테이션하는 구문은 다음과 같이 아포스트로피 문자를 사용합니다:</p>
 <pre><code class="language-rust ignore">foo&lt;'a&gt;
-// `foo` has a lifetime parameter `'a`</code></pre>
-<p>Similar to <a href="../../fn/closures/anonymity.html">closures</a>, using lifetimes requires generics.
-Additionally, this lifetime syntax indicates that the lifetime of <code>foo</code>
-may not exceed that of <code>'a</code>. Explicit annotation of a type has the form
-<code>&amp;'a T</code> where <code>'a</code> has already been introduced.</p>
-<p>In cases with multiple lifetimes, the syntax is similar:</p>
+// `foo`는 라이프타임 파라미터 `'a`를 가집니다</code></pre>
+<p><a href="../../fn/closures/anonymity.html">클로저</a>와 유사하게, 라이프타임을 사용하려면 제네릭이 필요합니다. 또한, 이 라이프타임 구문은 <code>foo</code>의 라이프타임이 <code>'a</code>의 라이프타임을 초과할 수 없음을 나타냅니다. 타입의 명시적 어노테이션은 <code>&amp;'a T</code> 형식을 가지며, 여기서 <code>'a</code>는 이미 도입된 라이프타임입니다.</p>
+<p>여러 라이프타임이 있는 경우에도 구문은 유사합니다:</p>
 <pre><code class="language-rust ignore">foo&lt;'a, 'b&gt;
-// `foo` has lifetime parameters `'a` and `'b`</code></pre>
-<p>In this case, the lifetime of <code>foo</code> cannot exceed that of either <code>'a</code> <em>or</em> <code>'b</code>.</p>
-<p>See the following example for explicit lifetime annotation in use:</p>
-<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// `print_refs` takes two references to `i32` which have different
-// lifetimes `'a` and `'b`. These two lifetimes must both be at
-// least as long as the function `print_refs`.
+// `foo`는 라이프타임 파라미터 `'a`와 `'b`를 가집니다</code></pre>
+<p>이 경우, <code>foo</code>의 라이프타임은 <code>'a</code> <em>또는</em> <code>'b</code> 중 어느 하나의 라이프타임도 초과할 수 없습니다.</p>
+<p>명시적 라이프타임 어노테이션이 사용된 다음 예제를 참조하세요:</p>
+<pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">// `print_refs`는 서로 다른 라이프타임 `'a`와 `'b`를 가진
+// 두 개의 `i32` 참조를 받습니다. 이 두 라이프타임은 모두
+// 적어도 `print_refs` 함수만큼 길어야 합니다.
 fn print_refs&lt;'a, 'b&gt;(x: &amp;'a i32, y: &amp;'b i32) {
-    println!("x is {} and y is {}", x, y);
+    println!("x는 {}이고 y는 {}입니다", x, y);
 }
 
-// A function which takes no arguments, but has a lifetime parameter `'a`.
+// 인자를 받지 않지만 라이프타임 파라미터 `'a`를 가진 함수입니다.
 fn failed_borrow&lt;'a&gt;() {
     let _x = 12;
 
-    // ERROR: `_x` does not live long enough
+    // 에러: `_x`의 수명이 충분히 길지 않습니다
     let _y: &amp;'a i32 = &amp;_x;
-    // Attempting to use the lifetime `'a` as an explicit type annotation
-    // inside the function will fail because the lifetime of `&amp;_x` is shorter
-    // than that of `_y`. A short lifetime cannot be coerced into a longer one.
+    // 함수 내부에서 라이프타임 `'a`를 명시적 타입 어노테이션으로 사용하려고 하면
+    // 실패합니다. `&amp;_x`의 라이프타임이 `_y`의 라이프타임보다 짧기 때문입니다.
+    // 짧은 라이프타임은 더 긴 라이프타임으로 강제 변환될 수 없습니다.
 }
 
 fn main() {
-    // Create variables to be borrowed below.
+    // 아래에서 빌려올 변수들을 생성합니다.
     let (four, nine) = (4, 9);
 
-    // Borrows (`&amp;`) of both variables are passed into the function.
+    // 두 변수의 빌림(`&amp;`)이 함수로 전달됩니다.
     print_refs(&amp;four, &amp;nine);
-    // Any input which is borrowed must outlive the borrower.
-    // In other words, the lifetime of `four` and `nine` must
-    // be longer than that of `print_refs`.
+    // 빌려온 모든 입력은 빌리는 주체보다 오래 살아야 합니다.
+    // 다시 말해, `four`와 `nine`의 라이프타임은
+    // `print_refs`의 라이프타임보다 길어야 합니다.
 
     failed_borrow();
-    // `failed_borrow` contains no references to force `'a` to be
-    // longer than the lifetime of the function, but `'a` is longer.
-    // Because the lifetime is never constrained, it defaults to `'static`.
+    // `failed_borrow`는 `'a`가 함수의 라이프타임보다 길어야 함을 강제하는
+// 참조를 포함하지 않지만, `'a`는 더 깁니다.
+// 라이프타임이 결코 제약되지 않으므로, 이는 `'static`으로 기본 설정됩니다.
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../generics.html">generics</a> and <a href="../../fn/closures.html">closures</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../generics.html">제네릭</a> 및 <a href="../../fn/closures.html">클로저</a></p>
 <hr>
 <ol class="footnote-definition">
 <li id="footnote-1">
-<p><a href="elision.html">elision</a> implicitly annotates lifetimes and so is different. <a href="#fr-1-1">↩</a></p>
+<p><a href="elision.html">생략(elision)</a>은 암시적으로 라이프타임을 어노테이션하므로 다릅니다. <a href="#fr-1-1">↩</a></p>
 </li>
 </ol>
 

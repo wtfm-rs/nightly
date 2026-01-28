@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>pointers/ref - Rust By Example</title>
+        <title>포인터/ref - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../../../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../../../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../../../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../../../toc-61902a00.js"></script>
+        <script src="../../../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,66 +255,59 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="pointersref"><a class="header" href="#pointersref">pointers/ref</a></h1>
-<p>For pointers, a distinction needs to be made between destructuring
-and dereferencing as they are different concepts which are used
-differently from languages like C/C++.</p>
+                        <h1 id="포인터ref"><a class="header" href="#포인터ref">포인터/ref</a></h1>
+<p>포인터의 경우, 구조 분해(destructuring)와 역참조(dereferencing)를 구분해야 합니다. 이들은 C/C++와 같은 언어와는 다르게 사용되는 서로 다른 개념이기 때문입니다.</p>
 <ul>
-<li>Dereferencing uses <code>*</code></li>
-<li>Destructuring uses <code>&amp;</code>, <code>ref</code>, and <code>ref mut</code></li>
+<li>역참조는 <code>*</code>를 사용합니다</li>
+<li>구조 분해는 <code>&amp;</code>, <code>ref</code>, <code>ref mut</code>을 사용합니다</li>
 </ul>
 <pre class="playground"><code class="language-rust editable edition2021">fn main() {
-    // Assign a reference of type `i32`. The `&amp;` signifies there
-    // is a reference being assigned.
+    // `i32` 타입의 참조를 할당합니다. `&amp;`는 참조가 할당되고 있음을 나타냅니다.
     let reference = &amp;4;
 
     match reference {
-        // If `reference` is pattern matched against `&amp;val`, it results
-        // in a comparison like:
-        // `&amp;i32`
-        // `&amp;val`
-        // ^ We see that if the matching `&amp;`s are dropped, then the `i32`
-        // should be assigned to `val`.
-        &amp;val =&gt; println!("Got a value via destructuring: {:?}", val),
+        // 만약 `reference`를 `&amp;val`에 대해 패턴 매칭하면, 다음과 같은 비교 결과가 됩니다:
+// `&amp;i32`
+// `&amp;val`
+// ^ 매칭되는 `&amp;`들을 떼어내면, `i32`가 `val`에 할당되어야 함을 알 수 있습니다.
+        &amp;val =&gt; println!("구조 분해를 통해 값을 얻었습니다: {:?}", val),
     }
 
-    // To avoid the `&amp;`, you dereference before matching.
+    // `&amp;`를 피하려면, 매칭하기 전에 역참조를 수행합니다.
     match *reference {
-        val =&gt; println!("Got a value via dereferencing: {:?}", val),
+        val =&gt; println!("역참조를 통해 값을 얻었습니다: {:?}", val),
     }
 
-    // What if you don't start with a reference? `reference` was a `&amp;`
-    // because the right side was already a reference. This is not
-    // a reference because the right side is not one.
+    // 참조로 시작하지 않는다면 어떨까요? `reference`는 오른쪽이 이미
+// 참조였기 때문에 `&amp;`였습니다. 이것은 오른쪽이 참조가 아니기 때문에
+// 참조가 아닙니다.
     let _not_a_reference = 3;
 
-    // Rust provides `ref` for exactly this purpose. It modifies the
-    // assignment so that a reference is created for the element; this
-    // reference is assigned.
+    // Rust는 정확히 이 목적을 위해 `ref`를 제공합니다. 이는 할당 방식을
+// 수정하여 요소에 대한 참조가 생성되도록 하며, 이 참조가 할당됩니다.
     let ref _is_a_reference = 3;
 
-    // Accordingly, by defining 2 values without references, references
-    // can be retrieved via `ref` and `ref mut`.
+    // 따라서, 참조가 없는 두 값을 정의함으로써, `ref`와 `ref mut`를 통해 참조를 가져올 수 있습니다.
     let value = 5;
     let mut mut_value = 6;
 
-    // Use `ref` keyword to create a reference.
+    // 참조를 생성하려면 `ref` 키워드를 사용합니다.
     match value {
-        ref r =&gt; println!("Got a reference to a value: {:?}", r),
+        ref r =&gt; println!("값에 대한 참조를 얻었습니다: {:?}", r),
     }
 
-    // Use `ref mut` similarly.
+    // `ref mut`도 비슷하게 사용합니다.
     match mut_value {
         ref mut m =&gt; {
-            // Got a reference. Gotta dereference it before we can
-            // add anything to it.
+            // 참조를 얻었습니다. 여기에 무언가를 더하기 전에
+// 역참조를 해야 합니다.
             *m += 10;
-            println!("We added 10. `mut_value`: {:?}", m);
+            println!("10을 더했습니다. `mut_value`: {:?}", m);
         },
     }
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="../../../scope/borrow/ref.html">The ref pattern</a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="../../../scope/borrow/ref.html">ref 패턴</a></p>
 
                     </main>
 

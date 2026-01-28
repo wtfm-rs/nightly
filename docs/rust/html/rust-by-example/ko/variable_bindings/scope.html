@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Scope and Shadowing - Rust By Example</title>
+        <title>스코프와 섀도잉 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "../searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-61902a00.js"></script>
+        <script src="../toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,45 +255,44 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="scope-and-shadowing"><a class="header" href="#scope-and-shadowing">Scope and Shadowing</a></h1>
-<p>Variable bindings have a scope, and are constrained to live in a <em>block</em>. A
-block is a collection of statements enclosed by braces <code>{}</code>.</p>
+                        <h1 id="스코프와-섀도잉"><a class="header" href="#스코프와-섀도잉">스코프와 섀도잉</a></h1>
+<p>변수 바인딩은 스코프(범위)를 가지며, <em>블록</em> 내에 거주하도록 제한됩니다. 블록은 중괄호 <code>{}</code>로 둘러싸인 문장들의 모음입니다.</p>
 <pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">fn main() {
-    // This binding lives in the main function
+    // 이 바인딩은 메인 함수에 거주합니다
     let long_lived_binding = 1;
 
-    // This is a block, and has a smaller scope than the main function
+    // 이것은 블록이며, 메인 함수보다 더 작은 스코프를 가집니다
     {
-        // This binding only exists in this block
+        // 이 바인딩은 이 블록 내에만 존재합니다
         let short_lived_binding = 2;
 
-        println!("inner short: {}", short_lived_binding);
+        println!("내부 short: {}", short_lived_binding);
     }
-    // End of the block
+    // 블록의 끝
 
-    // Error! `short_lived_binding` doesn't exist in this scope
-    println!("outer short: {}", short_lived_binding);
-    // FIXME ^ Comment out this line
+    // 에러! `short_lived_binding`은 이 스코프에 존재하지 않습니다
+    println!("외부 short: {}", short_lived_binding);
+    // FIXME ^ 이 줄을 주석 처리하세요
 
-    println!("outer long: {}", long_lived_binding);
+    println!("외부 long: {}", long_lived_binding);
 }</code></pre>
-<p>Also, <a href="https://en.wikipedia.org/wiki/Variable_shadowing">variable shadowing</a> is allowed.</p>
+<p>또한, <a href="https://en.wikipedia.org/wiki/Variable_shadowing">변수 섀도잉</a>이 허용됩니다.</p>
 <pre class="playground"><code class="language-rust editable ignore mdbook-runnable edition2021">fn main() {
     let shadowed_binding = 1;
 
     {
-        println!("before being shadowed: {}", shadowed_binding);
+        println!("섀도잉 전: {}", shadowed_binding);
 
-        // This binding *shadows* the outer one
+        // 이 바인딩은 외부 바인딩을 *섀도잉*합니다
         let shadowed_binding = "abc";
 
-        println!("shadowed in inner block: {}", shadowed_binding);
+        println!("내부 블록에서 섀도잉됨: {}", shadowed_binding);
     }
-    println!("outside inner block: {}", shadowed_binding);
+    println!("내부 블록 밖: {}", shadowed_binding);
 
-    // This binding *shadows* the previous binding
+    // 이 바인딩은 이전 바인딩을 *섀도잉*합니다
     let shadowed_binding = 2;
-    println!("shadowed in outer block: {}", shadowed_binding);
+    println!("외부 블록에서 섀도잉됨: {}", shadowed_binding);
 }</code></pre>
 
                     </main>

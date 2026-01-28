@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Generics - Rust By Example</title>
+        <title>제네릭 - Rust By Example</title>
 
 
         <!-- Custom HTML head -->
@@ -31,6 +31,9 @@
                       </button></li>
                       <li role="none"><button role="menuitem" class="theme">
                           <a id="es">Español</a>
+                      </button></li>
+                      <li role="none"><button role="menuitem" class="theme">
+                          <a id="ko">한국어</a>
                       </button></li>
                     </ul>
                 `);
@@ -107,10 +110,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-ffebdbdc.js";
+            window.path_to_searchindex_js = "searchindex-206c834e.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-61902a00.js"></script>
+        <script src="toc-eb357a13.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -252,54 +255,42 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="generics"><a class="header" href="#generics">Generics</a></h1>
-<p><em>Generics</em> is the topic of generalizing types and functionalities to broader
-cases. This is extremely useful for reducing code duplication in many ways,
-but can call for rather involved syntax. Namely, being generic requires
-taking great care to specify over which types a generic type
-is actually considered valid. The simplest and most common use of generics
-is for type parameters.</p>
-<p>A type parameter is specified as generic by the use of angle brackets and upper
-<a href="https://en.wikipedia.org/wiki/CamelCase">camel case</a>: <code>&lt;Aaa, Bbb, ...&gt;</code>. “Generic type parameters” are
-typically represented as <code>&lt;T&gt;</code>. In Rust, “generic” also describes anything that
-accepts one or more generic type parameters <code>&lt;T&gt;</code>. Any type specified as a
-generic type parameter is generic, and everything else is concrete (non-generic).</p>
-<p>For example, defining a <em>generic function</em> named <code>foo</code> that takes an argument
-<code>T</code> of any type:</p>
+                        <h1 id="제네릭"><a class="header" href="#제네릭">제네릭</a></h1>
+<p>_제네릭(Generics)_은 타입과 기능을 더 넓은 케이스로 일반화하는 주제입니다. 이는 여러 면에서 코드 중복을 줄이는 데 매우 유용하지만, 다소 복잡한 문법을 요구할 수 있습니다. 즉, 제네릭이 되려면 제네릭 타입이 실제로 유효한 것으로 간주되는 타입을 지정하는 데 세심한 주의가 필요합니다. 제네릭의 가장 간단하고 흔한 용도는 타입 파라미터입니다.</p>
+<p>타입 파라미터는 꺾쇠 괄호와 대문자 <a href="https://en.wikipedia.org/wiki/CamelCase">카멜 케이스</a>를 사용하여 제네릭으로 지정됩니다: <code>&lt;Aaa, Bbb, ...&gt;</code>. “제네릭 타입 파라미터“는 일반적으로 <code>&lt;T&gt;</code>로 표현됩니다. Rust에서 “제네릭“은 하나 이상의 제네릭 타입 파라미터 <code>&lt;T&gt;</code>를 허용하는 모든 것을 설명하기도 합니다. 제네릭 타입 파라미터로 지정된 모든 타입은 제네릭이며, 그 외의 모든 것은 구체적(비-제네릭)입니다.</p>
+<p>예를 들어, 모든 타입의 인자 <code>T</code>를 취하는 <code>foo</code>라는 이름의 _제네릭 함수_를 정의하면 다음과 같습니다:</p>
 <pre><code class="language-rust ignore">fn foo&lt;T&gt;(arg: T) { ... }</code></pre>
-<p>Because <code>T</code> has been specified as a generic type parameter using <code>&lt;T&gt;</code>, it
-is considered generic when used here as <code>(arg: T)</code>. This is the case even if <code>T</code>
-has previously been defined as a <code>struct</code>.</p>
-<p>This example shows some of the syntax in action:</p>
-<pre class="playground"><code class="language-rust editable edition2021">// A concrete type `A`.
+<p><code>T</code>가 <code>&lt;T&gt;</code>를 사용하여 제네릭 타입 파라미터로 지정되었으므로, 여기서 <code>(arg: T)</code>와 같이 사용될 때 제네릭으로 간주됩니다. 이는 <code>T</code>가 이전에 <code>struct</code>로 정의되었더라도 마찬가지입니다.</p>
+<p>이 예제는 실제 작동하는 문법의 일부를 보여줍니다:</p>
+<pre class="playground"><code class="language-rust editable edition2021">// 구체적인 타입 `A`.
 struct A;
 
-// In defining the type `Single`, the first use of `A` is not preceded by `&lt;A&gt;`.
-// Therefore, `Single` is a concrete type, and `A` is defined as above.
+// `Single` 타입을 정의할 때, `A`의 첫 사용 앞에 `&lt;A&gt;`가 붙지 않습니다.
+// 따라서 `Single`은 구체적인 타입이며, `A`는 위에서 정의된 대로입니다.
 struct Single(A);
-//            ^ Here is `Single`s first use of the type `A`.
+//            ^ 여기서 `Single`이 처음으로 `A` 타입을 사용합니다.
 
-// Here, `&lt;T&gt;` precedes the first use of `T`, so `SingleGen` is a generic type.
-// Because the type parameter `T` is generic, it could be anything, including
-// the concrete type `A` defined at the top.
+// 여기서 `&lt;T&gt;`가 `T`의 첫 사용 앞에 오므로, `SingleGen`은 제네릭 타입입니다.
+// 타입 파라미터 `T`는 제네릭이므로, 상단에서 정의된 구체적인 타입 `A`를 포함하여
+// 무엇이든 될 수 있습니다.
 struct SingleGen&lt;T&gt;(T);
 
 fn main() {
-    // `Single` is concrete and explicitly takes `A`.
+    // `Single`은 구체적이며 명시적으로 `A`를 취합니다.
     let _s = Single(A);
 
-    // Create a variable `_char` of type `SingleGen&lt;char&gt;`
-    // and give it the value `SingleGen('a')`.
-    // Here, `SingleGen` has a type parameter explicitly specified.
+    // `SingleGen&lt;char&gt;` 타입의 변수 `_char`를 생성하고
+    // `SingleGen('a')` 값을 줍니다.
+    // 여기서 `SingleGen`은 타입 파라미터가 명시적으로 지정되었습니다.
     let _char: SingleGen&lt;char&gt; = SingleGen('a');
 
-    // `SingleGen` can also have a type parameter implicitly specified:
-    let _t    = SingleGen(A); // Uses `A` defined at the top.
-    let _i32  = SingleGen(6); // Uses `i32`.
-    let _char = SingleGen('a'); // Uses `char`.
+    // `SingleGen`은 타입 파라미터를 암시적으로 지정할 수도 있습니다:
+    let _t    = SingleGen(A); // 상단에서 정의된 `A`를 사용합니다.
+    let _i32  = SingleGen(6); // `i32`를 사용합니다.
+    let _char = SingleGen('a'); // `char`를 사용합니다.
 }</code></pre>
-<h3 id="see-also"><a class="header" href="#see-also">See also:</a></h3>
-<p><a href="custom_types/structs.html"><code>structs</code></a></p>
+<h3 id="참고"><a class="header" href="#참고">참고:</a></h3>
+<p><a href="custom_types/structs.html"><code>구조체</code></a></p>
 
                     </main>
 
